@@ -32,8 +32,8 @@ import java.util.*;
  */
 
 /**
- * 
- * @author Team 1: Jinho Hwang, Andrew Maywapersaud, Rajvi Chavada
+ * s
+ * @author Team 1: Jinho Hwang, Andrew Maywapersaud, Rajvi Chavada annonymous
  *
  */
 public class BrailleCell {
