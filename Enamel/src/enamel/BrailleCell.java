@@ -30,6 +30,12 @@ import java.util.*;
  * @author ENAMEL team: Sunjik Lee, Li Yin, Vassilios Tzerpos.
  *
  */
+
+/**
+ * 
+ * @author Team 1: Jinho Hwang, Andrew Maywapersaud, Rajvi Chavada
+ *
+ */
 public class BrailleCell {
 
 	private boolean[] listOfPins = new boolean[8];
