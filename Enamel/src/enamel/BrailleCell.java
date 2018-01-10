@@ -33,7 +33,7 @@ import java.util.*;
 
 /**
  * s
- * @author Team 1: Jinho Hwang, Andrew Maywapersaud, Rajvi Chavada annonymous
+ * @author Team 1: Jinho Hwang, Andrew Maywapersaud, Rajvi Chavada 
  *
  */
 public class BrailleCell {
