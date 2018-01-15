@@ -32,9 +32,9 @@ import java.util.*;
  */
 
 /**
- * s
+ * 
  * @author Team 1: Jinho Hwang, Andrew Maywapersaud, Rajvi Chavada 
- *
+ * Testing changes
  */
 public class BrailleCell {
 
