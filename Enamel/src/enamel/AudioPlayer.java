@@ -1,10 +1,6 @@
 package enamel;
 
-/*
- * asdf  backkk asdfheqwhrwkw
- * 
- * pull this
-*/
+
 public class AudioPlayer extends Player {
 	
 	
