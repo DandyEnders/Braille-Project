@@ -4,9 +4,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.*;
 import java.io.*;
+
 // I am in branch lab2e
 // I am in branch lab2 yay
 // this will be a conflict
+=======
+// I am in branch lab2 what upppppppasdfsdfsdf
+>>>>>>> refs/heads/lab2
 
 public class JFileDemo extends JFrame implements ActionListener {
 
