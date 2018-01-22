@@ -9,9 +9,6 @@ import java.io.*;
 // I am in branch lab2 yay
 // this will be a conflict
 
-// I am in branch lab2 what upppppppasdfsdfsdf
-
-
 public class JFileDemo extends JFrame implements ActionListener {
 
 	private JFileChooser file;
