@@ -75,7 +75,7 @@ The “Useful Information” is for us to share tips and tricks about programmin
 
 1. [How to make javadoc](https://www.youtube.com/watch?v=Hx-8BD_Osdw)
 2. [GUI maker for eclipse](https://www.eclipse.org/windowbuilder/)
-3.[Markdown editor ( github readme text editor )](https://dillinger.io/)
+3. [Markdown editor ( github readme text editor )](https://dillinger.io/)
 # Todo List
 The “Todo List” is a list of things that we need to accomplish.
 
