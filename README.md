@@ -11,7 +11,7 @@ Group members
 
 # Table of Contents
 1. [Introduction](#introduction)
-2. [Notes to Group Members](#notes-to-Group-Members)
+2. [Notes to Group Members](#notes-to-group-members)
 3. [Questions](#questions)
 4. [Researches](#researches)
 5. [Requirements](#requirements)
