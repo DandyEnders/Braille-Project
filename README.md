@@ -10,14 +10,14 @@ Group members
 3. [Jinho Hwang](https://github.com/DandyEnders)
 
 # Table of Contents
-1. [Introduction](#Introduction)
-2. [Notes to Group Members](#Notes-to-Group-Members)
-3. [Questions](#Questions)
-4. [Researches](#Researches)
-5. [Requirements](#Requirements)
-6. [Project Structure Plan](#Project-Structure-Plan)
-7. [Useful Information](#Useful-Information)
-8. [Todo List](#Todo-List)
+1. [Introduction](#introduction)
+2. [Notes to Group Members](#notes-to-Group-Members)
+3. [Questions](#questions)
+4. [Researches](#researches)
+5. [Requirements](#requirements)
+6. [Project Structure Plan](#project-structure-plan)
+7. [Useful Information](#useful-information)
+8. [Todo List](#todo-list)
 
 # Introduction
 Purpose of this document is to track our progress on our project.
