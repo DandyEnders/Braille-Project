@@ -11,13 +11,13 @@ Group members
 
 # Table of Contents
 1. [Introduction](#Introduction)
-2. [Notes to Group Members](#Notes_to_Group_Members)
+2. [Notes to Group Members](#Notes-to-Group-Members)
 3. [Questions](#Questions)
 4. [Researches](#Researches)
 5. [Requirements](#Requirements)
-6. [Project Structure Plan](#Project_Structure_Plan)
-7. [Useful Information](#Useful_Information)
-8. [Todo List](#Todo_List)
+6. [Project Structure Plan](#Project-Structure-Plan)
+7. [Useful Information](#Useful-Information)
+8. [Todo List](#Todo-List)
 
 # Introduction
 Purpose of this document is to track our progress on our project.
