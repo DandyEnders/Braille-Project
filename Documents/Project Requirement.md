@@ -34,7 +34,7 @@ This program will provide the educators tools to import, export, create, and edi
 ### 1.3 Definitions, acronyms, and abbreviations
 | Term  | Definition |
 | ------  | ------ | 
-| scenario | A custom made case study for the users to create to provide an entertaining educational experience. The scenario file is ritten in a script format.|
+| scenario | A custom made case study for the users to create to provide an entertaining educational experience to Braille learners. The scenario file is ritten in a script format.|
 
 ### 1.4 References
 [1] Geagea, S., Zhang, S., Shalin, N., Hasibi, F., Hameed, F., Rafiyan, E. and Ekberg, M. (2018). Software Requirements Sepcification. [ebook] chalmers, p.2. Available at: http://www.cse.chalmers.se/~feldt/courses/reqeng/examples/srs_example_2010_group2.pdf [Accessed 4 Feb. 2018].
