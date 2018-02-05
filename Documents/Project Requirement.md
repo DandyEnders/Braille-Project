@@ -15,7 +15,7 @@
 ## 1. Introduction
 This section explains the purpose and scope of Braille program as well deifintions, acronyms, and abbreviations with its refereces.
 
-The document was shaped in the format similar to [this](#1.4-references)[1].
+The document was shaped in the format similar to [this](#14-references)[1].
 
 ### 1.1 Purpose of this document
 The following document is created to:
