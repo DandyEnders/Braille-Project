@@ -2,3 +2,4 @@
 | ------ | ------ | ------ |
 | 1 | App opens | Pass |
 | 2 | JFileChooser opens text file | Pass |
+| 3 | - | - |
