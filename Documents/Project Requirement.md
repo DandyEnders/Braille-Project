@@ -2,15 +2,15 @@
 
 ## Table of Contents
 
-1. [Introduction](#1.-Introduction)
-    - 1.1 [Purpose of this document](#1.1-purpose-of-this-document) 
-    - 1.2 [Scope](#1.2-scope)
-    - 1.3 [Definitions, acronyms, and abbreviations](#1.3-definitions,-acronyms,-and-abbreviations)
-    - 1.4 [References](#1.4-references)
-2. [Overall description](#2.-overall-description)
-3. [Specific requirements](#3.-specific-requirements)
-4. [Use cases](#4.-use-cases)
-5. [Test cases](#5.-test-cases)
+1. [Introduction](#1-introduction)
+    - 1.1 [Purpose of this document](#11-purpose-of-this-document) 
+    - 1.2 [Scope](#12-scope)
+    - 1.3 [Definitions, acronyms, and abbreviations](#13-definitions,-acronyms,-and-abbreviations)
+    - 1.4 [References](#14-references)
+2. [Overall description](#2-overall-description)
+3. [Specific requirements](#3-specific-requirements)
+4. [Use cases](#4-use-cases)
+5. [Test cases](#5-test-cases)
 
 ## 1. Introduction
 This section explains the purpose and scope of Braille program as well deifintions, acronyms, and abbreviations with its refereces.
