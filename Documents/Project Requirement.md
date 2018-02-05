@@ -3,10 +3,10 @@
 ## Table of Contents
 
 1. [Introduction](#introduction)
-    1.1 [Purpose of this document](#1.1-purpose-of-this-document)
-    1.2 [Scope](#1.2-scope)
-    1.3 [Definitions, acronyms, and abbreviations](#1.3-definitions,-acronyms,-and-abbreviations)
-    1.4 [References](#1.4-references)
+    - 1.1 [Purpose of this document](#1.1-purpose-of-this-document) 
+    - 1.2 [Scope](#1.2-scope)
+    - 1.3 [Definitions, acronyms, and abbreviations](#1.3-definitions,-acronyms,-and-abbreviations)
+    - 1.4 [References](#1.4-references)
 2. [Overall description](#2.-overall-description)
 3. [Specific requirements](#3.-specific-requirements)
 4. [Use cases](#4.-use-cases)
