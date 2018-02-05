@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-1. [Introduction](#1.-introduction)
+1. [Introduction](#1.-Introduction)
     - 1.1 [Purpose of this document](#1.1-purpose-of-this-document) 
     - 1.2 [Scope](#1.2-scope)
     - 1.3 [Definitions, acronyms, and abbreviations](#1.3-definitions,-acronyms,-and-abbreviations)
