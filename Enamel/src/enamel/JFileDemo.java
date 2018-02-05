@@ -5,9 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.*;
 import java.io.*;
 
-// I am in branch lab2e
-// I am in branch lab2 yay
-// this will be a conflict conflict?
 
 public class JFileDemo extends JFrame implements ActionListener {
 
