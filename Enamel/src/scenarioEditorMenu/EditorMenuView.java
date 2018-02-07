@@ -1,4 +1,4 @@
-package scenarioEditor;
+package scenarioEditorMenu;
 
 import java.awt.EventQueue;
 
@@ -20,7 +20,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
-public class EditorMenu {
+public class EditorMenuView {
 
 	private JFrame frmScenarioEditor;
 
@@ -31,7 +31,7 @@ public class EditorMenu {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EditorMenu window = new EditorMenu();
+					EditorMenuView window = new EditorMenuView();
 					window.frmScenarioEditor.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,7 +43,7 @@ public class EditorMenu {
 	/**
 	 * Create the application.
 	 */
-	public EditorMenu() {
+	public EditorMenuView() {
 		initialize();
 	}
 

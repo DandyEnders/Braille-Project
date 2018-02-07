@@ -23,31 +23,25 @@ import javax.swing.JButton;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
-public class mainMenuWindow {
+public class MainMenuView {
 
 	private JFrame frmBrailleProjectProgram;
 
 	/**
-	 * Launch the application.
+	 * Create the application.
 	 */
-	public static void main(String[] args) {
+	public MainMenuView() {
+		initialize();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					mainMenuWindow window = new mainMenuWindow();
+					MainMenuView window = new MainMenuView();
 					window.frmBrailleProjectProgram.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public mainMenuWindow() {
-		initialize();
 	}
 
 	/**
@@ -81,7 +75,7 @@ public class mainMenuWindow {
 		
 		JButton btnExit = new JButton("Exit");
 		btnExit.setFont(new Font("Tahoma", Font.PLAIN, 32));
-		btnExit.setToolTipText("Exit button");
+		btnExit.setToolTipText("Exit braille program button");
 		GridBagConstraints gbc_btnExit = new GridBagConstraints();
 		gbc_btnExit.insets = new Insets(0, 0, 0, 5);
 		gbc_btnExit.gridx = 9;
