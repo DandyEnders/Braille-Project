@@ -1,5 +1,5 @@
 Cell 1
-Button 4
+Button 5
 Directional orientation
 
 /~disp-cell-pins:0 11100000

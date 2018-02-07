@@ -18,6 +18,7 @@ import javax.swing.JList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class EditorMenu {
 
@@ -57,32 +58,44 @@ public class EditorMenu {
 		frmScenarioEditor.getContentPane().setLayout(null);
 		
 		JTextArea scenarioLists = new JTextArea();
-		scenarioLists.setToolTipText("This is a list of scenarios");
+		scenarioLists.setToolTipText("List of scenarios");
 		scenarioLists.setBounds(12, 51, 177, 450);
 		frmScenarioEditor.getContentPane().add(scenarioLists);
+		
+		JLabel lblScenarioLists = new JLabel("Scenario Lists");
+		lblScenarioLists.setToolTipText("Scenario List label");
+		lblScenarioLists.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblScenarioLists.setHorizontalAlignment(SwingConstants.CENTER);
+		lblScenarioLists.setBounds(10, 7, 179, 42);
+		frmScenarioEditor.getContentPane().add(lblScenarioLists);
 		
 		JPanel buttonListPanel = new JPanel();
 		buttonListPanel.setBounds(204, 7, 235, 494);
 		frmScenarioEditor.getContentPane().add(buttonListPanel);
 		buttonListPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JButton btnCreateScenario = new JButton("Create scenario");
+		JButton btnCreateScenario = new JButton("Create new scenario");
+		btnCreateScenario.setToolTipText("Create new scenario button");
 		btnCreateScenario.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		buttonListPanel.add(btnCreateScenario);
 		
 		JButton btnEditScenario = new JButton("Edit scenario");
+		btnEditScenario.setToolTipText("Edit scenario button");
 		btnEditScenario.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		buttonListPanel.add(btnEditScenario);
 		
 		JButton btnImportScenario = new JButton("Import scenario");
+		btnImportScenario.setToolTipText("Import scenario button");
 		btnImportScenario.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		buttonListPanel.add(btnImportScenario);
 		
 		JButton btnExportScenario = new JButton("Export scenario");
+		btnExportScenario.setToolTipText("Export scenario button");
 		btnExportScenario.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		buttonListPanel.add(btnExportScenario);
 		
 		JButton btnExit = new JButton("Exit");
+		btnExit.setToolTipText("Exit scenari editor button");
 		btnExit.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnExit.addMouseListener(new MouseAdapter() {
 			@Override
@@ -92,6 +105,7 @@ public class EditorMenu {
 		});
 		
 		JButton btnSimulateScenario = new JButton("Simulate scenario");
+		btnSimulateScenario.setToolTipText("Simulate scenario button");
 		btnSimulateScenario.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		buttonListPanel.add(btnSimulateScenario);
 		buttonListPanel.add(btnExit );

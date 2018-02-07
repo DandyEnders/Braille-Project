@@ -25,7 +25,7 @@ import java.awt.Insets;
 
 public class mainMenuWindow {
 
-	private JFrame frame;
+	private JFrame frmBrailleProjectProgram;
 
 	/**
 	 * Launch the application.
@@ -35,7 +35,7 @@ public class mainMenuWindow {
 			public void run() {
 				try {
 					mainMenuWindow window = new mainMenuWindow();
-					window.frame.setVisible(true);
+					window.frmBrailleProjectProgram.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -54,13 +54,14 @@ public class mainMenuWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 776, 528);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		frmBrailleProjectProgram = new JFrame();
+		frmBrailleProjectProgram.setTitle("Braille Project Program");
+		frmBrailleProjectProgram.setBounds(100, 100, 776, 528);
+		frmBrailleProjectProgram.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmBrailleProjectProgram.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel centrePanel = new JPanel();
-		frame.getContentPane().add(centrePanel, BorderLayout.CENTER);
+		frmBrailleProjectProgram.getContentPane().add(centrePanel, BorderLayout.CENTER);
 		GridBagLayout gbl_centrePanel = new GridBagLayout();
 		gbl_centrePanel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_centrePanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
@@ -88,26 +89,26 @@ public class mainMenuWindow {
 		centrePanel.add(btnExit, gbc_btnExit);
 		
 		JPanel leftPanel = new JPanel();
-		frame.getContentPane().add(leftPanel, BorderLayout.WEST);
+		frmBrailleProjectProgram.getContentPane().add(leftPanel, BorderLayout.WEST);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(80);
 		leftPanel.add(horizontalStrut);
 		
 		JPanel rightPanel = new JPanel();
-		frame.getContentPane().add(rightPanel, BorderLayout.EAST);
+		frmBrailleProjectProgram.getContentPane().add(rightPanel, BorderLayout.EAST);
 		
 		Component horizontalStrut_4 = Box.createHorizontalStrut(80);
 		rightPanel.add(horizontalStrut_4);
 		
 		JPanel bottomPanel = new JPanel();
-		frame.getContentPane().add(bottomPanel, BorderLayout.SOUTH);
+		frmBrailleProjectProgram.getContentPane().add(bottomPanel, BorderLayout.SOUTH);
 		bottomPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		Component verticalStrut_1 = Box.createVerticalStrut(120);
 		bottomPanel.add(verticalStrut_1);
 		
 		JPanel topPanel = new JPanel();
-		frame.getContentPane().add(topPanel, BorderLayout.NORTH);
+		frmBrailleProjectProgram.getContentPane().add(topPanel, BorderLayout.NORTH);
 		
 		JLabel lblBrailleProject = new JLabel("Braille Project");
 		lblBrailleProject.setToolTipText("Title : Braille Project mainMenu");
