@@ -12,6 +12,9 @@ import javax.swing.SpringLayout;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
 import net.miginfocom.swing.MigLayout;
+import scenarioEditorMenu.EditorMenuController;
+import scenarioEditorMenu.EditorMenuModel;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -22,32 +25,29 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionListener;
 
 public class MainMenuView {
 
 	private JFrame frmBrailleProjectProgram;
+	private MainMenuModel model;
+	private MainMenuController controller;
 
 	/**
 	 * Create the application.
 	 */
 	public MainMenuView() {
+		// Assigning model and the controller to MainMenuView
+		model = new MainMenuModel();
+		controller = new MainMenuController(model, this);
 		initialize();
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainMenuView window = new MainMenuView();
-					window.frmBrailleProjectProgram.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		frmBrailleProjectProgram = new JFrame();
 		frmBrailleProjectProgram.setTitle("Braille Project Program");
 		frmBrailleProjectProgram.setBounds(100, 100, 776, 528);
@@ -56,31 +56,21 @@ public class MainMenuView {
 		
 		JPanel centrePanel = new JPanel();
 		frmBrailleProjectProgram.getContentPane().add(centrePanel, BorderLayout.CENTER);
-		GridBagLayout gbl_centrePanel = new GridBagLayout();
-		gbl_centrePanel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_centrePanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_centrePanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_centrePanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		centrePanel.setLayout(gbl_centrePanel);
+		centrePanel.setLayout(null);
 		
 		JButton btnScenarioEditor = new JButton("Scenario Editor");
+		btnScenarioEditor.setBounds(54, 180, 282, 47);
 		btnScenarioEditor.setFont(new Font("Tahoma", Font.PLAIN, 32));
 		btnScenarioEditor.setToolTipText("Scenario Editor button");
-		GridBagConstraints gbc_btnScenarioEditor = new GridBagConstraints();
-		gbc_btnScenarioEditor.gridwidth = 3;
-		gbc_btnScenarioEditor.insets = new Insets(0, 0, 0, 5);
-		gbc_btnScenarioEditor.gridx = 4;
-		gbc_btnScenarioEditor.gridy = 6;
-		centrePanel.add(btnScenarioEditor, gbc_btnScenarioEditor);
+		btnScenarioEditor.addActionListener(controller);
+		centrePanel.add(btnScenarioEditor);
 		
 		JButton btnExit = new JButton("Exit");
+		btnExit.setBounds(401, 180, 107, 47);
 		btnExit.setFont(new Font("Tahoma", Font.PLAIN, 32));
 		btnExit.setToolTipText("Exit braille program button");
-		GridBagConstraints gbc_btnExit = new GridBagConstraints();
-		gbc_btnExit.insets = new Insets(0, 0, 0, 5);
-		gbc_btnExit.gridx = 9;
-		gbc_btnExit.gridy = 6;
-		centrePanel.add(btnExit, gbc_btnExit);
+		btnExit.addActionListener(controller);
+		centrePanel.add(btnExit);
 		
 		JPanel leftPanel = new JPanel();
 		frmBrailleProjectProgram.getContentPane().add(leftPanel, BorderLayout.WEST);
@@ -109,5 +99,8 @@ public class MainMenuView {
 		topPanel.add(lblBrailleProject);
 		lblBrailleProject.setFont(new Font("Tahoma", Font.PLAIN, 72));
 		lblBrailleProject.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		frmBrailleProjectProgram.setVisible(true);
 	}
+	
 }

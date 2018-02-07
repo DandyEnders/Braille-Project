@@ -12,15 +12,13 @@ import mainMenu.MainMenuView;
  *
  */
 
-
 public class BrailleProject  {
 
     public static void main(String[] args) { 	  	
     	
-    	MainMenuModel mainMenuModel = new MainMenuModel();
+    	//MainMenuModel mainMenuModel = new MainMenuModel();
     	MainMenuView mainMenuView = new MainMenuView();
-    	MainMenuController mainMenuController = new MainMenuController(mainMenuModel, mainMenuView);
-    	
+    	//MainMenuController mainMenuController = new MainMenuController(mainMenuModel, mainMenuView);
     	
     		
 		/*

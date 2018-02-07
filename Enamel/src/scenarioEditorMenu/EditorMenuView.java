@@ -14,6 +14,8 @@ import java.awt.GridLayout;
 import java.awt.Window.Type;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.LinkedList;
+
 import javax.swing.JList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -23,27 +25,16 @@ import javax.swing.SwingConstants;
 public class EditorMenuView {
 
 	private JFrame frmScenarioEditor;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EditorMenuView window = new EditorMenuView();
-					window.frmScenarioEditor.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private EditorMenuModel model;
+	private EditorMenuController controller;
+	private LinkedList<JButton> buttonList = new LinkedList<JButton>();
 
 	/**
 	 * Create the application.
 	 */
 	public EditorMenuView() {
+		model = new EditorMenuModel();
+		controller = new EditorMenuController(model,this);
 		initialize();
 	}
 
@@ -51,6 +42,7 @@ public class EditorMenuView {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		frmScenarioEditor = new JFrame();
 		frmScenarioEditor.setTitle("Scenario Editor");
 		frmScenarioEditor.setBounds(100, 100, 451, 550);
@@ -74,40 +66,52 @@ public class EditorMenuView {
 		frmScenarioEditor.getContentPane().add(buttonListPanel);
 		buttonListPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JButton btnCreateScenario = new JButton("Create new scenario");
-		btnCreateScenario.setToolTipText("Create new scenario button");
+		JButton btnCreateScenario = new JButton("Create a new scenario");
+		btnCreateScenario.setToolTipText("Create a new scenario button");
 		btnCreateScenario.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		buttonListPanel.add(btnCreateScenario);
 		
-		JButton btnEditScenario = new JButton("Edit scenario");
-		btnEditScenario.setToolTipText("Edit scenario button");
+		JButton btnEditScenario = new JButton("Edit selected scenario");
+		btnEditScenario.setToolTipText("Edit selected scenario button");
 		btnEditScenario.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		buttonListPanel.add(btnEditScenario);
 		
-		JButton btnImportScenario = new JButton("Import scenario");
-		btnImportScenario.setToolTipText("Import scenario button");
-		btnImportScenario.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		buttonListPanel.add(btnImportScenario);
+		JButton btnSaveScenario = new JButton("Save selected scenario");
+		btnSaveScenario.setToolTipText("Save selected scenario button");
+		btnSaveScenario.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		buttonListPanel.add(btnSaveScenario);
 		
-		JButton btnExportScenario = new JButton("Export scenario");
-		btnExportScenario.setToolTipText("Export scenario button");
-		btnExportScenario.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		buttonListPanel.add(btnExportScenario);
+		JButton btnLoadScenario = new JButton("Load scenario");
+		btnLoadScenario.setToolTipText("Load scenario button");
+		btnLoadScenario.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		buttonListPanel.add(btnLoadScenario);
 		
 		JButton btnExit = new JButton("Exit");
 		btnExit.setToolTipText("Exit scenari editor button");
 		btnExit.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnExit.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			
-			}
-		});
 		
-		JButton btnSimulateScenario = new JButton("Simulate scenario");
-		btnSimulateScenario.setToolTipText("Simulate scenario button");
-		btnSimulateScenario.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		buttonListPanel.add(btnSimulateScenario);
+		JButton btnRunScenario = new JButton("Run selected scenario");
+		btnRunScenario.setToolTipText("Run selected scenario button");
+		btnRunScenario.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		buttonListPanel.add(btnRunScenario);
 		buttonListPanel.add(btnExit );
+		
+		// Puts all the buttons in a list, and add listener to all for
+		// controller to control it.
+		for(int i = 0 ; i < buttonListPanel.getComponentCount() ; i++) {
+			buttonList.add((JButton)buttonListPanel.getComponent(i));
+			buttonList.get(i).addActionListener(controller);
+		}
+		
 	}
+	
+	public JFrame getEditorWindow() {
+		return this.frmScenarioEditor;
+	}
+	
+	protected LinkedList<JButton> getButtonList(){
+		return this.buttonList;
+	}
+	
+	
 }
