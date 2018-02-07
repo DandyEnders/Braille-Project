@@ -1,6 +1,6 @@
-package enamel;
+package startProgram;
 
-
+import enamel.ScenarioParser;
 
 public class ToyAuthoring  {
 
