@@ -23,6 +23,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
+import javax.accessibility.*;
 
 public class EditorMenuView {
 
