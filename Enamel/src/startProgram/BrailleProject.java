@@ -16,16 +16,16 @@ public class BrailleProject  {
 
     public static void main(String[] args) { 	  	
     	
-    	//MainMenuModel mainMenuModel = new MainMenuModel();
+    	
     	MainMenuView mainMenuView = new MainMenuView();
-    	//MainMenuController mainMenuController = new MainMenuController(mainMenuModel, mainMenuView);
+    	
     	
     		
-		/*
-	    ScenarioParser s = new ScenarioParser(true);
-	    s.setScenarioFile("FactoryScenarios/Scenario_" + 1 + ".txt");
-	    */
-    	    
+		
+	   // ScenarioParser s = new ScenarioParser(true);
+	    //s.setScenarioFile("./FactoryScenarios/Scenario_" + 1 + ".txt");
+	    
+    	   
     	  
     }
 }

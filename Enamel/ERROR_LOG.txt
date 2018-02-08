@@ -1,0 +1,4 @@
+2월 08, 2018 12:01:56 오전 enamel.ScenarioParser errorLog
+경고: Exception error : java.lang.InterruptedException: sleep interrupted
+2월 08, 2018 12:01:56 오전 enamel.ScenarioParser errorLog
+정보: Strange error occurred if you are able to read this message. Possibilities could include possible file corruption, or that you have enter characters that could not be read/interpreted.

@@ -21,6 +21,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.AbstractListModel;
+import javax.swing.DefaultListModel;
 
 public class EditorMenuView {
 
@@ -28,7 +30,8 @@ public class EditorMenuView {
 	private EditorMenuModel model;
 	private EditorMenuController controller;
 	private LinkedList<JButton> buttonList = new LinkedList<JButton>();
-
+	protected DefaultListModel listModel;
+	protected JList ScenarioList;
 	/**
 	 * Create the application.
 	 */
@@ -46,13 +49,9 @@ public class EditorMenuView {
 		frmScenarioEditor = new JFrame();
 		frmScenarioEditor.setTitle("Scenario Editor");
 		frmScenarioEditor.setBounds(100, 100, 451, 550);
-		frmScenarioEditor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmScenarioEditor.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		frmScenarioEditor.setResizable(false);
 		frmScenarioEditor.getContentPane().setLayout(null);
-		
-		JTextArea scenarioLists = new JTextArea();
-		scenarioLists.setToolTipText("List of scenarios");
-		scenarioLists.setBounds(12, 51, 177, 450);
-		frmScenarioEditor.getContentPane().add(scenarioLists);
 		
 		JLabel lblScenarioLists = new JLabel("Scenario Lists");
 		lblScenarioLists.setToolTipText("Scenario List label");
@@ -96,12 +95,25 @@ public class EditorMenuView {
 		buttonListPanel.add(btnRunScenario);
 		buttonListPanel.add(btnExit );
 		
+		ScenarioList = new JList();
+		listModel = new DefaultListModel();
+		ScenarioList.setModel(listModel);
+		
+		ScenarioList.setBounds(12, 48, 177, 453);
+		frmScenarioEditor.getContentPane().add(ScenarioList);
+		
 		// Puts all the buttons in a list, and add listener to all for
 		// controller to control it.
 		for(int i = 0 ; i < buttonListPanel.getComponentCount() ; i++) {
 			buttonList.add((JButton)buttonListPanel.getComponent(i));
 			buttonList.get(i).addActionListener(controller);
 		}
+		
+		
+		
+	}
+	
+	public void update(){
 		
 	}
 	
@@ -112,6 +124,4 @@ public class EditorMenuView {
 	protected LinkedList<JButton> getButtonList(){
 		return this.buttonList;
 	}
-	
-	
 }
