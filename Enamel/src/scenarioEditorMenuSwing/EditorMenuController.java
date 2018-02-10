@@ -1,4 +1,4 @@
-package scenarioEditorMenu;
+package scenarioEditorMenuSwing;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,8 +10,8 @@ import java.util.Scanner;
 import javax.swing.JFileChooser;
 
 import enamel.*;
-import mainMenu.MainMenuModel;
-import mainMenu.MainMenuView;
+import mainMenuSwing.MainMenuModel;
+import mainMenuSwing.MainMenuView;
 
 public class EditorMenuController  implements ActionListener {
 	

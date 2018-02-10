@@ -1,4 +1,4 @@
-package mainMenu;
+package mainMenuSwing;
 
 public class MainMenuModel {
 	

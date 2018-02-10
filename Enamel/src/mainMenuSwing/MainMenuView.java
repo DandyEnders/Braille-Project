@@ -1,4 +1,4 @@
-package mainMenu;
+package mainMenuSwing;
 
 import java.awt.EventQueue;
 
@@ -12,8 +12,8 @@ import javax.swing.SpringLayout;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
 import net.miginfocom.swing.MigLayout;
-import scenarioEditorMenu.EditorMenuController;
-import scenarioEditorMenu.EditorMenuModel;
+import scenarioEditorMenuSwing.EditorMenuController;
+import scenarioEditorMenuSwing.EditorMenuModel;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;

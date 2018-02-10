@@ -1,9 +1,9 @@
-package mainMenu;
+package mainMenuSwing;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import scenarioEditorMenu.EditorMenuView;
+import scenarioEditorMenuSwing.EditorMenuView;
 
 public class MainMenuController implements ActionListener {
 	

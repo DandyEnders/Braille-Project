@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="mainMenuJavaFX.MainMenuController">
+   <center>
+      <TitledPane animated="false" text="Hello Bro" BorderPane.alignment="CENTER">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button ellipsisString="Ellipsis String" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#printYay" text="This is a button" />
+                  <TextField layoutX="37.0" layoutY="79.0" promptText="Bruh" text="This not" />
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+   </center>
+</BorderPane>

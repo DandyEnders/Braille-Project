@@ -1,4 +1,4 @@
-package scenarioEditorMenu;
+package scenarioEditorMenuSwing;
 
 import java.awt.EventQueue;
 
