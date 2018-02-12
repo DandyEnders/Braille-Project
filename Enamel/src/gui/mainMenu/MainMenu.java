@@ -1,6 +1,7 @@
 package gui.mainMenu;
 	
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 import utility.Language;
 import javafx.scene.Scene;
@@ -37,7 +38,7 @@ public class MainMenu extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			//debug
-			//System.out.println("Braille Program executing...");
+			System.out.println("Braille Program executing...");
 			
 			// Initialize the window
 			window = primaryStage;
@@ -55,6 +56,9 @@ public class MainMenu extends Application {
 			window.setScene(scene);
 			window.setTitle(Language.mainMenuTitle);
 			window.show();
+			
+			// Close the whole thing when red X is pressed.
+			window.setOnCloseRequest(e -> Platform.exit());
 			
 			
 			
