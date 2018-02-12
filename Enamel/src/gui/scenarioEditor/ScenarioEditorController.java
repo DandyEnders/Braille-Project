@@ -114,8 +114,8 @@ public class ScenarioEditorController {
 		}
 	}
 	
-	public void saveScenario() {
-		// TODO : add saving feature using FileChooser.
+	public void createScenario() {
+		// TODO : add creating scenario feature.
 	}
 	
 	/**

@@ -10,7 +10,7 @@
    <children>
       <FlowPane layoutX="200.0" prefHeight="600.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" text="Create a new Scenario">
+            <Button mnemonicParsing="false" onMouseClicked="#createScenario" prefHeight="100.0" prefWidth="200.0" text="Create a new Scenario">
                <font>
                   <Font name="Arial Bold" size="15.0" />
                </font>
