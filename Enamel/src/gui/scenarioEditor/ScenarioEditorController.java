@@ -114,6 +114,10 @@ public class ScenarioEditorController {
 		}
 	}
 	
+	public void saveScenario() {
+		// TODO : add saving feature using FileChooser.
+	}
+	
 	/**
 	 * This method is used for Exiting ( hiding ) editor.
 	 * May change it later by closing it completely.
