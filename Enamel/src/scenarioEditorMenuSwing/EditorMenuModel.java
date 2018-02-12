@@ -1,5 +1,12 @@
 package scenarioEditorMenuSwing;
 
+/**
+ * Swing version of EditorMenuModel
+ * Deprecated.
+ * @author Jinho Hwang
+ *
+ */
+
 import java.io.File;
 import java.util.LinkedList;
 

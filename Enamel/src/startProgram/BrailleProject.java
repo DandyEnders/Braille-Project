@@ -7,9 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import mainMenuJavaFX.MainMenu;
-import mainMenuSwing.MainMenuController;
-import mainMenuSwing.MainMenuModel;
-import mainMenuSwing.MainMenuView;
+import mainMenuJavaFX.MainMenuController;
+
 
 /**
  * This class starts the program execution by creating view, model, and a controller for
@@ -28,8 +27,8 @@ public class BrailleProject{
        // ScenarioParser s = new ScenarioParser(true);
 	    //s.setScenarioFile("./FactoryScenarios/Scenario_" + 1 + ".txt");
     	
-      System.out.println("LOL");
-     
+      System.out.println("Braille Program executing...");
+      
       new Thread() {
           @Override
           public void run() {
@@ -37,6 +36,7 @@ public class BrailleProject{
           }
       }.start();
 	  
+     
     	   
     	  
     }

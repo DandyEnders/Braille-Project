@@ -1,5 +1,12 @@
 package scenarioEditorMenuSwing;
 
+/**
+ * Swing version of EditorMenuController
+ * Deprecated.
+ * @author Jinho Hwang
+ *
+ */
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -51,6 +58,7 @@ public class EditorMenuController  implements ActionListener {
 			break;
 		case "Run selected scenario":
 			System.out.println("You pressed a "+ e.getActionCommand().toString() + " button!");
+			
 			if(this.view.ScenarioList.getSelectedIndex() != -1){
 				Thread starterCodeThread = new Thread("Starter Code Thread") {
 				    public void run(){    

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainMenuJavaFX.ScenarioEditorController">
+   <children>
+      <FlowPane layoutX="200.0" prefHeight="600.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" text="Create a new Scenario">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" text="Edit selected Scenario">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" text="Save selected Scenario">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onMouseClicked="#loadScenario" prefHeight="100.0" prefWidth="200.0" text="Load Scenario">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onMouseClicked="#runScenario" prefHeight="100.0" prefWidth="200.0" text="Run selected Scenario">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onMouseClicked="#hideScenarioEditor" prefHeight="100.0" prefWidth="200.0" text="Exit">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </FlowPane>
+      <ListView fx:id="scenarioList" layoutX="7.0" layoutY="69.0" prefHeight="527.0" prefWidth="186.0" />
+      <Label layoutX="34.0" layoutY="28.0" text="Scenario Lists" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

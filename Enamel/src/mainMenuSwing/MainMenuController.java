@@ -5,6 +5,12 @@ import java.awt.event.ActionListener;
 
 import scenarioEditorMenuSwing.EditorMenuView;
 
+/**
+ * Swing version of MainMenuController.
+ * Deprecated.
+ * @author Jinho Hwang
+ *
+ */
 public class MainMenuController implements ActionListener {
 	
 	private MainMenuModel model;

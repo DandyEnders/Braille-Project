@@ -1,5 +1,12 @@
 package mainMenuSwing;
 
+/**
+ * Swing version of MainMenuView
+ * Deprecated.
+ * @author Jinho Hwang
+ *
+ */
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
