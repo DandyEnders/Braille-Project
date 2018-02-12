@@ -1,13 +1,13 @@
 package startProgram;
 
 import enamel.ScenarioParser;
+import gui.mainMenu.MainMenu;
+import gui.mainMenu.MainMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import mainMenuJavaFX.MainMenu;
-import mainMenuJavaFX.MainMenuController;
 
 
 /**
@@ -21,13 +21,7 @@ public class BrailleProject{
 
     public static void main(String[] args) { 	  	
     	
-    	
-    	//MainMenuView mainMenuView = new MainMenuView();
-    	
-       // ScenarioParser s = new ScenarioParser(true);
-	    //s.setScenarioFile("./FactoryScenarios/Scenario_" + 1 + ".txt");
-    	
-      System.out.println("Braille Program executing...");
+      
       
       new Thread() {
           @Override

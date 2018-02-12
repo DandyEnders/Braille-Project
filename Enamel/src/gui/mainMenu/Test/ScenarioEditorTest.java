@@ -1,5 +1,5 @@
 
-package mainMenuJavaFX.Test;
+package gui.mainMenu.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,9 +8,9 @@ import java.util.List;
 import org.junit.Test;
 
 import enamel.ScenarioParser;
+import gui.mainMenu.MainMenu;
+import gui.mainMenu.MainMenuController;
 import javafx.application.Application;
-import mainMenuJavaFX.MainMenu;
-import mainMenuJavaFX.MainMenuController;
 
 /**
  * @author howden2
