@@ -1,6 +1,6 @@
 package gui.mainMenu;
 
-import gui.ScenarioEditor.ScenarioEditor;
+import gui.scenarioEditor.ScenarioEditor;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXML;

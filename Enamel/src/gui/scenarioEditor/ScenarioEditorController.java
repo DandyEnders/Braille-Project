@@ -1,4 +1,4 @@
-package gui.ScenarioEditor;
+package gui.scenarioEditor;
 
 import java.io.File;
 import java.io.IOException;
