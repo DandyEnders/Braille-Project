@@ -20,7 +20,7 @@
                   <Font name="Arial Bold" size="15.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" text="Save selected Scenario">
+            <Button mnemonicParsing="false" onMouseClicked="#saveScenario" prefHeight="100.0" prefWidth="200.0" text="Save selected Scenario">
                <font>
                   <Font name="Arial Bold" size="15.0" />
                </font>
