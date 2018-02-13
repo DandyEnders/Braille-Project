@@ -17,6 +17,7 @@ public final class Language {
 	public static final String scenarioEditorFxml = "ScenarioEditor.fxml";
 	
 	public static final String scenarioEditorLoadFileChooserTitle = "Open Scenario";
+	public static final String scenarioEditorSaveFileChooserTitle = "Open Scenario";
 	
 	//These are unused so far due to imcompatibility of scenebuilder to the variable String.
 	// Main menu Strings
