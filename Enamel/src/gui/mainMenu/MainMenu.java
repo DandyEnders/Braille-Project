@@ -1,5 +1,7 @@
 package gui.mainMenu;
 	
+import java.awt.Color;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -9,6 +11,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.effect.DropShadow;
+
 
  /**
   * Main menu view class. It is controlled by MainMenuController.
@@ -37,6 +41,7 @@ public class MainMenu extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+		
 			//debug
 			System.out.println("Braille Program executing...");
 			
