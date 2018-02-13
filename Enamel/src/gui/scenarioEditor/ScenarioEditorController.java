@@ -116,6 +116,7 @@ public class ScenarioEditorController {
 	
 	public void createScenario() {
 		// TODO : add creating scenario feature.
+		
 	}
 	
 	/**
