@@ -44,6 +44,9 @@ public class ScenarioEditor {
 			// Instantiates new window
 			window = new Stage();
 			
+			// Window should not be resizeable ( else destroys our layout )
+			window.setResizable(false);
+			
 			// Loading the format from FXML file
 			root = (AnchorPane)FXMLLoader.load(getClass().getResource(Language.scenarioEditorFxml));
 			
@@ -71,7 +74,7 @@ public class ScenarioEditor {
 	}
 	
 	/**
-	 * Method for maing the window invisible.
+	 * Method for making the window invisible.
 	 * @Author Jinho Hwang
 	 */
 	public void hide() {

@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.JFileChooser;
 
 import enamel.ScenarioParser;
+import gui.choiceBox.ScenarioMaker;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -40,11 +41,13 @@ public class ScenarioEditorController {
 	// OberservableList for List items.
 	ObservableList<String> obsFileList;
 	
+	// ScenarioMaker
+	ScenarioMaker scenarioMaker;
+	
 	// Initialize the fileList.
 	// TODO : make a model for scenario Editor to keep track of.
 	public ScenarioEditorController(){
 		fileList = new ArrayList<File>();
-		
 	}
 	
 	
@@ -115,8 +118,8 @@ public class ScenarioEditorController {
 	}
 	
 	public void createScenario() {
-		// TODO : add creating scenario feature.
-		
+		scenarioMaker = new ScenarioMaker();
+		scenarioMaker.show();
 	}
 	
 	/**

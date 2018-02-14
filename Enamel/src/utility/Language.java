@@ -15,12 +15,26 @@ public final class Language {
 	public static final String mainMenuCss = "MainMenu.css";
 	public static final String mainMenuFxml = "MainMenu.fxml";
 	public static final String scenarioEditorFxml = "ScenarioEditor.fxml";
+	public static final String scenarioMakerFxml = "ScenarioMaker.fxml";
 	
-	public static final String scenarioEditorLoadFileChooserTitle = "Open Scenario";
-	
-	//These are unused so far due to imcompatibility of scenebuilder to the variable String.
 	// Main menu Strings
 	public static final String mainMenuTitle = "Braille Project Main Menu";
+	
+	// Scenario editor Strings
+	public static final String scenarioEditorTitle = "Scenario Editor";
+	public static final String scenarioEditorLoadFileChooserTitle = "Open Scenario";
+	
+	// Scanerio maker Strings
+	public static final String scanerioMakerTitle = "Scanerio Maker";
+	
+	
+	
+	
+	
+	
+	//These are unused so far due to imcompatibility of scenebuilder to the variable String.
+	
+	// Main menu Strings
 	public static final String mainMenuExitButton = "Exit";
 	public static final String mainMenuScenarioEditorButton = "Scenario Editor";
 	public static final String mainMenuBraileProjectLabel = "Braile Project";
@@ -28,7 +42,6 @@ public final class Language {
 
 	
 	// Scenario editor Strings
-	public static final String scenarioEditorTitle = "Scenario Editor";
 	
 	public static final String scenarioEditorCreateScenario = "Create a new Scenario";
 	public static final String scenarioEditorEditScenario = "Edit selected Scenario";

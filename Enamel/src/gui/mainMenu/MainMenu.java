@@ -43,6 +43,9 @@ public class MainMenu extends Application {
 			// Initialize the window
 			window = primaryStage;
 			
+			// Window should not be resizeable ( else destroys our layout )
+			window.setResizable(false);
+			
 			// Set the base panel ( root ) from fxml file
 			root = (AnchorPane)FXMLLoader.load(getClass().getResource(Language.mainMenuFxml));
 			
