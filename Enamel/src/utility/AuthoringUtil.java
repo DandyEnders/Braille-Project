@@ -2,7 +2,12 @@ package utility;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 
 /**
@@ -25,55 +30,88 @@ public class AuthoringUtil {
 	 * Extension overload version of isCorrectlyParsed.
 	 * @author Jinho Hwang
 	 * @param file
-	 * @return true
+	 * @return List\<Phrase\>
 	 * 			if given file is correctly parsed
-	 * @return false
+	 * @return null
 	 * 			if given file has incorrect syntax
 	 */
-	public static boolean isCorrectlyParsed(File file) {
+	public static List<Phrase> isCorrectlyParsed(File file) {
 		String scenarioFile = AuthoringUtil.fileToString(file);
 		return isCorrectlyParsed(scenarioFile);
 	}
 	
 	/**
 	 * This method is responsible to determine if lines of Strings
-	 * are correctly formatted. ( Correct syntax is available at 
+	 * are correctly phrased. ( Correct phrase is available at 
 	 * https://wiki.eecs.yorku.ca/course_archive/2017-18/W/2311/_media/scenarioformat.pdf
 	 * 
 	 * @author Jinho Hwang
 	 * @param scenarioFile
-	 * @return true
-	 * 			if given file is correctly parsed
-	 * @return false
-	 * 			if given file has incorrect syntax
+	 * @return List\<Phrase\>
+	 * 			if the file was correctly phrased, return a Pair of true and list of 
+	 * 			correct List of Phrases.
+	 * @return null
+	 * 			if given file failed to phrase correctly.
 	 */
-	public static boolean isCorrectlyParsed(String scenarioFile) {
+	public static List<Phrase> isCorrectlyParsed(String scenarioFile) {
+		// TODO : MAKE THIS WORK -----------------------------------------------------------------/
 		
+		// Get scanner to read each line of String
 		Scanner scan = new Scanner(scenarioFile);
 		
+		// Check if repeat is done
 		boolean isRepeat = false;
 		
-		
-		while(scan.hasNextLine()) {
-			Pair<Boolean,String> answerPair = isThisLineSyntacticallyCorrect(scan.nextLine());
-			
+		try {
+			String cellNumber = scan.nextLine().split("\\s")[1];
+			String buttonNumber = scan.nextLine().split("\\s")[1];
+		}catch (Exception e) {
+			System.out.println("Exception error: " + e.toString() + "\n" +
+					"Expected format: Cell num1 \n Button num2 \n "
+							+ "as the first two lines of the scenarion file, and where num1 and num2 are positive integers. \n"
+							+ "Did not receive such a format in the scenario file and program had to end due to the incorrect"
+							+ "file format.");
 		}
 		
 		
 		
+		// While scenarioFile has line to read,
+		while(scan.hasNextLine()) {
+			
+			// Check if each phrase is correct and spit out their output 
+			Pair<Boolean,String> answerPair = isThisLineSyntacticallyCorrect(scan.nextLine());
+			
+			// Get the correctness of the phrase of the line and type of correct phrase
+			boolean isCorrect = answerPair.getFirst(); 	// first is boolean
+			String type = answerPair.getSecond();		// second is string
+			
+			// If the phrase is incorrect, then whole thing is incorrect so return false 
+			if(!isCorrect) {
+				return null;
+			}
+		
+			
+		}
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		return true; // dummy return
+		return null; // dummy return
 	}
 	
-	public static Pair<Boolean,String> isThisLineSyntacticallyCorrect(String fileLine) {
+	/**
+	 * This method checks if a phrase of a line of String is well-defined ( correctly written )
+	 * returns true if the phrase follows the file format, returns false if the phrase does not.
+	 * 		
+	 * @author ScenarioParser Writer ( Used his / her list of if statements / comments )
+	 * @author Jinho Hwang
+	 * 
+	 * @param fileLine
+	 * 		a phrase to test if it satisfy file format
+	 * @return true
+	 * 		if the phrase is correct
+	 * @return false
+	 * 		if the phrase is not correct
+	 */
+	private static Pair<Boolean,String> isThisLineSyntacticallyCorrect(String fileLine) {
 		
 		Pair<Boolean,String> answerPair = new Pair<Boolean,String>(false,"");
 			
@@ -99,6 +137,9 @@ public class AuthoringUtil {
 		// will be repeated.
 		else if (fileLine.length() >= 8 && fileLine.substring(0, 8).equals("/~repeat")) {
 			answerPair.set(true, "repeat");
+		}
+		else if (fileLine.length() >= 11 && fileLine.substring(0, 11).equals("/~endrepeat")) {
+			answerPair.set(true, "endrepeat");
 		}
 		// The key phrase to reset the action listeners of all of the
 		// JButtons.
@@ -155,17 +196,51 @@ public class AuthoringUtil {
 		}
 		
 		return answerPair;
-	}
 		
+	}
+	
+	
+	
+	
+	
+	// TODO : fix this method -------------------------------------------------------//
+	public void errorLog(String exception, String message) {
+		Logger logger = Logger.getLogger("ERROR_LOG");
+		FileHandler fh;
+
+		System.out.println(message);
+
+		//speak("Error! Something went wrong in the program! Please consult a teacher "
+		//		+ "or administrator for assistance! Also please view the ERROR_LOG file for more details");
+		// The try-catch block is to format the Logger class so that the error
+		// log file is easier to understand.
+		try {
+			File f = new File("ERROR_LOG.txt");
+			fh = new FileHandler(f.toString());
+
+			logger.addHandler(fh);
+			logger.setUseParentHandlers(false);
+			SimpleFormatter formatter = new SimpleFormatter();
+			fh.setFormatter(formatter);
+
+			logger.warning(exception);
+			logger.info(message);
+			fh.close();
+
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		//exit();
+	}
 	
 	
 	
 	
 	
 	
-	
-	
-	
+ 
 
 	/**
 	 * A method that scans through input file and

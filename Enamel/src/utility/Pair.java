@@ -12,8 +12,8 @@ package utility;
  */
 public class Pair<A, B> {
 
-	A a;
-	B b;
+	private A a;
+	private B b;
 
 	Pair(A a, B b) {
 		this.a = a;
@@ -40,4 +40,5 @@ public class Pair<A, B> {
 		setFirst(a);
 		setSecond(b);
 	}
+	
 }
