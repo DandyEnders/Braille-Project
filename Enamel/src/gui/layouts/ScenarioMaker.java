@@ -1,10 +1,13 @@
 package gui.layouts;
+import java.io.File;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import utility.Language;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXML;
@@ -22,6 +25,11 @@ public class ScenarioMaker {
 	private final static Integer windowMinHeight = windowHeight;
 	private final static Integer windowMinWidth = windowWidth;
 	private final static Integer windowMaxWidth = windowWidth;
+	
+	
+	// Input file and its name
+	private File scenarioFile;
+	private String scenarioFileName;
 
 	// List of pane, scene, stage
 	private AnchorPane root;
@@ -29,7 +37,13 @@ public class ScenarioMaker {
 	private Stage window;
 	
 	public ScenarioMaker(){
+		this(new File("./temp/"));
+	}
+	
+	public ScenarioMaker(File scenarioFile){
 		display();
+		this.scenarioFile = scenarioFile;
+		this.scenarioFileName = scenarioFile.getName();
 	}
 	
 	public void display() {

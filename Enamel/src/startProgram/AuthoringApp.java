@@ -17,7 +17,7 @@ import javafx.stage.Stage;
  *
  */
 
-public class BrailleProject{
+public class AuthoringApp{
 
     public static void main(String[] args) { 	  	
     	

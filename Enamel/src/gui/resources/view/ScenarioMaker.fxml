@@ -15,8 +15,8 @@
          <children>
             <HBox layoutX="13.0" layoutY="17.0" prefHeight="23.0" prefWidth="386.0">
                <children>
-                  <Label layoutX="-1.0" layoutY="7.0" text="Senario Name: " />
-                  <TextField layoutX="88.0" layoutY="3.0" prefHeight="23.0" prefWidth="295.0" />
+                  <Label layoutX="-1.0" layoutY="7.0" text="Scenario Name: " />
+                  <TextField fx:id="scenarioNameField" layoutX="88.0" layoutY="3.0" prefHeight="23.0" prefWidth="295.0" />
                </children>
             </HBox>
             <Region prefHeight="10.0" prefWidth="373.0" />

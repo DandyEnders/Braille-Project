@@ -70,20 +70,25 @@ public class ScenarioEditorController {
 		// Set starting directory ( the directory you start to select from )
 		fileChooser.setInitialDirectory(new File("./FactoryScenarios").getCanonicalFile());
 		
-		// Open up fileChooser, let user pick multiple files, add it into fileList
-		fileList.addAll(fileChooser.showOpenMultipleDialog(window));
+		// Open fileChooser, get multiple files
+		List<File> inputFiles = fileChooser.showOpenMultipleDialog(window);
 		
-		// Initialize observable file lists
-		obsFileList = FXCollections.observableArrayList();
-		
-		// Transfer all the file names into observable file lists
-		for(File file : fileList) {
-			obsFileList.add(file.getName());
-			System.out.println(obsFileList.get(obsFileList.size()-1));
+		if(inputFiles != null){
+			// Add files into fileList
+			fileList.addAll(inputFiles);
+			
+			// Initialize observable file lists
+			obsFileList = FXCollections.observableArrayList();
+			
+			// Transfer all the file names into observable file lists
+			for(File file : fileList) {
+				obsFileList.add(file.getName());
+				System.out.println(obsFileList.get(obsFileList.size()-1));
+			}
+			
+			// Set the view of List to the list of File names.
+			scenarioList.setItems(obsFileList);
 		}
-		
-		// Set the view of List to the list of File names.
-		scenarioList.setItems(obsFileList);
 	
 	}
 	
@@ -126,8 +131,6 @@ public class ScenarioEditorController {
 	 * @author Jinho Hwang
 	 */
 	public void saveScenario() {
-		// TODO : add saving feature using FileChooser.
-		
 		// If the list is empty or not elected then
 		if(!scenarioList.getSelectionModel().isEmpty()) {
 			
@@ -181,9 +184,27 @@ public class ScenarioEditorController {
 		}
 	}
 	
+	/**
+	 * This method opens a ScenarioMaker, with all empty fields.
+	 * @Author Jinho Hwang
+	 */
 	public void createScenario() {
 		scenarioMaker = new ScenarioMaker();
-		scenarioMaker.show();
+		scenarioMaker.show();  
+	}
+	
+	/**
+	 * This method opens a Scenemaker, with file selected.
+	 */
+	public void editScenario() {
+		int selectedIndex = scenarioList.getSelectionModel().getSelectedIndex();
+		System.out.println(selectedIndex);
+		if(selectedIndex != -1){
+			File selectedFile = fileList.get(selectedIndex);
+			System.out.println(selectedFile);
+			scenarioMaker = new ScenarioMaker(selectedFile);
+			scenarioMaker.show();
+		}
 	}
 	
 	/**
