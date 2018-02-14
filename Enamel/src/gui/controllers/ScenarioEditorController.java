@@ -189,6 +189,8 @@ public class ScenarioEditorController {
 	 * @Author Jinho Hwang
 	 */
 	public void createScenario() {
+		// Create scenario maker with empty args and show it; 
+		// empty name and zero cells / buttons
 		scenarioMaker = new ScenarioMaker();
 		scenarioMaker.show();  
 	}
@@ -197,11 +199,17 @@ public class ScenarioEditorController {
 	 * This method opens a Scenemaker, with file selected.
 	 */
 	public void editScenario() {
+		// The index of scenario selected
 		int selectedIndex = scenarioList.getSelectionModel().getSelectedIndex();
-		System.out.println(selectedIndex);
+		
+		// If scenario is selected
 		if(selectedIndex != -1){
+			
+			// Get the selected file
 			File selectedFile = fileList.get(selectedIndex);
-			System.out.println(selectedFile);
+			
+			// Create scenario maker with the File;
+			// name of the file / commands / # of cell / button will be filled.
 			scenarioMaker = new ScenarioMaker(selectedFile);
 			scenarioMaker.show();
 		}

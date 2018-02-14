@@ -15,18 +15,21 @@
          <children>
             <HBox layoutX="13.0" layoutY="17.0" prefHeight="23.0" prefWidth="386.0">
                <children>
-                  <Label layoutX="-1.0" layoutY="7.0" text="Scenario Name: " />
-                  <TextField fx:id="scenarioNameField" layoutX="88.0" layoutY="3.0" prefHeight="23.0" prefWidth="295.0" />
+                  <Label layoutX="-1.0" layoutY="7.0" prefHeight="17.0" prefWidth="89.0" text="Scenario Name: " />
+                  <Region prefHeight="25.0" prefWidth="13.0" />
+                  <TextField fx:id="scenarioNameField" layoutX="88.0" layoutY="3.0" prefHeight="25.0" prefWidth="267.0" promptText="Put scenario name here..." />
                </children>
             </HBox>
             <Region prefHeight="10.0" prefWidth="373.0" />
             <HBox layoutX="14.0" layoutY="48.0" prefHeight="23.0" prefWidth="386.0">
                <children>
-                  <Label layoutY="38.0" text="Number of Braille Cells: " />
-                  <TextField layoutX="141.0" layoutY="34.0" prefHeight="23.0" prefWidth="41.0" />
+                  <Label layoutY="38.0" prefHeight="17.0" prefWidth="133.0" text="Number of Braille Cells: " />
+                  <Region prefHeight="25.0" prefWidth="7.0" />
+                  <TextField fx:id="numCellTextField" layoutX="141.0" layoutY="34.0" prefHeight="23.0" prefWidth="41.0" promptText="#" text="0" />
                   <Region prefHeight="23.0" prefWidth="13.0" />
                   <Label layoutX="200.0" layoutY="38.0" text="Number of Buttons: " />
-                  <TextField layoutX="318.0" layoutY="34.0" prefHeight="23.0" prefWidth="68.0" />
+                  <Region prefHeight="25.0" prefWidth="9.0" />
+                  <TextField fx:id="numButtonTextField" layoutX="318.0" layoutY="34.0" prefHeight="25.0" prefWidth="58.0" promptText="#" text="0" />
                </children>
             </HBox>
          </children>
@@ -51,16 +54,16 @@
             <Region prefHeight="76.0" prefWidth="15.0" />
             <Button mnemonicParsing="false" prefHeight="76.0" prefWidth="94.0" text="Exit">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Button>
          </children>
       </HBox>
       <ToggleButton layoutX="14.0" layoutY="85.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="386.0" text="Toggle Law Textview" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="85.0" />
-      <HBox layoutX="14.0" layoutY="669.0" prefHeight="59.0" prefWidth="372.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
+      <HBox layoutX="14.0" layoutY="669.0" prefHeight="59.0" prefWidth="386.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="129.0" text="Create a command" textAlignment="CENTER" />
-            <Region prefHeight="59.0" prefWidth="23.0" />
+            <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="129.0" text="Create a &#10;command" textAlignment="CENTER" />
+            <Region prefHeight="59.0" prefWidth="13.0" />
             <VBox prefHeight="59.0" prefWidth="75.0">
                <children>
                   <RadioButton mnemonicParsing="false" text="Above">
@@ -74,7 +77,7 @@
                   <RadioButton mnemonicParsing="false" selected="true" text="Below" toggleGroup="$CommandPosGroup" />
                </children>
             </VBox>
-            <Region prefHeight="59.0" prefWidth="21.0" />
+            <Region prefHeight="59.0" prefWidth="19.0" />
             <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="137.0" text="Remove the&#10;command" textAlignment="CENTER" />
          </children>
       </HBox>

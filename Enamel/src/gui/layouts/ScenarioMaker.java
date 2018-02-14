@@ -1,6 +1,7 @@
 package gui.layouts;
 import java.io.File;
 
+import gui.controllers.ScenarioMakerController;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Modality;
@@ -26,11 +27,12 @@ public class ScenarioMaker {
 	private final static Integer windowMinWidth = windowWidth;
 	private final static Integer windowMaxWidth = windowWidth;
 	
+	// Controller
+	ScenarioMakerController control;
 	
-	// Input file and its name
+	// Input file
 	private File scenarioFile;
-	private String scenarioFileName;
-
+	
 	// List of pane, scene, stage
 	private AnchorPane root;
 	private Scene scene;
@@ -41,9 +43,8 @@ public class ScenarioMaker {
 	}
 	
 	public ScenarioMaker(File scenarioFile){
-		display();
 		this.scenarioFile = scenarioFile;
-		this.scenarioFileName = scenarioFile.getName();
+		display();
 	}
 	
 	public void display() {
@@ -62,9 +63,16 @@ public class ScenarioMaker {
 			// i.e. you cannot do any other tasks on other windows
 			// until ScenarioMaker closes
 			window.initModality(Modality.APPLICATION_MODAL);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(Language.scenarioMakerFxml));
 			
 			// Set the base panel ( root ) from fxml file
-			root = (AnchorPane)FXMLLoader.load(getClass().getResource(Language.scenarioMakerFxml));
+			root = (AnchorPane)loader.load();
+			
+			// Gets the controller so I can pass scenarioFile
+			control = loader.getController();
+			
+			// Pass scenarioFile to Control
+			control.setFile(scenarioFile);
 			
 			// Scene is built using the base panel
 			scene = new Scene(root,windowWidth,windowHeight);
