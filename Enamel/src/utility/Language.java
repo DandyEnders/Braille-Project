@@ -12,11 +12,18 @@ public final class Language {
 	
 	
 	
-	public static final String mainMenuCss = "MainMenu.css";
-	public static final String mainMenuFxml = "MainMenu.fxml";
-	public static final String scenarioEditorFxml = "ScenarioEditor.fxml";
-	public static final String scenarioMakerFxml = "ScenarioMaker.fxml";
 	
+	
+	// Fxml directory
+	public static final String mainMenuFxml = "/gui/resources/view/MainMenu.fxml";
+	public static final String scenarioEditorFxml = "/gui/resources/view/ScenarioEditor.fxml";
+	public static final String scenarioMakerFxml = "/gui/resources/view/ScenarioMaker.fxml";
+	public static final String choiceBoxFxml = "/gui/resources/view/ChoiceBox.fxml";
+	public static final String choiceTextBoxFxml = "/gui/resources/view/ChoiceTextBox.fxml";
+	
+	// CSS directory
+	public static final String mainMenuCss = "/gui/resources/css/MainMenu.css";
+	 
 	// Main menu Strings
 	public static final String mainMenuTitle = "Braille Project Main Menu";
 	

@@ -50,7 +50,7 @@ public class ScenarioMaker {
 			window.initModality(Modality.APPLICATION_MODAL);
 			
 			// Set the base panel ( root ) from fxml file
-			root = (AnchorPane)FXMLLoader.load(getClass().getResource("ScenarioMaker.fxml"));
+			root = (AnchorPane)FXMLLoader.load(getClass().getResource(Language.scenarioMakerFxml));
 			
 			// Scene is built using the base panel
 			scene = new Scene(root,windowWidth,windowHeight);
