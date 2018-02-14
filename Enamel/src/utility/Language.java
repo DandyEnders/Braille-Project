@@ -10,9 +10,7 @@ package utility;
  */
 public final class Language {
 	
-	
-	
-	
+
 	
 	// Fxml directory
 	public static final String mainMenuFxml = "/gui/resources/view/MainMenu.fxml";
@@ -30,6 +28,8 @@ public final class Language {
 	// Scenario editor Strings
 	public static final String scenarioEditorTitle = "Scenario Editor";
 	public static final String scenarioEditorLoadFileChooserTitle = "Open Scenario";
+	public static final String scenarioEditorSaveFileChooserTitle = "Save Scenario";
+
 	
 	// Scanerio maker Strings
 	public static final String scanerioMakerTitle = "Scanerio Maker";

@@ -1,9 +1,12 @@
 package gui.controllers;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.swing.JFileChooser;
 
@@ -113,6 +116,67 @@ public class ScenarioEditorController {
 			};
 			starterCodeThread.start();
 				
+			
+		}
+	}
+	
+	/**
+	 * This method is for user to save a list-selected scenario from
+	 * scenario list on the scenario editor.
+	 * @author Jinho Hwang
+	 */
+	public void saveScenario() {
+		// TODO : add saving feature using FileChooser.
+		
+		// If the list is empty or not elected then
+		if(!scenarioList.getSelectionModel().isEmpty()) {
+			
+			try {
+				
+				// New window other then scenario Editor
+				Stage window = new Stage();
+				
+				// Get the selected item index from the list
+				int index = scenarioList.getSelectionModel().getSelectedIndex();
+				
+				// Create fileChooser and set its title
+				FileChooser fileChooser = new FileChooser();
+				fileChooser.setTitle(Language.scenarioEditorSaveFileChooserTitle);
+				
+				// Set starting directory ( the directory you start to select from )
+				fileChooser.setInitialDirectory(new File("./FactoryScenarios").getCanonicalFile());
+				
+				// Create a dummy variable for customized file.
+				//( selectedFile can be null if user decides to not to make a file )
+				File writtenFile = fileChooser.showSaveDialog(window);
+				
+				// If user pressed save after write its name,
+				if(writtenFile != null ) {
+					
+					// Create fileWriter and scanner to read selected file from the fileList.
+					Writer fileWriter = new FileWriter(writtenFile);
+					Scanner scenarioFileString = new Scanner(fileList.get(index));
+					
+					// Create a String to write.
+					String scenarioScript = "";
+					
+					// Copy all the contents from the selected file to scenarioScript.
+					while(scenarioFileString.hasNextLine()) {
+						scenarioScript += scenarioFileString.nextLine() + "\n";
+					}
+					
+					// Writes file with user written property with list-selected scenario
+					fileWriter.write(scenarioScript);
+					
+					// Closes IOStream.
+					scenarioFileString.close();
+					fileWriter.close();
+				}
+					
+			} catch (IOException e) {
+				e.printStackTrace(); // Happens when factory Scenarios folder do not exit.
+			}
+			
 			
 		}
 	}
