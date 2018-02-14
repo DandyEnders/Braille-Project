@@ -8,8 +8,8 @@ import java.util.List;
 import org.junit.Test;
 
 import enamel.ScenarioParser;
-import gui.mainMenu.MainMenu;
-import gui.mainMenu.MainMenuController;
+import gui.controllers.MainMenuController;
+import gui.layouts.MainMenu;
 import javafx.application.Application;
 
 /**

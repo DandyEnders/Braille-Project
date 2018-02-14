@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="800.0" minHeight="750.0" minWidth="800.0" prefHeight="750.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.choiceBox.ScenarioMakerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="800.0" minHeight="750.0" minWidth="800.0" prefHeight="750.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.ScenarioMakerController">
    <children>
       <ListView layoutX="14.0" layoutY="120.0" prefHeight="547.0" prefWidth="386.0" AnchorPane.bottomAnchor="83.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="120.0" />
       <VBox layoutX="414.0" layoutY="14.0" prefHeight="637.0" prefWidth="372.0" AnchorPane.bottomAnchor="99.0" AnchorPane.leftAnchor="414.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />

@@ -1,4 +1,4 @@
-package gui.mainMenu;
+package gui.layouts;
 	
 import javafx.application.Application;
 import javafx.application.Platform;

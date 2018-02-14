@@ -1,4 +1,4 @@
-package gui.scenarioEditor;
+package gui.layouts;
 import java.io.IOException;
 
 import javafx.application.Application;

@@ -1,8 +1,8 @@
 package startProgram;
 
 import enamel.ScenarioParser;
-import gui.mainMenu.MainMenu;
-import gui.mainMenu.MainMenuController;
+import gui.controllers.MainMenuController;
+import gui.layouts.MainMenu;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

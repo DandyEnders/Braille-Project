@@ -1,4 +1,4 @@
-package gui.scenarioEditor;
+package gui.controllers;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import java.util.List;
 import javax.swing.JFileChooser;
 
 import enamel.ScenarioParser;
-import gui.choiceBox.ScenarioMaker;
+import gui.layouts.ScenarioMaker;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,7 +19,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import utility.Language;
 /**
- * Scenario menu controller.
+ * Scenario editor controller.
  * @author Jinho Hwang
  *
  */

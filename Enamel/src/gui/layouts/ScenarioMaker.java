@@ -1,4 +1,4 @@
-package gui.choiceBox;
+package gui.layouts;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Modality;
