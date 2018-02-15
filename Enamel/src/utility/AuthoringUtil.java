@@ -96,6 +96,7 @@ public class AuthoringUtil {
 							+ "as the first two lines of the scenarion file, and where num1 and num2 are positive integers. \n"
 							+ "Did not receive such a format in the scenario file and program had to end due to the incorrect"
 							+ "file format.",PCE);
+			// Exception was thrown, which means phrase was wrong, so return false
 			return null;
 		}
 		
@@ -103,6 +104,8 @@ public class AuthoringUtil {
 		
 		
 		// TODO : MAKE THIS MULTILINE READER WORK
+		// change Pair<Boolean, String> to Pair<String, String>, First string being
+		// type and second being "argument,flag"
 		
 		// While scenarioFile has line to read,
 		while (scan.hasNextLine()) {
