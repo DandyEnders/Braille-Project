@@ -1,13 +1,7 @@
 package startProgram;
 
-import enamel.ScenarioParser;
-import gui.controllers.MainMenuController;
 import gui.layouts.MainMenu;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
 
 /**

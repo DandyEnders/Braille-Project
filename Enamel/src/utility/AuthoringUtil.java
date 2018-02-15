@@ -10,6 +10,9 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
 /**
  * This method will be responsible with Parsing the scenarioFile.
  * 
@@ -77,9 +80,11 @@ public class AuthoringUtil {
 			
 			// Throw exception if cell is not "Cell" or button is not "Button"
 			if(!cell.equals("Cell")){
+				scan.close();
 				throw new IllegalArgumentException("First word of first line is not \"Cell\".");
 			}
 			if(!button.equals("Button")){
+				scan.close();
 				throw new IllegalArgumentException("First word of second line is not \"Button\".");
 			}
 			
@@ -100,6 +105,8 @@ public class AuthoringUtil {
 			return null;
 		}
 		
+		scan.close();
+		
 		// Got validation check of two first line---------------//
 		
 		
@@ -111,25 +118,25 @@ public class AuthoringUtil {
 		while (scan.hasNextLine()) {
 
 			// Check if each phrase is correct and spit out their output
-			Pair<Boolean, String> answerPair = isThisLineSyntacticallyCorrect(scan.nextLine());
+			Pair<String, String> answerPair = isThisLineSyntacticallyCorrect(scan.nextLine());
 
 			// Get the correctness of the phrase of the line and type of correct
 			// phrase
-			boolean isCorrect = answerPair.getFirst(); // first is boolean
-			String type = answerPair.getSecond(); // second is string
+			String type = answerPair.getFirst(); // first is boolean
+			String argument = answerPair.getSecond(); // second is string
 			
 			// If the phrase is incorrect, then whole thing is incorrect so
-			// return false (null)
-			if (!isCorrect) {
+			// return null (false)
+			if (type == null) {
 				return null;
 			}
-			else if(isCorrect){
+			else if(type != null){
 				
 			}
 
 		}
 		
-		scan.close();
+		
 
 		return null; // dummy return
 	}
@@ -147,90 +154,115 @@ public class AuthoringUtil {
 	 * 
 	 * @param fileLine
 	 *            a phrase to test if it satisfy file format
-	 * @return true if the phrase is correct
-	 * @return false if the phrase is not correct
+	 * @return Pair<String, String>
+	 * 			First String is type of legal phrase ( Ex : sound, skip, repeat...)
+	 * 			Second String is argument of legal phrase (Ex : voice.wav, GOHERE, 1, 2...)
+	 * 			Second String can be a null if the legal phrase do not have any argument to take.
+	 * 			(Ex. First String = user-input, second String = null because user-input don't take an arg.
+	 * 
+	 * @return Pair<String, String>
+	 * 			If the given line input is not syntactically correct, ( not well-formed ) then, 
+	 * 			both first and second String is null. 
+	 * 			First String is null if and only if the given argument is incorrect.
+	 * 			
 	 */
-	private static Pair<Boolean, String> isThisLineSyntacticallyCorrect(String fileLine) {
+	private static Pair<String, String> isThisLineSyntacticallyCorrect(String fileLine) {
 
-		Pair<Boolean, String> answerPair = new Pair<Boolean, String>(false, "");
+		Pair<String, String> answerPair = new Pair<String, String>(null, null);
 
 		// The key phrase to indicate to play a sound file.
 		if (fileLine.length() >= 8 && fileLine.substring(0, 8).equals("/~sound:")) {
-			answerPair.set(true, "sound");
+			try{
+				Clip clip = AudioSystem.getAudioInputStream(
+						new File())
+			} catch (Exception e) {
+				errorLog("Exception error: " + e.toString(),
+						"Expected the name of the file (including extension) but instead got: " + sound
+								+ "\n Perhaps you forgot to include the extension of the sound file with the name? Other "
+								+ "possibilities include: \n Incorrect name of the file, the file not being in the same location "
+								+ "as the project folder, or an attempt to play an unsupported sound file. (only .wav files"
+								+ "are supported at this time)", PCE);
+			}
+			
+			
+			// Setting command = sound 
+			// arg = audio file name ( THIS DOES NOT CHECK IF THE FILE IS PLAYABLE )
+			answerPair.set("sound", fileLine.substring(8, fileLine.length()));
 		}
 		// The key phrase to indicate to skip to another part of the
 		// scenario.
-		else if (fileLine.length() >= 7 && fileLine.substring(0, 7).equals("/~skip:")) {
-			answerPair.set(true, "skip");
+		else if (fileLine.length() >= 7 && fileLine.substring(0, 7).equals("/~skip:")) 
+			answerPair.set("skip");
 		}
 		// The key phrase to indicate to pause for a specified number of
 		// seconds.
 		else if (fileLine.length() >= 8 && fileLine.substring(0, 8).equals("/~pause:")) {
-			answerPair.set(true, "pause");
+			
+			answerPair.set("pause");
 		}
 		// The key phrase to assign a button to repeat text.
 		else if (fileLine.length() >= 16 && fileLine.substring(0, 16).equals("/~repeat-button:")) {
-			answerPair.set(true, "repeat-button");
+			answerPair.set("repeat-button");
 		}
 		// The key phrase to signal that everything after that key phrase
 		// will be repeated.
 		else if (fileLine.length() >= 8 && fileLine.substring(0, 8).equals("/~repeat")) {
-			answerPair.set(true, "repeat");
+			answerPair.set("repeat");
 		} else if (fileLine.length() >= 11 && fileLine.substring(0, 11).equals("/~endrepeat")) {
-			answerPair.set(true, "endrepeat");
+			answerPair.set("endrepeat");
 		}
 		// The key phrase to reset the action listeners of all of the
 		// JButtons.
 		else if (fileLine.length() >= 15 && fileLine.substring(0, 15).equals("/~reset-buttons")) {
-			answerPair.set(true, "reset-buttons");
+			answerPair.set("reset-buttons");
 		}
 		// The key phrase to assign a button to skip to another part of the
 		// scenario.
 		else if (fileLine.length() >= 14 && fileLine.substring(0, 14).equals("/~skip-button:")) {
-			answerPair.set(true, "skip-button");
+			answerPair.set("skip-button");
 		}
 		// The key phrase to clear the display of all of the braille cells.
 		else if (fileLine.length() >= 15 && fileLine.substring(0, 15).equals("/~disp-clearAll")) {
-			answerPair.set(true, "disp-clearAll");
+			answerPair.set("disp-clearAll");
 		}
 		// The key phrase to set a Braille cell to a string.
 		else if (fileLine.length() >= 17 && fileLine.substring(0, 17).equals("/~disp-cell-pins:")) {
-			answerPair.set(true, "disp-cell-pins:");
+			answerPair.set("disp-cell-pins:");
 		}
 		// The key phrase to represent a string in Braille.
 		else if (fileLine.length() >= 14 && fileLine.substring(0, 14).equals("/~disp-string:")) {
-			answerPair.set(true, "disp-string");
+			answerPair.set("disp-string");
 		}
 		// The key phrase to change the cell to represent a character in
 		// Braille.
 		else if (fileLine.length() >= 17 && fileLine.substring(0, 17).equals("/~disp-cell-char:")) {
-			answerPair.set(true, "disp-cell-char");
+			answerPair.set("disp-cell-char");
 		}
 		// The key phrase to raise a pin of the specified Braille cell.
 		else if (fileLine.length() >= 18 && fileLine.substring(0, 18).equals("/~disp-cell-raise:")) {
-			answerPair.set(true, "disp-cell-raise");
+			answerPair.set("disp-cell-raise");
 		}
 		// The key phrase to lower a pin of the specified Braille cell.
 		else if (fileLine.length() >= 18 && fileLine.substring(0, 18).equals("/~disp-cell-lower:")) {
-			answerPair.set(true, "disp-cell-lower");
+			answerPair.set("disp-cell-lower");
 		}
 		// The key phrase to clear a Braille cell.
 		else if (fileLine.length() >= 18 && fileLine.substring(0, 18).equals("/~disp-cell-clear:")) {
-			answerPair.set(true, "disp-cell-clear");
+			answerPair.set("disp-cell-clear");
 		}
 		// The key phrase to lower pins of the Braille cell.
 		else if (fileLine.length() >= 21 && fileLine.substring(0, 21).equals("/~disp-cell-lowerPins")) {
-			answerPair.set(true, "disp-cell-lowerPins");
+			answerPair.set("disp-cell-lowerPins");
 		}
 		// The key phrase to wait for the program to receive a user's input.
 		else if (fileLine.length() >= 12 && fileLine.substring(0, 12).equals("/~user-input")) {
-			answerPair.set(true, "user-input");
+			answerPair.set("user-input");
 		}
 		// Anything other than the specified commands above, is to be
 		// interpreted as text that
 		// will be spoken for the user to hear.
 		else {
-			answerPair.set(true, "speak");
+			answerPair.set("speak");
 		}
 
 		return answerPair;
@@ -296,6 +328,7 @@ public class AuthoringUtil {
 				while (scan.hasNextLine()) {
 					fileContent += scan.nextLine() + "\n";
 				}
+				scan.close();
 			} catch (FileNotFoundException e) {
 				System.out.println("File parsing error. File name: " + file.getName());
 				e.printStackTrace();

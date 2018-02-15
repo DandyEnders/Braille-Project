@@ -1,14 +1,7 @@
 
 package gui.mainMenu.Test;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-
 import org.junit.Test;
-
-import enamel.ScenarioParser;
-import gui.controllers.MainMenuController;
 import gui.layouts.MainMenu;
 import javafx.application.Application;
 

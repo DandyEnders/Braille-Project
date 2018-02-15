@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import javax.swing.JFileChooser;
 
 import enamel.ScenarioParser;
 import gui.layouts.ScenarioMaker;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -48,7 +46,6 @@ public class ScenarioEditorController {
 	ScenarioMaker scenarioMaker;
 	
 	// Initialize the fileList.
-	// TODO : make a model for scenario Editor to keep track of.
 	public ScenarioEditorController(){
 		fileList = new ArrayList<File>();
 	}

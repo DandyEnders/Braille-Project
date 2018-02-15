@@ -2,16 +2,11 @@ package gui.layouts;
 import java.io.File;
 
 import gui.controllers.ScenarioMakerController;
-import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import utility.Language;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
 /**

@@ -2,8 +2,6 @@ package gui.controllers;
 
 import java.io.File;
 
-import javax.activation.CommandMap;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
