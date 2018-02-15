@@ -3,6 +3,7 @@ package utility;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -111,30 +112,32 @@ public class AuthoringUtil {
 		
 		
 		// TODO : MAKE THIS MULTILINE READER WORK
-		// change Pair<Boolean, String> to Pair<String, String>, First string being
-		// type and second being "argument,flag"
+		// Translate given string to Phrases
 		
 		// While scenarioFile has line to read,
 		while (scan.hasNextLine()) {
 
 			// Check if each phrase is correct and spit out their output
-			Pair<String, String> answerPair = isThisLineSyntacticallyCorrect(scan.nextLine());
-
-			// Get the correctness of the phrase of the line and type of correct
-			// phrase
-			String type = answerPair.getFirst(); // first is boolean
-			String argument = answerPair.getSecond(); // second is string
+			ArrayList<String> answerPair = parseThisLine(scan.nextLine());
 			
-			// If the phrase is incorrect, then whole thing is incorrect so
-			// return null (false)
-			if (type == null) {
-				return null;
-			}
-			else if(type != null){
-				
-			}
-
 		}
+		
+		
+		// Get the correctness of the phrase of the line and type of correct
+		// phrase
+		String type = answerPair.getFirst(); // first is boolean
+		String argument = answerPair.getSecond(); // second is string
+		
+		// If the phrase is incorrect, then whole thing is incorrect so
+		// return null (false)
+		if (type == null) {
+			return null;
+		}
+		else if(type != null){
+			
+		}
+
+		
 		
 		
 
@@ -166,38 +169,32 @@ public class AuthoringUtil {
 	 * 			First String is null if and only if the given argument is incorrect.
 	 * 			
 	 */
-	private static Pair<String, String> isThisLineSyntacticallyCorrect(String fileLine) {
+	private static ArrayList<String> parseThisLine(String fileLine) {
 
-		Pair<String, String> answerPair = new Pair<String, String>(null, null);
+		ArrayList<String> answerPair = null;
+
+		
+		
+		
 
 		// The key phrase to indicate to play a sound file.
 		if (fileLine.length() >= 8 && fileLine.substring(0, 8).equals("/~sound:")) {
-			try{
-				Clip clip = AudioSystem.getAudioInputStream(
-						new File())
-			} catch (Exception e) {
-				errorLog("Exception error: " + e.toString(),
-						"Expected the name of the file (including extension) but instead got: " + sound
-								+ "\n Perhaps you forgot to include the extension of the sound file with the name? Other "
-								+ "possibilities include: \n Incorrect name of the file, the file not being in the same location "
-								+ "as the project folder, or an attempt to play an unsupported sound file. (only .wav files"
-								+ "are supported at this time)", PCE);
-			}
-			
-			
-			// Setting command = sound 
-			// arg = audio file name ( THIS DOES NOT CHECK IF THE FILE IS PLAYABLE )
-			answerPair.set("sound", fileLine.substring(8, fileLine.length()));
+			// command = sound 
+			// arg = audio file name
+			answerPair.add("sound");
+			answerPair.add(fileLine.substring(8, fileLine.length()));
 		}
 		// The key phrase to indicate to skip to another part of the
 		// scenario.
 		else if (fileLine.length() >= 7 && fileLine.substring(0, 7).equals("/~skip:")) 
-			answerPair.set("skip");
+			// command = skip
+			// arg = 
+			answerPair.add("skip");
+			answerPair.add(fileLine.substring(7, fileLine.length()));
 		}
 		// The key phrase to indicate to pause for a specified number of
 		// seconds.
 		else if (fileLine.length() >= 8 && fileLine.substring(0, 8).equals("/~pause:")) {
-			
 			answerPair.set("pause");
 		}
 		// The key phrase to assign a button to repeat text.
