@@ -23,6 +23,9 @@ import javax.sound.sampled.Clip;
 public class AuthoringUtil {
 	
 	private final static String PCE = "PHRASE_CHECK_ERROR";
+	private final static String[] typeList = {"/~sound:","/~skip:","/~pause:","/~repeat-button:","/~repeat","/~endrepeat","/~reset-buttons","/~skip-button:"
+											,"/~disp-clearAll","/~disp-cell-pins:","/~disp-string:","/~disp-cell-char:","/~disp-cell-raise:","/~disp-cell-lower:"
+											,"/~disp-cell-clear:","/~disp-cell-lowerPins","/~user-input"};
 
 	/**
 	 * Letting constructor private so this class can be a utility class.
@@ -141,10 +144,34 @@ public class AuthoringUtil {
 		
 		
 
-		return null; // dummy return
+		return null; // mummy returns 
 	}
 	
-	
+	private Phrase phraseThisLine(String line){
+		
+		Phrase phrase = null;
+		
+		try{
+			for(String type : typeList){
+				String typeString = line.substring(0, type.length());
+				if(type.equals(typeString)){
+					String[] argument = line.substring(type.length()-1, line.length()).split(" ");
+					
+					if(argument.length >= 3 || argument.length <= 0){
+						throw new IllegalArgumentException("Phrase parsing failed. the line " + line + "is not either 1 or 2 arguments");
+					}
+					
+					phrase = new Phrase(typeString, line.substring(type.length()-1, line.length()));
+					break;
+				}
+			}
+		}catch(Exception e){
+			errorLog("Exception error: " + e.toString(),
+					e.toString(),PCE);
+		}
+		
+		return phrase;
+	}
 
 	/**
 	 * This method checks if a phrase of a line of String is well-defined (
