@@ -83,4 +83,30 @@ public class Phrase {
 		this.arguments = arguments;
 		this.flag = flag;
 	}
+
+	@Override
+	public boolean equals(Object obj){
+		if (obj == null){
+			return false;
+		}
+		if (this == obj){
+			return true;
+		}
+		if (obj.getClass() != this.getClass()){
+			return false;
+		}
+		
+		Phrase phrase = (Phrase)obj;
+		
+		if (this.type.equals(phrase.getType())){
+			if(this.getArguments()[0].equals(phrase.getArguments()[0])){
+				if(this.getArguments()[1].equals(phrase.getArguments()[1])){
+					if(this.flag == phrase.getFlag()){
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
 }

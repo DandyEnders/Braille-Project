@@ -73,7 +73,7 @@ public class AuthoringUtil {
 		int buttonNumber = 0;
 		
 		// List of phrases
-		List<Phrase> phraseList = new LinkedList<Phrase>();
+		LinkedList<Phrase> phraseList = new LinkedList<Phrase>();
 		
 		// Get scanner to read each line of String
 		Scanner scan = new Scanner(scenarioFile);
@@ -105,6 +105,7 @@ public class AuthoringUtil {
 			phraseList.add(new Phrase(cell,cellNumber + ""));
 			phraseList.add(new Phrase(button,buttonNumber + ""));
 			
+			scan.close();
 			
 		} catch (Exception e) {
 			// In case where word "Cell" or "Button" or number after cell and button fails, deal with exception
@@ -114,12 +115,13 @@ public class AuthoringUtil {
 							+ "Did not receive such a format in the scenario file and program had to end due to the incorrect"
 							+ "file format.",PCE);
 			// Exception was thrown, which means phrase was wrong, so return false
+			scan.close();
 			return null;
 		}
 		
-		scan.close();
 		
-		// Got validation check of two first line and phrase it---------------//
+		
+		// Got validation check of two first line and phrase it---------------//^^^^^
 		
 		// From the third line of scenario, translate all lines into phrases.
 		while (scan.hasNextLine()) {
@@ -130,20 +132,56 @@ public class AuthoringUtil {
 		// But validation of argument of phrases must be determined.
 
 		// Get iterator so we can traverse through phrases to see if they are valid.
-		Iterator<Phrase> listIterator = phraseList.iterator();
+		//Iterator<Phrase> listIterator = phraseList.iterator();
 		
 		// While iterator traverses...
-		while(listIterator.hasNext()) {
+		for(int i = 0 ; i < phraseList.size(); i ++) {
 			
 			// Get the current phrase.
-			Phrase currentPhrase = listIterator.next();
+			Phrase currentPhrase = phraseList.get(i);
+			
+			String[] arguments = currentPhrase.getArguments();
 			
 			// Checks validity. This cannot be done in a
 			// separate method because the class is utility
 			// class and non-static list cannot be stated
 			// globally that some of types need for checking
 			// validity. ( like skip:abc /
-			if(currentPhrase.getType().equals("pause"))
+			
+			switch(currentPhrase.getType()){
+			
+				// Case of pause
+				case "/~pause:":
+					try{
+						int pauseLength = Integer.parseInt(arguments[0]);
+					}catch(Exception e){
+						errorLog("Exception error: " + e.toString(),
+								"Expected format: /~pause: number \n "
+								+ "Where the number is the number of seconds the program "
+								+ "waits before continuing. \n"
+								+ "Program instead received : " + currentPhrase
+										,PCE);
+					}
+				
+				break;
+					
+				// case /~disp-string: -> nothing to check
+				
+				// Case of repeat
+				case "/~repeat":
+					LinkedList<Phrase> remainingList = (LinkedList<Phrase>)phraseList.subList(i+1, phraseList.size());
+					for(int j = 0; j < remainingList.size(); j++){
+						Phrase currentPivotPhrase = remainingList.get(j);
+						if(currentPivotPhrase.getType() == "/~endrepat"){
+							if(currentPivotPhrase.getFlag() == null){
+								phraseList.get(j).getFlag()
+							}
+						}
+					}
+				break;
+			}
+			
+		
 			
 			
 		}
