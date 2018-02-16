@@ -51,9 +51,17 @@ public class AuthoringUtil {
 	/**
 	 * This method is responsible to determine if scenario is ready-to-run.
 	 * 
-	 * This method does not guarantee if the file argument can be executed or not.
+	 * 1. Output of this method does not guarantee the file argument executability.
 	 *   For example, a phrase /~sound:bark.wav has an argument of bark.wav,
 	 *   but this method do not check if bark.wav is executable. 
+	 *   
+	 * 2. Output of this method does not guarantee if user-input is between skip-button - goto.
+	 *   For example, a scenario is following:
+	 *   Cell 1
+	 *   Button 2
+	 *   
+	 *   /~user-input
+	 *   This method does not check if /~user-input will cause a freeze or not.
 	 *   
 	 * Correct phrase is available at
 	 * https://wiki.eecs.yorku.ca/course_archive/2017-18/W/2311/_media/scenarioformat.pdf
@@ -148,6 +156,9 @@ public class AuthoringUtil {
 			// globally that some of types need for checking
 			// validity. ( like skip:abc /
 			
+			// For later use.
+			LinkedList<Phrase> remainingList;
+			
 			switch(currentPhrase.getType()){
 			
 				// Case of pause
@@ -155,30 +166,282 @@ public class AuthoringUtil {
 					try{
 						int pauseLength = Integer.parseInt(arguments[0]);
 					}catch(Exception e){
-						errorLog("Exception error: " + e.toString(),
+						errorLog("Phrasing pause length error on line" + i + ": " + e.toString(),
 								"Expected format: /~pause: number \n "
 								+ "Where the number is the number of seconds the program "
 								+ "waits before continuing. \n"
-								+ "Program instead received : " + currentPhrase
+								+ "Program received : " + currentPhrase
 										,PCE);
 					}
 				
 				break;
 					
-				// case /~disp-string: -> nothing to check
+				//case "/~disp-string:": // nothing to check.
+				//break;
 				
-				// Case of repeat
+				
 				case "/~repeat":
-					LinkedList<Phrase> remainingList = (LinkedList<Phrase>)phraseList.subList(i+1, phraseList.size());
+					// Make a composition sublist from current+1 to end. It will be used to test if there is
+					// a matching pair of endrepeat.
+					remainingList = (LinkedList<Phrase>)phraseList.subList(i+1, phraseList.size());
+					
+					// Make a for loop that goes through all the remaining list finding unmatched endrepeat.
 					for(int j = 0; j < remainingList.size(); j++){
+						
+						// Get the current remaining phrase.
 						Phrase currentPivotPhrase = remainingList.get(j);
-						if(currentPivotPhrase.getType() == "/~endrepat"){
+						
+						// If the phrase is endrepeat,
+						if(currentPivotPhrase.getType() == "/~endrepeat"){
+							
+							// and if the phrase is unmatched,
 							if(currentPivotPhrase.getFlag() == null){
-								phraseList.get(j).getFlag()
-							}
+								
+								// matching each other.
+								phraseList.get(j).setFlag(currentPhrase);
+								currentPhrase.setFlag(phraseList.get(j));
+								break;
+							} // end of if
+						} // end of if
+					} // end of for
+					
+					// At this point, repeat could not find any matching endrepeat, so print error
+					errorLog("Repeat no match endrepeat error on "+ i, "the repeat on line " + i + " do not have a matching endrepeat "
+							+ "for the rest of the scenario.",PCE);
+					
+				break;
+				
+				
+				case "/~repeat-button":
+					try{
+						// 
+						int repeatbutton = Integer.parseInt(arguments[0]);
+						if(buttonNumber < repeatbutton){
+							throw new IllegalArgumentException("Repeat button index out of bounds. Max button num: " + buttonNumber);
 						}
+					}catch(Exception e){
+						errorLog("Phrasing repeat button error on "+ i + " " + e.toString(),
+								"Expected format: /~repeat-button:number \n "
+								+ "Where the number is the index of button to repeat. \n"
+								+ "Program received : " + currentPhrase,PCE);
 					}
 				break;
+				
+				
+				case "/~skip-button:":
+					try{
+						int skipbutton = Integer.parseInt(arguments[0]);
+						if(buttonNumber < skipbutton){
+							throw new IllegalArgumentException("Skip button index out of bounds. MaxBtnNum / given: " + buttonNumber + " / " + skipbutton);
+						}
+						
+						// Make a composition sublist from current+1 to end. It will be used to test if there is
+						// a matching pair of skip.
+						remainingList = (LinkedList<Phrase>)phraseList.subList(i+1, phraseList.size());
+						
+						// Make a for loop that goes through all the remaining list finding for place to skip to.
+						for(int j = 0; j < remainingList.size(); j++){
+							
+							// Get the current remaining phrase.
+							Phrase currentPivotPhrase = remainingList.get(j);
+							
+							// If the phrase is skip-button,
+							if(currentPivotPhrase.getType() == "goto"){
+								
+								// and if the phrase is unmatched,
+								if(currentPivotPhrase.getArguments()[0].equals(currentPhrase.getArguments()[1])){
+									
+									// matching each other.
+									phraseList.get(j).setFlag(currentPhrase);
+									currentPhrase.setFlag(phraseList.get(j));
+									break;
+								} // end of if
+							} // end of if
+						} // end of for
+						
+						// At this point, skip-button could not find any matching skip to, so print error
+						errorLog("Skip-button no match goto error on "+ i, 
+								"the skip-button on line " + i + " do not have a matching endrepeat "
+								+ "for the rest of the scenario.",PCE);
+						
+					}catch(Exception e){
+						errorLog("Phrasing skip button error on "+ i + " " + e.toString(),
+								"Expected format: /~skip-button:number String \n "
+								+ "Where the number is the index of button to skip. \n"
+								+ "Where the String is the line to skip to.\n"
+								+ "Program received : " + currentPhrase,PCE);
+					}
+				break;
+				
+				//case "goto": nothing to check.
+				//break;
+				
+				//case "/~user-input": do not check
+				//break;
+				
+				
+				case "/~sound":
+					File soundfile = new File("./FactoryScenarios/AudioFiles/" + currentPhrase.getArguments()[0]);
+					if(!soundfile.exists()){
+						errorLog("Sound file mssing error: " + soundfile.getAbsolutePath(),
+								"Expected format: /~sound:String \n "
+								+ "Where the String is the name of soundfile.\n"
+								+ "Program received : " + currentPhrase,PCE);
+					}
+				break;
+				
+				//case "/~reset-buttons": nothing to check.
+				//break;
+				
+				
+				case "/~skip:":
+					// Make a composition sublist from current+1 to end. It will be used to test if there is
+					// a matching pair of skip.
+					remainingList = (LinkedList<Phrase>)phraseList.subList(i+1, phraseList.size());
+					
+					// Make a for loop that goes through all the remaining list finding for place to skip to.
+					for(int j = 0; j < remainingList.size(); j++){
+						
+						// Get the current remaining phrase.
+						Phrase currentPivotPhrase = remainingList.get(j);
+						
+						// If the phrase is skip-button,
+						if(currentPivotPhrase.getType() == "goto"){
+							
+							// and if the phrase is unmatched,
+							if(currentPivotPhrase.getArguments()[0].equals(currentPhrase.getArguments()[0])){
+								
+								// matching each other.
+								phraseList.get(j).setFlag(currentPhrase);
+								currentPhrase.setFlag(phraseList.get(j));
+								break;
+							} // end of if
+						} // end of if
+					} // end of for
+					
+					errorLog("Phrasing skip unmatch error on "+ i,
+							"Expected format: /~skip:String \n "
+							+ "Where the String is the place to jump to. \n"
+							+ "Program received : " + currentPhrase,PCE);
+					
+				break;
+				
+				
+				//case "/~disp-clearAll":
+				//break;
+				
+				
+				case "/~disp-clear-cell:":
+					try{
+						int dispclearcellbutton = Integer.parseInt(arguments[0]);
+						if(cellNumber < dispclearcellbutton || 0 > dispclearcellbutton){
+							throw new IllegalArgumentException("dispClearCell button index out of bounds. Range of button index: 0 ~ " + cellNumber);
+						}
+					}catch(Exception e){
+						errorLog("Phrasing dispclearcell error on "+ i + " " + e.toString(),
+								"Expected format: /~disp-clear-cell:number \n "
+								+ "Where the number is the index of button to display clear cell. \n"
+								+ "Program received : " + currentPhrase,PCE);
+					}
+				break;
+				
+				
+				case "/~disp-cell-pins:":
+					try{
+						int dispcellpinsbutton = Integer.parseInt(arguments[0]);
+						if(buttonNumber < dispcellpinsbutton){
+							throw new IllegalArgumentException("dispCellPins button index out of bounds. Max button num: " + buttonNumber);
+						}
+						
+						if(currentPhrase.getArguments()[1].length() != 8){
+							throw new IllegalArgumentException("dispCellPins has wrong number of pins.");
+						}
+						
+						for(int j = 0; j < 8 ; j ++){
+							if(currentPhrase.getArguments()[1].charAt(j) != '1' || currentPhrase.getArguments()[1].charAt(j) != '0'){
+								throw new IllegalArgumentException("dispCellPins has other number/things other than 1 or 0");
+							}
+						}
+					}catch(Exception e){
+						errorLog("Phrasing dispCellPins error on "+ i + " " + e.toString(),
+								"Expected format: /~disp-clear-cell:number1 number2 \n "
+								+ "Where the number1 is the index of button to display cell pins. \n"
+								+ "Where the number2 8 1 or 0 's representing cell pins. \n"
+								+ "Program received : " + currentPhrase,PCE);
+					}
+				break;
+					
+				
+				case "/~disp-cell-char:":
+					try{
+						int dispcellcharbutton = Integer.parseInt(arguments[0]);
+						if(cellNumber < dispcellcharbutton || 0 > dispcellcharbutton){
+							throw new IllegalArgumentException("dispCellChar button index out of bounds. Range of button index: 0 ~ " + cellNumber);
+						}
+						
+						if(currentPhrase.getArguments()[1].charAt(0) < 65 ||
+						   currentPhrase.getArguments()[1].charAt(0) > 90 && currentPhrase.getArguments()[1].charAt(0) < 97 ||
+						   currentPhrase.getArguments()[1].charAt(0) > 122){
+							throw new IllegalArgumentException("dispCellChar argument is not an English alphabet.");
+						}
+						
+					}catch(Exception e){
+						errorLog("Phrasing dispCellChar error on "+ i + " " + e.toString(),
+								"Expected format: /~disp-clear-cell:number char \n "
+								+ "Where the number is the index of button to display a character in a braille cell. \n"
+								+ "Where the char representing a character for a braille cell to read. \n"
+								+ "Program received : " + currentPhrase,PCE);
+					}
+				break;
+					
+				
+				case "/~disp-cell-raise:":
+					try{
+						int dispcellraisebutton = Integer.parseInt(arguments[0]);
+						if(cellNumber < dispcellraisebutton || 0 > dispcellraisebutton){
+							throw new IllegalArgumentException("dispCellRaise button index out of bounds. Range of button index: 0 ~ " + cellNumber);
+						}
+						
+						int dispcellraisepins = Integer.parseInt(arguments[1]);
+						if(dispcellraisepins > 8 || dispcellraisepins < 0){
+							throw new IllegalArgumentException("dispCellRaise braille cell pins out of bounds. Allowed pin num: 1 ~ 8");
+						}
+						
+						
+					}catch(Exception e){
+						errorLog("Phrasing dispCellRaise error on "+ i + " " + e.toString(),
+								"Expected format: /~disp-cell-raise:number1 number2 \n "
+								+ "Where the number1 is the index of button to raise cell. \n"
+								+ "Where the number2 is the number of pin to raise. \n"
+								+ "Program received : " + currentPhrase,PCE);
+					}
+				break;
+					
+				
+				case "/~disp-cell-lower:":
+					try{
+						int dispcelllowerbutton = Integer.parseInt(arguments[0]);
+						if(cellNumber < dispcelllowerbutton || 0 > dispcelllowerbutton){
+							throw new IllegalArgumentException("dispCellLower button index out of bounds. Range of button index: 0 ~ " + cellNumber);
+						}
+						
+						int dispcellraisepins = Integer.parseInt(arguments[1]);
+						if(dispcellraisepins > 8 || dispcellraisepins < 0){
+							throw new IllegalArgumentException("dispCellLower braille cell pins out of bounds. Allowed pin num: 1 ~ 8");
+						}
+						
+						
+					}catch(Exception e){
+						errorLog("Phrasing dispCellLower error on "+ i + " " + e.toString(),
+								"Expected format: /~disp-cell-lower:number1 number2 \n "
+								+ "Where the number1 is the index of button to raise cell. \n"
+								+ "Where the number2 is the number of pin to lower.  \n"
+								+ "Program received : " + currentPhrase,PCE);
+					}
+				break;
+				
+				
+				
 			}
 			
 		

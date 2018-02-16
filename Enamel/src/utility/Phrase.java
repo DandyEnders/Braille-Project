@@ -84,6 +84,12 @@ public class Phrase {
 		this.flag = flag;
 	}
 
+	/**
+	 * @param obj
+	 * 			Phrase to compare to.
+	 * @return true
+	 * 			If this.equals(phrase) meets equal contracts. ( look Object API )
+	 */
 	@Override
 	public boolean equals(Object obj){
 		if (obj == null){
@@ -108,5 +114,13 @@ public class Phrase {
 			}
 		}
 		return false;
+	}
+	
+	@Override
+	public String toString(){
+		if(this.getArguments().length == 2){
+			return this.getType() + this.getArguments()[0] + this.getArguments()[1];
+		}
+		return this.getType() + this.getArguments()[0];
 	}
 }
