@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -11,8 +12,6 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 
 /**
  * This method will be responsible with Parsing the scenarioFile.
@@ -50,8 +49,13 @@ public class AuthoringUtil {
 	}
 
 	/**
-	 * This method is responsible to determine if lines of Strings are correctly
-	 * phrased. ( Correct phrase is available at
+	 * This method is responsible to determine if scenario is ready-to-run.
+	 * 
+	 * This method does not guarantee if the file argument can be executed or not.
+	 *   For example, a phrase /~sound:bark.wav has an argument of bark.wav,
+	 *   but this method do not check if bark.wav is executable. 
+	 *   
+	 * Correct phrase is available at
 	 * https://wiki.eecs.yorku.ca/course_archive/2017-18/W/2311/_media/scenarioformat.pdf
 	 * 
 	 * @author Jinho Hwang
@@ -64,13 +68,17 @@ public class AuthoringUtil {
 		
 		// -----------------------------------------------------------------/
 
+		// Initialization of first two numbers.
+		int cellNumber = 0;
+		int buttonNumber = 0;
+		
 		// List of phrases
 		List<Phrase> phraseList = new LinkedList<Phrase>();
 		
 		// Get scanner to read each line of String
 		Scanner scan = new Scanner(scenarioFile);
 
-		// Get validation check of two first line------------//
+		// Get validation check of two first line and phrase it------------//
 		try {
 			// Get 1st and 2nd line
 			String[] firstLine = scan.nextLine().split("\\s");
@@ -79,8 +87,8 @@ public class AuthoringUtil {
 			// Separtion of words
 			String cell = firstLine[0];
 			String button = secondLine[0];
-			int cellNumber = Integer.parseInt(firstLine[1]);
-			int buttonNumber = Integer.parseInt(secondLine[1]);
+			cellNumber = Integer.parseInt(firstLine[1]);
+			buttonNumber = Integer.parseInt(secondLine[1]);
 			
 			// Throw exception if cell is not "Cell" or button is not "Button"
 			if(!cell.equals("Cell")){
@@ -95,7 +103,7 @@ public class AuthoringUtil {
 			// Validation of first two line completed here;
 			// Submit the first two line in the phraseList as phrases
 			phraseList.add(new Phrase(cell,cellNumber + ""));
-			phraseList.add(new Phrase(cell,buttonNumber + ""));
+			phraseList.add(new Phrase(button,buttonNumber + ""));
 			
 			
 		} catch (Exception e) {
@@ -111,60 +119,113 @@ public class AuthoringUtil {
 		
 		scan.close();
 		
-		// Got validation check of two first line---------------//
+		// Got validation check of two first line and phrase it---------------//
 		
-		
-		// TODO : MAKE THIS MULTILINE READER WORK
-		// Translate given string to Phrases
-		
-		// While scenarioFile has line to read,
+		// From the third line of scenario, translate all lines into phrases.
 		while (scan.hasNextLine()) {
+			phraseList.add(phraseThisLine(scan.nextLine()));
+		}
+		
+		// So far to this line, all scenario file must have phrased. 
+		// But validation of argument of phrases must be determined.
 
-			// Check if each phrase is correct and spit out their output
-			ArrayList<String> answerPair = parseThisLine(scan.nextLine());
+		// Get iterator so we can traverse through phrases to see if they are valid.
+		Iterator<Phrase> listIterator = phraseList.iterator();
+		
+		// While iterator traverses...
+		while(listIterator.hasNext()) {
+			
+			// Get the current phrase.
+			Phrase currentPhrase = listIterator.next();
+			
+			// Checks validity. This cannot be done in a
+			// separate method because the class is utility
+			// class and non-static list cannot be stated
+			// globally that some of types need for checking
+			// validity. ( like skip:abc /
+			if(currentPhrase.getType().equals("pause"))
+			
 			
 		}
 		
 		
-		// Get the correctness of the phrase of the line and type of correct
-		// phrase
-		String type = answerPair.getFirst(); // first is boolean
-		String argument = answerPair.getSecond(); // second is string
-		
-		// If the phrase is incorrect, then whole thing is incorrect so
-		// return null (false)
-		if (type == null) {
-			return null;
-		}
-		else if(type != null){
-			
-		}
-
 		
 		
 		
-
+		
+		
+		
 		return null; // mummy returns 
 	}
 	
-	private Phrase phraseThisLine(String line){
+	
+	
+	
+	
+	/**
+	 * This method is responsible to change input string to phrase.
+	 * 
+	 * This method do check :
+	 * 		1. if argument of the scenario line is not 1 or 2.
+	 * 			( Throws illegalARgumentException if the line contains 
+	 * 			 more than three or less than two.)
+	 * 
+	 * This method does not check :
+	 * 		1. if the argument is valid.
+	 * 		   ( For example, on a "sound" type line, the method do not check
+	 * 			 if the audio file actually work or exist. )
+	 * 			
+	 * @author Jinho Hwang
+	 * @param line
+	 * 			A line in a scenario file.
+	 * @return Phrase
+	 * 			Phrase that was parsed.
+	 */
+	private static Phrase phraseThisLine(String line){
 		
+		// Setting up output phrase.
 		Phrase phrase = null;
 		
+		
+		// try, because there is a case where a phrase might have 3 or more.
 		try{
+			
+			// Traverse through all the type list to compare type of the line.
 			for(String type : typeList){
+				
+				// The first few characters of the line determines if it is a type of string.
 				String typeString = line.substring(0, type.length());
+				
+				// If the front few character matches type,
 				if(type.equals(typeString)){
-					String[] argument = line.substring(type.length()-1, line.length()).split(" ");
+
+					// Get the argument
+					String argument = line.substring(type.length(), line.length());
 					
-					if(argument.length >= 3 || argument.length <= 0){
-						throw new IllegalArgumentException("Phrase parsing failed. the line " + line + "is not either 1 or 2 arguments");
+					// Splits with pivot = space
+					String[] multipleArguments = argument.split(" ");
+					
+					// If argument is 3 or more, throw exception ( no phrase has 3 arguments)
+					if(multipleArguments.length >= 3){
+						throw new IllegalArgumentException("Phrase parsing failed. the line " + line + " hass 3 or more arguments.");
 					}
 					
-					phrase = new Phrase(typeString, line.substring(type.length()-1, line.length()));
-					break;
+					// Make phrase = type String and the argument.
+					phrase = new Phrase(typeString, multipleArguments);
+					break;//get out of the for loop since the job is done.
 				}
 			}
+			
+			// If for loop could not find a type match, set it as a speak phrase or goto phrase.
+			if(phrase == null) {
+				if(line.substring(0, "/~".length()).equals("/~")) {
+					phrase = new Phrase("goto", line.substring("/~".length(), line.length()));
+				}else {
+					phrase = new Phrase("speak", line) ;
+				}
+				
+			}
+			
 		}catch(Exception e){
 			errorLog("Exception error: " + e.toString(),
 					e.toString(),PCE);
@@ -174,126 +235,7 @@ public class AuthoringUtil {
 	}
 
 	/**
-	 * This method checks if a phrase of a line of String is well-defined (
-	 * correctly written ) returns true if the phrase follows the file format,
-	 * returns false if the phrase does not.
-	 * 
-	 * @author ScenarioParser Writer ( Used his / her list of if statements /
-	 *         comments )
-	 * @author Jinho Hwang
-	 * 
-	 * @param fileLine
-	 *            a phrase to test if it satisfy file format
-	 * @return Pair<String, String>
-	 * 			First String is type of legal phrase ( Ex : sound, skip, repeat...)
-	 * 			Second String is argument of legal phrase (Ex : voice.wav, GOHERE, 1, 2...)
-	 * 			Second String can be a null if the legal phrase do not have any argument to take.
-	 * 			(Ex. First String = user-input, second String = null because user-input don't take an arg.
-	 * 
-	 * @return Pair<String, String>
-	 * 			If the given line input is not syntactically correct, ( not well-formed ) then, 
-	 * 			both first and second String is null. 
-	 * 			First String is null if and only if the given argument is incorrect.
-	 * 			
-	 */
-	private static ArrayList<String> parseThisLine(String fileLine) {
-
-		ArrayList<String> answerPair = null;
-
-		
-		
-		
-
-		// The key phrase to indicate to play a sound file.
-		if (fileLine.length() >= 8 && fileLine.substring(0, 8).equals("/~sound:")) {
-			// command = sound 
-			// arg = audio file name
-			answerPair.add("sound");
-			answerPair.add(fileLine.substring(8, fileLine.length()));
-		}
-		// The key phrase to indicate to skip to another part of the
-		// scenario.
-		else if (fileLine.length() >= 7 && fileLine.substring(0, 7).equals("/~skip:")) 
-			// command = skip
-			// arg = 
-			answerPair.add("skip");
-			answerPair.add(fileLine.substring(7, fileLine.length()));
-		}
-		// The key phrase to indicate to pause for a specified number of
-		// seconds.
-		else if (fileLine.length() >= 8 && fileLine.substring(0, 8).equals("/~pause:")) {
-			answerPair.set("pause");
-		}
-		// The key phrase to assign a button to repeat text.
-		else if (fileLine.length() >= 16 && fileLine.substring(0, 16).equals("/~repeat-button:")) {
-			answerPair.set("repeat-button");
-		}
-		// The key phrase to signal that everything after that key phrase
-		// will be repeated.
-		else if (fileLine.length() >= 8 && fileLine.substring(0, 8).equals("/~repeat")) {
-			answerPair.set("repeat");
-		} else if (fileLine.length() >= 11 && fileLine.substring(0, 11).equals("/~endrepeat")) {
-			answerPair.set("endrepeat");
-		}
-		// The key phrase to reset the action listeners of all of the
-		// JButtons.
-		else if (fileLine.length() >= 15 && fileLine.substring(0, 15).equals("/~reset-buttons")) {
-			answerPair.set("reset-buttons");
-		}
-		// The key phrase to assign a button to skip to another part of the
-		// scenario.
-		else if (fileLine.length() >= 14 && fileLine.substring(0, 14).equals("/~skip-button:")) {
-			answerPair.set("skip-button");
-		}
-		// The key phrase to clear the display of all of the braille cells.
-		else if (fileLine.length() >= 15 && fileLine.substring(0, 15).equals("/~disp-clearAll")) {
-			answerPair.set("disp-clearAll");
-		}
-		// The key phrase to set a Braille cell to a string.
-		else if (fileLine.length() >= 17 && fileLine.substring(0, 17).equals("/~disp-cell-pins:")) {
-			answerPair.set("disp-cell-pins:");
-		}
-		// The key phrase to represent a string in Braille.
-		else if (fileLine.length() >= 14 && fileLine.substring(0, 14).equals("/~disp-string:")) {
-			answerPair.set("disp-string");
-		}
-		// The key phrase to change the cell to represent a character in
-		// Braille.
-		else if (fileLine.length() >= 17 && fileLine.substring(0, 17).equals("/~disp-cell-char:")) {
-			answerPair.set("disp-cell-char");
-		}
-		// The key phrase to raise a pin of the specified Braille cell.
-		else if (fileLine.length() >= 18 && fileLine.substring(0, 18).equals("/~disp-cell-raise:")) {
-			answerPair.set("disp-cell-raise");
-		}
-		// The key phrase to lower a pin of the specified Braille cell.
-		else if (fileLine.length() >= 18 && fileLine.substring(0, 18).equals("/~disp-cell-lower:")) {
-			answerPair.set("disp-cell-lower");
-		}
-		// The key phrase to clear a Braille cell.
-		else if (fileLine.length() >= 18 && fileLine.substring(0, 18).equals("/~disp-cell-clear:")) {
-			answerPair.set("disp-cell-clear");
-		}
-		// The key phrase to lower pins of the Braille cell.
-		else if (fileLine.length() >= 21 && fileLine.substring(0, 21).equals("/~disp-cell-lowerPins")) {
-			answerPair.set("disp-cell-lowerPins");
-		}
-		// The key phrase to wait for the program to receive a user's input.
-		else if (fileLine.length() >= 12 && fileLine.substring(0, 12).equals("/~user-input")) {
-			answerPair.set("user-input");
-		}
-		// Anything other than the specified commands above, is to be
-		// interpreted as text that
-		// will be spoken for the user to hear.
-		else {
-			answerPair.set("speak");
-		}
-
-		return answerPair;
-
-	}
-
-	/**
+	 * Writes an error and store in a text file.
 	 * @author ScenarioParser writer
 	 * @param exception
 	 *            the exception message
@@ -302,7 +244,6 @@ public class AuthoringUtil {
 	 * @param errorLoggerName
 	 *            the name of error file and logger's name
 	 */
-
 	public static void errorLog(String exception, String message, String errorLoggerName) {
 		Logger logger = Logger.getLogger(errorLoggerName);
 		FileHandler fh;
