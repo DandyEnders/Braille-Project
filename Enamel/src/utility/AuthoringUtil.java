@@ -352,7 +352,7 @@ public class AuthoringUtil {
 			// case "/~user-input": do not check
 			// break;
 
-			case "/~sound":
+			case "/~sound:1":
 				File soundfile = new File("./FactoryScenarios/AudioFiles/" + currentPhrase.getArguments()[0]);
 				if (!soundfile.exists()) {
 					errorLog("Sound file missing error: " + soundfile.getAbsolutePath(),
@@ -403,7 +403,7 @@ public class AuthoringUtil {
 					if (currentPhrase.getFlag() == null) {
 						errorLog(
 								"Skip unmatched goto error on " + currentLine, "The skip on line " + currentLine
-										+ " do not have a matching skip button to " + "for the rest of the scenario.",
+										+ " do not have a matching skip goto to for the rest of the scenario.",
 								PCE);
 						return null;
 					}
