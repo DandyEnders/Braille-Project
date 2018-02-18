@@ -43,12 +43,16 @@ public class Phrase {
 	 * 		Type of a phrase, Ex: reset, repeat, etc
 	 */
 	public Phrase(String type) {
-		this(type,null,null);
+		this.type = type;
+		this.flag = null;
+		String[] arguments = {null, null};
+		
+		this.arguments = arguments;
 	}
 	
 	public Phrase(String type, String argument) {
 		this.type = type;
-		this.flag = flag;
+		this.flag = null;
 		String[] arguments = {argument, null};
 		
 		this.arguments = arguments;
@@ -118,9 +122,29 @@ public class Phrase {
 	
 	@Override
 	public String toString(){
-		if(this.getArguments().length == 2){
-			return this.getType() + this.getArguments()[0] + this.getArguments()[1];
+		String firstArg;
+		String secondArg;
+		
+		if(this.getArguments()[0] == null) {
+			firstArg = "";
+		}else {
+			firstArg = this.getArguments()[0];
 		}
-		return this.getType() + this.getArguments()[0];
+		
+		if(this.getArguments()[1] == null) {
+			secondArg = "";	
+		}else {
+			secondArg = this.getArguments()[1];
+		}
+		
+		if(this.getArguments()[0] == null && this.getArguments()[1] == null) {
+			return this.getType();
+		}
+		else if(this.getArguments()[0] != null && this.getArguments()[1] == null) {
+			return this.getType() + firstArg;
+		}
+		else{
+			return this.getType() + firstArg + " " + secondArg;
+		}
 	}
 }
