@@ -6,12 +6,10 @@ package utility.test;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 import org.junit.Test;
-import org.junit.jupiter.api.Disabled;
 
 import utility.AuthoringUtil;
 import utility.Phrase;
@@ -249,7 +247,7 @@ public class AuthoringUtilTest {
 	public void testScenarioPhrasingWithFactoryScenario2() {
 		
 		File file = new File("./FactoryScenarios/Scenario_2.txt");
-		List<Phrase> phraseList = AuthoringUtil.phraseScenario(file);
+		AuthoringUtil.phraseScenario(file);
 		
 		
 		
@@ -260,7 +258,7 @@ public class AuthoringUtilTest {
 		public void testScenarioPhrasingWithFactoryScenario3() {
 			
 			File file = new File("./FactoryScenarios/Scenario_3.txt");
-			List<Phrase> phraseList = AuthoringUtil.phraseScenario(file);
+			AuthoringUtil.phraseScenario(file);
 			
 			
 		}
