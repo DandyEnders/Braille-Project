@@ -130,7 +130,12 @@ public class Phrase {
 	 */
 	public Phrase(String type, String[] arguments, Phrase flag){
 		this.type = type;
-		this.arguments = arguments;
+		String[] inputArguments = new String[2];
+		
+		inputArguments[0] = arguments[0];
+		inputArguments[1] = arguments[1];
+		
+		this.arguments = inputArguments;
 		this.flag = flag;
 	}
 

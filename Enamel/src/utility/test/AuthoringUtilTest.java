@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
 
 import utility.AuthoringUtil;
 import utility.Phrase;
@@ -245,15 +246,23 @@ public class AuthoringUtilTest {
 	
 	// Testing factory scenario 2 because 1 was covered on prev test.
 	@Test
-	public void testScenarioPhrasingWithFactoryScenarios() {
+	public void testScenarioPhrasingWithFactoryScenario2() {
 		
 		File file = new File("./FactoryScenarios/Scenario_2.txt");
 		List<Phrase> phraseList = AuthoringUtil.phraseScenario(file);
 		
-		for(Phrase phrase : phraseList) {
-			System.out.println(phrase);
-		}
+		
 		
 	}
+	
+	// Testing factory scenario 3 because 1 2 was covered on prev test.
+		@Test
+		public void testScenarioPhrasingWithFactoryScenario3() {
+			
+			File file = new File("./FactoryScenarios/Scenario_3.txt");
+			List<Phrase> phraseList = AuthoringUtil.phraseScenario(file);
+			
+			
+		}
 	
 }

@@ -10,6 +10,8 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+import org.junit.platform.commons.util.StringUtils;
+
 /**
  * This method will be responsible with Parsing the scenarioFile.
  * 
@@ -198,8 +200,36 @@ public class AuthoringUtil {
 
 				break;
 
-			// case "/~disp-string:": // nothing to check.
-			// break;
+			case "/~disp-string:": 
+			try {
+				
+				int stringLength = currentPhrase.getArguments()[0].length();
+				
+				if (stringLength-1 > cellNumber-1 || stringLength < 0){
+					throw new IOException("Input string out of bound. String length = " + stringLength + " maxCell range = 0 ~ " + (cellNumber-1));
+				}
+				
+				for (int j = 0; j < stringLength; j++) {
+
+					// If the number is not either 1 or 0,
+					if ((currentPhrase.getArguments()[0].charAt(j) < 65
+							|| currentPhrase.getArguments()[0].charAt(j) > 90
+							&& currentPhrase.getArguments()[0].charAt(j) < 97
+					|| currentPhrase.getArguments()[0].charAt(j) > 122)) {
+
+						// throw an exception
+						throw new IOException("dispstring is not formatted with proper English alphabet. Found it on " + j + "th letter.");
+					}
+				}
+			} catch (Exception e) {
+				errorLog("Phrasing disp-string error on " + currentLine + " " + e.toString(),
+						e.toString() + " Expected format: /~disp-string:string \n "
+								+ "Where the string is the string to display on cells. \n"
+								+ "Program received : " + currentPhrase,
+						PCE);
+				return null;
+			}
+			break;
 
 			case "/~repeat":
 				// Make a composition sublist from current+1 to end. It will be used to test if
@@ -282,11 +312,11 @@ public class AuthoringUtil {
 						}
 
 						// If the phrase is goto,
-						if (currentPivotPhrase.getType() == "/~") {
-
+						if (currentPivotPhrase.getType().equals("/~")) {
+							
 							// and if the phrase is unmatched before,
 							if (currentPivotPhrase.getArguments()[0].equals(currentPhrase.getArguments()[1])) {
-
+								
 								// matching each other.
 								phraseList.get(j + i + 1).setFlag(currentPhrase);
 								currentPhrase.setFlag(phraseList.get(j + i + 1));
@@ -309,7 +339,7 @@ public class AuthoringUtil {
 					errorLog("Phrasing skip button error on " + currentLine + " " + e.toString(),
 							e.toString() + " : Expected format: /~skip-button:number String \n "
 									+ "Where the number is the index of button to skip.\n"
-									+ "Where the String is the line to skip to.\n" + "Program received : "
+									+ "Where the String is the line to skip to.\n" + "Program received "+currentLine + " : "
 									+ currentPhrase,
 							PCE);
 					return null;
@@ -352,7 +382,7 @@ public class AuthoringUtil {
 						Phrase currentPivotPhrase = remainingList.get(j);
 
 						// If the phrase is goto,
-						if (currentPivotPhrase.getType() == "/~") {
+						if (currentPivotPhrase.getType().equals("/~")) {
 /*
 							// If the pivot has a flag
 							if (currentPivotPhrase.getFlag() != null) {
@@ -587,7 +617,7 @@ public class AuthoringUtil {
 			// Setting up output phrase.
 			Phrase phrase = null;
 
-			if (line.equals("")) {
+			if (StringUtils.isBlank(line)) {
 				phrase = new Phrase("emptyLine");
 			} else if (!line.substring(0, 2).equals("/~")) {
 				phrase = new Phrase("speak", line);
