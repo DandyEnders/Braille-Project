@@ -5,6 +5,7 @@ package utility.test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
@@ -173,6 +174,7 @@ public class AuthoringUtilTest {
 		AuthoringUtil.phraseThisLine(testStr);
 	}
 	
+
 	@Test
 	public void testScenarioParsing() {
 		String testStr = "Cell 3\r\n" + 
@@ -240,4 +242,18 @@ public class AuthoringUtilTest {
 		
 		
 	}
+	
+	// Testing factory scenario 2 because 1 was covered on prev test.
+	@Test
+	public void testScenarioPhrasingWithFactoryScenarios() {
+		
+		File file = new File("./FactoryScenarios/Scenario_2.txt");
+		List<Phrase> phraseList = AuthoringUtil.phraseScenario(file);
+		
+		for(Phrase phrase : phraseList) {
+			System.out.println(phrase);
+		}
+		
+	}
+	
 }

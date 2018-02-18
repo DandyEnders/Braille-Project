@@ -277,14 +277,16 @@ public class AuthoringUtil {
 						// Get the current remaining phrase.
 						Phrase currentPivotPhrase = remainingList.get(j);
 
-						// If the phrase is skip-button,
+						if (currentPivotPhrase.getFlag() != null) {
+							continue;
+						}
+
+						// If the phrase is goto,
 						if (currentPivotPhrase.getType() == "/~") {
 
 							// and if the phrase is unmatched before,
 							if (currentPivotPhrase.getArguments()[0].equals(currentPhrase.getArguments()[1])) {
-								if (currentPivotPhrase.getFlag() != null) {
-									continue;
-								}
+
 								// matching each other.
 								phraseList.get(j + i + 1).setFlag(currentPhrase);
 								currentPhrase.setFlag(phraseList.get(j + i + 1));
@@ -297,7 +299,7 @@ public class AuthoringUtil {
 					// error
 					if (currentPhrase.getFlag() == null) {
 						errorLog("Skip-button no match goto error somewhere. Last one found on " + currentLine,
-								"One of the skip-button does not match to its goto. The skip-button on line "
+								" One of the skip-button does not match to its goto. The skip-button on line "
 										+ currentLine + " do not have a matching goto "
 										+ "for the rest of the scenario.",
 								PCE);
@@ -340,7 +342,7 @@ public class AuthoringUtil {
 					// Make a composition sublist from current+1 to end. It will be used to test if
 					// there is
 					// a matching pair of skip.
-					remainingList = (LinkedList<Phrase>) phraseList.subList(i + 1, phraseList.size());
+					remainingList = new LinkedList<Phrase>(phraseList.subList(i + 1, phraseList.size()));
 
 					// Make a for loop that goes through all the remaining list finding for place to
 					// skip to.
@@ -349,16 +351,16 @@ public class AuthoringUtil {
 						// Get the current remaining phrase.
 						Phrase currentPivotPhrase = remainingList.get(j);
 
-						// If the phrase is skip-button,
+						// If the phrase is goto,
 						if (currentPivotPhrase.getType() == "/~") {
+/*
+							// If the pivot has a flag
+							if (currentPivotPhrase.getFlag() != null) {
+								continue;
+							}*/
 
 							// and if the phrase is unmatched before,
 							if (currentPivotPhrase.getArguments()[0].equals(currentPhrase.getArguments()[0])) {
-
-								// If the pivot has a flag
-								if (currentPivotPhrase.getFlag() != null) {
-									continue;
-								}
 
 								// matching each other.
 								phraseList.get(j + i + 1).setFlag(currentPhrase);
@@ -370,14 +372,16 @@ public class AuthoringUtil {
 
 					if (currentPhrase.getFlag() == null) {
 						errorLog(
-								"Skip unmatched goto error on " + currentLine, "The skip-button on line " + currentLine
+								"Skip unmatched goto error on " + currentLine, "The skip on line " + currentLine
 										+ " do not have a matching skip button to " + "for the rest of the scenario.",
 								PCE);
 						return null;
 					}
 				} catch (Exception e) {
-					errorLog("Phrasing skip error on " + currentLine, "Expected format: /~skip:String \n "
-							+ "Where the String is the place to jump to. \n" + "Program received : " + currentPhrase,
+					errorLog("Phrasing skip error on " + currentLine,
+							e.toString() + " Expected format: /~skip:String \n "
+									+ "Where the String is the place to jump to. Error found on " + currentLine + "\n"
+									+ "Program received : " + currentPhrase,
 							PCE);
 					return null;
 				}

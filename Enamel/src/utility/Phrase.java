@@ -7,31 +7,70 @@ package utility;
  */
 
 public class Phrase {
+	
+	/**
+	 * Type represents the type of phrase such as skip, pause, dis-cell-clear, etc.
+	 */
 	private String type;
-	private Phrase flag; // for repeat / end repeat
+	
+	/**
+	 * Flag represents another phrase that is linked to. (Ex. /~skip:goto is linked to /~goto)
+	 */
+	private Phrase flag;
+	
+	/**
+	 * Arguments represents argument of the phrase such as 1, 2, ONEE, THREE, OKAY, etc
+	 */
 	private String[] arguments = new String[2]; // for button, cell , etc
 	
 	
+	/**
+	 * Type getter.
+	 * @return this.type
+	 */
 	public String getType() {
 		return type;
 	}
-
+	
+	/**
+	 * Type setter.
+	 * @param type
+	 * 		Type to set this phrase.
+	 */
 	public void setType(String type) {
 		this.type = type;
 	}
 
+	/**
+	 * Flag getter.
+	 * @return this.flag
+	 */
 	public Phrase getFlag() {
 		return flag;
 	}
 
+	/**
+	 * Flag setter.
+	 * @param flag
+	 * 		Flag to set this phrase.
+	 */
 	public void setFlag(Phrase flag) {
 		this.flag = flag;
 	}
 
+	/**
+	 * Arguments getter.
+	 * @return this.arugments
+	 */
 	public String[] getArguments() {
 		return arguments;
 	}
 
+	/**
+	 * Arguments setter.
+	 * @param arguments
+	 * 		arguments to set this phrase.
+	 */
 	public void setArguments(String[] arguments) {
 		this.arguments = arguments;
 	}
@@ -50,6 +89,13 @@ public class Phrase {
 		this.arguments = arguments;
 	}
 	
+	/**
+	 * Takes a type (String) and an argument of a phrase.
+	 * @param type
+	 * 		Type of a phrase, Ex: reset, repeat, etc
+	 * @param argument
+	 * 		Argument value, Ex: 1, 2, one, two, etc
+	 */
 	public Phrase(String type, String argument) {
 		this.type = type;
 		this.flag = null;
@@ -59,12 +105,12 @@ public class Phrase {
 	}
 	
 	/**
-	 * Takes a type (String) and value (String) of a phrase.
+	 * Takes a type (String) and arguments (String) of a phrase.
 	 * 
 	 * @param type
 	 * 		Type of a phrase, Ex: reset, repeat, etc
-	 * @param value
-	 * 		Value of a argument value, Ex: 1, 2, one, two, etc
+	 * @param arguments
+	 * 		Argument value, Ex: 1, 2, one, two, etc in array size 2
 	 */
 	public Phrase(String type, String[] arguments){
 		this(type,arguments,null);
@@ -76,8 +122,8 @@ public class Phrase {
 	 * 
 	 * @param type
 	 * 		Type of a phrase, Ex: reset, repeat, etc
-	 * @param value
-	 * 		Value of a argument value, Ex: 1, 2, one, two, etc
+	 * @param arguments
+	 * 		Argument value, Ex: 1, 2, one, two, etc in array size 2
 	 * @param flag
 	 * 		A reference to another phrase, Ex : repeat phrase has
 	 * 		a flag of endrepeat.
@@ -93,6 +139,8 @@ public class Phrase {
 	 * 			Phrase to compare to.
 	 * @return true
 	 * 			If this.equals(phrase) meets equal contracts. ( look Object API )
+	 * @return false
+	 * 			If this.equals(phrase) do not satisfy equal contracts.
 	 */
 	@Override
 	public boolean equals(Object obj){
@@ -120,6 +168,16 @@ public class Phrase {
 		return false;
 	}
 	
+	/**
+	 * toString() shows a string representation of a phrase.
+	 * It sees if the argument is empty(null) or not and prints out 
+	 * argument if it is not empty.
+	 * 
+	 * Also, if the phrase is linked (for example, /~skip:go is linked to /~go)
+	 * it prints out linked phrase after this phrase.
+	 * 
+	 * 
+	 */
 	@Override
 	public String toString(){
 		String firstArg;
@@ -137,14 +195,25 @@ public class Phrase {
 			secondArg = this.getArguments()[1];
 		}
 		
+		String output = "";
+		
 		if(this.getArguments()[0] == null && this.getArguments()[1] == null) {
-			return this.getType();
+			output += this.getType();
 		}
 		else if(this.getArguments()[0] != null && this.getArguments()[1] == null) {
-			return this.getType() + firstArg;
+			output += this.getType() + firstArg;
 		}
 		else{
-			return this.getType() + firstArg + " " + secondArg;
+			output += this.getType() + firstArg + " " + secondArg;
 		}
+		
+		if(this.getFlag() != null) {
+			output += " linked to " + this.getFlag().getType();
+			if(getFlag().getArguments() != null) {
+				output += getFlag().getArguments()[0] + " " + getFlag().getArguments()[1];
+			}
+		}
+		
+		return output;
 	}
 }
