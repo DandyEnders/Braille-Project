@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 
 import enamel.ScenarioParser;
+import gui.layouts.ErrorListReportPopUpBox;
 import gui.layouts.ScenarioMaker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,6 +19,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import utility.AuthoringUtil;
 import utility.Language;
 /**
  * Scenario editor controller.
@@ -70,6 +72,9 @@ public class ScenarioEditorController {
 		// Open fileChooser, get multiple files
 		List<File> inputFiles = fileChooser.showOpenMultipleDialog(window);
 		
+		// List of phraseFailFiles
+		List<File> phrasingFailedFiles = new ArrayList<File>();
+		
 		if(inputFiles != null){
 			// Add files into fileList
 			fileList.addAll(inputFiles);
@@ -79,12 +84,50 @@ public class ScenarioEditorController {
 			
 			// Transfer all the file names into observable file lists
 			for(File file : fileList) {
-				obsFileList.add(file.getName());
-				System.out.println(obsFileList.get(obsFileList.size()-1));
+				
+				// If the loaded Files can be phrased
+				if(AuthoringUtil.phraseScenario(file) != null && !obsFileList.contains(file.getName()) ) {
+					
+					// Add it on the list
+					obsFileList.add(file.getName());
+					
+				// If loadedFiles cannot be phrased ( syntax error or something )
+				}else {
+					// Add the un-phrase-able file into FailList
+					phrasingFailedFiles.add(file);
+				}
 			}
 			
-			// Set the view of List to the list of File names.
-			scenarioList.setItems(obsFileList);
+			// If loading was done without any failures,
+			if(phrasingFailedFiles.size() == 0) {
+				
+				// Set listItems = phraseable file list
+				scenarioList.setItems(obsFileList);
+				
+			// If loading was done with all failures,
+			}else if(phrasingFailedFiles.size() == fileList.size()) {
+				
+				ErrorListReportPopUpBox popUp = new ErrorListReportPopUpBox("Failed to load all of the files.",
+						"The editor has failed to load all the files\nselected. The reasons will be stated"
+						+ "on /error/ folder.", phrasingFailedFiles);
+			}else {
+				ErrorListReportPopUpBox popUp = new ErrorListReportPopUpBox("Failed to load some of the files.",
+						"The editor has failed to load some of the files\nselected. The reasons will be stated "
+						+ "on /error/ folder.", phrasingFailedFiles);
+				
+				// Set listItems = phraseable file list
+				scenarioList.setItems(obsFileList);
+				
+			}
+			
+			
+			// For fileList to remove all the excessive files.
+			for(File file : phrasingFailedFiles) {
+				if(fileList.contains(file)) {
+					fileList.remove(file);
+				}
+			}
+			
 		}
 	
 	}

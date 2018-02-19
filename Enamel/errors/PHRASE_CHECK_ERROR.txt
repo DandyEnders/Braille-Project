@@ -1,0 +1,4 @@
+2월 18, 2018 5:41:55 오후 utility.AuthoringUtil errorLog
+경고: Skip unmatched goto error on 18
+2월 18, 2018 5:41:55 오후 utility.AuthoringUtil errorLog
+정보: The skip on line 18 do not have a matching skip goto to for the rest of the scenario.

@@ -1,7 +1,0 @@
-2월 17, 2018 9:52:17 오후 utility.AuthoringUtil errorLog
-경고: Phrasing pause length error on line 13: java.lang.NumberFormatException: For input string: ""
-2월 17, 2018 9:52:17 오후 utility.AuthoringUtil errorLog
-정보: Expected format: /~pause: number 
-Where the number is the number of seconds the program 
-waits before continuing on line 13
-Program received : /~pause:
