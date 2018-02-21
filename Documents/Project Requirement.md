@@ -73,62 +73,41 @@ This sections contains, highlights, and explains all the functional and quality 
 ### 3.2 Functional Requirements
 
 #### 3.2.1 The User
-<br><br>
 
-**_3.2.1.1 Functional Requirement 1.1_**                                                                                                      
-**ID: FR1**
+**_3.2.1.1 Functional Requirement 1.1_**  
+**ID: FR1**  
+**Title:** Create a new sceario(s)  
+**Desc:** The user should be able to create and implement their own scenario(s).  
+**Dep:** None  
 
-**Title:** Create a new scenario(s)
+**_3.2.1.2 Functional Requirement 1.2_**  
+**ID: FR2**  
+**Title:** Save created scenario(s)   
+**Desc:** The user should be able to save their created scenario in the scenario list or as a file with specified format.    
+**Dep:** FR1  
 
-**Desc:** The user should be able to create and implement their own scenario(s).
+**_3.2.1.3 Functional Requirement 1.3_**  
+**ID: FR3**  
+**Title:** Edit Existing Scenarios    
+**Desc:** The user should be able to select and edit an existing scenario from the scenario list.     
+**Dep:** There should be existing scenarios.  
 
-**Dep:** None
-<br><br>
 
-**_3.2.1.2 Functional Requirement 1.2_**
+**_3.2.1.4 Functional Requirement 1.4_**  
+**ID: FR4**  
+**Title:**  Load Scenarios     
+**Desc:** The user should be allowed to navigate through their directory and load selected scenario to add to scenario list.       
+**Dep:** ?  
 
-**ID: FR2**
+**_3.2.1.5 Functional Requirement 1.5_**  
+**ID: FR5**  
+**Title:** Run Scenarios      
+**Desc:** The user should be able to select a scenario and run it.  
+**Dep:** ?  
 
-**Title:** Save created scenario(s)
 
-**Desc:** The user should be able to save their created scenario in the scenario list or as a file with specified format.
-
-**Dep:** FR1
-<br><br>
-
-**_3.2.1.3 Functional Requirement 1.3_**
-
-**ID: FR3**
-
-**Title:** Edit Existing Scenarios
-
-**Desc:** The user should be able to select and edit an existing scenario from the scenario list.
-
-**Dep:** There should be existing scenarios.
-<br><br>
-
-**_3.2.1.4 Functional Requirement 1.4_**
-
-**ID: FR4**
-
-**Title:** Load Scenarios
-
-**Desc:** The user should be allowed to navigate through their directory and load selected scenario to add to scenario list.
-
-**Dep: ?**
-<br><br>
-
-**_3.2.1.4 Functional Requirement 1.5_**
-
-**ID: FR5**
-
-**Title:** Run Scenarios
-
-**Desc:** The user should be able to select a scenario and run it.
-
-**Dep: ?**
-
-<br><br>
+### 3.3 Performance Requirements
+This requirement section outlines the performance specifications that the user can expect from the software. 
 
 
 
