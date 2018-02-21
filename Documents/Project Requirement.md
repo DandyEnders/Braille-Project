@@ -144,7 +144,7 @@ This requirement section outlines the performance specifications that the user c
 #### 3.3.4 Pre-existing scenario deliverabilities
 **_ID:_** QR4   
 **_Title:_** Usage of the scenario editor to modify scenarios.     
-**_Desc:_** Pre-existign scenarios that have been created or loaded should be displayed in a user friendly way in the scenario list and the features to modify the scenarios should be easily accessible and easy to find.  
+**_Desc:_** Pre-existing scenarios that have been created or loaded should be displayed in a user friendly way in the scenario list and the features to modify the scenarios should be easily accessible and easy to find.  
 **_Rat:_** In order for the user to modify scenarios.   
 
 #### 3.3.5 Usage of Audio Recording
@@ -178,28 +178,29 @@ This section will outline the different use cases and outline requirements speci
      6. Once scenario is complete, user can save the scenario and/or choose to exit and be redirected to the scenario editor page.   
     
 **Alternative Flow:**   
-AF1: User wants to edit an existing saved scenario in the scenario list.     
+**AF1:** User wants to edit an existing saved scenario in the scenario list.     
       1. User selects the scenario from the scenario list and clicks "Edit Selected Scenario"
       2. System redirects to the scenario maker window
       3. Return user to basic flow step 4    
-AF2: User wants to upload a scenario from their directory and edit that  
+**AF2:** User wants to upload a scenario from their directory and edit that  
       1. User selects "Load Scenario" and finds the scenario they want to edit in their directory
       2. The selected scenario is displayed in scenario list
       3. User selects the uploaded scenario and and clicks "Edit Selected Scenario"
       4. Return user to basic flow step 4
       
 **Exception Flows:**  
-EX1: System fails in saving scenario to scenario list  
+**EX1:** System fails in saving scenario to scenario list  
     1. System notifies user that an error has occured
     2. Return user to basic flow step 3
     
-EX2: User uploads uncorrect scenario file format/missing file
+**EX2:**  User uploads uncorrect scenario file format/missing file
     1. System reminds user of what files will be accepted/that the file does not exist.  
     2. Return user to AF2 step 1  
 
-EX3: User enters incorrect number of cells or number of buttons  
+**EX3:**  User enters incorrect number of cells or number of buttons  
     1. System notifies user they have entered an inccorect value   
-    2. Return system to basic flow step 4  
+    2. Return system to basic flow step 4     
+    
 **Post Conditions:**  
 The user has created a new/existing file ready to be run.    
 
