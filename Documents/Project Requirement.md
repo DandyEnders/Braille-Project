@@ -12,6 +12,11 @@
       - 2.2 [User Characteristics](#22-user-characteristics)
       - 2.3 [Constraints](#23-constraints)
 3. [Specific requirements](#3-specific-requirements)
+      - 3.1 [External Interface Requirements](#31-external-interface-requirements)   
+      - 3.1.1 [User Interface](#311-user-interface)
+      - 3.2 [Functional Requirements](#32-functional-requirement)   
+      - 3.2.1 [The User](#321-the-user)   
+     
 4. [Use cases](#4-use-cases)
 5. [Test cases](#5-test-cases)
 
@@ -51,14 +56,12 @@ A shallow description of the project can be stated by a device that allows kids,
 
 Essentially, the main system is an authoring app that must be usable by visually impaired users. The authoring app will provide facilities and functions to create the flow of the scenario where the user can ask questions and receive answers. A function for the user (educator) to record, save, and upload the audio will be given. Furthermore, there will be a facility implemented to save the scenario in an appropriate format and then test the scenario using provided software.
 
-### 2.2 Product Functions
-
-### 2.3 User Characteristics
+### 2.2 User Characteristics
 There are essentially 2 types of users that can use the application: those visually impaired, and those who are not. Each of these users cannot navigate through the application in the same way as one another and the application must be compatible for both types. 
 ***INSERT MORE HERE ON HOW WE ARE MAKING THE APP FOR BOTH USERS***
 
 
-### 2.4 Constraints
+### 2.3 Constraints
 
 
 ## 3. Specific requirements
