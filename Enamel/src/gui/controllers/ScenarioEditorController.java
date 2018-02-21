@@ -149,19 +149,20 @@ public class ScenarioEditorController {
 /*			System.out.println("running : " + fileList.get(index));
 			System.out.println("index : " + scenarioList.getSelectionModel().getSelectedIndex());*/
 			
-			// Start a Thread to start enamel program. Thread is needed to run without an error.
-			Thread starterCodeThread = new Thread("Starter Code Thread") {
-			    public void run(){    
-			    	//Open Scenario simulator, allow visual
-			        ScenarioParser s = new ScenarioParser(true);
-			        
-			        //Set Scenario simulator to run the file from the fileList. (not from GUI list)
-					s.setScenarioFile(fileList.get(index).getPath());
-			    }
-			};
-			starterCodeThread.start();
-				
-			
+			if( index != -1) {
+				// Start a Thread to start enamel program. Thread is needed to run without an error.
+				Thread starterCodeThread = new Thread("Starter Code Thread") {
+				    public void run(){    
+				    	//Open Scenario simulator, allow visual
+				        ScenarioParser s = new ScenarioParser(true);
+				        
+				        //Set Scenario simulator to run the file from the fileList. (not from GUI list)
+						s.setScenarioFile(fileList.get(index).getPath());
+				    }
+				};
+				starterCodeThread.start();
+					
+			}
 		}
 	}
 	

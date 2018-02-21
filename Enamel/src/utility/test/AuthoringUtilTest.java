@@ -83,63 +83,63 @@ public class AuthoringUtilTest {
 		
 		Scanner scan = new Scanner(testScenarioPiece);
 		
-			String expected = "speakDirectional orientation\r\n" + 
-					"emptyLine\r\n" + 
+			String expected = "Directional orientation\r\n" + 
+					"\r\n" + 
 					"/~disp-cell-pins:0 11100000\r\n" + 
-					"speakThese are pins 1, 2 and 3, the 3 pins on the left side. \r\n" + 
-					"speakPress button 1 to continue.\r\n" + 
+					"These are pins 1, 2 and 3, the 3 pins on the left side. \r\n" + 
+					"Press button 1 to continue.\r\n" + 
 					"/~skip-button:0 ONEE\r\n" + 
 					"/~user-input\r\n" + 
-					"emptyLine\r\n" + 
+					"\r\n" + 
 					"/~ONEE\r\n" + 
 					"/~disp-cell-clear:0\r\n" + 
 					"/~pause:1\r\n" + 
 					"/~reset-buttons\r\n" + 
 					"/~disp-cell-pins:0 00011100\r\n" + 
-					"speakThese are pins 4, 5 and 6, the 3 pins on the right side. \r\n" + 
-					"speakPress button 1 to continue.\r\n" + 
+					"These are pins 4, 5 and 6, the 3 pins on the right side. \r\n" + 
+					"Press button 1 to continue.\r\n" + 
 					"/~skip-button:0 ONEE\r\n" + 
 					"/~user-input\r\n" + 
-					"emptyLine\r\n" + 
+					"\r\n" + 
 					"/~ONEE\r\n" + 
 					"/~disp-cell-clear:0\r\n" + 
 					"/~pause:1\r\n" + 
 					"/~reset-buttons\r\n" + 
 					"/~disp-cell-pins:0 11000000\r\n" + 
-					"speakThese are pins 1 and 2, the top two pins on the left side. \r\n" + 
-					"speakPress button 1 to continue.\r\n" + 
+					"These are pins 1 and 2, the top two pins on the left side. \r\n" + 
+					"Press button 1 to continue.\r\n" + 
 					"/~skip-button:0 ONEE\r\n" + 
 					"/~user-input\r\n" + 
-					"emptyLine\r\n" + 
+					"\r\n" + 
 					"/~ONEE\r\n" + 
 					"/~disp-cell-clear:0\r\n" + 
 					"/~pause:1\r\n" + 
 					"/~reset-buttons\r\n" + 
 					"/~disp-cell-pins:0 00011000\r\n" + 
-					"speakThese are pins 4 and 5, the top two pins on the right side. Press button 1 to continue.\r\n" + 
+					"These are pins 4 and 5, the top two pins on the right side. Press button 1 to continue.\r\n" + 
 					"/~skip-button:0 ONEE\r\n" + 
 					"/~user-input\r\n" + 
-					"emptyLine\r\n" + 
+					"\r\n" + 
 					"/~ONEE\r\n" + 
 					"/~disp-cell-clear:0\r\n" + 
 					"/~pause:1\r\n" + 
 					"/~reset-buttons\r\n" + 
 					"/~disp-cell-pins:0 10010000\r\n" + 
-					"speakThese are pins 1 and 4, the two pins on the top. Press button 1 to continue.\r\n" + 
+					"These are pins 1 and 4, the two pins on the top. Press button 1 to continue.\r\n" + 
 					"/~skip-button:0 ONEE\r\n" + 
 					"/~user-input\r\n" + 
-					"emptyLine\r\n" + 
+					"\r\n" + 
 					"/~ONEE\r\n" + 
 					"/~disp-cell-clear:0\r\n" + 
 					"/~pause:1\r\n" + 
 					"/~reset-buttons\r\n" + 
 					"/~disp-cell-pins:0 00100100\r\n" + 
-					"speakThese are pins 3 and 6, the two pins on the bottom. Press button 1 to continue.\r\n" + 
+					"These are pins 3 and 6, the two pins on the bottom. Press button 1 to continue.\r\n" + 
 					"/~skip-button:0 ONEE\r\n" + 
 					"/~user-input\r\n" + 
-					"emptyLine\r\n" + 
+					"\r\n" + 
 					"/~ONEE\r\n" + 
-					"speakThat's the end of directional orientation!\r\n" + 
+					"That's the end of directional orientation!\r\n" + 
 					"/~disp-cell-clear:0\r\n"
 					+ "";
 			

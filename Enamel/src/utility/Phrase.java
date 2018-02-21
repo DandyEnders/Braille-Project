@@ -161,7 +161,17 @@ public class Phrase {
 		
 		Phrase phrase = (Phrase)obj;
 		
+		if(this.getArguments().length != phrase.getArguments().length) {
+			return false;
+		}
+		
 		if (this.type.equals(phrase.getType())){
+			
+			if(this.getArguments()[0] == null && this.getArguments()[1] == null &&
+			   phrase.getArguments()[0] == null && phrase.getArguments()[1] == null) {
+				return true;
+			}
+			
 			if(this.getArguments()[0].equals(phrase.getArguments()[0])){
 				if(this.getArguments()[1].equals(phrase.getArguments()[1])){
 					if(this.flag == phrase.getFlag()){
@@ -202,14 +212,20 @@ public class Phrase {
 		
 		String output = "";
 		
+		String typeStr = this.getType();
+		
+		if(this.getType().equals("speak") || this.getType().equals("emptyLine")) {
+			typeStr = "";
+		}
+		
 		if(this.getArguments()[0] == null && this.getArguments()[1] == null) {
-			output += this.getType();
+			output += typeStr;
 		}
 		else if(this.getArguments()[0] != null && this.getArguments()[1] == null) {
-			output += this.getType() + firstArg;
+			output += typeStr + firstArg;
 		}
 		else{
-			output += this.getType() + firstArg + " " + secondArg;
+			output += typeStr + firstArg + " " + secondArg;
 		}
 		
 		if(this.getFlag() != null) {
