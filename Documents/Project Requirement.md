@@ -105,9 +105,51 @@ This sections contains, highlights, and explains all the functional and quality 
 **Desc:** The user should be able to select a scenario and run it.  
 **Dep:** ?  
 
+**_3.2.1.6 Functional Requirement 1.6_**  
+**ID: FR6**  
+**Title:** Record user audio       
+**Desc:** The user should be able to record their own audio in an appropriate file format. Also, the user should be able to utilize the screen reader if they do not want to record their own audio.  
+**Dep:** Screen reader  
+
 
 ### 3.3 Performance Requirements
-This requirement section outlines the performance specifications that the user can expect from the software. 
+This requirement section outlines the performance specifications that the user can expect from the software.  
+#### 3.3.1 Easy Navigation to Scenario Editor  
+**_ID:_** QR1  
+**_Title:_** Easy Navigation to editor   
+**_Desc:_** The user should be able to easily find and navigate to the scenario editor easily from the main menu.   
+**_Rat:_** In order for the user to easily access the editor window. 
+
+
+#### 3.3.2 Usage of Scenario Lists 
+**_ID:_** QR2   
+**_Title:_** Usage of the scenario list   
+**_Desc:_** The scenarios displayed in scenario list should be outputed in a user friendly way and easy to understand. Selecting a scenario from the list should only take 1 click.   
+**_Rat:_** In order for the user to use the list view easily. 
+
+#### 3.3.3 Usage of Scenario Maker 
+**_ID:_** QR3   
+**_Title:_** Usage of the scenario maker    
+**_Desc:_** The functions and features of the scenario maker should have a user-freindly layout that is easy to navigate and use to conduct various tasks (i.e create command, remove command, save, etc). Features and functions should not be hard to find.  
+**_Rat:_** In order for the user to use the scenario maker easily. 
+
+#### 3.3.4 Pre-existing scenario deliverabilities
+**_ID:_** QR4   
+**_Title:_** Usage of the scenario editor to modify scenarios.     
+**_Desc:_** Pre-existign scenarios that have been created or loaded should be displayed in a user friendly way in the scenario list and the features to modify the scenarios should be easily accessible and easy to find.  
+**_Rat:_** In order for the user to modify scenarios.   
+
+#### 3.3.5 Usage of Audio Recording
+**_ID:_** QR5    
+**_Title:_** Usage of the audio recording.       
+**_Desc:_** The steps taken to record user's audio should be simple to use and easy to save upon recoding completion.     
+**_Rat:_** In order for the user to easily record their audio.  
+
+
+
+
+
+
 
 
 
