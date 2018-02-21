@@ -12,6 +12,11 @@
       - 2.2 [User Characteristics](#22-user-characteristics)
       - 2.3 [Constraints](#23-constraints)
 3. [Specific requirements](#3-specific-requirements)
+      - 3.1 [External Interface Requirements](#31-external-interface-requirements)   
+      - 3.1.1 [User Interface](#311-user-interface)
+      - 3.2 [Functional Requirements](#32-functional-requirement)   
+      - 3.2.1 [The User](#321-the-user)   
+     
 4. [Use cases](#4-use-cases)
 5. [Test cases](#5-test-cases)
 
@@ -38,6 +43,8 @@ This program will provide the educators tools to import, export, create, and edi
 | Term  | Definition |
 | ------  | ------ | 
 | scenario | A custom made case study for the users to create to provide an entertaining educational experience to Braille learners. The scenario file is ritten in a script format.|
+| Desc | Description |
+| Dep | Dependency |
 
 ### 1.4 References
 [1] Geagea, S., Zhang, S., Shalin, N., Hasibi, F., Hameed, F., Rafiyan, E. and Ekberg, M. (2018). Software Requirements Sepcification. [ebook] chalmers, p.2. Available at: http://www.cse.chalmers.se/~feldt/courses/reqeng/examples/srs_example_2010_group2.pdf [Accessed 4 Feb. 2018].
@@ -49,17 +56,60 @@ A shallow description of the project can be stated by a device that allows kids,
 
 Essentially, the main system is an authoring app that must be usable by visually impaired users. The authoring app will provide facilities and functions to create the flow of the scenario where the user can ask questions and receive answers. A function for the user (educator) to record, save, and upload the audio will be given. Furthermore, there will be a facility implemented to save the scenario in an appropriate format and then test the scenario using provided software.
 
-### 2.2 Product Functions
-
-### 2.3 User Characteristics
+### 2.2 User Characteristics
 There are essentially 2 types of users that can use the application: those visually impaired, and those who are not. Each of these users cannot navigate through the application in the same way as one another and the application must be compatible for both types. 
 ***INSERT MORE HERE ON HOW WE ARE MAKING THE APP FOR BOTH USERS***
 
 
-### 2.4 Constraints
+### 2.3 Constraints
 
 
 ## 3. Specific requirements
+This sections contains, highlights, and explains all the functional and quality requirements of the system.
+
+### 3.1 External Interface Requirements
+#### 3.1.1 User Interfaces
+
+### 3.2 Functional Requirements
+
+#### 3.2.1 The User
+
+**_3.2.1.1 Functional Requirement 1.1_**  
+**ID: FR1**  
+**Title:** Create a new sceario(s)  
+**Desc:** The user should be able to create and implement their own scenario(s).  
+**Dep:** None  
+
+**_3.2.1.2 Functional Requirement 1.2_**  
+**ID: FR2**  
+**Title:** Save created scenario(s)   
+**Desc:** The user should be able to save their created scenario in the scenario list or as a file with specified format.    
+**Dep:** FR1  
+
+**_3.2.1.3 Functional Requirement 1.3_**  
+**ID: FR3**  
+**Title:** Edit Existing Scenarios    
+**Desc:** The user should be able to select and edit an existing scenario from the scenario list.     
+**Dep:** There should be existing scenarios.  
+
+
+**_3.2.1.4 Functional Requirement 1.4_**  
+**ID: FR4**  
+**Title:**  Load Scenarios     
+**Desc:** The user should be allowed to navigate through their directory and load selected scenario to add to scenario list.       
+**Dep:** ?  
+
+**_3.2.1.5 Functional Requirement 1.5_**  
+**ID: FR5**  
+**Title:** Run Scenarios      
+**Desc:** The user should be able to select a scenario and run it.  
+**Dep:** ?  
+
+
+### 3.3 Performance Requirements
+This requirement section outlines the performance specifications that the user can expect from the software. 
+
+
 
 ## 4. Use cases
 
