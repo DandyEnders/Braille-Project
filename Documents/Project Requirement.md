@@ -206,5 +206,5 @@ The user has created a new/existing file ready to be run.
 
 
 
-## 5. Test cases
+## 5. Test case
 
