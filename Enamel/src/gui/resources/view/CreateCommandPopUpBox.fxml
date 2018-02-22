@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.CreateCommandPopUpBoxController">
+   <children>
+      <HBox alignment="CENTER" layoutY="114.0" prefHeight="29.0" prefWidth="400.0">
+         <children>
+            <Button fx:id="createButton" mnemonicParsing="false" onMouseClicked="#create" text="Create" />
+            <Region prefHeight="11.0" prefWidth="18.0" />
+            <Button fx:id="discardButton" mnemonicParsing="false" onMouseClicked="#close" text="Discard" />
+         </children>
+      </HBox>
+      <ComboBox fx:id="phraseTypeComboBox" layoutX="44.0" layoutY="29.0" onAction="#comboSelected" prefHeight="29.0" prefWidth="315.0" promptText="Select a command type you want." />
+      <Label alignment="CENTER" layoutX="132.0" layoutY="7.0" text="Select a command Type" />
+      <Pane fx:id="firstArgumentPane" disable="true" layoutX="44.0" layoutY="64.0">
+         <children>
+            <TextField fx:id="firstArgumentTextField" layoutY="20.0" />
+            <Label text="First argument" />
+         </children>
+      </Pane>
+      <Pane fx:id="secondArgumentPane" disable="true" layoutX="221.0" layoutY="64.0">
+         <children>
+            <TextField fx:id="secondArgumentTextField" layoutY="20.0" />
+            <Label text="Second argument" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

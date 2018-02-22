@@ -117,6 +117,21 @@ public class Phrase {
 	}
 	
 	/**
+	 * Takes a type (String) and argument1 (String) and argument2 (String) of a phrase.
+	 * 
+	 * @param type
+	 * 		Type of a phrase, Ex: reset, repeat, etc
+	 * @param argument1 and argument2
+	 * 		Argument value, Ex: 1, 2, one, two, etc in array size 2
+	 */
+	public Phrase(String type, String argument1, String argument2) {
+		this.type = type;
+		String[] arguments = {argument1, argument2};
+		this.arguments = arguments;
+		this.flag = null;
+	}
+	
+	/**
 	 * Takes a type (String), value (String), and flag (Phrase)
 	 * of a phrase.
 	 * 
@@ -228,12 +243,12 @@ public class Phrase {
 			output += typeStr + firstArg + " " + secondArg;
 		}
 		
-		if(this.getFlag() != null) {
+		/*if(this.getFlag() != null) {
 			output += " linked to " + this.getFlag().getType();
 			if(getFlag().getArguments() != null) {
 				output += getFlag().getArguments()[0] + " " + getFlag().getArguments()[1];
 			}
-		}
+		}*/
 		
 		return output;
 	}

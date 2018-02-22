@@ -17,6 +17,7 @@ public final class Language {
 	public static final String scenarioEditorFxml = "/gui/resources/view/ScenarioEditor.fxml";
 	public static final String scenarioMakerFxml = "/gui/resources/view/ScenarioMaker.fxml";
 	public static final String errorListReportPopUpBox = "/gui/resources/view/ErrorListReportPopUpBox.fxml";
+	public static final String createCommandPopUpBox = "/gui/resources/view/CreateCommandPopUpBox.fxml";
 	
 	// CSS directory
 	public static final String mainMenuCss = "/gui/resources/css/MainMenu.css";
@@ -35,7 +36,7 @@ public final class Language {
 	
 	// PopupBox Strings
 	//public static final String errorListReportPopUpBoxTitle = "";
-	
+	public static final String createCommandPopUpBoxTitle = "Create Scenario";
 	
 	
 	

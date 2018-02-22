@@ -26,6 +26,10 @@ public class AuthoringUtil {
 			"/~disp-string:", "/~disp-cell-char:", "/~disp-cell-raise:", "/~disp-cell-lower:", "/~disp-cell-clear:",
 			"/~disp-cell-lowerPins", "/~user-input" };
 
+	public static String[] getTypeList() {
+		return typeList;
+	}
+	
 	/**
 	 * Letting constructor private so this class can be a utility class.
 	 * 

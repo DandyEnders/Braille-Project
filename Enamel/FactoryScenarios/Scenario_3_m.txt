@@ -1,0 +1,25 @@
+Cell 1
+Button 4
+
+Simple alphabet questions
+
+/~pause:1
+/~disp-cell-clear:0
+/~disp-string:a
+Is the braille cell displaying the letter a?
+Press the button 1 for true, the button 2 for false.
+/~skip-button:0 ONEE
+/~skip-button:1 TWOO
+/~user-input
+
+/~ONEE
+/~sound:correct.wav
+That's correct! The letter displayed on the cell was a. 
+/~skip:NEXTT
+
+/~TWOO
+/~sound:wrong.wav
+Sorry! That's incorrect. The cell is displaying the character a.
+/~skip:NEXTT
+
+/~NEXTT

@@ -107,11 +107,11 @@ public class ScenarioEditorController {
 			// If loading was done with all failures,
 			}else if(phrasingFailedFiles.size() == fileList.size()) {
 				
-				ErrorListReportPopUpBox popUp = new ErrorListReportPopUpBox("Failed to load all of the files.",
+				new ErrorListReportPopUpBox("Failed to load all of the files.",
 						"The editor has failed to load all the files\nselected. The reasons will be stated"
 						+ "on /error/ folder.", phrasingFailedFiles);
 			}else {
-				ErrorListReportPopUpBox popUp = new ErrorListReportPopUpBox("Failed to load some of the files.",
+				new ErrorListReportPopUpBox("Failed to load some of the files.",
 						"The editor has failed to load some of the files\nselected. The reasons will be stated "
 						+ "on /error/ folder.", phrasingFailedFiles);
 				
@@ -187,6 +187,9 @@ public class ScenarioEditorController {
 				FileChooser fileChooser = new FileChooser();
 				fileChooser.setTitle(Language.scenarioEditorSaveFileChooserTitle);
 				
+				// Set its initial name as the scenario file name on the list.
+				fileChooser.setInitialFileName(scenarioList.getSelectionModel().getSelectedItem());
+				
 				// Set starting directory ( the directory you start to select from )
 				fileChooser.setInitialDirectory(new File("./FactoryScenarios").getCanonicalFile());
 				
@@ -232,7 +235,7 @@ public class ScenarioEditorController {
 	public void createScenario() {
 		// Create scenario maker with empty args and show it; 
 		// empty name and zero cells / buttons
-		scenarioMaker = new ScenarioMaker();
+		scenarioMaker = new ScenarioMaker(fileList,obsFileList);
 		scenarioMaker.show();  
 	}
 	
@@ -251,7 +254,7 @@ public class ScenarioEditorController {
 			
 			// Create scenario maker with the File;
 			// name of the file / commands / # of cell / button will be filled.
-			scenarioMaker = new ScenarioMaker(selectedFile);
+			scenarioMaker = new ScenarioMaker(selectedFile,fileList,obsFileList);
 			scenarioMaker.show();
 		}
 	}

@@ -1,5 +1,6 @@
 package gui.layouts;
 import java.io.File;
+import java.util.List;
 
 import gui.controllers.ScenarioMakerController;
 import javafx.stage.Modality;
@@ -16,7 +17,7 @@ import javafx.fxml.FXMLLoader;
  */
 public class ScenarioMaker {
 	// The integer window wiedth / height. Added for convenience.
-	private final static Integer windowWidth = 800;
+	private final static Integer windowWidth = 614;
 	private final static Integer windowHeight = 750;
 	private final static Integer windowMinHeight = windowHeight;
 	private final static Integer windowMinWidth = windowWidth;
@@ -27,18 +28,22 @@ public class ScenarioMaker {
 	
 	// Input file
 	private File scenarioFile;
+	private List<File> scenarioList;
+	private List<String> scenarioNameList;
 	
 	// List of pane, scene, stage
 	private AnchorPane root;
 	private Scene scene;
 	private Stage window;
 	
-	public ScenarioMaker(){
-		this(new File("./temp/"));
+	public ScenarioMaker(List<File> scenarioList, List<String> scenarioNameList){
+		this(new File(""),scenarioList,scenarioNameList);
 	}
 	
-	public ScenarioMaker(File scenarioFile){
+	public ScenarioMaker(File scenarioFile, List<File> scenarioList, List<String> scenarioNameList){
+		this.scenarioList = scenarioList;
 		this.scenarioFile = scenarioFile;
+		this.scenarioNameList = scenarioNameList;
 		display();
 	}
 	
@@ -67,7 +72,11 @@ public class ScenarioMaker {
 			control = loader.getController();
 			
 			// Pass scenarioFile to Control
-			control.setFile(scenarioFile);
+			if(!scenarioFile.getName().equals("")) {
+				control.setFile(scenarioFile);
+			}
+			control.setScenarioList(scenarioList);
+			control.setScenarioNameList(scenarioNameList);
 			
 			// Scene is built using the base panel
 			scene = new Scene(root,windowWidth,windowHeight);

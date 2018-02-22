@@ -1,15 +1,19 @@
 package gui.controllers;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.List;
 
+import gui.layouts.CreateCommandPopUpBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -41,9 +45,6 @@ public class ScenarioMakerController {
     private Button saveButton;
 
     @FXML
-    private ToggleButton toggleTextViewButton;
-
-    @FXML
     private Button createCommandButton;
 
     @FXML
@@ -57,10 +58,23 @@ public class ScenarioMakerController {
 
     @FXML
     private Button moveDownButton;
+
+    @FXML
+    private RadioButton replace;
+
+    @FXML
+    private RadioButton below;
  	
+    @FXML
+    private RadioButton above;
+    
  	File scenarioFile;
  	
+ 	List<File> scenarioList;
+ 	
  	List<Phrase> phraseList;
+ 	
+ 	List<String> scenarioNameList;
  	
  	ObservableList<Phrase> phraseListObs;
  	
@@ -69,6 +83,14 @@ public class ScenarioMakerController {
  	public ScenarioMakerController(){
  		phraseListObs = FXCollections.observableArrayList();
  		numberOfCellAndButton = FXCollections.observableArrayList();
+ 	}
+ 	
+ 	public void setScenarioList(List<File> scenarioList) {
+ 		this.scenarioList = scenarioList;
+ 	}
+ 	
+ 	public void setScenarioNameList(List<String> scnearioNameList) {
+ 		this.scenarioNameList = scnearioNameList;
  	}
  	
  	public void setFile(File file) {
@@ -110,8 +132,111 @@ public class ScenarioMakerController {
  		window.close();
  	}
  	
+    private boolean isItemSelected() {
+    	return selectedItemIndex() != -1;
+    }
+    
+    private int selectedItemIndex() {
+    	return listOfCommands.getSelectionModel().getSelectedIndex();
+    }
+    
+    private Phrase selectedItem() {
+    	return listOfCommands.getSelectionModel().getSelectedItem();
+    }
+ 	
  	public void createCommand() {
+ 		if(isItemSelected()) {
+	 		
+	 		String pos = "";
+	 		
+	 		if(above.isSelected()) {
+	 			pos = "above";
+	 			
+	 		}else if(replace.isSelected()) {
+	 			pos = "replace";
+	 			
+	 		}else if(below.isSelected()) {
+	 			pos = "below";
+	 			
+	 		}
+	 		
+	 		new CreateCommandPopUpBox(phraseListObs,pos,selectedItemIndex());
+	 		
+ 		}
+ 		
  		
  	}
+ 	
+ 	public void removeCommand() {
+ 		if(isItemSelected()) {
+ 			phraseListObs.remove(selectedItemIndex());
+ 		}
+ 	}
+ 	
+ 	private void swap(int pos1, int pos2) {
+ 		Phrase temp = phraseListObs.get(pos1);
+ 		phraseListObs.set(pos1, phraseListObs.get(pos2));
+ 		phraseListObs.set(pos2, temp);
+ 	}
+ 	
+ 	public void moveUp() {
+ 		if(isItemSelected()) {
+ 			if(selectedItemIndex() > 0) {
+ 				swap(selectedItemIndex(), selectedItemIndex()-1);
+ 				listOfCommands.getSelectionModel().select(selectedItemIndex()-1);
+ 			}
+ 		}
+ 	}
+ 	
+ 	public void moveDown() {
+ 		if(isItemSelected()) {
+ 			if(selectedItemIndex() < phraseListObs.size()-1) {
+ 				swap(selectedItemIndex(), selectedItemIndex()+1);
+ 				listOfCommands.getSelectionModel().select(selectedItemIndex()+1);
+ 			}
+ 		}
+ 	}
+ 	
+ 	public void save() {
+		String scenarioString = "";
+		
+		scenarioString += "Cell " + numCellTextField.getText() + "\n";
+		scenarioString += "Button " + numButtonTextField.getText() + "\n";
+		
+		for(Phrase phrase : phraseListObs) {
+			scenarioString += phrase + "\n";
+		}
+		
+		
+		if(AuthoringUtil.phraseScenario(scenarioString) != null) {
+			
+			String fileName = scenarioNameField.getText();
+			
+			if(scenarioNameList.contains(fileName)) {
+				while(scenarioNameList.contains(fileName)) {
+					fileName = fileName.split("\\.")[0] + "_m.txt";
+				}
+			}
+			File file = new File("./FactoryScenarios/" + fileName);
+			
+			try {
+				Writer fileWriter = new FileWriter(file);
+				fileWriter.write(scenarioString);
+				fileWriter.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			scenarioList.add(file);
+			scenarioNameList.add(file.getName());
+			
+			exit();
+		}else {
+			// TODO : Error occurred.
+		}
+ 		
+ 	}
+ 	
  	
 }
