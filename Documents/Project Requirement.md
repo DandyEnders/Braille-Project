@@ -45,6 +45,8 @@ This program will provide the educators tools to import, export, create, and edi
 | scenario | A custom made case study for the users to create to provide an entertaining educational experience to Braille learners. The scenario file is ritten in a script format.|
 | Desc | Description |
 | Dep | Dependency |
+| AF | Alternative Flow |
+| EX | Exception |
 
 ### 1.4 References
 [1] Geagea, S., Zhang, S., Shalin, N., Hasibi, F., Hameed, F., Rafiyan, E. and Ekberg, M. (2018). Software Requirements Sepcification. [ebook] chalmers, p.2. Available at: http://www.cse.chalmers.se/~feldt/courses/reqeng/examples/srs_example_2010_group2.pdf [Accessed 4 Feb. 2018].
@@ -103,15 +105,106 @@ This sections contains, highlights, and explains all the functional and quality 
 **ID: FR5**  
 **Title:** Run Scenarios      
 **Desc:** The user should be able to select a scenario and run it.  
-**Dep:** ?  
+**Dep:** ? 
+
+**_3.2.1.6 Functional Requirement 1.6_**  
+**ID: FR6**  
+**Title:** Record user audio       
+**Desc:** The user should be able to record their own audio in an appropriate file format. Also, the user should be able to utilize the screen reader if they do not want to record their own audio.  
+**Dep:** Screen reader 
+
+**_3.2.1.7 Functional Requirement 1.7_**  
+**ID: FR7**  
+**Title:** Screen Reader      
+**Desc:** For the users that are visually impaired, the feature of a screen reader should me implemented and can be accessed in a easy way.   
+**Dep:** Type of user  
 
 
 ### 3.3 Performance Requirements
-This requirement section outlines the performance specifications that the user can expect from the software. 
+This requirement section outlines the performance specifications that the user can expect from the software.  
+#### 3.3.1 Easy Navigation to Scenario Editor  
+**_ID:_** QR1  
+**_Title:_** Easy Navigation to editor   
+**_Desc:_** The user should be able to easily find and navigate to the scenario editor easily from the main menu.   
+**_Rat:_** In order for the user to easily access the editor window. 
+
+
+#### 3.3.2 Usage of Scenario Lists 
+**_ID:_** QR2   
+**_Title:_** Usage of the scenario list   
+**_Desc:_** The scenarios displayed in scenario list should be outputed in a user friendly way and easy to understand. Selecting a scenario from the list should only take 1 click.   
+**_Rat:_** In order for the user to use the list view easily. 
+
+#### 3.3.3 Usage of Scenario Maker 
+**_ID:_** QR3   
+**_Title:_** Usage of the scenario maker    
+**_Desc:_** The functions and features of the scenario maker should have a user-freindly layout that is easy to navigate and use to conduct various tasks (i.e create command, remove command, save, etc). Features and functions should not be hard to find.  
+**_Rat:_** In order for the user to use the scenario maker easily. 
+
+#### 3.3.4 Pre-existing scenario deliverabilities
+**_ID:_** QR4   
+**_Title:_** Usage of the scenario editor to modify scenarios.     
+**_Desc:_** Pre-existing scenarios that have been created or loaded should be displayed in a user friendly way in the scenario list and the features to modify the scenarios should be easily accessible and easy to find.  
+**_Rat:_** In order for the user to modify scenarios.   
+
+#### 3.3.5 Usage of Audio Recording
+**_ID:_** QR5    
+**_Title:_** Usage of the audio recording.       
+**_Desc:_** The steps taken to record user's audio should be simple to use and easy to save upon recoding completion.     
+**_Rat:_** In order for the user to easily record their audio.  
+
+#### 3.3.6 Usage of Audio Recording
+**_ID:_** QR6     
+**_Title:_** Usage of the screen reader      
+**_Desc:_** The visually impaired users should be able to navigate and turn of the screen reader feature easily and without any hassle. Also, the screen reader should allow the user to naviagte through the authoring app without any difficulties.       
+**_Rat:_** In order for visually impaired users to use the app. 
+
+
+## 4. Use cases  
+This section will outline the different use cases and outline requirements specification that will capture how user(s) will intteract with the authoring app and acieve a specific goal. The section will describe a step by step process a user will go through to complete and accomplish a task or goal.
+
+### 4.1: User 1-Educator  
+#### 4.1.1 User Case 1  
+**Name:** Make a scenario  
+**Brief Description:**  The user wants to create a  scenario.  
+**Actor:**  Educator  
+**Preconditions:**  User has entered the scenario editor from the main menu.  
+**Basic Flow:**  
+     1. User selects the "Create a new scenario" button     
+     2. System redirects the user to the scenario maker window    
+     3. User enters the name of this new scenario and selects whether it will be saved in the scenario list and/or another file                  location   
+     4. User enters the number of braille cells and the number of buttons for this scenario.    
+     5. User can begin making a scenario suing the create/remove command options and place the commands above, below, or replace them.  
+     6. Once scenario is complete, user can save the scenario and/or choose to exit and be redirected to the scenario editor page.   
+    
+**Alternative Flow:**   
+**AF1:** User wants to edit an existing saved scenario in the scenario list.     
+      1. User selects the scenario from the scenario list and clicks "Edit Selected Scenario"
+      2. System redirects to the scenario maker window
+      3. Return user to basic flow step 4    
+**AF2:** User wants to upload a scenario from their directory and edit that  
+      1. User selects "Load Scenario" and finds the scenario they want to edit in their directory
+      2. The selected scenario is displayed in scenario list
+      3. User selects the uploaded scenario and and clicks "Edit Selected Scenario"
+      4. Return user to basic flow step 4
+      
+**Exception Flows:**  
+**EX1:** System fails in saving scenario to scenario list  
+    1. System notifies user that an error has occured
+    2. Return user to basic flow step 3
+    
+**EX2:**  User uploads uncorrect scenario file format/missing file
+    1. System reminds user of what files will be accepted/that the file does not exist.  
+    2. Return user to AF2 step 1  
+
+**EX3:**  User enters incorrect number of cells or number of buttons  
+    1. System notifies user they have entered an inccorect value   
+    2. Return system to basic flow step 4     
+    
+**Post Conditions:**  
+The user has created a new/existing file ready to be run.    
 
 
 
-## 4. Use cases
-
-## 5. Test cases
+## 5. Test case
 
