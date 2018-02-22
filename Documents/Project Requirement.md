@@ -15,7 +15,8 @@
       - 3.1 [External Interface Requirements](#31-external-interface-requirements)   
       - 3.1.1 [User Interface](#311-user-interface)
       - 3.2 [Functional Requirements](#32-functional-requirement)   
-      - 3.2.1 [The User](#321-the-user)   
+      - 3.2.1 [The User](#321-the-user) 
+      - 3.3 [Performance Requirements](#33-performance-requirements)
      
 4. [Use cases](#4-use-cases)
 5. [Test cases](#5-test-cases)
@@ -59,8 +60,8 @@ A shallow description of the project can be stated by a device that allows kids,
 Essentially, the main system is an authoring app that must be usable by visually impaired users. The authoring app will provide facilities and functions to create the flow of the scenario where the user can ask questions and receive answers. A function for the user (educator) to record, save, and upload the audio will be given. Furthermore, there will be a facility implemented to save the scenario in an appropriate format and then test the scenario using provided software.
 
 ### 2.2 User Characteristics
-There are essentially 2 types of users that can use the application: those visually impaired, and those who are not. Each of these users cannot navigate through the application in the same way as one another and the application must be compatible for both types. 
-***INSERT MORE HERE ON HOW WE ARE MAKING THE APP FOR BOTH USERS***
+There are essentially 2 types of users that can use the application: those visually impaired, and those who are not. Each of these users cannot navigate through the application in the same way as one another and the application must be compatible for both types. A screen reader for the visually impaired will be provided for them to use the authoring app. 
+
 
 
 ### 2.3 Constraints
@@ -70,7 +71,14 @@ There are essentially 2 types of users that can use the application: those visua
 This sections contains, highlights, and explains all the functional and quality requirements of the system.
 
 ### 3.1 External Interface Requirements
-#### 3.1.1 User Interfaces
+#### 3.1.1 User Interfaces   
+Esentially there are two types of users who will be interacting with the graphical interace: educator, and a visually impaired educator. The interface must be implemented in such a way that both users find ease in navigating through the app. For visually imapaired users, a screen reader function will be implemented that will allow them to map out different buttons and fields of the app.
+
+There will be four main windows of the app:    
+1. The main menu: Here the user can enter the scenario editor or exit the program.    
+2. The scenario editor: In this window the user will have be able to view the scenario list and have access to: create a new scenario, edit selected scenario, save seected scenario, load scenario, and run selected scenario functions.   
+3. The scenario maker: This window will open up once the user selcts "create a new scenario." In this window, the user can create their own scenario and edit existing scenarios as well. The user can set the file name, the number of pins and buttons, and have the ability to create and remove commands and save the file.  
+4. Run scenario: When the user selects a scenario to run, a window will open up that uses the provided tetsing software to run the scenario they have created.  
 
 ### 3.2 Functional Requirements
 
@@ -202,7 +210,42 @@ This section will outline the different use cases and outline requirements speci
     2. Return system to basic flow step 4     
     
 **Post Conditions:**  
-The user has created a new/existing file ready to be run.    
+The user has created a new/existing file ready to be run.     
+
+#### 4.1.2 User Case 2  
+**Name:** Run a scenario     
+**Brief Description:**  The user wants to run a  scenario.     
+**Actor:**  Educator/tester    
+**Preconditions:** Scenario's need to have been already created without any errors, and user has enterred the scenario editor window    
+**Basic Flow:**  
+    1. User selects a scenario from the scenario list   
+    2. User clicks "Run Scenario" button  
+    3. System redirects and runs the selected scenario  
+    
+**Alternative Flow:**  
+**AF1:** The user wants to run an uploaded scenario 
+    1. User clicks "Load Scenario," system redirects page allowing user to find the scenario file in their directory    
+    2. System displays the scenario in the scenario list    
+    3. Redirect user to basic flow step 1  
+    
+**Exception Flows:**   
+**EX1:** Scenario file in scenario list or dorectory is not saved in the appropriate format.  
+    1. System displays error message informing the user that the system does not support the format  
+    2. Redirect user to basic flow step 1.  
+    
+**Post Conditions:**   
+The selected scenario file runs.  
+
+
+#### 4.1.3 User Case 3  
+**Name:** Record Audio 
+**Brief Description:**  The user wants to record audio.    
+**Actor:**  Educator 
+**Preconditions:**    
+**Basic Flow:**  
+**Alternative Flow:**  
+**Exception Flows:**   
+**Post Conditions:**   
 
 
 
