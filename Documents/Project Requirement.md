@@ -247,7 +247,11 @@ The selected scenario file runs.
 **Exception Flows:**   
 **Post Conditions:**   
 
+## 5. Test case  
+| Execution Process | Expected Result | Pass or Fail |
+| ------  | ------ | ------ | 
+| Create Scenario is pressed | A window with the scenario editor opens up | Pass |
+| Edit a scenario from scenario list | Selected scenario opens up in scenario editor once edit is pressed | Pass |
+| Load a scenario | Window opens up allowing user to select a sceanrio which appears in scenario list | Pass |
 
-
-## 5. Test case
 
