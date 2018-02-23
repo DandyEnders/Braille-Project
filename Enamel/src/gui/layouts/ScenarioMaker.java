@@ -11,7 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXMLLoader;
 
 /**
- * 
+ * Scenario maker java
  * @author Jinho Hwang
  *
  */

@@ -1,5 +1,9 @@
 package gui.controllers;
 
+/**
+ * ErrorList pop up controller.
+ * @author Jinho Hwang
+ */
 import java.io.File;
 import java.util.List;
 
