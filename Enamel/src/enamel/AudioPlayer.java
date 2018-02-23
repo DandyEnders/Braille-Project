@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.LinkedList;
 import java.util.logging.Level;
 
@@ -15,6 +17,15 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.SwingUtilities;
 //test2
+
+/**
+ * 
+ * @author Andrew Maywapersaud
+ * 			Copied contents of visual player to audio player.
+ * @author Jinho Hwang
+ * 			Fixed it to work with keyboard keys.
+ *
+ */
 
 public class AudioPlayer extends Player {
 	
@@ -98,14 +109,38 @@ public class AudioPlayer extends Player {
 
 	@Override
 	public void addSkipButtonListener(int index, String param, ScenarioParser sp) {
-		buttonList.get(index).addActionListener(new ActionListener() {
+		/*buttonList.get(index).addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (sp.userInput) {
 					sp.skip(param);
+					
 					//logger.log(Level.INFO, "Button {0} was pressed", index+1);
 					sp.userInput = false;
 				}
+			}
+		});*/
+		buttonList.get(index).addKeyListener(new KeyListener() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == (index + 49)) {
+					if(sp.userInput) {
+						sp.skip(param);
+						sp.userInput = false;
+					}
+				}
+			}
+
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
 			}
 		});
 		
@@ -116,10 +151,17 @@ public class AudioPlayer extends Player {
 		if (index >= this.buttonNumber || index < 0) {
             throw new IllegalArgumentException("Invalid index.");
         }
-		ActionListener[] aList = getButton(index).getActionListeners();
+		/*ActionListener[] aList = getButton(index).getActionListeners();
 		if (aList.length > 0) {
 			for (int x = 0; x < aList.length; x++) {
 				getButton(index).removeActionListener(getButton(index).getActionListeners()[x]);
+			}
+		}*/
+		
+		KeyListener[] aList = getButton(index).getKeyListeners();
+		if(aList.length>0) {
+			for(int i = 0; i < aList.length ; i++) {
+				getButton(index).removeKeyListener(getButton(index).getKeyListeners()[i]);
 			}
 		}
 		
@@ -127,7 +169,7 @@ public class AudioPlayer extends Player {
 
 	@Override
 	public void addRepeatButtonListener(int index, ScenarioParser sp) {
-		getButton(index).addActionListener(new ActionListener() {
+		/*getButton(index).addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 			
@@ -138,8 +180,35 @@ public class AudioPlayer extends Player {
 					sp.repeatText();
 				}
 			}
-		});
+		});*/
 		
+		getButton(index).addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == (index + 49)) {
+					if(sp.userInput) {
+						logger.log(Level.INFO, "Repeat Button was pressed.");
+						logger.log(Level.INFO, "Repeat Button was pressed {0} times", repeat);
+						sp.repeatText();
+					}
+				}
+				
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 	}
 	
 	public JButton getButton(int index) {
