@@ -1,13 +1,11 @@
 package gui.layouts;
 
-import gui.controllers.TextAnswerBoxController;
 import gui.controllers.TwoChoiceBoxController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import utility.Language;
 
 /**
@@ -23,6 +21,7 @@ public class TwoChoiceBox {
 	// List of pane, scene, stage
 	private AnchorPane root;
 	private Scene scene;
+	@SuppressWarnings("unused")
 	private Stage window;
 	
 	private String title;

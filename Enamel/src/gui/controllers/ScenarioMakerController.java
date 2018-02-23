@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -154,9 +153,9 @@ public class ScenarioMakerController {
     	return listOfCommands.getSelectionModel().getSelectedIndex();
     }
     
-    private Phrase selectedItem() {
+    /*private Phrase selectedItem() {
     	return listOfCommands.getSelectionModel().getSelectedItem();
-    }
+    }*/
  	
     private void listUpdate() {
     	this.phraseListObs.clear();

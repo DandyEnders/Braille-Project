@@ -2,7 +2,6 @@ package gui.layouts;
 import java.io.IOException;
 
 import gui.controllers.ScenarioEditorController;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import utility.Language;
 import javafx.scene.Scene;

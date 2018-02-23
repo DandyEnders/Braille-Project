@@ -106,9 +106,9 @@ public class ScenarioEditorController {
 		return scenarioList.getSelectionModel().getSelectedIndex();
 	}
 	
-	private File getSelectedFile() {
+	/*private File getSelectedFile() {
 		return fileList.get(getSelectedIndex());
-	}
+	}*/
 	
 	private boolean isSelected() {
 		return getSelectedIndex() != -1;

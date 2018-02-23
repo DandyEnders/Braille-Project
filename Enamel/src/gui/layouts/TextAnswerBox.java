@@ -1,7 +1,6 @@
 package gui.layouts;
 
 import gui.controllers.TextAnswerBoxController;
-import gui.controllers.VoiceRecorderController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -16,6 +15,7 @@ public class TextAnswerBox {
 	// List of pane, scene, stage
 	private AnchorPane root;
 	private Scene scene;
+	@SuppressWarnings("unused")
 	private Stage window;
 	
 	private String title;
@@ -28,9 +28,11 @@ public class TextAnswerBox {
 	}
 	
 	public String display(Stage window) {
+		
+		// Initialize the window
+		this.window = window;
 		try {
-			// Initialize the window
-			this.window = window;
+			
 			
 			// Allow resize, but set width fixed, set height resizeable with a minimum.
 			window.setResizable(false);
