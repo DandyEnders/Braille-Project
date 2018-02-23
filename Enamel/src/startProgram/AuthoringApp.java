@@ -39,7 +39,6 @@ public class AuthoringApp {
 		fileList.add(new File(Language.errorPath));
 		
 		for(File file : fileList) {
-			System.out.println(Language.mainMenuFxml);
 			if(!file.exists()) {
 				file.mkdirs();
 			}else {

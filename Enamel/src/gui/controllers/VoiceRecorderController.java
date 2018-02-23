@@ -21,7 +21,6 @@ import gui.layouts.TextAnswerBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ToggleButton;
@@ -185,11 +184,21 @@ public class VoiceRecorderController {
     }
     
     private void disableAllOthers(boolean isDisable) {
-    	for(Node node : root.getChildren()) {
+    	
+    	playButton.setDisable(isDisable);
+    	exitButton.setDisable(isDisable);
+    	deleteButton.setDisable(isDisable);
+    	loadSoundButton.setDisable(isDisable);
+    	exitButton.setDisable(isDisable);
+    	voiceNameList.setDisable(isDisable);
+    	
+    	
+    	
+    	/*for(Node node : root.getChildren()) {
     		if(!node.getId().equals(recordVoiceButton.getId())) {
     			node.setDisable(isDisable);
     		}
-    	}
+    	}*/
     }
   
     
