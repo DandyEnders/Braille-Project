@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
 
+import org.junit.platform.commons.util.StringUtils;
+
 import gui.layouts.CreateCommandPopUpBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -198,44 +200,59 @@ public class ScenarioMakerController {
  	}
  	
  	public void save() {
-		String scenarioString = "";
-		
-		scenarioString += "Cell " + numCellTextField.getText() + "\n";
-		scenarioString += "Button " + numButtonTextField.getText() + "\n";
-		
-		for(Phrase phrase : phraseListObs) {
-			scenarioString += phrase + "\n";
-		}
-		
-		
-		if(AuthoringUtil.phraseScenario(scenarioString) != null) {
-			
-			String fileName = scenarioNameField.getText();
-			
-			if(scenarioNameList.contains(fileName)) {
-				while(scenarioNameList.contains(fileName)) {
-					fileName = fileName.split("\\.")[0] + "_m.txt";
-				}
-			}
-			File file = new File("./FactoryScenarios/" + fileName);
-			
-			try {
-				Writer fileWriter = new FileWriter(file);
-				fileWriter.write(scenarioString);
-				fileWriter.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			scenarioList.add(file);
-			scenarioNameList.add(file.getName());
-			
-			exit();
-		}else {
-			// TODO : Error occurred.
-		}
  		
+ 		if(!StringUtils.isBlank(numCellTextField.getText()) &&
+ 		   !StringUtils.isBlank(numCellTextField.getText()) &&
+ 		   !StringUtils.isBlank(numButtonTextField.getText())) {
+ 			
+			String scenarioString = "";
+			
+			scenarioString += "Cell " + numCellTextField.getText() + "\n";
+			scenarioString += "Button " + numButtonTextField.getText() + "\n";
+			
+			for(Phrase phrase : phraseListObs) {
+				scenarioString += phrase + "\n";
+			}
+			
+			
+			if(AuthoringUtil.phraseScenario(scenarioString) != null) {
+				
+				String fileName = scenarioNameField.getText();
+				
+				if(fileName.length() < 5) {
+					if(!fileName.equals(".txt"))
+						fileName += ".txt";
+				}else {
+					if(!fileName.substring(fileName.length()-4, fileName.length()).equals(".txt")) {
+						fileName += ".txt";
+					}
+				}
+				
+				if(scenarioNameList.contains(fileName)) {
+					while(scenarioNameList.contains(fileName)) {
+						fileName = fileName.split("\\.")[0] + "_m.txt";
+					}
+				}
+				File file = new File("./FactoryScenarios/" + fileName);
+				
+				try {
+					Writer fileWriter = new FileWriter(file);
+					fileWriter.write(scenarioString);
+					fileWriter.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				scenarioList.add(file);
+				scenarioNameList.add(file.getName());
+				
+				exit();
+			}else {
+				// TODO : Error occurred.
+			}
+	 		
+	 	}
  	}
  	
  	

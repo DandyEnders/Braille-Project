@@ -47,7 +47,7 @@ public class ErrorListReportPopUpBox {
 			window.initModality(Modality.APPLICATION_MODAL);
 			
 			// Get the FXML loader.
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(Language.errorListReportPopUpBox));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(Language.errorListReportPopUpBoxFxml));
 			
 			// Loading the format from FXML file
 			root = (AnchorPane)loader.load();

@@ -16,8 +16,10 @@ public final class Language {
 	public static final String mainMenuFxml = "/gui/resources/view/MainMenu.fxml";
 	public static final String scenarioEditorFxml = "/gui/resources/view/ScenarioEditor.fxml";
 	public static final String scenarioMakerFxml = "/gui/resources/view/ScenarioMaker.fxml";
-	public static final String errorListReportPopUpBox = "/gui/resources/view/ErrorListReportPopUpBox.fxml";
-	public static final String createCommandPopUpBox = "/gui/resources/view/CreateCommandPopUpBox.fxml";
+	public static final String errorListReportPopUpBoxFxml = "/gui/resources/view/ErrorListReportPopUpBox.fxml";
+	public static final String createCommandPopUpBoxFxml = "/gui/resources/view/CreateCommandPopUpBox.fxml";
+	public static final String voiceRecorderFxml = "/gui/resources/view/VoiceRecorder.fxml";
+	public static final String textAnswerBoxFxml = "/gui/resources/view/TextAnswerBox.fxml";
 	
 	// CSS directory
 	public static final String mainMenuCss = "/gui/resources/css/MainMenu.css";
@@ -38,7 +40,11 @@ public final class Language {
 	//public static final String errorListReportPopUpBoxTitle = "";
 	public static final String createCommandPopUpBoxTitle = "Create Scenario";
 	
+	// Voice Recorder Strings
+	public static final String voiceRecorderTitle = "Voice Recorder";
 	
+	// Text answerbox title
+	//public static final String textAnswerBoxTitle = "";
 	
 	
 	//These are unused so far due to imcompatibility of scenebuilder to the variable String.
