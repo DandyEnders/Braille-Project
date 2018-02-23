@@ -15,7 +15,7 @@
          <font>
             <Font name="Arial" size="30.0" />
          </font></Button>
-      <Label ellipsisString="Label : Braille Project" layoutX="139.0" layoutY="70.0" text="Braile Project">
+      <Label ellipsisString="Label : Braille Project" layoutX="129.0" layoutY="68.0" text="Authoring App">
          <font>
             <Font name="Arial" size="54.0" />
          </font>

@@ -10,22 +10,26 @@ package utility;
  */
 public final class Language {
 	
-
+	public static final String viewPath = "/gui/resources/view/";
+	public static final String scenarioPath = "./FactoryScenarios/";
+	public static final String AudioPath = "./FactoryScenarios/AudioFiles/";
 	
 	// Fxml directory
-	public static final String mainMenuFxml = "/gui/resources/view/MainMenu.fxml";
-	public static final String scenarioEditorFxml = "/gui/resources/view/ScenarioEditor.fxml";
-	public static final String scenarioMakerFxml = "/gui/resources/view/ScenarioMaker.fxml";
-	public static final String errorListReportPopUpBoxFxml = "/gui/resources/view/ErrorListReportPopUpBox.fxml";
-	public static final String createCommandPopUpBoxFxml = "/gui/resources/view/CreateCommandPopUpBox.fxml";
-	public static final String voiceRecorderFxml = "/gui/resources/view/VoiceRecorder.fxml";
-	public static final String textAnswerBoxFxml = "/gui/resources/view/TextAnswerBox.fxml";
+	public static final String mainMenuFxml = viewPath + "MainMenu.fxml";
+	public static final String scenarioEditorFxml = viewPath + "ScenarioEditor.fxml";
+	public static final String scenarioMakerFxml = viewPath + "ScenarioMaker.fxml";
+	public static final String errorListReportPopUpBoxFxml = viewPath + "ErrorListReportPopUpBox.fxml";
+	public static final String createCommandPopUpBoxFxml = viewPath + "CreateCommandPopUpBox.fxml";
+	public static final String voiceRecorderFxml = viewPath + "VoiceRecorder.fxml";
+	public static final String textAnswerBoxFxml = viewPath + "TextAnswerBox.fxml";
+	public static final String twoChoiceBoxFxml = viewPath + "TwoChoiceBox.fxml";
+	
 	
 	// CSS directory
 	public static final String mainMenuCss = "/gui/resources/css/MainMenu.css";
 	 
 	// Main menu Strings
-	public static final String mainMenuTitle = "Braille Project Main Menu";
+	public static final String mainMenuTitle = "Authoring App";
 	
 	// Scenario editor Strings
 	public static final String scenarioEditorTitle = "Scenario Editor";

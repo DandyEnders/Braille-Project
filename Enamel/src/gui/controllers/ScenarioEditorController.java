@@ -13,6 +13,7 @@ import org.assertj.core.util.Files;
 import enamel.ScenarioParser;
 import gui.layouts.ErrorListReportPopUpBox;
 import gui.layouts.ScenarioMaker;
+import gui.layouts.TwoChoiceBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -48,11 +49,14 @@ public class ScenarioEditorController {
 	// ScenarioMaker
 	ScenarioMaker scenarioMaker;
 	
+	private boolean isVisual;
+	
 	// Initialize the fileList.
 	public ScenarioEditorController(){
 		obsFileList = FXCollections.observableArrayList();
 		fileList = new ArrayList<File>();
 	}
+	
 	
 	 public void loadFileOn(String dir) {
     	File scenarioFileFolder = new File(dir);
@@ -195,6 +199,12 @@ public class ScenarioEditorController {
 		// If the list is empty or not elected then
 		if(!scenarioList.getSelectionModel().isEmpty()){
 			
+			Stage window = new Stage();
+			
+			TwoChoiceBox choiceBox = new TwoChoiceBox("Player type", "Which one do you want to run as?", "Visual Player", "Audio Player");
+			isVisual = choiceBox.display(window);
+			
+			
 			// Get the selected item index from the list
 			int index = scenarioList.getSelectionModel().getSelectedIndex();
 					
@@ -207,7 +217,7 @@ public class ScenarioEditorController {
 				Thread starterCodeThread = new Thread("Starter Code Thread") {
 				    public void run(){    
 				    	//Open Scenario simulator, allow visual
-				        ScenarioParser s = new ScenarioParser(true);
+				        ScenarioParser s = new ScenarioParser(isVisual);
 				        
 				        //Set Scenario simulator to run the file from the fileList. (not from GUI list)
 						s.setScenarioFile(fileList.get(index).getPath());

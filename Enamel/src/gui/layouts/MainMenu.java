@@ -1,5 +1,6 @@
 package gui.layouts;
 	
+import gui.controllers.MainMenuController;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -16,6 +17,8 @@ import javafx.fxml.FXMLLoader;
   */
 
 public class MainMenu extends Application {
+	
+	MainMenuController control;
 	
 	// The integer window wiedth / height. Added for convenience.
 	private final static Integer windowWidth = 600;
@@ -44,14 +47,21 @@ public class MainMenu extends Application {
 			// Window should not be resizeable ( else destroys our layout )
 			window.setResizable(false);
 			
+			
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(Language.mainMenuFxml));
+			
 			// Set the base panel ( root ) from fxml file
-			root = (AnchorPane)FXMLLoader.load(getClass().getResource(Language.mainMenuFxml));
+			root = (AnchorPane)loader.load();
+			
+			control = loader.getController();
 			
 			// Scene is built using the base panel
 			scene = new Scene(root,windowWidth,windowHeight);
 			
 			// Adds CSS formatting into scene. ( it is empty file now )
 			scene.getStylesheets().add(getClass().getResource(Language.mainMenuCss).toExternalForm());
+			
+			
 			
 			// Set scene to the window, title, and show it
 			window.setScene(scene);

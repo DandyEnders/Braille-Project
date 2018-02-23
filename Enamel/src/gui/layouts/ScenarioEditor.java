@@ -59,7 +59,7 @@ public class ScenarioEditor {
 			
 			control = loader.getController();
 			
-			control.loadFileOn("./FactoryScenarios/");
+			control.loadFileOn(Language.scenarioPath);
 		
 			// Instantiate a new scene
 			Scene scene = new Scene(root);

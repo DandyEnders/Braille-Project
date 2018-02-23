@@ -1,10 +1,12 @@
 package gui.controllers;
 
 import gui.layouts.ScenarioEditor;
+import gui.layouts.TwoChoiceBox;
 import gui.layouts.VoiceRecorder;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * Main menu controller.

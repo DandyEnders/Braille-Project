@@ -99,7 +99,7 @@ public class VoiceRecorderController {
 			fileChooser.setTitle(Language.voiceRecorderFileChooserTitle);
 			
 			// Set starting directory ( the directory you start to select from )
-			fileChooser.setInitialDirectory(new File("./FactoryScenarios/AudioFiles/").getCanonicalFile());
+			fileChooser.setInitialDirectory(new File(Language.AudioPath).getCanonicalFile());
 			
 			// Open fileChooser, get multiple files
 			List<File> inputFiles = fileChooser.showOpenMultipleDialog(window);
