@@ -3,6 +3,7 @@ package utility;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -24,7 +25,7 @@ public class AuthoringUtil {
 	private final static String[] typeList = { "/~sound:", "/~skip:", "/~pause:", "/~repeat-button:", "/~repeat",
 			"/~endrepeat", "/~reset-buttons", "/~skip-button:", "/~disp-clearAll", "/~disp-cell-pins:",
 			"/~disp-string:", "/~disp-cell-char:", "/~disp-cell-raise:", "/~disp-cell-lower:", "/~disp-cell-clear:",
-			"/~disp-cell-lowerPins", "/~user-input" };
+			"/~user-input" };
 
 	public static String[] getTypeList() {
 		return typeList;
@@ -38,6 +39,28 @@ public class AuthoringUtil {
 	private AuthoringUtil() {
 		// Meh
 	}
+	
+	public static List<File> getAudioFiles(String str){
+		List<File> voiceList = new ArrayList<File>();
+		File audioFileFolder = new File(str);
+
+    	if(audioFileFolder.isDirectory()) {
+    		for(File soundFile : audioFileFolder.listFiles()) {
+    			
+    			if(soundFile.length() < 4) {
+    				continue;
+    			}
+    			
+    			if(!soundFile.isDirectory()) {
+    				if(soundFile.getName().substring(soundFile.getName().length()-4, soundFile.getName().length()).equals(".wav")) {
+    					voiceList.add(soundFile);
+    				}
+    			}
+    		}
+    	}
+    	return voiceList;
+	}
+	
 
 	/**
 	 * Extension overload version of isCorrectlyParsed.

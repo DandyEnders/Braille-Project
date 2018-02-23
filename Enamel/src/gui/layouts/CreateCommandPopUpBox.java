@@ -1,6 +1,7 @@
 package gui.layouts;
 
 import java.io.IOException;
+import java.util.List;
 
 import gui.controllers.CreateCommandPopUpBoxController;
 import javafx.collections.ObservableList;
@@ -22,17 +23,23 @@ public class CreateCommandPopUpBox {
 	// control.
 	CreateCommandPopUpBoxController control;
 	
+	private List<Phrase> phraseList;
+	private String pos;
+	private int selectedIndex;
+	
 	// List of pane, scene, stage
 	private AnchorPane root;
 	private Scene scene;
 	private Stage window;
 
 	
-	public CreateCommandPopUpBox(ObservableList<Phrase> phraseList, String pos, int selectedIndex) {
-		display(phraseList, pos,selectedIndex);
+	public CreateCommandPopUpBox(List<Phrase> phraseList, String pos, int selectedIndex) {
+		this.phraseList = phraseList;
+		this.pos = pos;
+		this.selectedIndex = selectedIndex;
 	}
 	
-	public void display(ObservableList<Phrase> phraseList, String pos, int selectedIndex) {
+	public List<Phrase> display() {
 		try {
 			// Instantiates new window
 			window = new Stage();
@@ -52,10 +59,11 @@ public class CreateCommandPopUpBox {
 			// Get controller.
 			control = loader.getController();
 			
-			control.setObsList(phraseList);
+			control.setList(phraseList);
 			control.setPos(pos);
 			control.setIndex(selectedIndex);
 			control.setComboBoxItems();
+			control.loadSoundFiles();
 			
 			// Instantiate a new scene
 			scene = new Scene(root);
@@ -65,11 +73,13 @@ public class CreateCommandPopUpBox {
 			// If close button (red X button) is pressed, hide the window instead of destroy
 			window.setOnCloseRequest(e -> control.close());
 			
-			window.show();
+			window.showAndWait();
 			
 		}catch (IOException e1) {
 			e1.printStackTrace(); // This happens if scenarioEditor.fxml changes its name.
 		}
+		
+		return control.getAnswer();
 		
 	}
 	

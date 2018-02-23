@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.platform.commons.util.StringUtils;
@@ -85,6 +87,7 @@ public class ScenarioMakerController {
  	public ScenarioMakerController(){
  		phraseListObs = FXCollections.observableArrayList();
  		numberOfCellAndButton = FXCollections.observableArrayList();
+ 		phraseList = new LinkedList<Phrase>();
  	}
  	
  	public void setScenarioList(List<File> scenarioList) {
@@ -120,8 +123,12 @@ public class ScenarioMakerController {
 	 		numCellTextField.setText(numberOfCellAndButton.get(0));
 	 		numButtonTextField.setText(numberOfCellAndButton.get(1));
 	 		
-	 		// Set phraseList to be rest of phrase list other then first two.
-	 		phraseListObs.addAll(lawPhraseList.subList(2, lawPhraseList.size()));
+	 		if(lawPhraseList.size() > 2) {
+	 			// Set phraseList to be rest of phrase list other then first two.
+	 			phraseList.addAll(lawPhraseList.subList(2, lawPhraseList.size()));
+	 		}
+	 		
+	 		listUpdate();
 	 		
 	 		// Set the gui list.
 	 		listOfCommands.setItems(phraseListObs);
@@ -146,8 +153,23 @@ public class ScenarioMakerController {
     	return listOfCommands.getSelectionModel().getSelectedItem();
     }
  	
+    private void listUpdate() {
+    	this.phraseListObs.clear();
+    	
+    	for(Phrase phrase : phraseList) {
+    		phraseListObs.add(phrase);
+    	}
+    	
+    	listOfCommands.setItems(phraseListObs);
+    }
+    
  	public void createCommand() {
- 		if(isItemSelected()) {
+ 		
+ 		
+ 		if(!isItemSelected()) {
+ 			CreateCommandPopUpBox popup = new CreateCommandPopUpBox(phraseList,"above",0);
+ 			phraseList = popup.display();
+ 		}else if(isItemSelected()) {
 	 		
 	 		String pos = "";
 	 		
@@ -161,30 +183,34 @@ public class ScenarioMakerController {
 	 			pos = "below";
 	 			
 	 		}
-	 		
-	 		new CreateCommandPopUpBox(phraseListObs,pos,selectedItemIndex());
+	 		CreateCommandPopUpBox popup = new CreateCommandPopUpBox(phraseList,pos,selectedItemIndex());
+	 		phraseList = popup.display();
 	 		
  		}
+ 		
+ 		listUpdate();
  		
  		
  	}
  	
  	public void removeCommand() {
  		if(isItemSelected()) {
- 			phraseListObs.remove(selectedItemIndex());
+ 			phraseList.remove(selectedItemIndex());
+ 			listUpdate();
  		}
  	}
  	
  	private void swap(int pos1, int pos2) {
  		Phrase temp = phraseListObs.get(pos1);
- 		phraseListObs.set(pos1, phraseListObs.get(pos2));
- 		phraseListObs.set(pos2, temp);
+ 		phraseList.set(pos1, phraseListObs.get(pos2));
+ 		phraseList.set(pos2, temp);
  	}
  	
  	public void moveUp() {
  		if(isItemSelected()) {
  			if(selectedItemIndex() > 0) {
  				swap(selectedItemIndex(), selectedItemIndex()-1);
+ 				listUpdate();
  				listOfCommands.getSelectionModel().select(selectedItemIndex()-1);
  			}
  		}
@@ -194,6 +220,7 @@ public class ScenarioMakerController {
  		if(isItemSelected()) {
  			if(selectedItemIndex() < phraseListObs.size()-1) {
  				swap(selectedItemIndex(), selectedItemIndex()+1);
+ 				listUpdate();
  				listOfCommands.getSelectionModel().select(selectedItemIndex()+1);
  			}
  		}
@@ -210,7 +237,7 @@ public class ScenarioMakerController {
 			scenarioString += "Cell " + numCellTextField.getText() + "\n";
 			scenarioString += "Button " + numButtonTextField.getText() + "\n";
 			
-			for(Phrase phrase : phraseListObs) {
+			for(Phrase phrase : phraseList) {
 				scenarioString += phrase + "\n";
 			}
 			
