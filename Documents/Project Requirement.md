@@ -32,7 +32,7 @@ The following document is created to:
 2. track down the requirements set by customers
 3. track down the references used 
 4. show the use case of the Braille program
-5. show test cases of the Braille program
+5. show test cases of the Braille program    
 6. get an approval to Braille program project
 
 ### 1.2 Scope
@@ -74,11 +74,12 @@ This sections contains, highlights, and explains all the functional and quality 
 #### 3.1.1 User Interfaces   
 Esentially there are two types of users who will be interacting with the graphical interace: educator, and a visually impaired educator. The interface must be implemented in such a way that both users find ease in navigating through the app. For visually imapaired users, a screen reader function will be implemented that will allow them to map out different buttons and fields of the app.
 
-There will be four main windows of the app:    
-1. The main menu: Here the user can enter the scenario editor or exit the program.    
-2. The scenario editor: In this window the user will have be able to view the scenario list and have access to: create a new scenario, edit selected scenario, save seected scenario, load scenario, and run selected scenario functions.   
-3. The scenario maker: This window will open up once the user selcts "create a new scenario." In this window, the user can create their own scenario and edit existing scenarios as well. The user can set the file name, the number of pins and buttons, and have the ability to create and remove commands and save the file.  
-4. Run scenario: When the user selects a scenario to run, a window will open up that uses the provided tetsing software to run the scenario they have created.  
+There will be five main windows of the app:    
+1. The main menu: Here the user can enter the scenario editor, record voice, and exit the program. 
+2. The voice recorder: Here the user can view all the voice file lists, record voice, delete selected voice, play selected voice, load sounds, and exit the menu.  
+3. The scenario editor: In this window the user will have be able to view the scenario list and have access to: create a new scenario, edit selected scenario, save seected scenario, load scenario, and run selected scenario functions.   
+4. The scenario maker: This window will open up once the user selcts "create a new scenario." In this window, the user can create their own scenario and edit existing scenarios as well. The user can set the file name, the number of pins and buttons, and have the ability to create and remove commands and save the file.  
+5. Run scenario: When the user selects a scenario to run, a window will open up that uses the provided tetsing software to run the scenario they have created in a visual player mode or an audio player mode. 
 
 ### 3.2 Functional Requirements
 
@@ -107,13 +108,13 @@ There will be four main windows of the app:
 **ID: FR4**  
 **Title:**  Load Scenarios     
 **Desc:** The user should be allowed to navigate through their directory and load selected scenario to add to scenario list.       
-**Dep:** ?  
+**Dep:** User's directory    
 
 **_3.2.1.5 Functional Requirement 1.5_**  
 **ID: FR5**  
 **Title:** Run Scenarios      
 **Desc:** The user should be able to select a scenario and run it.  
-**Dep:** ? 
+**Dep:** FR1 
 
 **_3.2.1.6 Functional Requirement 1.6_**  
 **ID: FR6**  
@@ -126,6 +127,12 @@ There will be four main windows of the app:
 **Title:** Screen Reader      
 **Desc:** For the users that are visually impaired, the feature of a screen reader should me implemented and can be accessed in a easy way.   
 **Dep:** Type of user  
+
+**_3.2.1.8 Functional Requirement 1.8_**  
+**ID: FR8**  
+**Title:** Audio player vs Visual player     
+**Desc:** The user should have an option to run the selected scenario as an audio player or visual player if they are visually impaired.  
+**Dep:** Type of user, FR5  
 
 
 ### 3.3 Performance Requirements
@@ -161,7 +168,7 @@ This requirement section outlines the performance specifications that the user c
 **_Desc:_** The steps taken to record user's audio should be simple to use and easy to save upon recoding completion.     
 **_Rat:_** In order for the user to easily record their audio.  
 
-#### 3.3.6 Usage of Audio Recording
+#### 3.3.6 Usage of Screen Reader
 **_ID:_** QR6     
 **_Title:_** Usage of the screen reader      
 **_Desc:_** The visually impaired users should be able to navigate and turn of the screen reader feature easily and without any hassle. Also, the screen reader should allow the user to naviagte through the authoring app without any difficulties.       
@@ -169,9 +176,13 @@ This requirement section outlines the performance specifications that the user c
 
 
 ## 4. Use cases  
-This section will outline the different use cases and outline requirements specification that will capture how user(s) will intteract with the authoring app and acieve a specific goal. The section will describe a step by step process a user will go through to complete and accomplish a task or goal.
+This section will outline the different use cases and outline requirements specification that will capture how user(s) will intteract with the authoring app and acieve a specific goal. The section will describe a step by step process a user will go through to complete and accomplish a task or goal
 
-### 4.1: User 1-Educator  
+### 4.1: User 1-Educator    
+The authoring app is designed for two users:    
+        - Visually impaired user    
+        - Not a visually impaired user  
+
 #### 4.1.1 User Case 1  
 **Name:** Make a scenario  
 **Brief Description:**  The user wants to create a  scenario.  
@@ -237,15 +248,69 @@ The user has created a new/existing file ready to be run.
 The selected scenario file runs.  
 
 
+#### 4.1.2.1 User Case 2.1 
+**Name:** Run a scenario     
+**Brief Description:**  The user wants to run a  scenario.     
+**Actor:**  Visually Impaired tester.educator   
+**Preconditions:** Scenario's need to have been already created without any errors, and user has enterred the scenario editor window    
+**Basic Flow:**  
+    1. User selects a scenario from the scenario list   
+    2. User clicks "Run Scenario" button  
+    3. System redirects and ask user if they want to run as an audio player or visual player  
+    4. User clicks on "audio player" button  
+    5. System begins to run scenario with a screen reader.  
+    
+**Alternative Flow:**  
+**AF1:** The user wants to run an uploaded scenario 
+    1. User clicks "Load Scenario," system redirects page allowing user to find the scenario file in their directory    
+    2. System displays the scenario in the scenario list    
+    3. Redirect user to basic flow step 1  
+    
+**Exception Flows:**   
+**EX1:** Scenario file in scenario list or dorectory is not saved in the appropriate format.  
+    1. System displays error message informing the user that the system does not support the format  
+    2. Redirect user to basic flow step 1.  
+    
+**Post Conditions:**   
+The selected scenario file runs for the visually impaired user.  
+
+
 #### 4.1.3 User Case 3  
 **Name:** Record Audio 
 **Brief Description:**  The user wants to record audio.    
 **Actor:**  Educator 
-**Preconditions:**    
-**Basic Flow:**  
+**Preconditions:**  User has entered the voice recorder stage from the main menu.    
+**Basic Flow:**    
+    1. User clicks "Record Voice"
+    2. System prompts user to enter the name of their new recording   
+    3. System saves the voice.wav file in the voice file list and prompts user to start recording and end recording
+    6. User has options to delete selected voice file, play selected voice file, load external sounds, and exit to main menu.  
 **Alternative Flow:**  
+**AF1:** User Wants to load an existing audio file   
+    1. User selects "Load Sound" and finds the appropriate format file in their directory.  
+    2. Redirect user to basic flow step 4.  
+**AF2:** User wants to delete an audio recording.  
+    1. User selects the audio file to be deleted from the audio file list  
+    2. User clicks on "Delete Selected"   
+    3. Redirect user to basic flow step 4.    
+**AF3** User wants to play an audio   
+    1. User selects audio file they want to play from the audio file list.  
+    2. User clicks "Play sound"  
+    3. System playsback the audio file to user  
+    4. Redirect user to basic flow step 4  
+
 **Exception Flows:**   
+**EX1:** Audio file that user enters contains illegal symbols/text
+    1. System displays error message stating incorrect file name  
+    2. Redirect user to basic flow step 2  
+    
+ **EX2:** Selected audio file to load is in incorrect format
+    1. System displays unsupported file format error 
+    2. Redirect user to AF1 step 1
 **Post Conditions:**   
+The user successfully records audio.  
+
+
 
 ## 5. Test case  
 | Execution Process | Expected Result | Pass or Fail |
