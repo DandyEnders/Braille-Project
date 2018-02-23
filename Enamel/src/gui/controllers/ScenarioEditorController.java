@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import org.assertj.core.util.Files;
-
 import enamel.ScenarioParser;
 import gui.layouts.ErrorListReportPopUpBox;
 import gui.layouts.ScenarioMaker;
@@ -118,7 +116,7 @@ public class ScenarioEditorController {
 	public void removeScenario() {
 		if(isSelected()) {
 			
-			Files.delete(fileList.remove(getSelectedIndex()));
+			fileList.remove(getSelectedIndex()).delete();
 			
 			listUpdate();
 		}
@@ -241,6 +239,7 @@ public class ScenarioEditorController {
 			System.out.println("index : " + scenarioList.getSelectionModel().getSelectedIndex());*/
 			
 			if( index != -1) {
+				
 				// Start a Thread to start enamel program. Thread is needed to run without an error.
 				Thread starterCodeThread = new Thread("Starter Code Thread") {
 				    public void run(){    

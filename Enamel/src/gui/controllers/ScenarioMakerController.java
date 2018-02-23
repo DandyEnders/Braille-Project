@@ -7,8 +7,6 @@ import java.io.Writer;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.junit.platform.commons.util.StringUtils;
-
 import gui.layouts.CreateCommandPopUpBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -232,9 +230,9 @@ public class ScenarioMakerController {
  	
  	public void save() {
  		
- 		if(!StringUtils.isBlank(numCellTextField.getText()) &&
- 		   !StringUtils.isBlank(numCellTextField.getText()) &&
- 		   !StringUtils.isBlank(numButtonTextField.getText())) {
+ 		if(!numCellTextField.getText().isEmpty() &&
+ 		   !numCellTextField.getText().isEmpty()  &&
+ 		   !numButtonTextField.getText().isEmpty() ) {
  			
 			String scenarioString = "";
 			

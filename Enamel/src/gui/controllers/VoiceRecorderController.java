@@ -14,8 +14,6 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.TargetDataLine;
 
-import org.assertj.core.util.Files;
-
 import gui.layouts.ErrorListReportPopUpBox;
 import gui.layouts.TextAnswerBox;
 import javafx.collections.FXCollections;
@@ -281,7 +279,7 @@ public class VoiceRecorderController {
     @FXML
     public void deleteSelected() {
     	if(isSelected()) {
-    		Files.delete(voiceList.get(getSelectedIndex()));
+    		voiceList.get(getSelectedIndex()).delete();
     		voiceList.remove(getSelectedIndex());
     		listUpdate();
     	}
