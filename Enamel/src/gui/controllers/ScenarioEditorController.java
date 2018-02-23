@@ -17,7 +17,9 @@ import gui.layouts.TwoChoiceBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -30,6 +32,28 @@ import utility.Language;
  */
 
 public class ScenarioEditorController {
+	
+    @FXML
+    private Button createScenarioButton;
+
+    @FXML
+    private Button editScenarioButton;
+
+    @FXML
+    private Button saveScenarioButton;
+
+    @FXML
+    private Button loadScenarioButton;
+
+    @FXML
+    private Button runScenarioButton;
+
+    @FXML
+    private Button removeScenarioButton;
+    
+    @FXML
+    private Button exitButton;
+
 	
 	// List of file loaded.
 	List<File> fileList;
@@ -116,15 +140,19 @@ public class ScenarioEditorController {
 	 * @author Jinho Hwang
 	 * @throws IOException
 	 */
-	public void loadScenario() throws IOException {
+	public void loadScenario() {
 		Stage window = new Stage();
 		
 		// Create fileChooser and set its title
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle(Language.scenarioEditorLoadFileChooserTitle);
 		
+		try {
 		// Set starting directory ( the directory you start to select from )
-		fileChooser.setInitialDirectory(new File("./FactoryScenarios").getCanonicalFile());
+		fileChooser.setInitialDirectory(new File(Language.scenarioPath).getCanonicalFile());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		// Open fileChooser, get multiple files
 		List<File> inputFiles = fileChooser.showOpenMultipleDialog(window);
@@ -331,8 +359,26 @@ public class ScenarioEditorController {
 		root.getScene().getWindow().hide();
 	}
 	
-	
-	
+	@FXML
+	void keyPressed(KeyEvent event) {
+    	if(event.getCode().equals(Language.openKey)) {
+    		if(event.getSource().equals(createScenarioButton)) {
+    			createScenario();
+    		}else if(event.getSource().equals(editScenarioButton)) {
+    			editScenario();
+    		}else if(event.getSource().equals(saveScenarioButton)) {
+    			saveScenario();
+    		}else if(event.getSource().equals(loadScenarioButton)) {
+    			loadScenario();
+    		}else if(event.getSource().equals(runScenarioButton)) {
+    			runScenario();
+    		}else if(event.getSource().equals(removeScenarioButton)) {
+    			removeScenario();
+    		}else if(event.getSource().equals(exitButton)) {
+    			hideScenarioEditor();
+    		}
+    	}
+    }
 	
 
 	

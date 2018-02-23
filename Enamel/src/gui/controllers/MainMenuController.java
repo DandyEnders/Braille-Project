@@ -5,8 +5,11 @@ import gui.layouts.TwoChoiceBox;
 import gui.layouts.VoiceRecorder;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import utility.Language;
 
 /**
  * Main menu controller.
@@ -20,6 +23,15 @@ public class MainMenuController {
 	// FXML component; Base panel
 	@FXML
 	private AnchorPane root;
+	
+    @FXML
+    private Button exitButton;
+
+    @FXML
+    private Button voiceRecordButton;
+
+    @FXML
+    private Button scenarioEditButton;
 	
 	// Scenario Editor
 	private ScenarioEditor scenarioEditor;
@@ -49,6 +61,19 @@ public class MainMenuController {
 	public void openVoiceRecorder() {
 		voiceRecorder.show();
 	}
+	
+    @FXML
+    private void keyPressed(KeyEvent event) {
+    	if(event.getCode().equals(Language.openKey)) {
+    		if(event.getSource().equals(scenarioEditButton)) {
+    			openScenarioEditor();
+    		}else if(event.getSource().equals(voiceRecordButton)) {
+    			openVoiceRecorder();
+    		}else if(event.getSource().equals(exitButton)) {
+    			exitProgram();
+    		}
+    	}
+    }
 	
 	
 }

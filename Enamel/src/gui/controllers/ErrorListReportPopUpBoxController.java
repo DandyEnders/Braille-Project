@@ -13,8 +13,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import utility.Language;
 
 public class ErrorListReportPopUpBoxController {
 
@@ -54,6 +56,16 @@ public class ErrorListReportPopUpBoxController {
     	stage.close();
     	
     }
+    
+    @FXML
+    void keyPressed(KeyEvent event) {
+    	if(event.getCode().equals(Language.openKey)) {
+    		if(event.getSource().equals(closeButton)) {
+    			close();
+    		}
+    	}
+    }
+
     
     
 }

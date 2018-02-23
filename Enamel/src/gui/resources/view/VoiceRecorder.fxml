@@ -13,18 +13,18 @@
    <children>
       <VBox alignment="CENTER" layoutX="188.0" layoutY="23.0" prefHeight="379.0" prefWidth="112.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <ToggleButton fx:id="recordVoiceButton" mnemonicParsing="false" onMouseClicked="#recordVoiceButtonClicked" prefHeight="39.0" prefWidth="130.0" text="Record Voice">
+            <ToggleButton fx:id="recordVoiceButton" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#recordVoiceButtonClicked" prefHeight="39.0" prefWidth="130.0" text="Record Voice">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></ToggleButton>
             <Region prefHeight="7.0" prefWidth="112.0" />
-            <Button fx:id="deleteButton" mnemonicParsing="false" onMouseClicked="#deleteSelected" prefHeight="37.0" prefWidth="124.0" text="Delete Selected" />
+            <Button fx:id="deleteButton" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#deleteSelected" prefHeight="37.0" prefWidth="124.0" text="Delete Selected" />
             <Region prefHeight="7.0" prefWidth="112.0" />
-            <Button fx:id="playButton" mnemonicParsing="false" onMouseClicked="#playSelected" prefHeight="37.0" prefWidth="130.0" text="Play Selected" />
+            <Button fx:id="playButton" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#playSelected" prefHeight="37.0" prefWidth="130.0" text="Play Selected" />
             <Region prefHeight="7.0" prefWidth="112.0" />
-            <Button fx:id="playButton1" mnemonicParsing="false" onMouseClicked="#loadSoundFile" prefHeight="37.0" prefWidth="130.0" text="Load Sound" />
+            <Button fx:id="loadSoundButton" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#loadSoundFile" prefHeight="37.0" prefWidth="130.0" text="Load Sound" />
             <Region prefHeight="7.0" prefWidth="112.0" />
-            <Button fx:id="exitButton" mnemonicParsing="false" onMouseClicked="#exit" prefHeight="41.0" prefWidth="125.0" text="Exit" />
+            <Button fx:id="exitButton" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#exit" prefHeight="41.0" prefWidth="125.0" text="Exit" />
          </children>
       </VBox>
       <ListView fx:id="voiceNameList" layoutY="23.0" prefHeight="379.0" prefWidth="188.0" />

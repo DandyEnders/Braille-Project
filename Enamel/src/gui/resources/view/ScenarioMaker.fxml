@@ -15,7 +15,6 @@
 
 <AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="800.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="614.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.ScenarioMakerController">
    <children>
-      <ListView fx:id="listOfCommands" layoutX="14.0" layoutY="147.0" prefHeight="502.0" prefWidth="386.0" AnchorPane.bottomAnchor="101.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="147.0" />
       <VBox alignment="CENTER" layoutX="13.0" layoutY="17.0" prefHeight="59.0" prefWidth="386.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
          <children>
             <HBox alignment="CENTER" layoutX="13.0" layoutY="17.0" prefHeight="23.0" prefWidth="386.0">
@@ -30,34 +29,18 @@
                <children>
                   <Label layoutY="38.0" prefHeight="17.0" prefWidth="145.0" text="Number of Braille Cells: " />
                   <Region prefHeight="25.0" prefWidth="7.0" />
-                  <TextField fx:id="numCellTextField" layoutX="141.0" layoutY="34.0" prefHeight="23.0" prefWidth="41.0" promptText="#" text="0" />
+                  <TextField fx:id="numCellTextField" accessibleHelp="Type number of Braille Cells here" accessibleText="Number of Braille cell" layoutX="141.0" layoutY="34.0" prefHeight="23.0" prefWidth="41.0" promptText="#" text="0" />
                   <Region prefHeight="23.0" prefWidth="13.0" />
                   <Label layoutX="200.0" layoutY="38.0" text="Number of Buttons: " />
                   <Region prefHeight="25.0" prefWidth="9.0" />
-                  <TextField fx:id="numButtonTextField" layoutX="318.0" layoutY="34.0" prefHeight="23.0" prefWidth="48.0" promptText="#" text="0" />
+                  <TextField fx:id="numButtonTextField" accessibleHelp="Type number of buttons on the scenario here." accessibleText="Number of buttons" layoutX="318.0" layoutY="34.0" prefHeight="23.0" prefWidth="48.0" promptText="#" text="0" />
                </children>
             </HBox>
          </children>
       </VBox>
-      <HBox alignment="CENTER" layoutX="21.0" layoutY="660.0" prefHeight="76.0" prefWidth="372.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="21.0">
-         <children>
-            <Region prefHeight="76.0" prefWidth="15.0" />
-            <Button fx:id="saveButton" mnemonicParsing="false" onMouseClicked="#save" prefHeight="76.0" prefWidth="161.0" text="Save and Exit&#10;&#10;" textAlignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Button>
-            <Region prefHeight="76.0" prefWidth="15.0" />
-            <Button mnemonicParsing="false" onMouseClicked="#exit" prefHeight="76.0" prefWidth="94.0" text="Exit">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Button>
-         </children>
-      </HBox>
       <HBox alignment="CENTER" layoutX="14.0" layoutY="81.0" prefHeight="59.0" prefWidth="386.0" AnchorPane.bottomAnchor="610.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="21.0">
          <children>
-            <Button fx:id="createCommandButton" mnemonicParsing="false" onMouseClicked="#createCommand" prefHeight="59.0" prefWidth="88.0" text="Create a &#10;command" textAlignment="CENTER" />
+            <Button fx:id="createCommandButton" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#createCommand" prefHeight="59.0" prefWidth="88.0" text="Create a &#10;command" textAlignment="CENTER" />
             <Region prefHeight="59.0" prefWidth="13.0" />
             <VBox prefHeight="59.0" prefWidth="75.0">
                <children>
@@ -73,18 +56,34 @@
                </children>
             </VBox>
             <Region prefHeight="59.0" prefWidth="9.0" />
-            <Button fx:id="removeCommandButton" mnemonicParsing="false" onMouseClicked="#removeCommand" prefHeight="59.0" prefWidth="89.0" text="Remove the&#10;command" textAlignment="CENTER" />
+            <Button fx:id="removeCommandButton" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#removeCommand" prefHeight="59.0" prefWidth="89.0" text="Remove the&#10;command" textAlignment="CENTER" />
             <Region prefHeight="59.0" prefWidth="13.0" />
             <VBox prefHeight="59.0" prefWidth="94.0">
                <children>
-                  <Button fx:id="moveUpButton" mnemonicParsing="false" onMouseClicked="#moveUp" prefHeight="30.0" prefWidth="94.0" text="Move it up">
+                  <Button fx:id="moveUpButton" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#moveUp" prefHeight="30.0" prefWidth="94.0" text="Move it up">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="moveDownButton" mnemonicParsing="false" onMouseClicked="#moveDown" prefHeight="34.0" prefWidth="94.0" text="Move it down" />
+                  <Button fx:id="moveDownButton" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#moveDown" prefHeight="34.0" prefWidth="94.0" text="Move it down" />
                </children>
             </VBox>
+         </children>
+      </HBox>
+      <ListView fx:id="listOfCommands" layoutX="14.0" layoutY="147.0" prefHeight="502.0" prefWidth="386.0" AnchorPane.bottomAnchor="101.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="147.0" />
+      <HBox alignment="CENTER" layoutX="21.0" layoutY="660.0" prefHeight="76.0" prefWidth="372.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="21.0">
+         <children>
+            <Button fx:id="saveButton" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#save" prefHeight="76.0" prefWidth="161.0" text="Save and Exit&#10;&#10;" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Region prefHeight="76.0" prefWidth="15.0" />
+            <Button fx:id="exitButton" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#exit" prefHeight="76.0" prefWidth="94.0" text="Exit">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
          </children>
       </HBox>
    </children>

@@ -3,6 +3,8 @@
  */
 package utility;
 
+import javafx.scene.input.KeyCode;
+
 /**
  * This class contains all the possible strings used by classes and fxml.
  * @author Jinho Hwang
@@ -12,7 +14,10 @@ public final class Language {
 	
 	public static final String viewPath = "/gui/resources/view/";
 	public static final String scenarioPath = "./FactoryScenarios/";
-	public static final String AudioPath = "./FactoryScenarios/AudioFiles/";
+	public static final String audioPath = scenarioPath + "AudioFiles/";
+	
+	public static final KeyCode openKey = KeyCode.SPACE;
+	//public static final KeyCode sayCurrentWindowKey = KeyCode.BACK_QUOTE;
 	
 	// Fxml directory
 	public static final String mainMenuFxml = viewPath + "MainMenu.fxml";

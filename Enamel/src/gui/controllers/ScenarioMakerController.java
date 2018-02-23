@@ -19,9 +19,11 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import utility.AuthoringUtil;
+import utility.Language;
 import utility.Phrase;
 /**
  * Scenario maker controller.
@@ -71,6 +73,9 @@ public class ScenarioMakerController {
  	
     @FXML
     private RadioButton above;
+    
+    @FXML
+    private Button exitButton;
     
  	File scenarioFile;
  	
@@ -281,6 +286,25 @@ public class ScenarioMakerController {
 	 		
 	 	}
  	}
+ 	
+ 	@FXML
+ 	void keyPressed(KeyEvent event) {
+    	if(event.getCode().equals(Language.openKey)) {
+    		if(event.getSource().equals(createCommandButton)) {
+    			createCommand();
+    		}else if(event.getSource().equals(removeCommandButton)) {
+    			removeCommand();
+    		}else if(event.getSource().equals(moveUpButton)) {
+    			moveUp();
+    		}else if(event.getSource().equals(moveDownButton)) {
+    			moveDown();
+    		}else if(event.getSource().equals(saveButton)) {
+    			save();
+    		}else if(event.getSource().equals(exitButton)) {
+    			exit();
+    		}
+    	}
+    }
  	
  	
 }

@@ -7,23 +7,24 @@
 
 <AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.MainMenuController">
    <children>
-      <Button ellipsisString="Exit" layoutX="416.0" layoutY="267.0" mnemonicParsing="false" onMouseClicked="#exitProgram" text="Exit">
+      <Button fx:id="voiceRecordButton" ellipsisString="Scenario lol" layoutX="60.0" layoutY="305.0" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#openVoiceRecorder" text="Voice Recorder">
          <font>
             <Font name="Arial" size="30.0" />
          </font></Button>
-      <Button ellipsisString="Scenario lol" layoutX="60.0" layoutY="305.0" mnemonicParsing="false" onMouseClicked="#openVoiceRecorder" text="Voice Recorder">
-         <font>
-            <Font name="Arial" size="30.0" />
-         </font></Button>
-      <Label ellipsisString="Label : Braille Project" layoutX="129.0" layoutY="68.0" text="Authoring App">
-         <font>
-            <Font name="Arial" size="54.0" />
-         </font>
-      </Label>
-      <Button ellipsisString="Scenario lol" layoutX="60.0" layoutY="234.0" mnemonicParsing="false" onMouseClicked="#openScenarioEditor" text="Scenario Editor">
+      <Button fx:id="scenarioEditButton" ellipsisString="Scenario lol" layoutX="60.0" layoutY="234.0" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#openScenarioEditor" text="Scenario Editor">
          <font>
             <Font name="Arial" size="30.0" />
          </font>
       </Button>
+      <Button fx:id="exitButton" ellipsisString="Exit" layoutX="416.0" layoutY="267.0" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#exitProgram" text="Exit">
+         <font>
+            <Font name="Arial" size="30.0" />
+         </font>
+      </Button>
+      <Label accessibleRole="TEXT_AREA" accessibleRoleDescription="This is a test" ellipsisString="Label : Braille Project" layoutX="129.0" layoutY="68.0" text="Authoring App">
+         <font>
+            <Font name="Arial" size="54.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

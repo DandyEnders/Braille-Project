@@ -17,37 +17,37 @@
       </Label>
       <VBox layoutX="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button mnemonicParsing="false" onMouseClicked="#createScenario" prefHeight="100.0" prefWidth="200.0" text="Create a new Scenario">
+            <Button fx:id="createScenarioButton" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#createScenario" prefHeight="100.0" prefWidth="200.0" text="Create a new Scenario">
                <font>
                   <Font name="Arial Bold" size="15.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onMouseClicked="#editScenario" prefHeight="100.0" prefWidth="200.0" text="Edit selected Scenario">
+            <Button fx:id="editScenarioButton" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#editScenario" prefHeight="100.0" prefWidth="200.0" text="Edit selected Scenario">
                <font>
                   <Font name="Arial Bold" size="15.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onMouseClicked="#saveScenario" prefHeight="100.0" prefWidth="200.0" text="Save selected Scenario">
+            <Button fx:id="saveScenarioButton" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#saveScenario" prefHeight="100.0" prefWidth="200.0" text="Save selected Scenario">
                <font>
                   <Font name="Arial Bold" size="15.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onMouseClicked="#loadScenario" prefHeight="100.0" prefWidth="200.0" text="Load Scenario">
+            <Button fx:id="loadScenarioButton" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#loadScenario" prefHeight="100.0" prefWidth="200.0" text="Load Scenario">
                <font>
                   <Font name="Arial Bold" size="15.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onMouseClicked="#runScenario" prefHeight="100.0" prefWidth="200.0" text="Run selected Scenario">
+            <Button fx:id="runScenarioButton" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#runScenario" prefHeight="100.0" prefWidth="200.0" text="Run selected Scenario">
                <font>
                   <Font name="Arial Bold" size="15.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onMouseClicked="#removeScenario" prefHeight="100.0" prefWidth="200.0" text="Remove Selected">
+            <Button fx:id="removeScenarioButton" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#removeScenario" prefHeight="100.0" prefWidth="200.0" text="Remove Selected">
                <font>
                   <Font name="Arial Bold" size="15.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onMouseClicked="#hideScenarioEditor" prefHeight="100.0" prefWidth="200.0" text="Exit">
+            <Button fx:id="exitButton" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#hideScenarioEditor" prefHeight="100.0" prefWidth="200.0" text="Exit">
                <font>
                   <Font name="Arial Bold" size="15.0" />
                </font>

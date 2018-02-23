@@ -3,8 +3,10 @@ package gui.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import utility.Language;
 
 public class TwoChoiceBoxController {
 
@@ -53,6 +55,17 @@ public class TwoChoiceBoxController {
     public void close() {
     	Stage window = (Stage) root.getScene().getWindow();
     	window.close();
+    }
+    
+    @FXML
+    void keyPressed(KeyEvent event) {
+    	if(event.getCode().equals(Language.openKey)) {
+    		if(event.getSource().equals(leftButton)) {
+    			leftButtonClicked();
+    		}else if(event.getSource().equals(rightButton)) {
+    			rightButtonClicked();
+    		}
+    	}
     }
 
 }

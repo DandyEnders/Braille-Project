@@ -15,6 +15,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -86,7 +87,7 @@ public class CreateCommandPopUpBoxController {
     }
     
     public void loadSoundFiles() {
-    	firstArgFileList = AuthoringUtil.getAudioFiles(Language.AudioPath);
+    	firstArgFileList = AuthoringUtil.getAudioFiles(Language.audioPath);
 		for(File file : firstArgFileList) {
 			firstArgListObs.add(file.getName());
 		}
@@ -98,6 +99,8 @@ public class CreateCommandPopUpBoxController {
     	
     	firstArgList.setVisible(false);
 		firstArgList.setDisable(true);
+		firstArgumentTextField.setVisible(true);
+		firstArgumentTextField.setDisable(false);
     	
     	if(comboBoxText.equals("/~sound:")) {
     		setArgumentText("Sound file name", "");
@@ -181,6 +184,7 @@ public class CreateCommandPopUpBoxController {
     		secondVisible = true;
     
 		setPaneDisable(firstVisible,secondVisible);
+		
 	
     }
     
@@ -253,6 +257,17 @@ public class CreateCommandPopUpBoxController {
 		
 		return phraseList;
 	}
+	
+	@FXML
+	void keyPressed(KeyEvent event) {
+    	if(event.getCode().equals(Language.openKey)) {
+    		if(event.getSource().equals(createButton)) {
+    			create();
+    		}else if(event.getSource().equals(discardButton)) {
+    			close();
+    		}
+    	}
+    }
      
    
 }

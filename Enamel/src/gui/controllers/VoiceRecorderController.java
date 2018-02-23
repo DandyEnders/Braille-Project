@@ -25,6 +25,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -47,6 +48,9 @@ public class VoiceRecorderController {
     
     @FXML
     private Button deleteButton;
+    
+    @FXML
+    private Button loadSoundButton;
 
     @FXML
     private ListView<String> voiceNameList;
@@ -99,7 +103,7 @@ public class VoiceRecorderController {
 			fileChooser.setTitle(Language.voiceRecorderFileChooserTitle);
 			
 			// Set starting directory ( the directory you start to select from )
-			fileChooser.setInitialDirectory(new File(Language.AudioPath).getCanonicalFile());
+			fileChooser.setInitialDirectory(new File(Language.audioPath).getCanonicalFile());
 			
 			// Open fileChooser, get multiple files
 			List<File> inputFiles = fileChooser.showOpenMultipleDialog(window);
@@ -293,7 +297,22 @@ public class VoiceRecorderController {
     	}
     }
     
-    
+    @FXML
+    void keyPressed(KeyEvent event) {
+    	if(event.getCode().equals(Language.openKey)) {
+    		if(event.getSource().equals(recordVoiceButton)) {
+    			recordVoiceButtonClicked();
+    		}else if(event.getSource().equals(deleteButton)) {
+    			deleteSelected();
+    		}else if(event.getSource().equals(playButton)) {
+				playSelected();
+    		}else if(event.getSource().equals(loadSoundButton)) {
+    			loadSoundFile();
+    		}else if(event.getSource().equals(exitButton)) {
+    			exit();
+    		}
+    	}
+    }
     
     
 }
