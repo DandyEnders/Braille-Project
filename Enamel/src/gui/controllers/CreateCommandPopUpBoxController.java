@@ -9,6 +9,7 @@ import java.util.List;
  */
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -56,7 +57,7 @@ public class CreateCommandPopUpBoxController {
     private Label secondArgText;
     
     @FXML
-    private ChoiceBox<String> firstArgList;
+    private ComboBox<String> firstArgList;
     private ObservableList<String> firstArgListObs;
     private List<File> firstArgFileList;
     
@@ -94,7 +95,7 @@ public class CreateCommandPopUpBoxController {
     }
     
     @FXML
-    public void comboSelected() {
+    public void comboSelected(ActionEvent event) {
     	String comboBoxText = phraseTypeComboBox.getSelectionModel().getSelectedItem();
     	
     	firstArgList.setVisible(false);
@@ -102,6 +103,10 @@ public class CreateCommandPopUpBoxController {
 		firstArgumentTextField.setVisible(true);
 		firstArgumentTextField.setDisable(false);
     	
+		if(comboBoxText != null) {
+			
+		}
+		
     	if(comboBoxText.equals("/~sound:")) {
     		setArgumentText("Sound file name", "");
     		firstArgumentTextField.setVisible(false);
@@ -174,6 +179,11 @@ public class CreateCommandPopUpBoxController {
     private void setArgumentText(String first, String second) {
     	firstArgText.setText(first);
     	secondArgText.setText(second);
+    	
+    	firstArgumentTextField.setPromptText(first);
+    	secondArgumentTextField.setPromptText(second);
+    	
+    	firstArgList.setPromptText(first);
     	
     	boolean firstVisible = false;
     	boolean secondVisible = false;
@@ -257,6 +267,7 @@ public class CreateCommandPopUpBoxController {
 		
 		return phraseList;
 	}
+	
 	
 	@FXML
 	void keyPressed(KeyEvent event) {

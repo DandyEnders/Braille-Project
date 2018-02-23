@@ -40,7 +40,7 @@
       </VBox>
       <HBox alignment="CENTER" layoutX="14.0" layoutY="81.0" prefHeight="59.0" prefWidth="386.0" AnchorPane.bottomAnchor="610.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="21.0">
          <children>
-            <Button fx:id="createCommandButton" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#createCommand" prefHeight="59.0" prefWidth="88.0" text="Create a &#10;command" textAlignment="CENTER" />
+            <Button fx:id="createCommandButton" accessibleHelp="This opens a new command creator window." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#createCommand" prefHeight="59.0" prefWidth="88.0" text="Create a &#10;command" textAlignment="CENTER" />
             <Region prefHeight="59.0" prefWidth="13.0" />
             <VBox prefHeight="59.0" prefWidth="75.0">
                <children>
@@ -56,30 +56,30 @@
                </children>
             </VBox>
             <Region prefHeight="59.0" prefWidth="9.0" />
-            <Button fx:id="removeCommandButton" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#removeCommand" prefHeight="59.0" prefWidth="89.0" text="Remove the&#10;command" textAlignment="CENTER" />
+            <Button fx:id="removeCommandButton" accessibleHelp="This removes a selected command on list below." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#removeCommand" prefHeight="59.0" prefWidth="89.0" text="Remove the&#10;command" textAlignment="CENTER" />
             <Region prefHeight="59.0" prefWidth="13.0" />
             <VBox prefHeight="59.0" prefWidth="94.0">
                <children>
-                  <Button fx:id="moveUpButton" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#moveUp" prefHeight="30.0" prefWidth="94.0" text="Move it up">
+                  <Button fx:id="moveUpButton" accessibleHelp="This moves up the selected command on the list." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#moveUp" prefHeight="30.0" prefWidth="94.0" text="Move it up">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="moveDownButton" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#moveDown" prefHeight="34.0" prefWidth="94.0" text="Move it down" />
+                  <Button fx:id="moveDownButton" accessibleHelp="This moves down the selected command on the list." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#moveDown" prefHeight="34.0" prefWidth="94.0" text="Move it down" />
                </children>
             </VBox>
          </children>
       </HBox>
-      <ListView fx:id="listOfCommands" layoutX="14.0" layoutY="147.0" prefHeight="502.0" prefWidth="386.0" AnchorPane.bottomAnchor="101.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="147.0" />
+      <ListView fx:id="listOfCommands" accessibleHelp="This is a list of commands for the scenario. You can nevigate it with arrow." layoutX="14.0" layoutY="147.0" prefHeight="502.0" prefWidth="386.0" AnchorPane.bottomAnchor="101.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="147.0" />
       <HBox alignment="CENTER" layoutX="21.0" layoutY="660.0" prefHeight="76.0" prefWidth="372.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="21.0">
          <children>
-            <Button fx:id="saveButton" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#save" prefHeight="76.0" prefWidth="161.0" text="Save and Exit&#10;&#10;" textAlignment="CENTER">
+            <Button fx:id="saveButton" accessibleHelp="This saves the file on default scenario folder, and closes the scenario maker window." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#save" prefHeight="76.0" prefWidth="161.0" text="Save and Exit&#10;&#10;" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
             <Region prefHeight="76.0" prefWidth="15.0" />
-            <Button fx:id="exitButton" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#exit" prefHeight="76.0" prefWidth="94.0" text="Exit">
+            <Button fx:id="exitButton" accessibleHelp="This exits the scenario maker." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#exit" prefHeight="76.0" prefWidth="94.0" text="Exit">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

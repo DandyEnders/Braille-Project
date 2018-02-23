@@ -62,7 +62,6 @@ public class MainMenu extends Application {
 			scene.getStylesheets().add(getClass().getResource(Language.mainMenuCss).toExternalForm());
 			
 			
-			
 			// Set scene to the window, title, and show it
 			window.setScene(scene);
 			window.setTitle(Language.mainMenuTitle);

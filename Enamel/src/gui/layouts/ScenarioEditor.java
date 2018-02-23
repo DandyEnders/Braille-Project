@@ -50,7 +50,7 @@ public class ScenarioEditor {
 			window.setResizable(false);
 			
 
-			window.initModality(Modality.APPLICATION_MODAL);
+			//window.initModality(Modality.APPLICATION_MODAL);
 			
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(Language.scenarioEditorFxml));
 			

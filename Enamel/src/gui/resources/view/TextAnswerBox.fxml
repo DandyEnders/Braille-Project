@@ -11,11 +11,11 @@
    <children>
       <HBox alignment="BOTTOM_RIGHT" layoutY="151.0" prefHeight="35.0" prefWidth="400.0">
          <children>
-            <Button fx:id="finishButton" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#finish" prefHeight="38.0" prefWidth="93.0" text="Finish" />
+            <Button fx:id="finishButton" accessibleHelp="This closes the popup window." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#finish" prefHeight="38.0" prefWidth="93.0" text="Finish" />
             <Region prefHeight="35.0" prefWidth="15.0" />
          </children>
       </HBox>
       <Label fx:id="label" alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="95.0" prefWidth="374.0" textAlignment="CENTER" />
-      <TextField fx:id="answer" layoutX="14.0" layoutY="117.0" prefHeight="23.0" prefWidth="374.0" />
+      <TextField fx:id="answer" layoutX="14.0" layoutY="117.0" prefHeight="23.0" prefWidth="374.0" promptText="Type your answer here." />
    </children>
 </AnchorPane>

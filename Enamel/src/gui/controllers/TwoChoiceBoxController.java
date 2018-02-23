@@ -1,5 +1,6 @@
 package gui.controllers;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -59,6 +60,7 @@ public class TwoChoiceBoxController {
     
     @FXML
     void keyPressed(KeyEvent event) {
+    	label.focusTraversableProperty().bind(Platform.accessibilityActiveProperty());
     	if(event.getCode().equals(Language.openKey)) {
     		if(event.getSource().equals(leftButton)) {
     			leftButtonClicked();

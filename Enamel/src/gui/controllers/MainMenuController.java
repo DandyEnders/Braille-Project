@@ -6,6 +6,7 @@ import gui.layouts.VoiceRecorder;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -32,6 +33,9 @@ public class MainMenuController {
 
     @FXML
     private Button scenarioEditButton;
+    
+    @FXML
+    private Label titleLabel;
 	
 	// Scenario Editor
 	private ScenarioEditor scenarioEditor;
@@ -64,6 +68,7 @@ public class MainMenuController {
 	
     @FXML
     private void keyPressed(KeyEvent event) {
+    	//titleLabel.focusTraversableProperty().bind(Platform.accessibilityActiveProperty());
     	if(event.getCode().equals(Language.openKey)) {
     		if(event.getSource().equals(scenarioEditButton)) {
     			openScenarioEditor();
