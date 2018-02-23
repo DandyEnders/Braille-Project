@@ -42,6 +42,7 @@ public final class Language {
 	
 	// Voice Recorder Strings
 	public static final String voiceRecorderTitle = "Voice Recorder";
+	public static final String voiceRecorderFileChooserTitle = "Choose sound files";
 	
 	// Text answerbox title
 	//public static final String textAnswerBoxTitle = "";

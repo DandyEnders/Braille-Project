@@ -2,6 +2,8 @@ package gui.controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioFormat;
@@ -14,15 +16,20 @@ import javax.sound.sampled.TargetDataLine;
 
 import org.assertj.core.util.Files;
 
+import gui.layouts.ErrorListReportPopUpBox;
 import gui.layouts.TextAnswerBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import utility.AuthoringUtil;
+import utility.Language;
 
 public class VoiceRecorderController {
 
@@ -62,8 +69,15 @@ public class VoiceRecorderController {
     public void loadFileOn(String dir) {
     	File audioFileFolder = new File(dir);
     	
+    	
+    	
     	if(audioFileFolder.isDirectory()) {
     		for(File soundFile : audioFileFolder.listFiles()) {
+    			
+    			if(soundFile.length() < 4) {
+    				continue;
+    			}
+    			
     			if(!soundFile.isDirectory()) {
     				if(soundFile.getName().substring(soundFile.getName().length()-4, soundFile.getName().length()).equals(".wav")) {
     					voiceList.add(soundFile);
@@ -74,6 +88,54 @@ public class VoiceRecorderController {
     	
     	listUpdate();
     }
+    
+    public void loadSoundFile() {
+    	
+    	try {
+	    	Stage window = new Stage();
+			
+			// Create fileChooser and set its title
+			FileChooser fileChooser = new FileChooser();
+			fileChooser.setTitle(Language.voiceRecorderFileChooserTitle);
+			
+			// Set starting directory ( the directory you start to select from )
+			fileChooser.setInitialDirectory(new File("./FactoryScenarios/AudioFiles/").getCanonicalFile());
+			
+			// Open fileChooser, get multiple files
+			List<File> inputFiles = fileChooser.showOpenMultipleDialog(window);
+			
+			List<File> failInput = new ArrayList<File>();
+			
+			if(inputFiles != null){
+				
+				for(File file : inputFiles) {
+					
+					if(!file.isDirectory()) {
+						if(file.length() >= 4) {
+							if(!voiceNameListObs.contains(file.getName())) {
+								if(file.getName().substring(file.getName().length()-4, file.getName().length()).equals(".wav")) {
+			    					voiceList.add(file);
+			    					continue;
+								}
+							}
+	    				}
+					}
+					
+					failInput.add(file);
+				}
+				
+				if(failInput.size() != 0){
+					new ErrorListReportPopUpBox("Failed to import", "Following list of files were failed to be imported.", failInput);
+				}
+				
+				listUpdate();
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}	
+	
+    }
+    
     
     public void exit() {
     	Stage window = (Stage)root.getScene().getWindow();
@@ -107,21 +169,23 @@ public class VoiceRecorderController {
     		startSoundDataLine(fileName);
     		// Record.
     		
-    		playButton.setDisable(true);
-    		exitButton.setDisable(true);
-    		voiceNameList.setDisable(true);
-    		deleteButton.setDisable(true);
+    		disableAllOthers(true);
     		
     	// Toggle was disabled.
     	}else {
     		
     		stopSoundDataLineAndSave();
     		
-    		playButton.setDisable(false);
-    		exitButton.setDisable(false);
-    		voiceNameList.setDisable(false);
-    		deleteButton.setDisable(false);
+    		disableAllOthers(false);
 
+    	}
+    }
+    
+    private void disableAllOthers(boolean isDisable) {
+    	for(Node node : root.getChildren()) {
+    		if(!node.getId().equals(recordVoiceButton.getId())) {
+    			node.setDisable(isDisable);
+    		}
     	}
     }
   
