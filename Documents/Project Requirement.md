@@ -10,7 +10,7 @@
 2. [Overall description](#2-overall-description)
       - 2.1 [Product Perspective](#21-product-perspective)
       - 2.2 [User Characteristics](#22-user-characteristics)
-      - 2.3 [Constraints](#23-constraints)
+      - 2.3 [Project Constraints](#23-project-constraints)
 3. [Specific requirements](#3-specific-requirements)
       - 3.1 [External Interface Requirements](#31-external-interface-requirements)   
       - 3.1.1 [User Interface](#311-user-interface)
@@ -67,7 +67,12 @@ There are essentially 2 types of users that can use the application: those visua
 
 
 
-### 2.3 Constraints
+### 2.3 Project Constraints
+**Scope:** Essentially the scope of this app is to create a working authoring app that enables the user (visually imapred and not visually impaired) to create scenarios. One possible constraint includes not being able to fully deliever the app to the visually impaired users. The app should include all features compatible for all users and should be easily accessible to these users. The app should be easy to navigate and create scenarios for them.   
+
+**Risk:** The authoring app is to connect to an external hard drive that displays the braille cells for the children to learn. There is a risk of miscommunication between the software and hardware and a risk of data being lost in the transmission arises.   
+
+**Quality & Time:** Given the timeframe for the project, the team must ensure that the quaulity delivered matches the original idea. The quality of the project should not be comprimised in relation with time, the team must ensure that the functions and features promised are also delivered.
 
 
 ## 3. Specific requirements
