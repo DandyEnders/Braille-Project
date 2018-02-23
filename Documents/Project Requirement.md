@@ -51,6 +51,9 @@ This program will provide the educators tools to import, export, create, and edi
 
 ### 1.4 References
 [1] Geagea, S., Zhang, S., Shalin, N., Hasibi, F., Hameed, F., Rafiyan, E. and Ekberg, M. (2018). Software Requirements Sepcification. [ebook] chalmers, p.2. Available at: http://www.cse.chalmers.se/~feldt/courses/reqeng/examples/srs_example_2010_group2.pdf [Accessed 4 Feb. 2018].
+
+ L. Brandenburg, "How to Write a Use Case", Bridging-the-gap.com, 2018. [Online]. Available: http://www.bridging-the-gap.com/what-is-a-use-case/. [Accessed: 23- Feb- 2018].   
+ 
 ## 2. Overall description
 The following section will give a breakdown of the project. The breakdown will explain different the interactions between classes and functions internally. The basic functionality will be explained, and a description of user and implementer interaction will be explored. Finally, the constraints and assumptions for the project will be presented. 
 
@@ -68,18 +71,19 @@ There are essentially 2 types of users that can use the application: those visua
 
 
 ## 3. Specific requirements
-This sections contains, highlights, and explains all the functional and quality requirements of the system.
+This section contains, highlights, and explains all the functional and quality requirements of the system.
 
 ### 3.1 External Interface Requirements
 #### 3.1.1 User Interfaces   
-Esentially there are two types of users who will be interacting with the graphical interace: educator, and a visually impaired educator. The interface must be implemented in such a way that both users find ease in navigating through the app. For visually imapaired users, a screen reader function will be implemented that will allow them to map out different buttons and fields of the app.
+Essentially there are two types of users who will be interacting with the graphical interface: educator, and a visually impaired educator. The interface must be implemented in such a way that both users find ease in navigating through the app. For visually impaired users, a screen reader function will be implemented that will allow them to map out different buttons and fields of the app.  
 
 There will be five main windows of the app:    
 1. The main menu: Here the user can enter the scenario editor, record voice, and exit the program. 
 2. The voice recorder: Here the user can view all the voice file lists, record voice, delete selected voice, play selected voice, load sounds, and exit the menu.  
-3. The scenario editor: In this window the user will have be able to view the scenario list and have access to: create a new scenario, edit selected scenario, save seected scenario, load scenario, and run selected scenario functions.   
-4. The scenario maker: This window will open up once the user selcts "create a new scenario." In this window, the user can create their own scenario and edit existing scenarios as well. The user can set the file name, the number of pins and buttons, and have the ability to create and remove commands and save the file.  
-5. Run scenario: When the user selects a scenario to run, a window will open up that uses the provided tetsing software to run the scenario they have created in a visual player mode or an audio player mode. 
+3. The scenario editor: In this window the user will have be able to view the scenario list and have access to: create a new scenario, edit selected scenario, save selected scenario, load scenario, and run selected scenario functions.   
+4. The scenario maker: This window will open up once the user selects "create a new scenario." In this window, the user can create their own scenario and edit existing scenarios as well. The user can set the file name, the number of pins and buttons, and have the ability to create and remove commands and save the file.  
+5. Run scenario: When the user selects a scenario to run, a window will open up that uses the provided testing software to run the scenario they have created in a visual player mode or an audio player mode. 
+
 
 ### 3.2 Functional Requirements
 
@@ -87,7 +91,7 @@ There will be five main windows of the app:
 
 **_3.2.1.1 Functional Requirement 1.1_**  
 **ID: FR1**  
-**Title:** Create a new sceario(s)  
+**Title:** Create a new scenario(s)  
 **Desc:** The user should be able to create and implement their own scenario(s).  
 **Dep:** None  
 
@@ -147,7 +151,7 @@ This requirement section outlines the performance specifications that the user c
 #### 3.3.2 Usage of Scenario Lists 
 **_ID:_** QR2   
 **_Title:_** Usage of the scenario list   
-**_Desc:_** The scenarios displayed in scenario list should be outputed in a user friendly way and easy to understand. Selecting a scenario from the list should only take 1 click.   
+**_Desc:_** The scenarios displayed in scenario list should be outputted in a user friendly way and easy to understand. Selecting a scenario from the list should only take 1 click.   
 **_Rat:_** In order for the user to use the list view easily. 
 
 #### 3.3.3 Usage of Scenario Maker 
@@ -156,7 +160,7 @@ This requirement section outlines the performance specifications that the user c
 **_Desc:_** The functions and features of the scenario maker should have a user-freindly layout that is easy to navigate and use to conduct various tasks (i.e create command, remove command, save, etc). Features and functions should not be hard to find.  
 **_Rat:_** In order for the user to use the scenario maker easily. 
 
-#### 3.3.4 Pre-existing scenario deliverabilities
+#### 3.3.4 Pre-existing scenario  deliverability
 **_ID:_** QR4   
 **_Title:_** Usage of the scenario editor to modify scenarios.     
 **_Desc:_** Pre-existing scenarios that have been created or loaded should be displayed in a user friendly way in the scenario list and the features to modify the scenarios should be easily accessible and easy to find.  
@@ -171,12 +175,12 @@ This requirement section outlines the performance specifications that the user c
 #### 3.3.6 Usage of Screen Reader
 **_ID:_** QR6     
 **_Title:_** Usage of the screen reader      
-**_Desc:_** The visually impaired users should be able to navigate and turn of the screen reader feature easily and without any hassle. Also, the screen reader should allow the user to naviagte through the authoring app without any difficulties.       
+**_Desc:_** The visually impaired users should be able to navigate and turn of the screen reader feature easily and without any hassle. Also, the screen reader should allow the user to navigate through the authoring app without any difficulties.       
 **_Rat:_** In order for visually impaired users to use the app. 
 
 
 ## 4. Use cases  
-This section will outline the different use cases and outline requirements specification that will capture how user(s) will intteract with the authoring app and acieve a specific goal. The section will describe a step by step process a user will go through to complete and accomplish a task or goal
+This section will outline the different use cases and outline requirements specification that will capture how user(s) will interact with the authoring app and achieve a specific goal. The section will describe a step by step process a user will go through to complete and accomplish a task or goal   
 
 ### 4.1: User 1-Educator    
 The authoring app is designed for two users:    
@@ -212,12 +216,12 @@ The authoring app is designed for two users:
     1. System notifies user that an error has occured
     2. Return user to basic flow step 3
     
-**EX2:**  User uploads uncorrect scenario file format/missing file
+**EX2:**  User uploads incorrect scenario file format/missing file
     1. System reminds user of what files will be accepted/that the file does not exist.  
     2. Return user to AF2 step 1  
 
 **EX3:**  User enters incorrect number of cells or number of buttons  
-    1. System notifies user they have entered an inccorect value   
+    1. System notifies user they have entered an incorrect value   
     2. Return system to basic flow step 4     
     
 **Post Conditions:**  
@@ -240,7 +244,7 @@ The user has created a new/existing file ready to be run.
     3. Redirect user to basic flow step 1  
     
 **Exception Flows:**   
-**EX1:** Scenario file in scenario list or dorectory is not saved in the appropriate format.  
+**EX1:** Scenario file in scenario list or directory is not saved in the appropriate format.  
     1. System displays error message informing the user that the system does not support the format  
     2. Redirect user to basic flow step 1.  
     
@@ -251,8 +255,8 @@ The selected scenario file runs.
 #### 4.1.2.1 User Case 2.1 
 **Name:** Run a scenario     
 **Brief Description:**  The user wants to run a  scenario.     
-**Actor:**  Visually Impaired tester.educator   
-**Preconditions:** Scenario's need to have been already created without any errors, and user has enterred the scenario editor window    
+**Actor:**  Visually Impaired tester/educator   
+**Preconditions:** Scenario's need to have been already created without any errors, and user has entered the scenario editor window    
 **Basic Flow:**  
     1. User selects a scenario from the scenario list   
     2. User clicks "Run Scenario" button  
@@ -267,7 +271,7 @@ The selected scenario file runs.
     3. Redirect user to basic flow step 1  
     
 **Exception Flows:**   
-**EX1:** Scenario file in scenario list or dorectory is not saved in the appropriate format.  
+**EX1:** Scenario file in scenario list or directory is not saved in the appropriate format.  
     1. System displays error message informing the user that the system does not support the format  
     2. Redirect user to basic flow step 1.  
     
@@ -315,8 +319,17 @@ The user successfully records audio.
 ## 5. Test case  
 | Execution Process | Expected Result | Pass or Fail |
 | ------  | ------ | ------ | 
-| Create Scenario is pressed | A window with the scenario editor opens up | Pass |
+| Create Scenario is pressed | A window with the scenario maker opens up | Pass |
 | Edit a scenario from scenario list | Selected scenario opens up in scenario editor once edit is pressed | Pass |
-| Load a scenario | Window opens up allowing user to select a sceanrio which appears in scenario list | Pass |
+| Load a scenario | Window opens up allowing user to select a scenario which appears in scenario list | Pass |
+| Save selected scenario | Window opens up to save the selected scenario in local directory | Pass |
+| Run Selected Scenario | Window redirects and asks user to run as an audio player or visual player and runs scenario upon selection| Pass |
+| Remove Selected | System removes the selected scenario from the scenario list | Pass |
+| Create Command in scenario maker| System opens a dialogue box allowing user to select command type and the first and second argument | Pass |
+| Remove a command in scenario maker| Selected command is deleted  | Pass |
+| Move it up/Move it down in scenario maker | Vertically shifts the command according to direction selection | Pass |
+| Record Voice | Prompts user to enter file name and begins recording once button is clicked | Pass |
+| Delete Selected/Play Selected | Deletes or plays back the selected scenario respectively | Pass |
+| Load Sound | App opens up user directory for user to select the audio file they wish to load | Pass |
 
 
