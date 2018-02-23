@@ -11,8 +11,6 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-import org.junit.platform.commons.util.StringUtils;
-
 /**
  * This method will be responsible with Parsing the scenarioFile.
  * 
@@ -644,7 +642,7 @@ public class AuthoringUtil {
 			// Setting up output phrase.
 			Phrase phrase = null;
 
-			if (StringUtils.isBlank(line)) {
+			if (line.trim().isEmpty()) {
 				phrase = new Phrase("emptyLine");
 			} else if (!line.substring(0, 2).equals("/~")) {
 				phrase = new Phrase("speak", line);

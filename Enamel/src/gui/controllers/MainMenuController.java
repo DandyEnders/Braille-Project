@@ -51,6 +51,7 @@ public class MainMenuController {
 	// Close the program
 	public void exitProgram() {
 		Platform.exit();
+		System.exit(0);
 	}
 	
 	// Show up the scenarioEditor

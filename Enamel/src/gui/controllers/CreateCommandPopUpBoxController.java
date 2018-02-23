@@ -214,7 +214,15 @@ public class CreateCommandPopUpBoxController {
     	secondArg = secondArgumentTextField.getText() == null ? secondArg = null : (secondArg = secondArgumentTextField.getText());
     	
     	
-		returnPhrase = AuthoringUtil.phraseThisLine(phraseTypeComboBox.getSelectionModel().getSelectedItem() + firstArg + " " + secondArg);//new Phrase(phraseTypeComboBox.getSelectionModel().getSelectedItem(),firstArg,secondArg);
+    	
+    	if(phraseTypeComboBox.getSelectionModel().getSelectedItem().equals("emptyLine")){
+    		returnPhrase = new Phrase("emptyLine", "", "");
+    	}else if(phraseTypeComboBox.getSelectionModel().getSelectedItem().equals("speak")){
+    		returnPhrase = new Phrase("speak",firstArg, "");
+    	}else {
+    		returnPhrase = AuthoringUtil.phraseThisLine(phraseTypeComboBox.getSelectionModel().getSelectedItem() + firstArg + " " + secondArg);//new Phrase(phraseTypeComboBox.getSelectionModel().getSelectedItem(),firstArg,secondArg);
+    		
+    	}
 		
 		
 		if(returnPhrase!= null && phraseTypeComboBox.getSelectionModel().getSelectedIndex() != -1 ||

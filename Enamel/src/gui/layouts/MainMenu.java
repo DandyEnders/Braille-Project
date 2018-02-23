@@ -1,5 +1,6 @@
 package gui.layouts;
 	
+
 import gui.controllers.MainMenuController;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -38,8 +39,7 @@ public class MainMenu extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			//debug
-			System.out.println("Braille Program executing...");
+			
 			
 			// Initialize the window
 			window = primaryStage;
