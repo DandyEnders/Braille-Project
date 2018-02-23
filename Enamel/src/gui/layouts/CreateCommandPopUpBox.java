@@ -44,7 +44,7 @@ public class CreateCommandPopUpBox {
 			window.initModality(Modality.APPLICATION_MODAL);
 			
 			// Get the FXML loader.
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(Language.createCommandPopUpBox));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(Language.createCommandPopUpBoxFxml));
 			
 			// Loading the format from FXML file
 			root = (AnchorPane)loader.load();

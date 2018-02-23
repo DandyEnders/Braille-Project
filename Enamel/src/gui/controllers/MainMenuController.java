@@ -1,6 +1,7 @@
 package gui.controllers;
 
 import gui.layouts.ScenarioEditor;
+import gui.layouts.VoiceRecorder;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
@@ -21,11 +22,15 @@ public class MainMenuController {
 	// Scenario Editor
 	private ScenarioEditor scenarioEditor;
 	
+	private VoiceRecorder voiceRecorder;
+	
 	// Scenario initialization
 	public MainMenuController(){
 		scenarioEditor = new ScenarioEditor();
+		voiceRecorder = new VoiceRecorder();
 		
 	}
+	
 	
 	// Close the program
 	public void exitProgram() {
@@ -33,8 +38,14 @@ public class MainMenuController {
 	}
 	
 	// Show up the scenarioEditor
+	@FXML
 	public void openScenarioEditor() {
 		scenarioEditor.show();
+	}
+	
+	@FXML
+	public void openVoiceRecorder() {
+		voiceRecorder.show();
 	}
 	
 	

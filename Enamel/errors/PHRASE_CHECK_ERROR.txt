@@ -1,6 +1,6 @@
-2월 20, 2018 11:57:08 오후 utility.AuthoringUtil errorLog
-경고: Exception error: java.util.NoSuchElementException: No line found
-2월 20, 2018 11:57:08 오후 utility.AuthoringUtil errorLog
+2월 22, 2018 7:36:01 오후 utility.AuthoringUtil errorLog
+경고: Exception error: java.io.IOException: A number of cell is not a positive number. ( < 1 )
+2월 22, 2018 7:36:01 오후 utility.AuthoringUtil errorLog
 정보: Expected format: 
 Cell num1 
  Button num2 

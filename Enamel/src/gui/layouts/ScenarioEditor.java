@@ -1,6 +1,8 @@
 package gui.layouts;
 import java.io.IOException;
 
+import gui.controllers.ScenarioEditorController;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import utility.Language;
 import javafx.scene.Scene;
@@ -17,6 +19,8 @@ import javafx.fxml.FXMLLoader;
  */
 
 public class ScenarioEditor {
+	
+	ScenarioEditorController control;
 	
 	//The main window
 	private Stage window;
@@ -45,9 +49,18 @@ public class ScenarioEditor {
 			// Window should not be resizeable ( else destroys our layout )
 			window.setResizable(false);
 			
-			// Loading the format from FXML file
-			root = (AnchorPane)FXMLLoader.load(getClass().getResource(Language.scenarioEditorFxml));
+
+			window.initModality(Modality.APPLICATION_MODAL);
 			
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(Language.scenarioEditorFxml));
+			
+			// Loading the format from FXML file
+			root = (AnchorPane) loader.load();
+			
+			control = loader.getController();
+			
+			control.loadFileOn("./FactoryScenarios/");
+		
 			// Instantiate a new scene
 			Scene scene = new Scene(root);
 			

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import org.assertj.core.util.Files;
 
 import enamel.ScenarioParser;
 import gui.layouts.ErrorListReportPopUpBox;
@@ -49,9 +50,61 @@ public class ScenarioEditorController {
 	
 	// Initialize the fileList.
 	public ScenarioEditorController(){
+		obsFileList = FXCollections.observableArrayList();
 		fileList = new ArrayList<File>();
 	}
 	
+	 public void loadFileOn(String dir) {
+    	File scenarioFileFolder = new File(dir);
+    	
+    	if(scenarioFileFolder.isDirectory()) {
+    		for(File scenarioFile : scenarioFileFolder.listFiles()) {
+    			if(!scenarioFile.isDirectory()) {
+    				if(scenarioFile.getName().length() >= 4) {
+	    				if(scenarioFile.getName().substring(scenarioFile.getName().length()-4, scenarioFile.getName().length()).equals(".txt")) {
+	    					if(AuthoringUtil.phraseScenario(scenarioFile) != null) {
+	    						fileList.add(scenarioFile);
+	    					}
+	    				}
+    				}
+    			}
+    		}
+    	}
+    	
+    	listUpdate();
+    }
+	 
+	private int getSelectedIndex() {
+		return scenarioList.getSelectionModel().getSelectedIndex();
+	}
+	
+	private File getSelectedFile() {
+		return fileList.get(getSelectedIndex());
+	}
+	
+	private boolean isSelected() {
+		return getSelectedIndex() != -1;
+	}
+	 
+	 
+	public void removeScenario() {
+		if(isSelected()) {
+			
+			Files.delete(fileList.remove(getSelectedIndex()));
+			
+			listUpdate();
+		}
+	}
+	 
+	private void listUpdate() {
+		this.obsFileList.clear();
+		
+		for(File file : fileList) {
+			obsFileList.add(file.getName());
+		}
+		
+		scenarioList.setItems(obsFileList);
+	}
 	
 	/**
 	 * Loads up scenario files into the fileList and set view of names of file in the fileList.
@@ -267,6 +320,7 @@ public class ScenarioEditorController {
 	public void hideScenarioEditor() {
 		root.getScene().getWindow().hide();
 	}
+	
 	
 	
 	
