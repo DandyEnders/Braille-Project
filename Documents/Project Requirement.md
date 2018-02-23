@@ -32,7 +32,7 @@ The following document is created to:
 2. track down the requirements set by customers
 3. track down the references used 
 4. show the use case of the Braille program
-5. show test cases of the Braille program
+5. show test cases of the Braille program    
 6. get an approval to Braille program project
 
 ### 1.2 Scope
