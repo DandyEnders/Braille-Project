@@ -1,5 +1,10 @@
-| Test | Description | Pass/Fail |
-| ------ | ------ | ------ |
-| 1 | App opens | Pass |
-| 2 | JFileChooser opens text file | Pass |
-| 3 | - | - |
+# Authoring app testing documents
+
+## Introduction
+
+This document was created to keep track of testing of the authoring app.
+
+## Test cases ran
+
+![Image of test java code](https://imgur.com/a/nHicx)
+
