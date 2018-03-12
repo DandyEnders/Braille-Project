@@ -18,7 +18,7 @@ import utility.Language;
 public class AuthoringApp {
 
 	public static void main(String[] args) {
-
+		
 		createDefaultFolders();
 		
 		new Thread() {
@@ -33,6 +33,8 @@ public class AuthoringApp {
 	
 	private static void createDefaultFolders() {
 		ArrayList<File> fileList = new ArrayList<File>();
+		
+		System.out.println(Language.rootPath);
 		
 		fileList.add(new File(Language.scenarioPath));
 		fileList.add(new File(Language.audioPath));

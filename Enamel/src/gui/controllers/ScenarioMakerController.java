@@ -211,9 +211,10 @@ public class ScenarioMakerController {
  	public void moveUp() {
  		if(isItemSelected()) {
  			if(selectedItemIndex() > 0) {
+ 				int index = selectedItemIndex()-1;
  				swap(selectedItemIndex(), selectedItemIndex()-1);
  				listUpdate();
- 				listOfCommands.getSelectionModel().select(selectedItemIndex()-1);
+ 				listOfCommands.getSelectionModel().select(index);
  			}
  		}
  	}
@@ -221,9 +222,10 @@ public class ScenarioMakerController {
  	public void moveDown() {
  		if(isItemSelected()) {
  			if(selectedItemIndex() < phraseListObs.size()-1) {
+ 				int index = selectedItemIndex()+1;
  				swap(selectedItemIndex(), selectedItemIndex()+1);
  				listUpdate();
- 				listOfCommands.getSelectionModel().select(selectedItemIndex()+1);
+ 				listOfCommands.getSelectionModel().select(index);
  			}
  		}
  	}
