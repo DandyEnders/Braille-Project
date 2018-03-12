@@ -24,9 +24,9 @@ public final class Language {
 
 	//public static final String viewPath = "." + File.separator + "gui" + File.separator + "resources" + File.separator + "view" + File.separator;
 	public static final String viewPath = "/gui/resources/view/";
-	public static final String scenarioPath = "\"" + rootPath + "FactoryScenarios" + File.separator;
-	public static final String audioPath = "\"" + scenarioPath + "AudioFiles" + File.separator;
-	public static final String errorPath = "\"" + rootPath + "errors" + File.separator;
+	public static final String scenarioPath = new String(rootPath + "FactoryScenarios" + File.separator).replace("%20", " ");
+	public static final String audioPath = new String(scenarioPath + "AudioFiles" + File.separator).replace("%20", " ");
+	public static final String errorPath = new String(rootPath + "errors" + File.separator).replace("%20", " ");
 	
 	
 	public static final KeyCode openKey = KeyCode.SPACE;
