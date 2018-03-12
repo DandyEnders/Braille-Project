@@ -147,7 +147,7 @@ public class ScenarioEditorController {
 		
 		try {
 		// Set starting directory ( the directory you start to select from )
-		fileChooser.setInitialDirectory(new File(Language.scenarioPath).getCanonicalFile());
+		fileChooser.setInitialDirectory(new File(Language.scenarioPath));
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -281,7 +281,7 @@ public class ScenarioEditorController {
 				fileChooser.setInitialFileName(scenarioList.getSelectionModel().getSelectedItem());
 				
 				// Set starting directory ( the directory you start to select from )
-				fileChooser.setInitialDirectory(new File("./FactoryScenarios").getCanonicalFile());
+				fileChooser.setInitialDirectory(new File(Language.scenarioPath));
 				
 				// Create a dummy variable for customized file.
 				//( selectedFile can be null if user decides to not to make a file )

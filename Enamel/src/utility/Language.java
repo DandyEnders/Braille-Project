@@ -20,13 +20,13 @@ public final class Language {
 	
 	public static final CodeSource codeSource = AuthoringApp.class.getProtectionDomain().getCodeSource();
 	public static final File jarFile = new File(codeSource.getLocation().getPath());
-	public static final String rootPath = jarFile.getParentFile().getPath();
-	
+	public static final String rootPath = jarFile.getParentFile().getPath() + File.separator;
+
 	//public static final String viewPath = "." + File.separator + "gui" + File.separator + "resources" + File.separator + "view" + File.separator;
 	public static final String viewPath = "/gui/resources/view/";
-	public static final String scenarioPath = rootPath + File.separator + "FactoryScenarios" + File.separator;
-	public static final String audioPath = scenarioPath + "AudioFiles" + File.separator;
-	public static final String errorPath = rootPath + File.separator + "errors" + File.separator;
+	public static final String scenarioPath = "\"" + rootPath + "FactoryScenarios" + File.separator;
+	public static final String audioPath = "\"" + scenarioPath + "AudioFiles" + File.separator;
+	public static final String errorPath = "\"" + rootPath + "errors" + File.separator;
 	
 	
 	public static final KeyCode openKey = KeyCode.SPACE;

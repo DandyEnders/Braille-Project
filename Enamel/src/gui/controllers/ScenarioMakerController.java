@@ -264,7 +264,7 @@ public class ScenarioMakerController {
 						fileName = fileName.split("\\.")[0] + "_m.txt";
 					}
 				}
-				File file = new File("./FactoryScenarios/" + fileName);
+				File file = new File(Language.scenarioPath + fileName);
 				
 				try {
 					Writer fileWriter = new FileWriter(file);
