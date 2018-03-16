@@ -23,10 +23,7 @@ import utility.AuthoringUtil;
 import utility.Language;
 import utility.Phrase;
 
-public class CreateCommandPopUpBoxController {
-
-	@FXML
-    private AnchorPane root;
+public class CreateCommandPopUpBoxController extends Controller {
 
     @FXML
     private Button createButton;
@@ -78,12 +75,6 @@ public class CreateCommandPopUpBoxController {
     	obsPhraseTypeList.add("speak");
     	
     	
-    }
-    
-    @FXML
-    public void close() {
-		Stage window = (Stage)root.getScene().getWindow();
-		window.close();
     }
     
     public void loadSoundFiles() {
@@ -277,7 +268,7 @@ public class CreateCommandPopUpBoxController {
 	
 	
 	@FXML
-	void keyPressed(KeyEvent event) {
+	protected void keyPressed(KeyEvent event) {
     	if(event.getCode().equals(Language.openKey)) {
     		if(event.getSource().equals(createButton)) {
     			create();

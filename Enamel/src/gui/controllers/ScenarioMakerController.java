@@ -27,10 +27,7 @@ import utility.Phrase;
  * @author Jinho Hwang
  *
  */
-public class ScenarioMakerController {
-
-    @FXML
-    private AnchorPane root;
+public class ScenarioMakerController extends Controller{
 
     @FXML
     private ListView<Phrase> listOfCommands;
@@ -138,11 +135,6 @@ public class ScenarioMakerController {
  		
  	}
  	
- 	public void exit() {
- 		Stage window = (Stage)root.getScene().getWindow();
- 		window.close();
- 	}
- 	
     private boolean isItemSelected() {
     	return selectedItemIndex() != -1;
     }
@@ -166,12 +158,13 @@ public class ScenarioMakerController {
     }
     
  	public void createCommand() {
- 		
+ 		CreateCommandPopUpBox popup;
  		
  		if(!isItemSelected()) {
- 			CreateCommandPopUpBox popup = new CreateCommandPopUpBox(phraseList,"above",0);
- 			phraseList = popup.display();
- 		}else if(isItemSelected()) {
+ 			
+ 			popup = new CreateCommandPopUpBox(phraseList,"above",0);
+ 			
+ 		}else{
 	 		
 	 		String pos = "";
 	 		
@@ -185,10 +178,13 @@ public class ScenarioMakerController {
 	 			pos = "below";
 	 			
 	 		}
-	 		CreateCommandPopUpBox popup = new CreateCommandPopUpBox(phraseList,pos,selectedItemIndex());
-	 		phraseList = popup.display();
+	 		popup = new CreateCommandPopUpBox(phraseList,pos,selectedItemIndex());
+
 	 		
  		}
+ 		
+ 		popup.display(new Stage());
+		phraseList = (List<Phrase>) popup.getReturn();
  		
  		listUpdate();
  		
@@ -276,7 +272,7 @@ public class ScenarioMakerController {
 				scenarioList.add(file);
 				scenarioNameList.add(file.getName());
 				
-				exit();
+				close();
 			}else {
 				// TODO : Error occurred.
 			}
@@ -285,7 +281,7 @@ public class ScenarioMakerController {
  	}
  	
  	@FXML
- 	void keyPressed(KeyEvent event) {
+ 	protected void keyPressed(KeyEvent event) {
     	if(event.getCode().equals(Language.openKey)) {
     		if(event.getSource().equals(createCommandButton)) {
     			createCommand();
@@ -298,7 +294,7 @@ public class ScenarioMakerController {
     		}else if(event.getSource().equals(saveButton)) {
     			save();
     		}else if(event.getSource().equals(exitButton)) {
-    			exit();
+    			close();
     		}
     	}
     }

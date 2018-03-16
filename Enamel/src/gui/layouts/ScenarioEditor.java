@@ -17,78 +17,26 @@ import javafx.fxml.FXMLLoader;
  *
  */
 
-public class ScenarioEditor {
+public class ScenarioEditor extends View {
 	
 	ScenarioEditorController control;
 	
-	//The main window
-	private Stage window;
-	
-	//The basic root panel
-	private AnchorPane root;
-	
 	//When ScenarioEditor is called, it displays
 	public ScenarioEditor(){
-		 display();
+		super();
 	}
-	
-	/**
-	 * This method instantiates window, relate the root panel ( the very basic panel )
-	 * with FXML, creates scene with root panel included. Then window is set with the scene
-	 * with title given from Language file.
-	 * 
-	 * @Author Jinho Hwang
-	 */
-	private void display() {
-		
-		try {
-			// Instantiates new window
-			window = new Stage();
-			
-			// Window should not be resizeable ( else destroys our layout )
-			window.setResizable(false);
-			
 
-			//window.initModality(Modality.APPLICATION_MODAL);
-			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(Language.scenarioEditorFxml));
-			
-			// Loading the format from FXML file
-			root = (AnchorPane) loader.load();
-			
-			control = loader.getController();
-			
-			control.loadFileOn(Language.scenarioPath);
+	@Override
+	protected void initialize() {
+		// Window should not be resizeable ( else destroys our layout )
+		window.setResizable(false);
 		
-			// Instantiate a new scene
-			Scene scene = new Scene(root);
-			
-			// Set window the scene and title
-			window.setScene(scene);
-			window.setTitle(Language.scenarioEditorTitle);
-			
-			// If close button (red X button) is pressed, hide the window instead of destroy
-			window.setOnCloseRequest(e -> hide());
-			
-		} catch (IOException e1) {
-			e1.printStackTrace(); // This happens if scenarioEditor.fxml changes its name.
-		}
+		control.loadFileOn(Language.scenarioPath);
+		
+		// If close button (red X button) is pressed, hide the window instead of destroy
+		window.setOnCloseRequest(e -> hide());
 	}
 	
-	/**
-	 * Method for making the window visible.
-	 * @Author Jinho Hwang
-	 */
-	public void show() {
-		window.show();
-	}
 	
-	/**
-	 * Method for making the window invisible.
-	 * @Author Jinho Hwang
-	 */
-	public void hide() {
-		window.hide();
-	}
 	
 }

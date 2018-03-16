@@ -29,7 +29,7 @@ import utility.Language;
  *
  */
 
-public class ScenarioEditorController {
+public class ScenarioEditorController extends Controller{
 	
     @FXML
     private Button createScenarioButton;
@@ -60,10 +60,6 @@ public class ScenarioEditorController {
 	// List
 	@FXML
 	ListView<String> scenarioList;
-	
-	// Main panel
-	@FXML
-	AnchorPane root;
 	
 	// OberservableList for List items.
 	ObservableList<String> obsFileList;
@@ -228,7 +224,8 @@ public class ScenarioEditorController {
 			Stage window = new Stage();
 			
 			TwoChoiceBox choiceBox = new TwoChoiceBox("Player type", "Which one do you want to run as?", "Visual Player", "Audio Player");
-			isVisual = choiceBox.display(window);
+			choiceBox.display(window);
+			isVisual = (boolean) choiceBox.getReturn();
 			
 			
 			// Get the selected item index from the list
@@ -349,17 +346,8 @@ public class ScenarioEditorController {
 		}
 	}
 	
-	/**
-	 * This method is used for Exiting ( hiding ) editor.
-	 * May change it later by closing it completely.
-	 * @Author Jinho Hwang
-	 */
-	public void hideScenarioEditor() {
-		root.getScene().getWindow().hide();
-	}
-	
 	@FXML
-	void keyPressed(KeyEvent event) {
+	protected void keyPressed(KeyEvent event) {
     	if(event.getCode().equals(Language.openKey)) {
     		if(event.getSource().equals(createScenarioButton)) {
     			createScenario();
@@ -374,7 +362,7 @@ public class ScenarioEditorController {
     		}else if(event.getSource().equals(removeScenarioButton)) {
     			removeScenario();
     		}else if(event.getSource().equals(exitButton)) {
-    			hideScenarioEditor();
+    			hide();
     		}
     	}
     }

@@ -18,7 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import utility.Language;
 
-public class ErrorListReportPopUpBoxController {
+public class ErrorListReportPopUpBoxController extends Controller{
 
     @FXML
     private Button closeButton;
@@ -50,15 +50,14 @@ public class ErrorListReportPopUpBoxController {
     	this.errorLabel.setText(errorString);
     }
     
+    @Override
     public void close() {
     	this.obsErrorList.clear();
-    	Stage stage = (Stage) root.getScene().getWindow();
-    	stage.close();
-    	
+    	super.close();
     }
     
     @FXML
-    void keyPressed(KeyEvent event) {
+	protected void keyPressed(KeyEvent event) {
     	if(event.getCode().equals(Language.openKey)) {
     		if(event.getSource().equals(closeButton)) {
     			close();

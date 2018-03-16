@@ -14,77 +14,38 @@ import utility.Language;
  *
  */
 
-public class TwoChoiceBox {
+public class TwoChoiceBox extends View {
 
-	TwoChoiceBoxController control;
+	private TwoChoiceBoxController control;
 	
-	// List of pane, scene, stage
-	private AnchorPane root;
-	private Scene scene;
-	@SuppressWarnings("unused")
-	private Stage window;
-	
-	private String title;
 	private String label;
 	private String leftButtonLabel, rightButtonLabel;
 	
-	
 	public TwoChoiceBox(String title, String label, String leftButtonLabel, String rightButtonLabel) {
+		super();
 		this.title = title;
 		this.label = label;
 		this.leftButtonLabel = leftButtonLabel;
 		this.rightButtonLabel = rightButtonLabel;
 	}
-	
-	
-	/**
-	 * 
-	 * @param window
-	 * @return true if left was selected
-	 * @return false if right was selected
-	 */
-	public boolean display(Stage window) {
-		try {
-			// Initialize the window
-			this.window = window;
-			
-			// Allow resize, but set width fixed, set height resizeable with a minimum.
-			window.setResizable(false);
-			
-			// Set focus on ScenarioMaker 
-			// i.e. you cannot do any other tasks on other windows
-			// until ScenarioMaker closes
-			window.initModality(Modality.APPLICATION_MODAL);
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(Language.twoChoiceBoxFxml));
-			
-			// Set the base panel ( root ) from fxml file
-			root = (AnchorPane)loader.load();
-			
-			// Gets the controller so I can pass scenarioFile
-			control = loader.getController();
-			
-			// Set label.
-			control.setMiddleLabel(label);
-			control.setLeftButtonLabel(leftButtonLabel);
-			control.setRightButtonLabel(rightButtonLabel);
-			
-			// Scene is built using the base panel
-			scene = new Scene(root);
-			
-			// Set scene to the window, title, and show it
-			window.setScene(scene);
-			window.setTitle(title);
-			
-			// Close the whole thing when red X is pressed.
-			window.setOnCloseRequest(e -> e.consume());
-			window.showAndWait();
-			
-			
-		}catch(Exception e) {
-			e.printStackTrace(); // only happens when mainMenu.fxml changes its name
-		}
+
+	@Override
+	protected void initialize() {
+		// Allow resize, but set width fixed, set height resizeable with a minimum.
+		window.setResizable(false);
 		
-		return control.getAnswer();
+		// until ScenarioMaker closes
+		window.initModality(Modality.APPLICATION_MODAL);
+		
+		// Set label.
+		control.setMiddleLabel(label);
+		control.setLeftButtonLabel(leftButtonLabel);
+		control.setRightButtonLabel(rightButtonLabel);
+		
+		// Close the whole thing when red X is pressed.
+		window.setOnCloseRequest(e -> e.consume());
+		window.showAndWait();
+		
 	}
 	
 

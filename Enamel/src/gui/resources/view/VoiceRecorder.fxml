@@ -24,7 +24,7 @@
             <Region prefHeight="7.0" prefWidth="112.0" />
             <Button fx:id="loadSoundButton" accessibleHelp="This pops up the load window for you to import a file." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#loadSoundFile" prefHeight="37.0" prefWidth="130.0" text="Load Sound" />
             <Region prefHeight="7.0" prefWidth="112.0" />
-            <Button fx:id="exitButton" accessibleHelp="This exits voice recorder." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#exit" prefHeight="41.0" prefWidth="125.0" text="Exit" />
+            <Button fx:id="exitButton" accessibleHelp="This exits voice recorder." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#close" prefHeight="41.0" prefWidth="125.0" text="Exit" />
          </children>
       </VBox>
       <ListView fx:id="voiceNameList" accessibleHelp="This is a list of voice files. You can nevigate this using arrow keys." layoutY="23.0" prefHeight="379.0" prefWidth="188.0" />

@@ -28,10 +28,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import utility.Language;
 
-public class VoiceRecorderController {
-
-	@FXML
-    private AnchorPane root;
+public class VoiceRecorderController extends Controller{
 
     @FXML
     private ToggleButton recordVoiceButton;
@@ -57,6 +54,7 @@ public class VoiceRecorderController {
 
     private TargetDataLine targetDataLine;
     private File waveFile;
+    
     private AudioInputStream audioStream;
     Thread record;
     
@@ -137,11 +135,6 @@ public class VoiceRecorderController {
     }
     
     
-    public void exit() {
-    	Stage window = (Stage)root.getScene().getWindow();
-    	window.close();
-    }
-    
     private int getSelectedIndex() {
     	return voiceNameList.getSelectionModel().getSelectedIndex();
     }
@@ -164,7 +157,8 @@ public class VoiceRecorderController {
     		Stage window = new Stage();
     		
     		TextAnswerBox box = new TextAnswerBox("Name the sound recording...", "Type the name of the voice recording.");
-    		String fileName = box.display(window);
+    		box.display(window);
+    		String fileName = (String) box.getReturn();
     		
     		startSoundDataLine(fileName);
     		// Record.
@@ -304,7 +298,7 @@ public class VoiceRecorderController {
     }
     
     @FXML
-    void keyPressed(KeyEvent event) {
+    protected void keyPressed(KeyEvent event) {
     	if(event.getCode().equals(Language.openKey)) {
     		if(event.getSource().equals(recordVoiceButton)) {
     			recordVoiceButtonClicked();
@@ -315,7 +309,7 @@ public class VoiceRecorderController {
     		}else if(event.getSource().equals(loadSoundButton)) {
     			loadSoundFile();
     		}else if(event.getSource().equals(exitButton)) {
-    			exit();
+    			close();
     		}
     	}
     }

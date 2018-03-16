@@ -9,10 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import utility.Language;
 
-public class TextAnswerBoxController {
-
-    @FXML
-    private AnchorPane root;
+public class TextAnswerBoxController extends Controller{
 
     @FXML
     private Button finishButton;
@@ -23,13 +20,7 @@ public class TextAnswerBoxController {
     @FXML
     private TextField answer;
     
-    
-    
-    @FXML
-    public void finish(){
-    	Stage window = (Stage) root.getScene().getWindow();
-    	window.close();
-    }
+   
     
     public String getAnswer() {
     	return answer.getText();
@@ -40,10 +31,10 @@ public class TextAnswerBoxController {
     }
     
     @FXML
-    void keyPressed(KeyEvent event) {
+    protected void keyPressed(KeyEvent event) {
     	if(event.getCode().equals(Language.openKey)) {
     		if(event.getSource().equals(finishButton)) {
-    			finish();
+    			close();
     		}
     	}
     }

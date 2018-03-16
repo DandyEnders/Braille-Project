@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import utility.Language;
 
 /**
@@ -17,11 +18,7 @@ import utility.Language;
  *
  */
 
-public class MainMenuController {
-	
-	// FXML component; Base panel
-	@FXML
-	private AnchorPane root;
+public class MainMenuController extends Controller{
 	
     @FXML
     private Button exitButton;
@@ -42,6 +39,7 @@ public class MainMenuController {
 	
 	// Scenario initialization
 	public MainMenuController(){
+		super();
 		scenarioEditor = new ScenarioEditor();
 		voiceRecorder = new VoiceRecorder();
 		
@@ -57,16 +55,17 @@ public class MainMenuController {
 	// Show up the scenarioEditor
 	@FXML
 	public void openScenarioEditor() {
-		scenarioEditor.show();
+		Stage editorWindow = new Stage();
+		scenarioEditor.display(editorWindow);
 	}
 	
 	@FXML
 	public void openVoiceRecorder() {
-		voiceRecorder.show();
+		voiceRecorder.display(new Stage());
 	}
 	
     @FXML
-    private void keyPressed(KeyEvent event) {
+	protected void keyPressed(KeyEvent event) {
     	//titleLabel.focusTraversableProperty().bind(Platform.accessibilityActiveProperty());
     	if(event.getCode().equals(Language.openKey)) {
     		if(event.getSource().equals(scenarioEditButton)) {

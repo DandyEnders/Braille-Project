@@ -17,7 +17,7 @@ import utility.Phrase;
  * @author Jinho Hwang
  *
  */
-public class CreateCommandPopUpBox {
+public class CreateCommandPopUpBox extends View {
 
 	// control.
 	CreateCommandPopUpBoxController control;
@@ -25,60 +25,34 @@ public class CreateCommandPopUpBox {
 	private List<Phrase> phraseList;
 	private String pos;
 	private int selectedIndex;
-	
-	// List of pane, scene, stage
-	private AnchorPane root;
-	private Scene scene;
-	private Stage window;
 
 	
 	public CreateCommandPopUpBox(List<Phrase> phraseList, String pos, int selectedIndex) {
+		super();
 		this.phraseList = phraseList;
 		this.pos = pos;
 		this.selectedIndex = selectedIndex;
 	}
-	
-	public List<Phrase> display() {
-		try {
-			// Instantiates new window
-			window = new Stage();
-			
-			// Window should not be re-sizeable ( else destroys our layout )
-			window.setResizable(false);
-			
-			// Make this box a pop up and stops any input until this pop up is resolved ( closed )
-			window.initModality(Modality.APPLICATION_MODAL);
-			
-			// Get the FXML loader.
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(Language.createCommandPopUpBoxFxml));
-			
-			// Loading the format from FXML file
-			root = (AnchorPane)loader.load();
-			
-			// Get controller.
-			control = loader.getController();
-			
-			control.setList(phraseList);
-			control.setPos(pos);
-			control.setIndex(selectedIndex);
-			control.setComboBoxItems();
-			control.loadSoundFiles();
-			
-			// Instantiate a new scene
-			scene = new Scene(root);
-			window.setTitle(Language.createCommandPopUpBoxTitle);
-			window.setScene(scene);
-			
-			// If close button (red X button) is pressed, hide the window instead of destroy
-			window.setOnCloseRequest(e -> control.close());
-			
-			window.showAndWait();
-			
-		}catch (IOException e1) {
-			e1.printStackTrace(); // This happens if scenarioEditor.fxml changes its name.
-		}
+
+	@Override
+	protected void initialize() {
+		// Window should not be re-sizeable ( else destroys our layout )
+		window.setResizable(false);
 		
-		return control.getAnswer();
+		// Make this box a pop up and stops any input until this pop up is resolved ( closed )
+		window.initModality(Modality.APPLICATION_MODAL);
+		
+		control.setList(phraseList);
+		control.setPos(pos);
+		control.setIndex(selectedIndex);
+		control.setComboBoxItems();
+		control.loadSoundFiles();
+		
+		// If close button (red X button) is pressed, hide the window instead of destroy
+		window.setOnCloseRequest(e -> control.close());
+		
+		window.showAndWait();
+		
 		
 	}
 	

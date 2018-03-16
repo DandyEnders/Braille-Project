@@ -9,10 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import utility.Language;
 
-public class TwoChoiceBoxController {
-
-    @FXML
-    private AnchorPane root;
+public class TwoChoiceBoxController extends Controller{
 
     @FXML
     private Button leftButton;
@@ -53,13 +50,8 @@ public class TwoChoiceBoxController {
     	return isLeft;
     }
     
-    public void close() {
-    	Stage window = (Stage) root.getScene().getWindow();
-    	window.close();
-    }
-    
     @FXML
-    void keyPressed(KeyEvent event) {
+    protected void keyPressed(KeyEvent event) {
     	label.focusTraversableProperty().bind(Platform.accessibilityActiveProperty());
     	if(event.getCode().equals(Language.openKey)) {
     		if(event.getSource().equals(leftButton)) {

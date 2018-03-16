@@ -8,66 +8,38 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import utility.Language;
 
-public class TextAnswerBox {
+public class TextAnswerBox extends View {
 
-	TextAnswerBoxController control;
-	
-	// List of pane, scene, stage
-	private AnchorPane root;
-	private Scene scene;
-	@SuppressWarnings("unused")
-	private Stage window;
+	private TextAnswerBoxController control;
 	
 	private String title;
 	private String label;
 	
 	
 	public TextAnswerBox(String title, String label) {
+		super();
 		this.title = title;
 		this.label = label;
 	}
-	
-	public String display(Stage window) {
+
+	@Override
+	protected void initialize() {
+		// Allow resize, but set width fixed, set height resizeable with a minimum.
+		window.setResizable(false);
 		
-		// Initialize the window
-		this.window = window;
-		try {
-			
-			
-			// Allow resize, but set width fixed, set height resizeable with a minimum.
-			window.setResizable(false);
-			
-			// Set focus on ScenarioMaker 
-			// i.e. you cannot do any other tasks on other windows
-			// until ScenarioMaker closes
-			window.initModality(Modality.APPLICATION_MODAL);
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(Language.textAnswerBoxFxml));
-			
-			// Set the base panel ( root ) from fxml file
-			root = (AnchorPane)loader.load();
-			
-			// Gets the controller so I can pass scenarioFile
-			control = loader.getController();
-			
-			// Set label.
-			control.setLabel(label);
-			// Scene is built using the base panel
-			scene = new Scene(root);
-			
-			// Set scene to the window, title, and show it
-			window.setScene(scene);
-			window.setTitle(title);
-			
-			// Close the whole thing when red X is pressed.
-			window.setOnCloseRequest(e -> control.finish());
-			window.showAndWait();
-			
-			
-		}catch(Exception e) {
-			e.printStackTrace(); // only happens when mainMenu.fxml changes its name
-		}
+		// Set focus on ScenarioMaker 
+		// i.e. you cannot do any other tasks on other windows
+		// until ScenarioMaker closes
+		window.initModality(Modality.APPLICATION_MODAL);
 		
-		return control.getAnswer();
+		// Set label.
+		control.setLabel(label);
+		
+		// Close the whole thing when red X is pressed.
+		window.setOnCloseRequest(e -> control.close());
+		window.showAndWait();
+		
+		window.setTitle(title);
 	}
 	
 

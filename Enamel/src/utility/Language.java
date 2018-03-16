@@ -16,7 +16,8 @@ import startProgram.AuthoringApp;
  */
 public final class Language {
 	
-	
+	private static final String emptyString = "";
+	private static final String nullString = null;
 	
 	public static final CodeSource codeSource = AuthoringApp.class.getProtectionDomain().getCodeSource();
 	public static final File jarFile = new File(codeSource.getLocation().getPath());
@@ -33,15 +34,44 @@ public final class Language {
 	//public static final KeyCode sayCurrentWindowKey = KeyCode.BACK_QUOTE;
 	
 	// Fxml directory
-	public static final String mainMenuFxml = viewPath + "MainMenu.fxml";
-	public static final String scenarioEditorFxml = viewPath + "ScenarioEditor.fxml";
-	public static final String scenarioMakerFxml = viewPath + "ScenarioMaker.fxml";
-	public static final String errorListReportPopUpBoxFxml = viewPath + "ErrorListReportPopUpBox.fxml";
-	public static final String createCommandPopUpBoxFxml = viewPath + "CreateCommandPopUpBox.fxml";
-	public static final String voiceRecorderFxml = viewPath + "VoiceRecorder.fxml";
-	public static final String textAnswerBoxFxml = viewPath + "TextAnswerBox.fxml";
-	public static final String twoChoiceBoxFxml = viewPath + "TwoChoiceBox.fxml";
+	private static final String mainMenuFxml = viewPath + "MainMenu.fxml";
+	private static final String scenarioEditorFxml = viewPath + "ScenarioEditor.fxml";
+	private static final String scenarioMakerFxml = viewPath + "ScenarioMaker.fxml";
+	private static final String errorListReportPopUpBoxFxml = viewPath + "ErrorListReportPopUpBox.fxml";
+	private static final String createCommandPopUpBoxFxml = viewPath + "CreateCommandPopUpBox.fxml";
+	private static final String voiceRecorderFxml = viewPath + "VoiceRecorder.fxml";
+	private static final String textAnswerBoxFxml = viewPath + "TextAnswerBox.fxml";
+	private static final String twoChoiceBoxFxml = viewPath + "TwoChoiceBox.fxml";
 	
+	public static String fxmlPath(String className) {
+		switch(className) {
+		case "MainMenu" : return mainMenuFxml; 
+		case "ScenarioEditor" : return scenarioEditorFxml;
+		case "ScenarioMaker" : return scenarioMakerFxml;
+		case "ErrorListReportPopUpBox" : return errorListReportPopUpBoxFxml;
+		case "CreateCommandPopUpBox" : return createCommandPopUpBoxFxml;
+		case "VoiceRecorder" : return voiceRecorderFxml;
+		case "TextAnswerBox" : return textAnswerBoxFxml;
+		case "TwoChoiceBox" : return twoChoiceBoxFxml;
+		
+		default : throw new IllegalArgumentException("Class with the given class name does not have a fxml!");
+		}
+	}
+	
+	public static String titleName(String className) {
+		switch(className){
+		case "MainMenu" : return mainMenuTitle; 
+		case "ScenarioEditor" : return scenarioEditorTitle;
+		case "ScenarioMaker" : return scenarioMakerTitle;
+		case "ErrorListReportPopUpBox" : return emptyString;
+		case "CreateCommandPopUpBox" : return createCommandPopUpBoxTitle;
+		case "VoiceRecorder" : return voiceRecorderTitle;
+		case "TextAnswerBox" : return emptyString;
+		case "TwoChoiceBox" : return emptyString;
+		
+		default : throw new IllegalArgumentException("Class with the given class name does not have a title!");
+		}
+	}
 	
 	// CSS directory
 	public static final String mainMenuCss = "/gui/resources/css/MainMenu.css";
@@ -56,7 +86,7 @@ public final class Language {
 
 	
 	// Scanerio maker Strings
-	public static final String scanerioMakerTitle = "Scanerio Maker";
+	public static final String scenarioMakerTitle = "Scanerio Maker";
 	
 	// PopupBox Strings
 	//public static final String errorListReportPopUpBoxTitle = "";
