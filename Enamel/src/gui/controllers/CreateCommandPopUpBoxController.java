@@ -23,7 +23,7 @@ import utility.AuthoringUtil;
 import utility.Language;
 import utility.Phrase;
 
-public class CreateCommandPopUpBoxController extends Controller {
+public class CreateCommandPopUpBoxController extends Controller implements Returnable<Phrase> {
 
     @FXML
     private Button createButton;
@@ -54,23 +54,22 @@ public class CreateCommandPopUpBoxController extends Controller {
     
     @FXML
     private ComboBox<String> firstArgList;
-    private ObservableList<String> firstArgListObs;
-    private List<File> firstArgFileList;
     
-    ObservableList<String> obsPhraseTypeList;
+   /* 
     
     List<Phrase> phraseList;
-    
     String pos;
+    int selectedIndex;*/
     
-    int selectedIndex;
-    
+    private List<File> audioFileList;
+    private ObservableList<String> obsAudioFileList;
+    ObservableList<String> obsPhraseTypeList;
     Phrase returnPhrase;
     
     public CreateCommandPopUpBoxController(){
     	String[] typeList = AuthoringUtil.getTypeList();
     	obsPhraseTypeList = FXCollections.observableArrayList(typeList);
-    	firstArgListObs = FXCollections.observableArrayList();
+    	obsAudioFileList = FXCollections.observableArrayList();
     	obsPhraseTypeList.add("emptyLine");
     	obsPhraseTypeList.add("speak");
     	
@@ -78,10 +77,12 @@ public class CreateCommandPopUpBoxController extends Controller {
     }
     
     public void loadSoundFiles() {
-    	firstArgFileList = AuthoringUtil.getAudioFiles(Language.audioPath);
-		for(File file : firstArgFileList) {
-			firstArgListObs.add(file.getName());
-		}
+    	audioFileList = AuthoringUtil.getAudioFiles(Language.audioPath);
+    	if(audioFileList != null) {
+			for(File file : audioFileList) {
+				obsAudioFileList.add(file.getName());
+			}
+    	}
     }
     
     @FXML
@@ -105,37 +106,37 @@ public class CreateCommandPopUpBoxController extends Controller {
     		firstArgList.setVisible(true);
     		firstArgList.setDisable(false);
     		
-    		firstArgList.setItems(firstArgListObs);
+    		firstArgList.setItems(obsAudioFileList);
     		
     	}else if(comboBoxText.equals("/~skip:")) {
-    		setArgumentText("Jump to String", "");
+    		setArgumentText("Jump to String");
     		
     	}else if(comboBoxText.equals("/~pause:")) {
-    		setArgumentText("Seconds to pause", "");
+    		setArgumentText("Seconds to pause");
     		
     	}else if(comboBoxText.equals("/~repeat-button:")) {
-    		setArgumentText("Index of button", "");
+    		setArgumentText("Index of button");
     		
     	}else if(comboBoxText.equals("/~repeat")) {
-    		setArgumentText("", "");
+    		setArgumentText();
     		
     	}else if(comboBoxText.equals("/~endrepeat")) {
-    		setArgumentText("", "");
+    		setArgumentText();
     		
     	}else if(comboBoxText.equals("/~reset-buttons")) {
-    		setArgumentText("", "");
+    		setArgumentText();
     		
     	}else if(comboBoxText.equals("/~skip-button:")) {
     		setArgumentText("Index of button", "Jump to String");
     		
     	}else if(comboBoxText.equals("/~disp-clearAll")) {
-    		setArgumentText("", "");
+    		setArgumentText();
     		
     	}else if(comboBoxText.equals("/~disp-cell-pins:")) {
     		setArgumentText("Index of cell", "Cell pins (eight 0 or 1)");
     		
     	}else if(comboBoxText.equals("/~disp-string:")) {
-    		setArgumentText("String to display", "");
+    		setArgumentText("String to display");
     		
     	}else if(comboBoxText.equals("/~disp-cell-char:")) {
     		setArgumentText("Index of cell", "English alphabet");
@@ -147,24 +148,32 @@ public class CreateCommandPopUpBoxController extends Controller {
     		setArgumentText("Index of cell", "Index of a pin of the cell");
     		
     	}else if(comboBoxText.equals("/~disp-cell-clear:")) {
-    		setArgumentText("Index of cell", "");
+    		setArgumentText("Index of cell");
     		
     	}else if(comboBoxText.equals("/~user-input")) {
-    		setArgumentText("", "");
+    		setArgumentText();
     		
     	}else if(comboBoxText.equals("emptyLine")) {
-    		setArgumentText("", "");
+    		setArgumentText();
     		
     	}else if(comboBoxText.equals("speak")) {
-    		setArgumentText("Sentence to speak", "");
+    		setArgumentText("Sentence to speak");
     		
     	}else {
-    		setArgumentText("", "");
+    		setArgumentText();
     	}
     	
     	
     }
     
+    
+    private void setArgumentText() {
+    	setArgumentText("","");
+    }
+    
+    private void setArgumentText(String first) {
+    	setArgumentText(first,"");
+    }
     
     private void setArgumentText(String first, String second) {
     	firstArgText.setText(first);
@@ -195,7 +204,10 @@ public class CreateCommandPopUpBoxController extends Controller {
     
     @FXML
     public void create() {
-    	String firstArg, secondArg;
+    	String command, firstArg, secondArg;
+    	
+    	command = phraseTypeComboBox.getSelectionModel().getSelectedItem();
+    	
     	firstArg = firstArgumentTextField.getText() == null ? firstArg = null : (firstArg = firstArgumentTextField.getText());
     	
     	if(firstArgList.isVisible() && firstArgList.getSelectionModel().getSelectedIndex() != -1) {
@@ -211,59 +223,24 @@ public class CreateCommandPopUpBoxController extends Controller {
     	}else if(phraseTypeComboBox.getSelectionModel().getSelectedItem().equals("speak")){
     		returnPhrase = new Phrase("speak",firstArg, "");
     	}else {
-    		returnPhrase = AuthoringUtil.phraseThisLine(phraseTypeComboBox.getSelectionModel().getSelectedItem() + firstArg + " " + secondArg);//new Phrase(phraseTypeComboBox.getSelectionModel().getSelectedItem(),firstArg,secondArg);
-    		
+    		returnPhrase = AuthoringUtil.phraseThisLine(command + firstArg + " " + secondArg);
     	}
 		
 		
-		if(returnPhrase!= null && phraseTypeComboBox.getSelectionModel().getSelectedIndex() != -1 ||
-			firstArgList.isVisible() && firstArgList.getSelectionModel().getSelectedIndex() != -1) {
-			
-			if(phraseList.size() == 0) {
-				phraseList.add(returnPhrase);
-			}else {
-				if(pos.equals("above")) {
-					phraseList.add(selectedIndex , returnPhrase);
-		 			
-		 		}else if(pos.equals("replace")) {
-		 			phraseList.set(selectedIndex, returnPhrase);
-		 			
-		 		}else if(pos.equals("below")) {
-		 			
-		 			if(selectedIndex+1 == phraseList.size()) {
-		 				phraseList.add(returnPhrase);
-		 				
-		 			}else {
-		 				phraseList.add(selectedIndex+1, returnPhrase);
-		 			}
-		 		}
-			}
-			
-			close();
-		}
+		
 		// TODO : Make an error box pop up if it is invalid
 		
 		
     }
     
     public void setComboBoxItems() {
-
     	phraseTypeComboBox.setItems(obsPhraseTypeList);
     }
     
-    public void setList(List<Phrase> phraseList) {
-    	this.phraseList = phraseList;
-    }
-    public void setPos(String pos) {
-    	this.pos = pos;
-    }
-    public void setIndex(int index) {
-    	this.selectedIndex = index;
-    }
 
-	public List<Phrase> getAnswer() {
-		
-		return phraseList;
+    @Override
+	public Phrase getReturn() {
+		return this.returnPhrase;
 	}
 	
 	
@@ -277,6 +254,7 @@ public class CreateCommandPopUpBoxController extends Controller {
     		}
     	}
     }
+
      
    
 }

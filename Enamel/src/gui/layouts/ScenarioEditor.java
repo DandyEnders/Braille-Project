@@ -1,13 +1,7 @@
 package gui.layouts;
-import java.io.IOException;
-
 import gui.controllers.ScenarioEditorController;
 import javafx.stage.Stage;
 import utility.Language;
-import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.fxml.FXMLLoader;
-
 /**
  * Scenario Editor GUI class.
  * This class is responsible for drawing the buttons, panes, scenes, etc.
@@ -17,9 +11,7 @@ import javafx.fxml.FXMLLoader;
  *
  */
 
-public class ScenarioEditor extends View {
-	
-	ScenarioEditorController control;
+public class ScenarioEditor extends View<ScenarioEditorController> {
 	
 	//When ScenarioEditor is called, it displays
 	public ScenarioEditor(){
@@ -28,6 +20,7 @@ public class ScenarioEditor extends View {
 
 	@Override
 	protected void initialize() {
+		
 		// Window should not be resizeable ( else destroys our layout )
 		window.setResizable(false);
 		
@@ -35,6 +28,7 @@ public class ScenarioEditor extends View {
 		
 		// If close button (red X button) is pressed, hide the window instead of destroy
 		window.setOnCloseRequest(e -> hide());
+		window.show();
 	}
 	
 	

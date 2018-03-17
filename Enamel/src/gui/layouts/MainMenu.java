@@ -43,6 +43,7 @@ public class MainMenu extends Application {
 			// Window should not be resizeable ( else destroys our layout )
 			window.setResizable(false);
 			
+			System.out.println(Language.fxmlPath(this.getClass().getSimpleName()));
 			
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(Language.fxmlPath(this.getClass().getSimpleName())));
 			

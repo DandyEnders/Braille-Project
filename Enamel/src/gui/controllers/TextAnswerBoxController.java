@@ -9,7 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import utility.Language;
 
-public class TextAnswerBoxController extends Controller{
+public class TextAnswerBoxController extends Controller implements Returnable<String>{
 
     @FXML
     private Button finishButton;
@@ -21,8 +21,8 @@ public class TextAnswerBoxController extends Controller{
     private TextField answer;
     
    
-    
-    public String getAnswer() {
+    @Override
+    public String getReturn() {
     	return answer.getText();
     }
     
@@ -38,5 +38,7 @@ public class TextAnswerBoxController extends Controller{
     		}
     	}
     }
+
+
 
 }

@@ -9,7 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import utility.Language;
 
-public class TwoChoiceBoxController extends Controller{
+public class TwoChoiceBoxController extends Controller implements Returnable<Boolean>{
 
     @FXML
     private Button leftButton;
@@ -46,7 +46,7 @@ public class TwoChoiceBoxController extends Controller{
     	this.label.setText(str);
     }
     
-    public boolean getAnswer() {
+    public Boolean getReturn() {
     	return isLeft;
     }
     
@@ -61,5 +61,7 @@ public class TwoChoiceBoxController extends Controller{
     		}
     	}
     }
+
+
 
 }

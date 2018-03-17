@@ -17,21 +17,10 @@ import utility.Phrase;
  * @author Jinho Hwang
  *
  */
-public class CreateCommandPopUpBox extends View {
+public class CreateCommandPopUpBox extends ReturnableView<CreateCommandPopUpBoxController,Phrase> {
 
-	// control.
-	CreateCommandPopUpBoxController control;
-	
-	private List<Phrase> phraseList;
-	private String pos;
-	private int selectedIndex;
-
-	
-	public CreateCommandPopUpBox(List<Phrase> phraseList, String pos, int selectedIndex) {
+	public CreateCommandPopUpBox() {
 		super();
-		this.phraseList = phraseList;
-		this.pos = pos;
-		this.selectedIndex = selectedIndex;
 	}
 
 	@Override
@@ -42,9 +31,6 @@ public class CreateCommandPopUpBox extends View {
 		// Make this box a pop up and stops any input until this pop up is resolved ( closed )
 		window.initModality(Modality.APPLICATION_MODAL);
 		
-		control.setList(phraseList);
-		control.setPos(pos);
-		control.setIndex(selectedIndex);
 		control.setComboBoxItems();
 		control.loadSoundFiles();
 		

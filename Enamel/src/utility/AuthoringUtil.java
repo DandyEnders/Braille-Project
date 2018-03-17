@@ -7,9 +7,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.FileHandler;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 /**
  * This method will be responsible with Parsing the scenarioFile.
@@ -168,7 +165,7 @@ public class AuthoringUtil {
 			scan.close();
 			// In case where word "Cell" or "Button" or number after cell and button fails,
 			// deal with exception
-			errorLog("Exception error: " + e.toString(), "Expected format: \nCell num1 \n Button num2 \n"
+			ErrorUtil.errorLog("Exception error: " + e.toString(), "Expected format: \nCell num1 \n Button num2 \n"
 					+ "as the first two lines of the scenarion file, and where num1 and num2 are positive integers. \n"
 					+ "Did not receive such a format in the scenario file and program had to end due to the incorrect"
 					+ "file format. ", PCE);
@@ -214,7 +211,7 @@ public class AuthoringUtil {
 				try {
 					Integer.parseInt(arguments[0]);
 				} catch (Exception e) {
-					errorLog("Phrasing pause length error on line " + currentLine + ": " + e.toString(),
+					ErrorUtil.errorLog("Phrasing pause length error on line " + currentLine + ": " + e.toString(),
 							"Expected format: /~pause: number \n"
 									+ "Where the number is the number of seconds the program "
 									+ "\nwaits before continuing on line " + currentLine + "\nProgram received : "
@@ -247,7 +244,7 @@ public class AuthoringUtil {
 					}
 				}
 			} catch (Exception e) {
-				errorLog("Phrasing disp-string error on " + currentLine + " " + e.toString(),
+				ErrorUtil.errorLog("Phrasing disp-string error on " + currentLine + " " + e.toString(),
 						e.toString() + " Expected format: /~disp-string:string \n "
 								+ "Where the string is the string to display on cells. \n"
 								+ "Program received : " + currentPhrase,
@@ -285,7 +282,7 @@ public class AuthoringUtil {
 
 				// At this point, repeat could not find any matching endrepeat, so print error
 				if (currentPhrase.getFlag() == null) {
-					errorLog(
+					ErrorUtil.errorLog(
 							"One of the repeat no match endrepeat error on " + currentLine, "Last found repeat on line "
 									+ currentLine + " do not have a matching endrepeat for the rest of the scenario.",
 							PCE);
@@ -303,7 +300,7 @@ public class AuthoringUtil {
 								"Repeat button index out of bounds. Index range of : 0 ~ " + (buttonNumber - 1));
 					}
 				} catch (Exception e) {
-					errorLog("Phrasing repeat button error on " + currentLine + " " + e.toString(),
+					ErrorUtil.errorLog("Phrasing repeat button error on " + currentLine + " " + e.toString(),
 							"Expected format: /~repeat-button:number \n "
 									+ "Where the number is the index of button to repeat. \n" + "Program received : "
 									+ currentPhrase,
@@ -353,7 +350,7 @@ public class AuthoringUtil {
 					// At this point, skip-button could not find any matching skip to, so print
 					// error
 					if (currentPhrase.getFlag() == null) {
-						errorLog("Skip-button no match goto error somewhere. Last one found on " + currentLine,
+						ErrorUtil.errorLog("Skip-button no match goto error somewhere. Last one found on " + currentLine,
 								" One of the skip-button does not match to its goto. The skip-button on line "
 										+ currentLine + " do not have a matching goto "
 										+ "for the rest of the scenario.",
@@ -361,7 +358,7 @@ public class AuthoringUtil {
 						return null;
 					}
 				} catch (Exception e) {
-					errorLog("Phrasing skip button error on " + currentLine + " " + e.toString(),
+					ErrorUtil.errorLog("Phrasing skip button error on " + currentLine + " " + e.toString(),
 							e.toString() + " : Expected format: /~skip-button:number String \n "
 									+ "Where the number is the index of button to skip.\n"
 									+ "Where the String is the line to skip to.\n" + "Program received "+currentLine + " : "
@@ -380,7 +377,7 @@ public class AuthoringUtil {
 			case "/~sound:1":
 				File soundfile = new File("./FactoryScenarios/AudioFiles/" + currentPhrase.getArguments()[0]);
 				if (!soundfile.exists()) {
-					errorLog("Sound file missing error: " + soundfile.getAbsolutePath(),
+					ErrorUtil.errorLog("Sound file missing error: " + soundfile.getAbsolutePath(),
 							"Expected format: /~sound:String \n " + "Where the String is the name of soundfile.\n"
 									+ "Program received : " + currentPhrase,
 							PCE);
@@ -426,14 +423,14 @@ public class AuthoringUtil {
 					} // end of for
 
 					if (currentPhrase.getFlag() == null) {
-						errorLog(
+						ErrorUtil.errorLog(
 								"Skip unmatched goto error on " + currentLine, "The skip on line " + currentLine
 										+ " do not have a matching skip goto to for the rest of the scenario.",
 								PCE);
 						return null;
 					}
 				} catch (Exception e) {
-					errorLog("Phrasing skip error on " + currentLine,
+					ErrorUtil.errorLog("Phrasing skip error on " + currentLine,
 							e.toString() + " Expected format: /~skip:String \n "
 									+ "Where the String is the place to jump to. Error found on " + currentLine + "\n"
 									+ "Program received : " + currentPhrase,
@@ -458,7 +455,7 @@ public class AuthoringUtil {
 								"dispClearCell cell index out of bounds. Range of cell index: 0 ~ " + (cellNumber - 1));
 					}
 				} catch (Exception e) {
-					errorLog("Phrasing dispclearcell error on " + currentLine + " " + e.toString(),
+					ErrorUtil.errorLog("Phrasing dispclearcell error on " + currentLine + " " + e.toString(),
 							"Expected format: /~disp-clear-cell:number \n "
 									+ "Where the number is the index of cell to display clear cell. \n"
 									+ "Program received : " + currentPhrase,
@@ -500,7 +497,7 @@ public class AuthoringUtil {
 						}
 					}
 				} catch (Exception e) {
-					errorLog("Phrasing dispCellPins error on " + currentLine + " " + e.toString(),
+					ErrorUtil.errorLog("Phrasing dispCellPins error on " + currentLine + " " + e.toString(),
 							"Expected format: /~disp-cell-pins:number1 number2 \n "
 									+ "Where the number1 is the index of cell to display cell pins. \n"
 									+ "Where the number2 represents 8 cell pins, either 0 or 1. \n"
@@ -534,7 +531,7 @@ public class AuthoringUtil {
 					}
 
 				} catch (Exception e) {
-					errorLog("Phrasing dispCellChar error on " + currentLine + " " + e.toString(),
+					ErrorUtil.errorLog("Phrasing dispCellChar error on " + currentLine + " " + e.toString(),
 							"Expected format: /~disp-cell-char:number char \n "
 									+ "Where the number is the index of cell to display a character in a braille cell. \n"
 									+ "Where the char representing a character for a braille cell to read. \n"
@@ -566,7 +563,7 @@ public class AuthoringUtil {
 					}
 
 				} catch (Exception e) {
-					errorLog("Phrasing dispCellRaise error on " + currentLine + " " + e.toString(),
+					ErrorUtil.errorLog("Phrasing dispCellRaise error on " + currentLine + " " + e.toString(),
 							"Expected format: /~disp-cell-raise:number1 number2 \n "
 									+ "Where the number1 is the index of cell to raise cell. \n"
 									+ "Where the number2 is the number of pin to raise. \n" + "Program received : "
@@ -597,7 +594,7 @@ public class AuthoringUtil {
 					}
 
 				} catch (Exception e) {
-					errorLog("Phrasing dispCellLower error on " + currentLine + " " + e.toString(),
+					ErrorUtil.errorLog("Phrasing dispCellLower error on " + currentLine + " " + e.toString(),
 							"Expected format: /~disp-cell-lower:number1 number2 \n "
 									+ "Where the number1 is the index of cell to lower cell. \n"
 									+ "Where the number2 is the number of pin to lower.  \n" + "Program received : "
@@ -724,54 +721,10 @@ public class AuthoringUtil {
 			return phrase;
 
 		} catch (Exception e) {
-			errorLog("Exception error: " + e.toString(), e.toString(), PCE);
+			ErrorUtil.errorLog("Exception error: " + e.toString(), e.toString(), PCE);
 			return null;
 		}
 
-	}
-
-	/**
-	 * Writes an error and store in a text file.
-	 * 
-	 * @author ScenarioParser writer
-	 * @param exception
-	 *            the exception message
-	 * @param message
-	 *            the specific error message
-	 * @param errorLoggerName
-	 *            the name of error file and logger's name
-	 */
-	public static void errorLog(String exception, String message, String errorLoggerName) {
-		Logger logger = Logger.getLogger(errorLoggerName);
-		FileHandler fh;
-
-		System.out.println(message);
-
-		// speak("Error! Something went wrong in the program! Please consult a
-		// teacher "
-		// + "or administrator for assistance! Also please view the ERROR_LOG
-		// file for more details");
-		// The try-catch block is to format the Logger class so that the error
-		// log file is easier to understand.
-		try {
-			File f = new File("./errors/" + errorLoggerName + ".txt");
-			fh = new FileHandler(f.toString());
-
-			logger.addHandler(fh);
-			logger.setUseParentHandlers(false);
-			SimpleFormatter formatter = new SimpleFormatter();
-			fh.setFormatter(formatter);
-
-			logger.warning(exception);
-			logger.info(message);
-			fh.close();
-
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		// exit();
 	}
 
 	/**
@@ -797,7 +750,7 @@ public class AuthoringUtil {
 			}
 
 		} catch (FileNotFoundException e) {
-			errorLog("File parsing error: " + e.toString(), "File name: " + file.getName(), PCE);
+			ErrorUtil.errorLog("File parsing error: " + e.toString(), "File name: " + file.getName(), PCE);
 		}
 
 		return fileContent;

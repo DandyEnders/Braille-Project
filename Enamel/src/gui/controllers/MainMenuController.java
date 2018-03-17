@@ -61,7 +61,8 @@ public class MainMenuController extends Controller{
 	
 	@FXML
 	public void openVoiceRecorder() {
-		voiceRecorder.display(new Stage());
+		Stage voiceRecorderWindow = new Stage();
+		voiceRecorder.display(voiceRecorderWindow);
 	}
 	
     @FXML

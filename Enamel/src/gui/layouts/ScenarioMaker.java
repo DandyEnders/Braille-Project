@@ -15,7 +15,8 @@ import javafx.fxml.FXMLLoader;
  * @author Jinho Hwang
  *
  */
-public class ScenarioMaker extends View {
+public class ScenarioMaker extends ReturnableView<ScenarioMakerController,File> {
+	
 	// The integer window wiedth / height. Added for convenience.
 	private final static Integer windowWidth = 614;
 	private final static Integer windowHeight = 750;
@@ -23,23 +24,16 @@ public class ScenarioMaker extends View {
 	private final static Integer windowMinWidth = windowWidth;
 	private final static Integer windowMaxWidth = windowWidth;
 	
-	// Controller
-	ScenarioMakerController control;
-	
 	// Input file
 	private File scenarioFile;
-	private List<File> scenarioList;
-	private List<String> scenarioNameList;
 	
-	public ScenarioMaker(List<File> scenarioList, List<String> scenarioNameList){
-		this(new File(""),scenarioList,scenarioNameList);
+	public ScenarioMaker(){
+		this(new File(""));
 	}
 	
-	public ScenarioMaker(File scenarioFile, List<File> scenarioList, List<String> scenarioNameList){
+	public ScenarioMaker(File scenarioFile){
 		super();
-		this.scenarioList = scenarioList;
 		this.scenarioFile = scenarioFile;
-		this.scenarioNameList = scenarioNameList;
 	}
 
 	@Override
@@ -56,11 +50,10 @@ public class ScenarioMaker extends View {
 		if(!scenarioFile.getName().equals("")) {
 			control.setFile(scenarioFile);
 		}
-		control.setScenarioList(scenarioList);
-		control.setScenarioNameList(scenarioNameList);
 		
 		// Close the whole thing when red X is pressed.
 		window.setOnCloseRequest(e -> window.close());
+		window.show();
 	}
 	
 }

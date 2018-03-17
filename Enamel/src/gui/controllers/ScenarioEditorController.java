@@ -119,6 +119,9 @@ public class ScenarioEditorController extends Controller{
 	}
 	 
 	private void listUpdate() {
+		
+		obsFileList = FXCollections.observableArrayList();
+		
 		this.obsFileList.clear();
 		
 		for(File file : fileList) {
@@ -322,29 +325,48 @@ public class ScenarioEditorController extends Controller{
 	public void createScenario() {
 		// Create scenario maker with empty args and show it; 
 		// empty name and zero cells / buttons
-		scenarioMaker = new ScenarioMaker(fileList,obsFileList);
-		scenarioMaker.show();  
+		File scenarioFile = makeScenario(new File(""));
+		
+		if(scenarioFile != null) {
+			fileList.add(scenarioFile);
+			listUpdate();
+		}
+	}
+
+
+	/**
+	 * 
+	 */
+	private File makeScenario(File inFile) {
+		Stage scenarioMakerWindow = new Stage();
+		scenarioMaker = new ScenarioMaker(inFile);
+		scenarioMaker.display(scenarioMakerWindow);
+		File scenarioFile = scenarioMaker.getReturn();
+		return scenarioFile;
 	}
 	
 	/**
 	 * This method opens a Scenemaker, with file selected.
 	 */
 	public void editScenario() {
-		// The index of scenario selected
-		int selectedIndex = scenarioList.getSelectionModel().getSelectedIndex();
 		
 		// If scenario is selected
-		if(selectedIndex != -1){
+		if(isSelected()){
 			
 			// Get the selected file
-			File selectedFile = fileList.get(selectedIndex);
+			File selectedFile = fileList.get(getSelectedIndex());
+			File scenarioFile = makeScenario(selectedFile);
 			
-			// Create scenario maker with the File;
-			// name of the file / commands / # of cell / button will be filled.
-			scenarioMaker = new ScenarioMaker(selectedFile,fileList,obsFileList);
-			scenarioMaker.show();
+			if(scenarioFile != null) {
+				fileList.set(getSelectedIndex(), scenarioFile);
+				listUpdate();
+			}
 		}
+		
 	}
+	
+	
+	
 	
 	@FXML
 	protected void keyPressed(KeyEvent event) {

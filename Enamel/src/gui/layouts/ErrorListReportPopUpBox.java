@@ -20,10 +20,7 @@ import utility.Language;
  * @author Jinho Hwang
  *
  */
-public class ErrorListReportPopUpBox extends View {
-	
-	// control.
-	ErrorListReportPopUpBoxController control;
+public class ErrorListReportPopUpBox extends View<ErrorListReportPopUpBoxController> {
 	
 	private String label;
 	private List<File> errorList;
@@ -45,5 +42,6 @@ public class ErrorListReportPopUpBox extends View {
 		
 		control.setErrorList(errorList);
 		control.setLabel(label);
+		window.showAndWait();
 	}
 }

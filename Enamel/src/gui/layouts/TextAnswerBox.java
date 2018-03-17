@@ -8,9 +8,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import utility.Language;
 
-public class TextAnswerBox extends View {
-
-	private TextAnswerBoxController control;
+public class TextAnswerBox extends ReturnableView<TextAnswerBoxController,String> {
 	
 	private String title;
 	private String label;

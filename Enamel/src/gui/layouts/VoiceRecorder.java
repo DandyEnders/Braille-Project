@@ -8,9 +8,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import utility.Language;
 
-public class VoiceRecorder extends View {
-	
-	VoiceRecorderController control;
+public class VoiceRecorder extends View<VoiceRecorderController> {
 	
 	public VoiceRecorder() {
 		super();
@@ -31,6 +29,8 @@ public class VoiceRecorder extends View {
 		
 		// Close the whole thing when red X is pressed.
 		window.setOnCloseRequest(e -> window.close());
+		
+		window.show();
 		
 	}
 }

@@ -29,11 +29,11 @@
                <children>
                   <Label layoutY="38.0" prefHeight="17.0" prefWidth="145.0" text="Number of Braille Cells: " />
                   <Region prefHeight="25.0" prefWidth="7.0" />
-                  <TextField fx:id="numCellTextField" accessibleHelp="Type number of Braille Cells here" accessibleText="Number of Braille cell" layoutX="141.0" layoutY="34.0" prefHeight="23.0" prefWidth="41.0" promptText="#" text="0" />
+                  <TextField fx:id="numCellTextField" accessibleHelp="Type number of Braille Cells here" accessibleText="Number of Braille cell" layoutX="141.0" layoutY="34.0" prefHeight="23.0" prefWidth="41.0" promptText="#" text="1" />
                   <Region prefHeight="23.0" prefWidth="13.0" />
                   <Label layoutX="200.0" layoutY="38.0" text="Number of Buttons: " />
                   <Region prefHeight="25.0" prefWidth="9.0" />
-                  <TextField fx:id="numButtonTextField" accessibleHelp="Type number of buttons on the scenario here." accessibleText="Number of buttons" layoutX="318.0" layoutY="34.0" prefHeight="23.0" prefWidth="48.0" promptText="#" text="0" />
+                  <TextField fx:id="numButtonTextField" accessibleHelp="Type number of buttons on the scenario here." accessibleText="Number of buttons" layoutX="318.0" layoutY="34.0" prefHeight="23.0" prefWidth="48.0" promptText="#" text="1" />
                </children>
             </HBox>
          </children>

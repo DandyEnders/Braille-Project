@@ -14,9 +14,7 @@ import utility.Language;
  *
  */
 
-public class TwoChoiceBox extends View {
-
-	private TwoChoiceBoxController control;
+public class TwoChoiceBox extends ReturnableView<TwoChoiceBoxController,Boolean> {
 	
 	private String label;
 	private String leftButtonLabel, rightButtonLabel;
@@ -44,8 +42,8 @@ public class TwoChoiceBox extends View {
 		
 		// Close the whole thing when red X is pressed.
 		window.setOnCloseRequest(e -> e.consume());
-		window.showAndWait();
 		
+		window.showAndWait();
 	}
 	
 

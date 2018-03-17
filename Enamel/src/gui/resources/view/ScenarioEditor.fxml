@@ -47,7 +47,7 @@
                   <Font name="Arial Bold" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="exitButton" accessibleHelp="You can exit scenario editor here." accessibleRoleDescription="Press space to activate, tab to traverse." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#hideScenarioEditor" prefHeight="100.0" prefWidth="200.0" text="Exit">
+            <Button fx:id="exitButton" accessibleHelp="You can exit scenario editor here." accessibleRoleDescription="Press space to activate, tab to traverse." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#hide" prefHeight="100.0" prefWidth="200.0" text="Exit">
                <font>
                   <Font name="Arial Bold" size="15.0" />
                </font>

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import gui.layouts.CreateCommandPopUpBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
@@ -20,6 +22,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import utility.AuthoringUtil;
+import utility.ErrorUtil;
 import utility.Language;
 import utility.Phrase;
 /**
@@ -27,7 +30,7 @@ import utility.Phrase;
  * @author Jinho Hwang
  *
  */
-public class ScenarioMakerController extends Controller{
+public class ScenarioMakerController extends Controller implements Returnable<File>{
 
     @FXML
     private ListView<Phrase> listOfCommands;
@@ -73,11 +76,7 @@ public class ScenarioMakerController extends Controller{
     
  	File scenarioFile;
  	
- 	List<File> scenarioList;
- 	
  	List<Phrase> phraseList;
- 	
- 	List<String> scenarioNameList;
  	
  	ObservableList<Phrase> phraseListObs;
  	
@@ -86,15 +85,7 @@ public class ScenarioMakerController extends Controller{
  	public ScenarioMakerController(){
  		phraseListObs = FXCollections.observableArrayList();
  		numberOfCellAndButton = FXCollections.observableArrayList();
- 		phraseList = new LinkedList<Phrase>();
- 	}
- 	
- 	public void setScenarioList(List<File> scenarioList) {
- 		this.scenarioList = scenarioList;
- 	}
- 	
- 	public void setScenarioNameList(List<String> scnearioNameList) {
- 		this.scenarioNameList = scnearioNameList;
+ 		phraseList = new ArrayList<Phrase>();
  	}
  	
  	public void setFile(File file) {
@@ -128,9 +119,6 @@ public class ScenarioMakerController extends Controller{
 	 		}
 	 		
 	 		listUpdate();
-	 		
-	 		// Set the gui list.
-	 		listOfCommands.setItems(phraseListObs);
  		}
  		
  	}
@@ -158,38 +146,30 @@ public class ScenarioMakerController extends Controller{
     }
     
  	public void createCommand() {
- 		CreateCommandPopUpBox popup;
+ 		
+ 		Stage window = new Stage();
+ 		CreateCommandPopUpBox popup = new CreateCommandPopUpBox();
+		popup.display(window);
+		Phrase returnPhrase = popup.getReturn();
+ 		
  		
  		if(!isItemSelected()) {
- 			
- 			popup = new CreateCommandPopUpBox(phraseList,"above",0);
- 			
- 		}else{
-	 		
-	 		String pos = "";
-	 		
-	 		if(above.isSelected()) {
-	 			pos = "above";
-	 			
-	 		}else if(replace.isSelected()) {
-	 			pos = "replace";
-	 			
-	 		}else if(below.isSelected()) {
-	 			pos = "below";
-	 			
-	 		}
-	 		popup = new CreateCommandPopUpBox(phraseList,pos,selectedItemIndex());
-
-	 		
+ 			phraseList.add(0, returnPhrase);
+ 		}else {
+ 			if(above.isSelected()) {
+ 				phraseList.add(selectedItemIndex(),returnPhrase);
+ 			}else if (replace.isSelected()) {
+ 				phraseList.set(selectedItemIndex(),returnPhrase);
+ 			}else {
+ 				phraseList.add(selectedItemIndex()+1,returnPhrase);
+ 				
+ 			}
  		}
  		
- 		popup.display(new Stage());
-		phraseList = (List<Phrase>) popup.getReturn();
- 		
  		listUpdate();
- 		
- 		
  	}
+ 	
+ 	
  	
  	public void removeCommand() {
  		if(isItemSelected()) {
@@ -223,62 +203,154 @@ public class ScenarioMakerController extends Controller{
  			}
  		}
  	}
+	
+	private boolean isCellAndButtonFieldValid() {
+		
+		if(numCellTextField.getText().isEmpty()) {
+ 			ErrorUtil.alertMessageSimple("Empty cell number textfield", "Your cell number textfield is empty.");
+ 			return false;
+ 		}else{
+ 			
+ 			int cellNumber = 0;
+ 			
+ 			try {
+ 				cellNumber = Integer.parseInt(numCellTextField.getText());
+ 			} catch(NumberFormatException e) {
+ 				ErrorUtil.alertMessageSimple("Non integer cell number textfield", "Your cell number is not a number!.");
+ 				return false;
+ 			}
+ 			
+ 			if(cellNumber < 1) {
+ 				ErrorUtil.alertMessageSimple("Non positive cell number", "Your cell number is not an positive number!");
+ 				return false;
+ 			}
+ 		}
+		
+		
+		
+		if(numButtonTextField.getText().isEmpty()) {
+ 			ErrorUtil.alertMessageSimple("Empty button number textfield", "Your button number textfield is empty.");
+ 			return false;
+ 		}else {
+ 			
+ 			int buttonNumber = 0;
+
+ 			try {
+ 				buttonNumber = Integer.parseInt(numButtonTextField.getText());
+ 			} catch(NumberFormatException e) {
+ 				ErrorUtil.alertMessageSimple("Non integer button number textfield", "Your button number is not a number!.");
+ 				return false;
+ 			}
+ 			
+ 			if(buttonNumber < 1) {
+ 				ErrorUtil.alertMessageSimple("Non positive button number", "Your button number is not an positive number!");
+ 				return false;
+ 			}
+ 			
+ 		}
+		
+		return true;
+	}
  	
+	
+	
  	public void save() {
  		
- 		if(!numCellTextField.getText().isEmpty() &&
- 		   !numCellTextField.getText().isEmpty()  &&
- 		   !numButtonTextField.getText().isEmpty() ) {
+ 		if (isCellAndButtonFieldValid()){
  			
+ 			// The Output scenario
 			String scenarioString = "";
 			
-			scenarioString += "Cell " + numCellTextField.getText() + "\n";
-			scenarioString += "Button " + numButtonTextField.getText() + "\n";
-			
-			for(Phrase phrase : phraseList) {
-				scenarioString += phrase + "\n";
-			}
-			
+			scenarioString = makeLawScenarioString(scenarioString);
 			
 			if(AuthoringUtil.phraseScenario(scenarioString) != null) {
 				
-				String fileName = scenarioNameField.getText();
-				
-				if(fileName.length() < 5) {
-					if(!fileName.equals(".txt"))
-						fileName += ".txt";
-				}else {
-					if(!fileName.substring(fileName.length()-4, fileName.length()).equals(".txt")) {
-						fileName += ".txt";
-					}
-				}
-				
-				if(scenarioNameList.contains(fileName)) {
-					while(scenarioNameList.contains(fileName)) {
-						fileName = fileName.split("\\.")[0] + "_m.txt";
-					}
-				}
-				File file = new File("./FactoryScenarios/" + fileName);
+				String scenarioFileName = scenarioNameField.getText();
 				
 				try {
-					Writer fileWriter = new FileWriter(file);
+				scenarioFileName = formatScenarioName(scenarioFileName);
+				} catch (Exception e) {
+					
+				}
+				
+				
+				/*if(scenarioNameList.contains(scenarioFileName)) {
+					while(scenarioNameList.contains(scenarioFileName)) {
+						scenarioFileName = scenarioFileName.split("\\.")[0] + "_m.txt";
+					}
+				}*/
+				scenarioFile = new File(Language.scenarioPath + scenarioFileName);
+				
+				try {
+					Writer fileWriter = new FileWriter(scenarioFile);
 					fileWriter.write(scenarioString);
 					fileWriter.close();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					ErrorUtil.alertMessageSimple("File writing failed", "File writing failed! Contact technical staff for this.");
 				}
-				
-				scenarioList.add(file);
-				scenarioNameList.add(file.getName());
 				
 				close();
 			}else {
-				// TODO : Error occurred.
+				// TODO: make error message pop.
 			}
 	 		
 	 	}
  	}
+
+	/**
+	 * Adds .txt at the end.
+	 * @param scenarioFileName
+	 * @return formatted scneario name
+	 * @throws Exception 
+	 */
+	private String formatScenarioName(String scenarioFileName) throws Exception {
+		
+		String scenarioFileFormat = Language.scenarioFileFormat;
+		
+		// if the scenario file name is less than the file format ex : ab , ac, caa, a...
+		if(scenarioFileName.length() <= scenarioFileFormat.length()) {
+			if(!scenarioFileName.equals(scenarioFileFormat))
+				// just add the file extension.
+				scenarioFileName += scenarioFileFormat;
+		}else if(scenarioFileName.isEmpty()){
+			ErrorUtil.alertMessageSimple("Empty scenario name", "The scenario name is empty!");
+			throw new Exception("Empty scneario name");
+		}else {
+			// if the scenario file does not have extension at the end, add it.
+			if(!scenarioFileName.substring(scenarioFileName.length()-scenarioFileFormat.length(), scenarioFileName.length()).equals(scenarioFileFormat)) {
+				scenarioFileName += scenarioFileFormat;
+			}
+		}
+		return scenarioFileName;
+	}
+
+	/**
+	 * @param scenarioString
+	 * @return lawScenarioString
+	 */
+	private String makeLawScenarioString(String scenarioString) {
+		scenarioString = addCellAndButton(scenarioString);
+		
+		for(Phrase phrase : phraseList) {
+			scenarioString += phrase + "\n";
+		}
+		return scenarioString;
+	}
+
+	/**
+	 * @param scenarioString
+	 * @return scnearioString 
+	 * 			with button and text
+	 */
+	private String addCellAndButton(String scenarioString) {
+		scenarioString += "Cell " + numCellTextField.getText() + "\n";
+		scenarioString += "Button " + numButtonTextField.getText() + "\n";
+		return scenarioString;
+	}
+
+	
  	
  	@FXML
  	protected void keyPressed(KeyEvent event) {
@@ -298,6 +370,11 @@ public class ScenarioMakerController extends Controller{
     		}
     	}
     }
+
+	@Override
+	public File getReturn() {
+		return this.scenarioFile;
+	}
  	
  	
 }

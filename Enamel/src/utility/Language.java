@@ -16,8 +16,9 @@ import startProgram.AuthoringApp;
  */
 public final class Language {
 	
-	private static final String emptyString = "";
-	private static final String nullString = null;
+	public static final String emptyString = "";
+	public static final String nullString = null;
+	public static final String scenarioFileFormat = ".txt";
 	
 	public static final CodeSource codeSource = AuthoringApp.class.getProtectionDomain().getCodeSource();
 	public static final File jarFile = new File(codeSource.getLocation().getPath());
@@ -45,6 +46,7 @@ public final class Language {
 	
 	public static String fxmlPath(String className) {
 		switch(className) {
+		
 		case "MainMenu" : return mainMenuFxml; 
 		case "ScenarioEditor" : return scenarioEditorFxml;
 		case "ScenarioMaker" : return scenarioMakerFxml;
@@ -60,6 +62,7 @@ public final class Language {
 	
 	public static String titleName(String className) {
 		switch(className){
+		
 		case "MainMenu" : return mainMenuTitle; 
 		case "ScenarioEditor" : return scenarioEditorTitle;
 		case "ScenarioMaker" : return scenarioMakerTitle;

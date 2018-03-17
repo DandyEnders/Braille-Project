@@ -1,4 +1,8 @@
-2월 23, 2018 12:30:52 오후 utility.AuthoringUtil errorLog
-경고: Exception error: java.io.IOException: /~sound: needs argument/s.
-2월 23, 2018 12:30:52 오후 utility.AuthoringUtil errorLog
-정보: java.io.IOException: /~sound: needs argument/s.
+3월 17, 2018 10:13:53 오전 utility.AuthoringUtil errorLog
+경고: Exception error: java.util.NoSuchElementException: No line found
+3월 17, 2018 10:13:53 오전 utility.AuthoringUtil errorLog
+정보: Expected format: 
+Cell num1 
+ Button num2 
+as the first two lines of the scenarion file, and where num1 and num2 are positive integers. 
+Did not receive such a format in the scenario file and program had to end due to the incorrectfile format. 
