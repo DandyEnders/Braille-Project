@@ -29,6 +29,12 @@ public class AuthoringUtil {
 		// Meh
 	}
 	
+	private static void errorLog(String exception, String message) throws IOException {
+		ErrorUtil.errorLog(exception, message, PCE);
+		throw new IOException(message);
+	}
+	
+	
 	public static List<File> getAudioFiles(String str){
 		List<File> voiceList = new ArrayList<File>();
 		File audioFileFolder = new File(str);
@@ -57,9 +63,9 @@ public class AuthoringUtil {
 	 * @author Jinho Hwang
 	 * @param file
 	 * @return List\<Phrase\> if given file is correctly parsed
-	 * @return null if given file has incorrect syntax
+	 * @throws IOException if parsing goes wrong
 	 */
-	public static List<Phrase> phraseScenario(File file) {
+	public static List<Phrase> phraseScenario(File file) throws IOException {
 		String scenarioFile = AuthoringUtil.fileToString(file);
 		return phraseScenario(scenarioFile);
 	}
@@ -84,10 +90,10 @@ public class AuthoringUtil {
 	 * @param scenarioFile
 	 * @return List\<Phrase\> if the file was correctly phrased, return a Pair of
 	 *         true and list of correct List of Phrases.
-	 * @return null if given file failed to phrase correctly.
+	 * @throws IOException if parsing goes wrong
 	 */
 	@SuppressWarnings("resource")
-	public static List<Phrase> phraseScenario(String scenarioFile) {
+	public static List<Phrase> phraseScenario(String scenarioFile) throws IOException {
 
 		// -----------------------------------------------------------------/
 
@@ -107,65 +113,62 @@ public class AuthoringUtil {
 		// Get validation check of two first line and phrase it------------//
 		try {
 
-			// Get 1st and 2nd line
-			String firstLawLine = scan.nextLine();
-			String secondLawLine = scan.nextLine();
+		// Get 1st and 2nd line
+		String firstLawLine = scan.nextLine();
+		String secondLawLine = scan.nextLine();
 
-			// Check if they have 2 arguments (cell & num or button & num) or not.
-			if (firstLawLine.split("\\s").length > 2 || firstLawLine.split("\\s").length < 2) {
-				throw new IOException("First line contains more or less than 2 arguments.");
-			}
+		// Check if they have 2 arguments (cell & num or button & num) or not.
+		if (firstLawLine.split("\\s").length > 2 || firstLawLine.split("\\s").length < 2) {
+			throw new IOException("First line contains more or less than 2 arguments.");
+		}
 
-			if (secondLawLine.split("\\s").length > 2 || secondLawLine.split("\\s").length < 2) {
-				throw new IOException("second line contains more or less than 2 arguments.");
-			}
+		if (secondLawLine.split("\\s").length > 2 || secondLawLine.split("\\s").length < 2) {
+			throw new IOException("second line contains more or less than 2 arguments.");
+		}
 
-			// Sub them in
-			firstLine[0] = firstLawLine.split("\\s")[0];
-			secondLine[0] = secondLawLine.split("\\s")[0];
+		// Sub them in
+		firstLine[0] = firstLawLine.split("\\s")[0];
+		secondLine[0] = secondLawLine.split("\\s")[0];
 
-			firstLine[1] = firstLawLine.split("\\s")[1];
-			secondLine[1] = secondLawLine.split("\\s")[1];
+		firstLine[1] = firstLawLine.split("\\s")[1];
+		secondLine[1] = secondLawLine.split("\\s")[1];
 
-			// Separation of words
-			String cell = firstLine[0]; // should be "Cell"
-			String button = secondLine[0]; // should be "Button"
+		// Separation of words
+		String cell = firstLine[0]; // should be "Cell"
+		String button = secondLine[0]; // should be "Button"
 
-			// "catch" will catch if the numeric argument is parse-able or not.
-			cellNumber = Integer.parseInt(firstLine[1]);
-			buttonNumber = Integer.parseInt(secondLine[1]);
+		// "catch" will catch if the numeric argument is parse-able or not.
+		cellNumber = Integer.parseInt(firstLine[1]);
+		buttonNumber = Integer.parseInt(secondLine[1]);
 
-			// Throw exception if cell is not "Cell" or button is not "Button"
-			// or # of cell or button is less than 1 ( not positive )
-			if (!cell.equals("Cell")) {
-				throw new IOException("First word of first line is not \"Cell\".");
-			}
-			if (!button.equals("Button")) {
-				throw new IOException("First word of second line is not \"Button\".");
-			}
-			if (cellNumber < 1) {
-				throw new IOException("A number of cell is not a positive number. ( < 1 )");
-			}
-			if (buttonNumber < 1) {
-				throw new IOException("A number of button is not a positive number. ( < 1 )");
-			}
+		// Throw exception if cell is not "Cell" or button is not "Button"
+		// or # of cell or button is less than 1 ( not positive )
+		if (!cell.equals("Cell")) {
+			throw new IOException("First word of first line is not \"Cell\".");
+		}
+		if (!button.equals("Button")) {
+			throw new IOException("First word of second line is not \"Button\".");
+		}
+		if (cellNumber < 1) {
+			throw new IOException("A number of cell is not a positive number. ( < 1 )");
+		}
+		if (buttonNumber < 1) {
+			throw new IOException("A number of button is not a positive number. ( < 1 )");
+		}
 
-			// Validation of first two line completed here;
-			// Submit the first two line in the phraseList as phrases
-			phraseList.add(new Phrase(cell, cellNumber + ""));
-			phraseList.add(new Phrase(button, buttonNumber + ""));
+		// Validation of first two line completed here;
+		// Submit the first two line in the phraseList as phrases
+		phraseList.add(new Phrase(cell, cellNumber + ""));
+		phraseList.add(new Phrase(button, buttonNumber + ""));
 
-		} catch (Exception e) {
+		} catch (IOException e) {
 			scan.close();
 			// In case where word "Cell" or "Button" or number after cell and button fails,
 			// deal with exception
-			ErrorUtil.errorLog("Exception error: " + e.toString(), "Expected format: \nCell num1 \n Button num2 \n"
+			errorLog("Exception error: " + e.toString(), "Expected format: \nCell num1 \n Button num2 \n"
 					+ "as the first two lines of the scenarion file, and where num1 and num2 are positive integers. \n"
 					+ "Did not receive such a format in the scenario file and program had to end due to the incorrect"
-					+ "file format. ", PCE);
-			// Exception was thrown, which means phrase was wrong, so return false
-
-			return null;
+					+ "file format. ");
 		}
 
 		// Got validation check of two first line and phrase it---------------//^^^^^
@@ -182,7 +185,7 @@ public class AuthoringUtil {
 		// While iterator traverses...
 		for (int i = 0; i < phraseList.size(); i++) {
 
-			int currentLine = i + 1;
+			int currentLine = i - 1;
 
 			// Get the current phrase.
 			Phrase currentPhrase = phraseList.get(i);
@@ -205,13 +208,13 @@ public class AuthoringUtil {
 				try {
 					Integer.parseInt(arguments[0]);
 				} catch (Exception e) {
-					ErrorUtil.errorLog("Phrasing pause length error on line " + currentLine + ": " + e.toString(),
-							"Expected format: /~pause: number \n"
-									+ "Where the number is the number of seconds the program "
-									+ "\nwaits before continuing on line " + currentLine + "\nProgram received : "
-									+ currentPhrase,
-							PCE);
-					return null;
+					String exception = "Phrasing pause length error on line " + currentLine + ": " + e.toString();
+					String message = "Expected format: /~pause: number \n"
+							+ "Where the number is the number of seconds the program "
+							+ "\nwaits before continuing on line " + currentLine + "\nProgram received : "
+							+ currentPhrase;
+					
+					errorLog(exception,message);
 				}
 
 				break;
@@ -238,12 +241,11 @@ public class AuthoringUtil {
 					}
 				}
 			} catch (Exception e) {
-				ErrorUtil.errorLog("Phrasing disp-string error on " + currentLine + " " + e.toString(),
+				errorLog("Phrasing disp-string error on " + currentLine + " " + e.toString(),
 						e.toString() + " Expected format: /~disp-string:string \n "
 								+ "Where the string is the string to display on cells. \n"
-								+ "Program received : " + currentPhrase,
-						PCE);
-				return null;
+								+ "Program received : " + currentPhrase);
+				;
 			}
 			break;
 
@@ -252,35 +254,35 @@ public class AuthoringUtil {
 				// there is
 				// a matching pair of endrepeat.
 				remainingList = new LinkedList<Phrase>(phraseList.subList(i + 1, phraseList.size()));
-
-				// Make a for loop that goes through all the remaining list finding unmatched
-				// endrepeat.
-				for (int j = 0; j < remainingList.size(); j++) {
-
-					// Get the current remaining phrase.
-					Phrase currentPivotPhrase = remainingList.get(j);
-
-					// If the phrase is endrepeat,
-					if (currentPivotPhrase.getType() == "/~endrepeat") {
-
-						// and if the phrase is unmatched,
-						if (currentPivotPhrase.getFlag() == null) {
-
-							// matching each other.
-							phraseList.get(j + i + 1).setFlag(currentPhrase);
-							currentPhrase.setFlag(phraseList.get(j + i + 1));
-							break;
+				
+				if(!remainingList.isEmpty()) {
+					// Make a for loop that goes through all the remaining list finding unmatched
+					// endrepeat.
+					for (int j = 0; j < remainingList.size(); j++) {
+	
+						// Get the current remaining phrase.
+						Phrase currentPivotPhrase = remainingList.get(j);
+	
+						// If the phrase is endrepeat,
+						if (currentPivotPhrase.getType().equals("/~endrepeat")) {
+	
+							// and if the phrase is unmatched,
+							if (currentPivotPhrase.getFlag() == null) {
+	
+								// matching each other.
+								phraseList.get(j + i + 1).setFlag(currentPhrase);
+								currentPhrase.setFlag(phraseList.get(j + i + 1));
+								break;
+							} // end of if
 						} // end of if
-					} // end of if
-				} // end of for
-
+					} // end of for
+				}
 				// At this point, repeat could not find any matching endrepeat, so print error
-				if (currentPhrase.getFlag() == null) {
-					ErrorUtil.errorLog(
-							"One of the repeat no match endrepeat error on " + currentLine, "Last found repeat on line "
-									+ currentLine + " do not have a matching endrepeat for the rest of the scenario.",
-							PCE);
-					return null;
+				if (currentPhrase.getFlag() == null || remainingList.isEmpty()) {
+					errorLog(
+							"One of the repeat no match endrepeat error on " + currentLine, "Repeat command on line "
+									+ currentLine + " do not have a matching endrepeat for the rest of the scenario.");
+					;
 				}
 
 				break;
@@ -294,12 +296,11 @@ public class AuthoringUtil {
 								"Repeat button index out of bounds. Index range of : 0 ~ " + (buttonNumber - 1));
 					}
 				} catch (Exception e) {
-					ErrorUtil.errorLog("Phrasing repeat button error on " + currentLine + " " + e.toString(),
+					errorLog("Phrasing repeat button error on " + currentLine + " " + e.toString(),
 							"Expected format: /~repeat-button:number \n "
 									+ "Where the number is the index of button to repeat. \n" + "Program received : "
-									+ currentPhrase,
-							PCE);
-					return null;
+									+ currentPhrase);
+					;
 				}
 				break;
 
@@ -318,47 +319,46 @@ public class AuthoringUtil {
 
 					// Make a for loop that goes through all the remaining list finding for place to
 					// skip to.
-					for (int j = 0; j < remainingList.size(); j++) {
-
-						// Get the current remaining phrase.
-						Phrase currentPivotPhrase = remainingList.get(j);
-
-						if (currentPivotPhrase.getFlag() != null) {
-							continue;
-						}
-
-						// If the phrase is goto,
-						if (currentPivotPhrase.getType().equals("/~")) {
-							
-							// and if the phrase is unmatched before,
-							if (currentPivotPhrase.getArguments()[0].equals(currentPhrase.getArguments()[1])) {
+					
+					if(!remainingList.isEmpty()) {
+						for (int j = 0; j < remainingList.size(); j++) {
+	
+							// Get the current remaining phrase.
+							Phrase currentPivotPhrase = remainingList.get(j);
+	
+							if (currentPivotPhrase.getFlag() != null) {
+								continue;
+							}
+	
+							// If the phrase is goto,
+							if (currentPivotPhrase.getType().equals(Language.commandPrefix)) {
 								
-								// matching each other.
-								phraseList.get(j + i + 1).setFlag(currentPhrase);
-								currentPhrase.setFlag(phraseList.get(j + i + 1));
-								break;
+								// and if the phrase is unmatched before,
+								if (currentPivotPhrase.getArguments()[0].equals(currentPhrase.getArguments()[1])) {
+									
+									// matching each other.
+									phraseList.get(j + i + 1).setFlag(currentPhrase);
+									currentPhrase.setFlag(phraseList.get(j + i + 1));
+									break;
+								} // end of if
 							} // end of if
-						} // end of if
-					} // end of for
-
+						} // end of for
+					}
 					// At this point, skip-button could not find any matching skip to, so print
 					// error
-					if (currentPhrase.getFlag() == null) {
-						ErrorUtil.errorLog("Skip-button no match goto error somewhere. Last one found on " + currentLine,
-								" One of the skip-button does not match to its goto. The skip-button on line "
-										+ currentLine + " do not have a matching goto "
-										+ "for the rest of the scenario.",
-								PCE);
-						return null;
+					if (currentPhrase.getFlag() == null || remainingList.isEmpty()) {
+						errorLog("Skip-button no match goto error somewhere. Last one found on " + currentLine,
+								" The skip-button on line " + currentLine + " do not have a matching goto "
+										+ "for the rest of the scenario.");
+						;
 					}
 				} catch (Exception e) {
-					ErrorUtil.errorLog("Phrasing skip button error on " + currentLine + " " + e.toString(),
+					errorLog("Phrasing skip button error on " + currentLine + " " + e.toString(),
 							e.toString() + " : Expected format: /~skip-button:number String \n "
 									+ "Where the number is the index of button to skip.\n"
 									+ "Where the String is the line to skip to.\n" + "Program received "+currentLine + " : "
-									+ currentPhrase,
-							PCE);
-					return null;
+									+ currentPhrase);
+					;
 				}
 				break;
 
@@ -368,14 +368,13 @@ public class AuthoringUtil {
 			// case "/~user-input": do not check
 			// break;
 
-			case "/~sound:1":
-				File soundfile = new File("./FactoryScenarios/AudioFiles/" + currentPhrase.getArguments()[0]);
+			case "/~sound:":
+				File soundfile = new File(Language.audioPath + currentPhrase.getArguments()[0]);
 				if (!soundfile.exists()) {
-					ErrorUtil.errorLog("Sound file missing error: " + soundfile.getAbsolutePath(),
+					errorLog("Sound file missing error: " + soundfile.getAbsolutePath(),
 							"Expected format: /~sound:String \n " + "Where the String is the name of soundfile.\n"
-									+ "Program received : " + currentPhrase,
-							PCE);
-					return null;
+									+ "Program received : " + currentPhrase);
+					;
 				}
 				break;
 
@@ -392,44 +391,44 @@ public class AuthoringUtil {
 
 					// Make a for loop that goes through all the remaining list finding for place to
 					// skip to.
-					for (int j = 0; j < remainingList.size(); j++) {
-
-						// Get the current remaining phrase.
-						Phrase currentPivotPhrase = remainingList.get(j);
-
-						// If the phrase is goto,
-						if (currentPivotPhrase.getType().equals("/~")) {
-/*
-							// If the pivot has a flag
-							if (currentPivotPhrase.getFlag() != null) {
-								continue;
-							}*/
-
-							// and if the phrase is unmatched before,
-							if (currentPivotPhrase.getArguments()[0].equals(currentPhrase.getArguments()[0])) {
-
-								// matching each other.
-								phraseList.get(j + i + 1).setFlag(currentPhrase);
-								currentPhrase.setFlag(phraseList.get(j + i + 1));
-								break;
+					if(!remainingList.isEmpty()) {
+						for (int j = 0; j < remainingList.size(); j++) {
+	
+							// Get the current remaining phrase.
+							Phrase currentPivotPhrase = remainingList.get(j);
+	
+							// If the phrase is goto,
+							if (currentPivotPhrase.getType().equals(Language.commandPrefix)) {
+	/*
+								// If the pivot has a flag
+								if (currentPivotPhrase.getFlag() != null) {
+									continue;
+								}*/
+	
+								// and if the phrase is unmatched before,
+								if (currentPivotPhrase.getArguments()[0].equals(currentPhrase.getArguments()[0])) {
+	
+									// matching each other.
+									phraseList.get(j + i + 1).setFlag(currentPhrase);
+									currentPhrase.setFlag(phraseList.get(j + i + 1));
+									break;
+								} // end of if
 							} // end of if
-						} // end of if
-					} // end of for
+						} // end of for
+					}
 
-					if (currentPhrase.getFlag() == null) {
-						ErrorUtil.errorLog(
+					if (currentPhrase.getFlag() == null || remainingList.isEmpty()) {
+						errorLog(
 								"Skip unmatched goto error on " + currentLine, "The skip on line " + currentLine
-										+ " do not have a matching skip goto to for the rest of the scenario.",
-								PCE);
-						return null;
+										+ " do not have a matching skip goto to for the rest of the scenario.");
+						;
 					}
 				} catch (Exception e) {
-					ErrorUtil.errorLog("Phrasing skip error on " + currentLine,
+					errorLog("Phrasing skip error on " + currentLine,
 							e.toString() + " Expected format: /~skip:String \n "
 									+ "Where the String is the place to jump to. Error found on " + currentLine + "\n"
-									+ "Program received : " + currentPhrase,
-							PCE);
-					return null;
+									+ "Program received : " + currentPhrase);
+					;
 				}
 				break;
 
@@ -449,12 +448,11 @@ public class AuthoringUtil {
 								"dispClearCell cell index out of bounds. Range of cell index: 0 ~ " + (cellNumber - 1));
 					}
 				} catch (Exception e) {
-					ErrorUtil.errorLog("Phrasing dispclearcell error on " + currentLine + " " + e.toString(),
+					errorLog("Phrasing dispclearcell error on " + currentLine + " " + e.toString(),
 							"Expected format: /~disp-clear-cell:number \n "
 									+ "Where the number is the index of cell to display clear cell. \n"
-									+ "Program received : " + currentPhrase,
-							PCE);
-					return null;
+									+ "Program received : " + currentPhrase);
+					;
 				}
 				break;
 
@@ -491,13 +489,12 @@ public class AuthoringUtil {
 						}
 					}
 				} catch (Exception e) {
-					ErrorUtil.errorLog("Phrasing dispCellPins error on " + currentLine + " " + e.toString(),
+					errorLog("Phrasing dispCellPins error on " + currentLine + " " + e.toString(),
 							"Expected format: /~disp-cell-pins:number1 number2 \n "
 									+ "Where the number1 is the index of cell to display cell pins. \n"
 									+ "Where the number2 represents 8 cell pins, either 0 or 1. \n"
-									+ "Program received : " + currentPhrase,
-							PCE);
-					return null;
+									+ "Program received : " + currentPhrase);
+					;
 				}
 				break;
 
@@ -525,13 +522,12 @@ public class AuthoringUtil {
 					}
 
 				} catch (Exception e) {
-					ErrorUtil.errorLog("Phrasing dispCellChar error on " + currentLine + " " + e.toString(),
+					errorLog("Phrasing dispCellChar error on " + currentLine + " " + e.toString(),
 							"Expected format: /~disp-cell-char:number char \n "
 									+ "Where the number is the index of cell to display a character in a braille cell. \n"
 									+ "Where the char representing a character for a braille cell to read. \n"
-									+ "Program received : " + currentPhrase,
-							PCE);
-					return null;
+									+ "Program received : " + currentPhrase);
+					;
 				}
 				break;
 
@@ -557,13 +553,12 @@ public class AuthoringUtil {
 					}
 
 				} catch (Exception e) {
-					ErrorUtil.errorLog("Phrasing dispCellRaise error on " + currentLine + " " + e.toString(),
+					errorLog("Phrasing dispCellRaise error on " + currentLine + " " + e.toString(),
 							"Expected format: /~disp-cell-raise:number1 number2 \n "
 									+ "Where the number1 is the index of cell to raise cell. \n"
 									+ "Where the number2 is the number of pin to raise. \n" + "Program received : "
-									+ currentPhrase,
-							PCE);
-					return null;
+									+ currentPhrase);
+					;
 				}
 				break;
 
@@ -588,13 +583,12 @@ public class AuthoringUtil {
 					}
 
 				} catch (Exception e) {
-					ErrorUtil.errorLog("Phrasing dispCellLower error on " + currentLine + " " + e.toString(),
+					errorLog("Phrasing dispCellLower error on " + currentLine + " " + e.toString(),
 							"Expected format: /~disp-cell-lower:number1 number2 \n "
 									+ "Where the number1 is the index of cell to lower cell. \n"
 									+ "Where the number2 is the number of pin to lower.  \n" + "Program received : "
-									+ currentPhrase,
-							PCE);
-					return null;
+									+ currentPhrase);
+					;
 				}
 				break;
 
@@ -626,12 +620,14 @@ public class AuthoringUtil {
 	 *            A line in a scenario file.
 	 * @return Phrase Phrase that was parsed.
 	 */
-	public static Phrase phraseThisLine(String line) {
+	public static Phrase phraseThisLine(String line) throws IOException {
+		
+		// Setting up output phrase.
+		Phrase phrase = null;
 
 		// try, because there is a case where a phrase might have 3 or more.
 		try {
-			// Setting up output phrase.
-			Phrase phrase = null;
+			
 
 			if (isEmptyLine(line)) {
 				phrase = new Phrase("emptyLine");
@@ -703,21 +699,20 @@ public class AuthoringUtil {
 					}
 				}
 
-				// If for loop could not find a type match, set it as a speak phrase or goto
-				// phrase.
+				// If for loop could not find a type match, set it as a goto phrase.
 				if (phrase == null) {
-					if (line.substring(0, 2).equals("/~")) {
-						phrase = new Phrase("/~", line.substring(2, line.length()));
+					if (line.substring(0, Language.commandPrefix.length()).equals(Language.commandPrefix)) {
+						phrase = new Phrase(Language.commandPrefix, line.substring(Language.commandPrefix.length(), line.length()));
 					}
 				}
 			}
 
-			return phrase;
+			
 
-		} catch (Exception e) {
-			ErrorUtil.errorLog("Exception error: " + e.toString(), e.toString(), PCE);
-			return null;
+		} catch (IOException e) {
+			errorLog("Exception error: " + e.toString(), e.toString());
 		}
+		return phrase;
 
 	}
 
@@ -738,22 +733,17 @@ public class AuthoringUtil {
 	 *            Input File.
 	 * @return fileContent Output String.
 	 */
-	public static String fileToString(File file) {
+	public static String fileToString(File file) throws FileNotFoundException {
 		String fileContent = "";
-
-		try {
-			if (file.isFile()) {
-				Scanner scan = new Scanner(file);
-				while (scan.hasNextLine()) {
-					fileContent += scan.nextLine() + "\n";
-				}
-				scan.close();
-			} else {
-				throw new FileNotFoundException(file.getName() + " is not a file!");
+		
+		if (file.isFile()) {
+			Scanner scan = new Scanner(file);
+			while (scan.hasNextLine()) {
+				fileContent += scan.nextLine() + "\n";
 			}
-
-		} catch (FileNotFoundException e) {
-			ErrorUtil.errorLog("File parsing error: " + e.toString(), "File name: " + file.getName(), PCE);
+			scan.close();
+		} else {
+			throw new FileNotFoundException(file.getName() + " is not a file!");
 		}
 
 		return fileContent;

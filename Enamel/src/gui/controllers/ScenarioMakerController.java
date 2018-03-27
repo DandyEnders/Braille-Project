@@ -95,8 +95,13 @@ public class ScenarioMakerController extends Controller implements Returnable<Fi
  		// Set the scenario name.
  		scenarioNameField.setText(file.getName());
  		
- 		// Bring the list of Phrases.
- 		List<Phrase> lawPhraseList = AuthoringUtil.phraseScenario(file);
+ 		List<Phrase> lawPhraseList = null;
+ 		try {
+	 		// Bring the list of Phrases.
+	 		lawPhraseList = AuthoringUtil.phraseScenario(file);
+ 		}catch(IOException e) {
+ 			ErrorUtil.alertMessageShowException("Formatting error!", "The following error occured.", e);
+ 		}
  		
  		// If scenario load was successful,
  		if( lawPhraseList != null) {
@@ -119,6 +124,9 @@ public class ScenarioMakerController extends Controller implements Returnable<Fi
 	 		}
 	 		
 	 		listUpdate();
+	 		
+	 		if(!phraseList.isEmpty())
+	 			listOfCommands.getSelectionModel().select(0);
  		}
  		
  	}
@@ -152,28 +160,34 @@ public class ScenarioMakerController extends Controller implements Returnable<Fi
 		popup.display(window);
 		Phrase returnPhrase = popup.getReturn();
  		
- 		
- 		if(!isItemSelected()) {
- 			phraseList.add(0, returnPhrase);
- 		}else {
- 			if(above.isSelected()) {
- 				phraseList.add(selectedItemIndex(),returnPhrase);
- 			}else if (replace.isSelected()) {
- 				phraseList.set(selectedItemIndex(),returnPhrase);
- 			}else {
- 				phraseList.add(selectedItemIndex()+1,returnPhrase);
- 				
- 			}
+ 		if(returnPhrase != null) {
+ 			int index = 0;
+	 		if(!isItemSelected()) {
+	 			phraseList.add(0, returnPhrase);
+	 		}else {
+	 			index = selectedItemIndex();
+	 			if(above.isSelected()) {
+	 				phraseList.add(index,returnPhrase);
+	 			}else if (replace.isSelected()) {
+	 				phraseList.set(index,returnPhrase);
+	 			}else {
+	 				phraseList.add(index+1,returnPhrase);
+	 				index++;
+	 			}
+	 		}
+	 		
+	 		listUpdate();
+	 		listOfCommands.getSelectionModel().select(index);
  		}
- 		
- 		listUpdate();
  	}
  	
  	
  	
  	public void removeCommand() {
  		if(isItemSelected()) {
- 			phraseList.remove(selectedItemIndex());
+ 			int index = selectedItemIndex();
+ 			phraseList.remove(index);
+ 			listOfCommands.getSelectionModel().select(index);
  			listUpdate();
  		}
  	}
@@ -187,9 +201,10 @@ public class ScenarioMakerController extends Controller implements Returnable<Fi
  	public void moveUp() {
  		if(isItemSelected()) {
  			if(selectedItemIndex() > 0) {
- 				swap(selectedItemIndex(), selectedItemIndex()-1);
+ 				int index = selectedItemIndex();
+ 				swap(index, index-1);
  				listUpdate();
- 				listOfCommands.getSelectionModel().select(selectedItemIndex()-1);
+ 				listOfCommands.getSelectionModel().select(index-1);
  			}
  		}
  	}
@@ -197,9 +212,10 @@ public class ScenarioMakerController extends Controller implements Returnable<Fi
  	public void moveDown() {
  		if(isItemSelected()) {
  			if(selectedItemIndex() < phraseListObs.size()-1) {
- 				swap(selectedItemIndex(), selectedItemIndex()+1);
+ 				int index = selectedItemIndex();
+ 				swap(index, index+1);
  				listUpdate();
- 				listOfCommands.getSelectionModel().select(selectedItemIndex()+1);
+ 				listOfCommands.getSelectionModel().select(index+1);
  			}
  		}
  	}
@@ -208,6 +224,7 @@ public class ScenarioMakerController extends Controller implements Returnable<Fi
 		
 		if(numCellTextField.getText().isEmpty()) {
  			ErrorUtil.alertMessageSimple("Empty cell number textfield", "Your cell number textfield is empty.");
+ 			numCellTextField.requestFocus();
  			return false;
  		}else{
  			
@@ -216,12 +233,14 @@ public class ScenarioMakerController extends Controller implements Returnable<Fi
  			try {
  				cellNumber = Integer.parseInt(numCellTextField.getText());
  			} catch(NumberFormatException e) {
- 				ErrorUtil.alertMessageSimple("Non integer cell number textfield", "Your cell number is not a number!.");
+ 				ErrorUtil.alertMessageSimple("Non integer cell number textfield", "Your cell number is not a number!");
+ 				numCellTextField.requestFocus();
  				return false;
  			}
  			
  			if(cellNumber < 1) {
  				ErrorUtil.alertMessageSimple("Non positive cell number", "Your cell number is not an positive number!");
+ 				numCellTextField.requestFocus();
  				return false;
  			}
  		}
@@ -230,6 +249,7 @@ public class ScenarioMakerController extends Controller implements Returnable<Fi
 		
 		if(numButtonTextField.getText().isEmpty()) {
  			ErrorUtil.alertMessageSimple("Empty button number textfield", "Your button number textfield is empty.");
+ 			numButtonTextField.requestFocus();
  			return false;
  		}else {
  			
@@ -238,12 +258,14 @@ public class ScenarioMakerController extends Controller implements Returnable<Fi
  			try {
  				buttonNumber = Integer.parseInt(numButtonTextField.getText());
  			} catch(NumberFormatException e) {
- 				ErrorUtil.alertMessageSimple("Non integer button number textfield", "Your button number is not a number!.");
+ 				ErrorUtil.alertMessageSimple("Non integer button number textfield", "Your button number is not a number!");
+ 				numButtonTextField.requestFocus();
  				return false;
  			}
  			
  			if(buttonNumber < 1) {
  				ErrorUtil.alertMessageSimple("Non positive button number", "Your button number is not an positive number!");
+ 				numButtonTextField.requestFocus();
  				return false;
  			}
  			
@@ -262,38 +284,36 @@ public class ScenarioMakerController extends Controller implements Returnable<Fi
 			String scenarioString = "";
 			
 			scenarioString = makeLawScenarioString(scenarioString);
+			List<Phrase> scenario = null;
 			
-			if(AuthoringUtil.phraseScenario(scenarioString) != null) {
+			try {
+				scenario = AuthoringUtil.phraseScenario(scenarioString);
+			} catch (IOException e) {
+				ErrorUtil.alertMessageShowException("Invalid scenario syntax.", e.getLocalizedMessage(), e);
+			}
+			
+			
+			if(scenario != null) {
 				
 				String scenarioFileName = scenarioNameField.getText();
-				
 				try {
-				scenarioFileName = formatScenarioName(scenarioFileName);
-				} catch (Exception e) {
+					scenarioFileName = formatScenarioName(scenarioFileName);
 					
-				}
-				
-				
-				/*if(scenarioNameList.contains(scenarioFileName)) {
-					while(scenarioNameList.contains(scenarioFileName)) {
-						scenarioFileName = scenarioFileName.split("\\.")[0] + "_m.txt";
-					}
-				}*/
-				scenarioFile = new File(Language.scenarioPath + scenarioFileName);
-				
-				try {
+					scenarioFile = new File(Language.scenarioPath + scenarioFileName);
+					
 					Writer fileWriter = new FileWriter(scenarioFile);
 					fileWriter.write(scenarioString);
 					fileWriter.close();
+	
+					close();
+				
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 					ErrorUtil.alertMessageSimple("File writing failed", "File writing failed! Contact technical staff for this.");
+				} catch (Exception e) {
+					ErrorUtil.alertMessageSimple("Missing Scenario name.", "Type the scenario name in the scenario name field.");
+					scenarioNameField.requestFocus();
 				}
 				
-				close();
-			}else {
-				// TODO: make error message pop.
 			}
 	 		
 	 	}
@@ -309,14 +329,16 @@ public class ScenarioMakerController extends Controller implements Returnable<Fi
 		
 		String scenarioFileFormat = Language.scenarioFileFormat;
 		
+		if(scenarioFileName.isEmpty() || scenarioFileName == null || scenarioFileName.equals(Language.emptyString)){
+			throw new Exception("Empty scneario name");
+		}
+		
 		// if the scenario file name is less than the file format ex : ab , ac, caa, a...
 		if(scenarioFileName.length() <= scenarioFileFormat.length()) {
-			if(!scenarioFileName.equals(scenarioFileFormat))
+			if(!scenarioFileName.equals(scenarioFileFormat)) {
 				// just add the file extension.
 				scenarioFileName += scenarioFileFormat;
-		}else if(scenarioFileName.isEmpty()){
-			ErrorUtil.alertMessageSimple("Empty scenario name", "The scenario name is empty!");
-			throw new Exception("Empty scneario name");
+			}
 		}else {
 			// if the scenario file does not have extension at the end, add it.
 			if(!scenarioFileName.substring(scenarioFileName.length()-scenarioFileFormat.length(), scenarioFileName.length()).equals(scenarioFileFormat)) {

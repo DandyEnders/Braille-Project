@@ -37,7 +37,12 @@ public class ErrorUtil {
 		alert.getDialogPane().setExpandableContent(area);
 		alert.showAndWait();
 	}
-
+	
+	public static void errorLog(Exception exception, String message, String errorLoggerName) {
+		ErrorUtil.errorLog(exception.toString(), message, errorLoggerName);
+	}
+	
+	
 	/**
 	 * Writes an error and store in a text file.
 	 * 
@@ -53,8 +58,12 @@ public class ErrorUtil {
 		Logger logger = Logger.getLogger(errorLoggerName);
 		FileHandler fh;
 	
-		System.out.println(message);
+		//System.out.println(message);
 	
+/*		alertMessageShowException("Error!", "Something went wrong in the program! Please consult \n" + 
+				"teacher or administrator for assistance! Also please view the error log in errors folder\n" + 
+				"for more details", new IllegalArgumentException(exception));*/
+		
 		// speak("Error! Something went wrong in the program! Please consult a
 		// teacher "
 		// + "or administrator for assistance! Also please view the ERROR_LOG

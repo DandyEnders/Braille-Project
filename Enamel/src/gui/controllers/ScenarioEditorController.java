@@ -22,6 +22,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import utility.AuthoringUtil;
+import utility.ErrorUtil;
 import utility.Language;
 /**
  * Scenario editor controller.
@@ -82,11 +83,15 @@ public class ScenarioEditorController extends Controller{
     	if(scenarioFileFolder.isDirectory()) {
     		for(File scenarioFile : scenarioFileFolder.listFiles()) {
     			if(!scenarioFile.isDirectory()) {
-    				if(scenarioFile.getName().length() >= 4) {
-	    				if(scenarioFile.getName().substring(scenarioFile.getName().length()-4, scenarioFile.getName().length()).equals(".txt")) {
-	    					if(AuthoringUtil.phraseScenario(scenarioFile) != null) {
-	    						fileList.add(scenarioFile);
-	    					}
+    				if(scenarioFile.getName().length() >= Language.scenarioFileFormat.length()) {
+	    				if(scenarioFile.getName().substring(scenarioFile.getName().length()-Language.scenarioFileFormat.length(), scenarioFile.getName().length()).equals(Language.scenarioFileFormat)) {
+	    					try {
+								if(AuthoringUtil.phraseScenario(scenarioFile) != null) {
+									fileList.add(scenarioFile);
+								}
+							} catch (IOException e) {
+								ErrorUtil.alertMessageShowException("Error while loading scenario file.", "Error occured while loading " + scenarioFile.getName(), e);
+							}
 	    				}
     				}
     			}
@@ -167,8 +172,14 @@ public class ScenarioEditorController extends Controller{
 			// Transfer all the file names into observable file lists
 			for(File file : fileList) {
 				
+				try {
+					AuthoringUtil.phraseScenario(file);
+				}catch(IOException e) {
+					ErrorUtil.alertMessageShowException("Scenario Load error.", "The scenario file " + file.getName() + " was not able to load due to error.", e);
+				}
+				
 				// If the loaded Files can be phrased
-				if(AuthoringUtil.phraseScenario(file) != null && !obsFileList.contains(file.getName()) ) {
+				if(!obsFileList.contains(file.getName()) ) {
 					
 					// Add it on the list
 					obsFileList.add(file.getName());

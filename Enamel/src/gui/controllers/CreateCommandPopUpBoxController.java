@@ -1,6 +1,7 @@
 package gui.controllers;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -20,6 +21,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import utility.AuthoringUtil;
+import utility.ErrorUtil;
 import utility.Language;
 import utility.Phrase;
 
@@ -207,31 +209,35 @@ public class CreateCommandPopUpBoxController extends Controller implements Retur
     	String command, firstArg, secondArg;
     	
     	command = phraseTypeComboBox.getSelectionModel().getSelectedItem();
-    	
-    	firstArg = firstArgumentTextField.getText() == null ? firstArg = null : (firstArg = firstArgumentTextField.getText());
-    	
-    	if(firstArgList.isVisible() && firstArgList.getSelectionModel().getSelectedIndex() != -1) {
-    		firstArg = firstArgList.getSelectionModel().getSelectedItem();
+    	if(command != null) {
+    		
+    		
+    		// TODO: make firstarg / secondarg into separate method
+	    	firstArg = firstArgumentTextField.getText() == null ? firstArg = null : (firstArg = firstArgumentTextField.getText());
+	    	
+	    	if(firstArgList.isVisible() && firstArgList.getSelectionModel().getSelectedIndex() != -1) {
+	    		firstArg = firstArgList.getSelectionModel().getSelectedItem();
+	    	}
+	    	
+	    	secondArg = secondArgumentTextField.getText() == null ? secondArg = null : (secondArg = secondArgumentTextField.getText());
+	    	
+	    	
+	    
+	    	try {
+		    	if(command.equals("emptyLine")){
+		    		returnPhrase = new Phrase("emptyLine", "", "");
+		    	}else if(command.equals("speak")){
+		    		returnPhrase = new Phrase("speak",firstArg, "");
+		    	}else {
+		    		returnPhrase = AuthoringUtil.phraseThisLine(command + firstArg + " " + secondArg);
+		    	}
+		    	close();
+	    	}catch(IOException e) {
+				ErrorUtil.alertMessageShowException("Invalid command.", e.getMessage(), e);
+			}
     	}
-    	
-    	secondArg = secondArgumentTextField.getText() == null ? secondArg = null : (secondArg = secondArgumentTextField.getText());
-    	
-    	
-    	
-    	if(phraseTypeComboBox.getSelectionModel().getSelectedItem().equals("emptyLine")){
-    		returnPhrase = new Phrase("emptyLine", "", "");
-    	}else if(phraseTypeComboBox.getSelectionModel().getSelectedItem().equals("speak")){
-    		returnPhrase = new Phrase("speak",firstArg, "");
-    	}else {
-    		returnPhrase = AuthoringUtil.phraseThisLine(command + firstArg + " " + secondArg);
-    	}
-		
-		
-		
-		// TODO : Make an error box pop up if it is invalid
-		
-		
     }
+    
     
     public void setComboBoxItems() {
     	phraseTypeComboBox.setItems(obsPhraseTypeList);
