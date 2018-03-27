@@ -32,6 +32,27 @@ public final class Language {
 	
 	
 	public static final KeyCode openKey = KeyCode.SPACE;
+	
+	public static final String commandPrefix = "/~";
+	
+	final static String[] typeList = { 
+			"/~sound:", 
+			"/~skip:", 
+			"/~pause:", 
+			"/~repeat-button:", 
+			"/~repeat",
+			"/~endrepeat", 
+			"/~reset-buttons", 
+			"/~skip-button:", 
+			"/~disp-clearAll", 
+			"/~disp-cell-pins:",
+			"/~disp-string:", 
+			"/~disp-cell-char:", 
+			"/~disp-cell-raise:", 
+			"/~disp-cell-lower:", 
+			"/~disp-cell-clear:",
+			"/~user-input" 
+			};
 	//public static final KeyCode sayCurrentWindowKey = KeyCode.BACK_QUOTE;
 	
 	// Fxml directory
@@ -121,6 +142,8 @@ public final class Language {
 	public static final String scenarioEditorRunScenario = "Run Selected Scenario";
 	public static final String scenarioEditorExit = "Exit";
 	//? Scenario editor Strings
+	
+	
 	
 	//? unused
 }

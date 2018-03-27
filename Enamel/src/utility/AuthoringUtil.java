@@ -17,14 +17,8 @@ import java.util.Scanner;
 public class AuthoringUtil {
 
 	private final static String PCE = "PHRASE_CHECK_ERROR";
-	private final static String[] typeList = { "/~sound:", "/~skip:", "/~pause:", "/~repeat-button:", "/~repeat",
-			"/~endrepeat", "/~reset-buttons", "/~skip-button:", "/~disp-clearAll", "/~disp-cell-pins:",
-			"/~disp-string:", "/~disp-cell-char:", "/~disp-cell-raise:", "/~disp-cell-lower:", "/~disp-cell-clear:",
-			"/~user-input" };
-
-	public static String[] getTypeList() {
-		return typeList;
-	}
+	
+	public static String[] getTypeList() {return Language.typeList;}
 	
 	/**
 	 * Letting constructor private so this class can be a utility class.
@@ -639,14 +633,14 @@ public class AuthoringUtil {
 			// Setting up output phrase.
 			Phrase phrase = null;
 
-			if (line.trim().isEmpty()) {
+			if (isEmptyLine(line)) {
 				phrase = new Phrase("emptyLine");
-			} else if (!line.substring(0, 2).equals("/~")) {
+			} else if (isSpeakLine(line)) {
 				phrase = new Phrase("speak", line);
 			} else {
 
 				// Traverse through all the type list to compare type of the line.
-				for (String type : typeList) {
+				for (String type : Language.typeList) {
 
 					// If the length of type is greater then line length, continue.
 					if (type.length() > line.length()) {
@@ -726,6 +720,15 @@ public class AuthoringUtil {
 		}
 
 	}
+
+	private static boolean isSpeakLine(String line) {
+		return !line.substring(0, Language.commandPrefix.length()).equals(Language.commandPrefix);
+	}
+
+	private static boolean isEmptyLine(String line) {
+		return line.trim().isEmpty();
+	}
+	
 
 	/**
 	 * A method that scans through input file and return String.
