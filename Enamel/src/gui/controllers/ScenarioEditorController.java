@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -90,7 +91,7 @@ public class ScenarioEditorController extends Controller{
 									fileList.add(scenarioFile);
 								}
 							} catch (IOException e) {
-								ErrorUtil.alertMessageShowException("Error while loading scenario file.", "Error occured while loading " + scenarioFile.getName(), e);
+								//ErrorUtil.alertMessageShowException("Error while loading scenario file.", "Error occured while loading " + scenarioFile.getName(), e);
 							}
 	    				}
     				}
@@ -164,30 +165,36 @@ public class ScenarioEditorController extends Controller{
 		
 		if(inputFiles != null){
 			// Add files into fileList
-			fileList.addAll(inputFiles);
+			//fileList.addAll(inputFiles);
 			
 			// Initialize observable file lists
 			obsFileList = FXCollections.observableArrayList();
 			
 			// Transfer all the file names into observable file lists
-			for(File file : fileList) {
+			
+			// TODO: FIX IT HERE. 
+			for(File file : inputFiles) {
 				
 				try {
 					AuthoringUtil.phraseScenario(file);
+					// If the loaded Files can be phrased
+					if(!obsFileList.contains(file.getName()) ) {
+						
+						// Add it on the list
+						obsFileList.add(file.getName());
+						fileList.add(file);
+						
+					// If loadedFiles cannot be phrased ( syntax error or something )
+					}else if(obsFileList.contains(file.getName())) {
+						ErrorUtil.alertMessageSimple("Scenario Load error", "The scneario " + file.getName() + " could not be loaded because"
+								+ " a scenario with same name exists on the list.");
+					}else {
+						// Add the un-phrase-able file into FailList
+						phrasingFailedFiles.add(file);
+					}
 				}catch(IOException e) {
-					ErrorUtil.alertMessageShowException("Scenario Load error.", "The scenario file " + file.getName() + " was not able to load due to error.", e);
-				}
-				
-				// If the loaded Files can be phrased
-				if(!obsFileList.contains(file.getName()) ) {
-					
-					// Add it on the list
-					obsFileList.add(file.getName());
-					
-				// If loadedFiles cannot be phrased ( syntax error or something )
-				}else {
-					// Add the un-phrase-able file into FailList
-					phrasingFailedFiles.add(file);
+					ErrorUtil.alertMessageShowException("Scenario Load error.", "The scenario file " + file.getName() + " was not able to load "
+							+ "because at least one of the line of scenario could not be read.", e);
 				}
 			}
 			

@@ -23,9 +23,12 @@ public class ScenarioEditor extends View<ScenarioEditorController> {
 		
 		// Window should not be resizeable ( else destroys our layout )
 		window.setResizable(false);
-		
-		control.loadFileOn(Language.scenarioPath);
-		
+		try {
+			control.loadFileOn(Language.scenarioPath);
+		}
+		catch(Exception e) {
+			
+		}
 		// If close button (red X button) is pressed, hide the window instead of destroy
 		window.setOnCloseRequest(e -> hide());
 		window.show();

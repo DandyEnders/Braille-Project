@@ -165,7 +165,7 @@ public class AuthoringUtil {
 			scan.close();
 			// In case where word "Cell" or "Button" or number after cell and button fails,
 			// deal with exception
-			errorLog("Exception error: " + e.toString(), "Expected format: \nCell num1 \n Button num2 \n"
+			errorLog("Exception error: " + e.getMessage(), "Expected format: \nCell num1 \n Button num2 \n"
 					+ "as the first two lines of the scenarion file, and where num1 and num2 are positive integers. \n"
 					+ "Did not receive such a format in the scenario file and program had to end due to the incorrect"
 					+ "file format. ");
@@ -208,7 +208,7 @@ public class AuthoringUtil {
 				try {
 					Integer.parseInt(arguments[0]);
 				} catch (Exception e) {
-					String exception = "Phrasing pause length error on line " + currentLine + ": " + e.toString();
+					String exception = "Phrasing pause length error on line " + currentLine + ": " + e.getMessage();
 					String message = "Expected format: /~pause: number \n"
 							+ "Where the number is the number of seconds the program "
 							+ "\nwaits before continuing on line " + currentLine + "\nProgram received : "
@@ -241,8 +241,8 @@ public class AuthoringUtil {
 					}
 				}
 			} catch (Exception e) {
-				errorLog("Phrasing disp-string error on " + currentLine + " " + e.toString(),
-						e.toString() + " Expected format: /~disp-string:string \n "
+				errorLog("Phrasing disp-string error on " + currentLine + " " + e.getMessage(),
+						e.getMessage() + " Expected format: /~disp-string:string \n "
 								+ "Where the string is the string to display on cells. \n"
 								+ "Program received : " + currentPhrase);
 				;
@@ -270,8 +270,8 @@ public class AuthoringUtil {
 							if (currentPivotPhrase.getFlag() == null) {
 	
 								// matching each other.
-								phraseList.get(j + i + 1).setFlag(currentPhrase);
-								currentPhrase.setFlag(phraseList.get(j + i + 1));
+								currentPivotPhrase.setFlag(currentPhrase);
+								currentPhrase.setFlag(currentPivotPhrase);
 								break;
 							} // end of if
 						} // end of if
@@ -286,6 +286,39 @@ public class AuthoringUtil {
 				}
 
 				break;
+				
+			case "/~endrepeat":
+				remainingList = new LinkedList<Phrase>(phraseList.subList(0, i));
+				
+				if(!remainingList.isEmpty()) {
+					
+					
+					for (int j = i-1; j > 0 ; j--) {
+	
+						Phrase currentPivotPhrase = remainingList.get(j);
+	
+						// If the phrase is endrepeat,
+						if (currentPivotPhrase.getType().equals("/~repeat")) {
+	
+							// and if the phrase is unmatched,
+							if (currentPivotPhrase.getFlag() == null) {
+	
+								// matching each other.
+								currentPivotPhrase.setFlag(currentPhrase);
+								currentPhrase.setFlag(currentPivotPhrase);
+								break;
+							} // end of if
+						} // end of if
+					} // end of for
+				}
+				// At this point, repeat could not find any matching endrepeat, so print error
+				if (currentPhrase.getFlag() == null || remainingList.isEmpty()) {
+					errorLog(
+							"One of the endrepeat no match repeat error on " + currentLine, "Endrepeat command on line "
+									+ currentLine + " do not have a matching repeat before the line.");
+					;
+				}
+			break;
 
 			case "/~repeat-button":
 				try {
@@ -296,7 +329,7 @@ public class AuthoringUtil {
 								"Repeat button index out of bounds. Index range of : 0 ~ " + (buttonNumber - 1));
 					}
 				} catch (Exception e) {
-					errorLog("Phrasing repeat button error on " + currentLine + " " + e.toString(),
+					errorLog("Phrasing repeat button error on " + currentLine + " " + e.getMessage(),
 							"Expected format: /~repeat-button:number \n "
 									+ "Where the number is the index of button to repeat. \n" + "Program received : "
 									+ currentPhrase);
@@ -337,8 +370,8 @@ public class AuthoringUtil {
 								if (currentPivotPhrase.getArguments()[0].equals(currentPhrase.getArguments()[1])) {
 									
 									// matching each other.
-									phraseList.get(j + i + 1).setFlag(currentPhrase);
-									currentPhrase.setFlag(phraseList.get(j + i + 1));
+									currentPivotPhrase.setFlag(currentPhrase);
+									currentPhrase.setFlag(currentPivotPhrase);
 									break;
 								} // end of if
 							} // end of if
@@ -353,8 +386,8 @@ public class AuthoringUtil {
 						;
 					}
 				} catch (Exception e) {
-					errorLog("Phrasing skip button error on " + currentLine + " " + e.toString(),
-							e.toString() + " : Expected format: /~skip-button:number String \n "
+					errorLog("Phrasing skip button error on " + currentLine + " " + e.getMessage(),
+							e.getMessage() + " : Expected format: /~skip-button:number String \n "
 									+ "Where the number is the index of button to skip.\n"
 									+ "Where the String is the line to skip to.\n" + "Program received "+currentLine + " : "
 									+ currentPhrase);
@@ -383,7 +416,7 @@ public class AuthoringUtil {
 
 			case "/~skip:":
 
-				try {
+				//try {
 					// Make a composition sublist from current+1 to end. It will be used to test if
 					// there is
 					// a matching pair of skip.
@@ -409,8 +442,8 @@ public class AuthoringUtil {
 								if (currentPivotPhrase.getArguments()[0].equals(currentPhrase.getArguments()[0])) {
 	
 									// matching each other.
-									phraseList.get(j + i + 1).setFlag(currentPhrase);
-									currentPhrase.setFlag(phraseList.get(j + i + 1));
+									currentPivotPhrase.setFlag(currentPhrase);
+									currentPhrase.setFlag(currentPivotPhrase);
 									break;
 								} // end of if
 							} // end of if
@@ -423,13 +456,13 @@ public class AuthoringUtil {
 										+ " do not have a matching skip goto to for the rest of the scenario.");
 						;
 					}
-				} catch (Exception e) {
+				/*} catch (Exception e) {
 					errorLog("Phrasing skip error on " + currentLine,
-							e.toString() + " Expected format: /~skip:String \n "
+							e.getMessage() + " Expected format: /~skip:String \n "
 									+ "Where the String is the place to jump to. Error found on " + currentLine + "\n"
 									+ "Program received : " + currentPhrase);
 					;
-				}
+				}*/
 				break;
 
 			// case "/~disp-clearAll":
@@ -448,7 +481,7 @@ public class AuthoringUtil {
 								"dispClearCell cell index out of bounds. Range of cell index: 0 ~ " + (cellNumber - 1));
 					}
 				} catch (Exception e) {
-					errorLog("Phrasing dispclearcell error on " + currentLine + " " + e.toString(),
+					errorLog("Phrasing dispclearcell error on " + currentLine + " " + e.getMessage(),
 							"Expected format: /~disp-clear-cell:number \n "
 									+ "Where the number is the index of cell to display clear cell. \n"
 									+ "Program received : " + currentPhrase);
@@ -489,7 +522,7 @@ public class AuthoringUtil {
 						}
 					}
 				} catch (Exception e) {
-					errorLog("Phrasing dispCellPins error on " + currentLine + " " + e.toString(),
+					errorLog("Phrasing dispCellPins error on " + currentLine + " " + e.getMessage(),
 							"Expected format: /~disp-cell-pins:number1 number2 \n "
 									+ "Where the number1 is the index of cell to display cell pins. \n"
 									+ "Where the number2 represents 8 cell pins, either 0 or 1. \n"
@@ -522,7 +555,7 @@ public class AuthoringUtil {
 					}
 
 				} catch (Exception e) {
-					errorLog("Phrasing dispCellChar error on " + currentLine + " " + e.toString(),
+					errorLog("Phrasing dispCellChar error on " + currentLine + " " + e.getMessage(),
 							"Expected format: /~disp-cell-char:number char \n "
 									+ "Where the number is the index of cell to display a character in a braille cell. \n"
 									+ "Where the char representing a character for a braille cell to read. \n"
@@ -553,7 +586,7 @@ public class AuthoringUtil {
 					}
 
 				} catch (Exception e) {
-					errorLog("Phrasing dispCellRaise error on " + currentLine + " " + e.toString(),
+					errorLog("Phrasing dispCellRaise error on " + currentLine + " " + e.getMessage(),
 							"Expected format: /~disp-cell-raise:number1 number2 \n "
 									+ "Where the number1 is the index of cell to raise cell. \n"
 									+ "Where the number2 is the number of pin to raise. \n" + "Program received : "
@@ -583,7 +616,7 @@ public class AuthoringUtil {
 					}
 
 				} catch (Exception e) {
-					errorLog("Phrasing dispCellLower error on " + currentLine + " " + e.toString(),
+					errorLog("Phrasing dispCellLower error on " + currentLine + " " + e.getMessage(),
 							"Expected format: /~disp-cell-lower:number1 number2 \n "
 									+ "Where the number1 is the index of cell to lower cell. \n"
 									+ "Where the number2 is the number of pin to lower.  \n" + "Program received : "
@@ -591,7 +624,41 @@ public class AuthoringUtil {
 					;
 				}
 				break;
-
+				
+			case "/~":
+				remainingList = new LinkedList<Phrase>(phraseList.subList(0, i));
+				
+				if(!remainingList.isEmpty()) {
+					
+					
+					for (int j = i-1; j > 0 ; j--) {
+	
+						Phrase currentPivotPhrase = remainingList.get(j);
+	
+						// If the phrase is endrepeat,
+						if (currentPivotPhrase.getType().equals("/~") 
+							&& currentPhrase.getArguments()[0].equals(currentPivotPhrase.getArguments()[0])) {
+	
+							// and if the phrase is unmatched,
+							if (currentPivotPhrase.getFlag() == null) {
+	
+								// matching each other.
+								currentPivotPhrase.setFlag(currentPhrase);
+								currentPhrase.setFlag(currentPivotPhrase);
+								break;
+							} // end of if
+						} // end of if
+					} // end of for
+				}
+				// At this point, repeat could not find any matching endrepeat, so print error
+				if (currentPhrase.getFlag() == null || remainingList.isEmpty()) {
+					errorLog(
+							"One of the skip goto no match repeat error on " + currentLine, currentPhrase + " command on line "
+									+ currentLine + " do not have a matching skip before the line.");
+					;
+				}
+			break;
+				
 			// case "emptyLine":
 			// break;
 
@@ -659,11 +726,49 @@ public class AuthoringUtil {
 
 							// Split the argument.
 							String[] splitedInputLineArguments = inputLineArgument.split(" ");
-
+							
+							for(String twoArgsType : Language.typeListTwoArguments) {
+								if(twoArgsType.equals(typeString)) {
+									if(splitedInputLineArguments.length != 2 ) {
+										throw new IOException(type + " must have two arugments.");
+									}
+								}
+							}
+							
+							for(String oneArgsType : Language.typeListOneArgument) {
+								if(oneArgsType.equals(typeString)) {
+									if(splitedInputLineArguments.length != 1) {
+										throw new IOException(type + " must have one argument.");
+									}
+								}
+							}
+							
+							
+							for(String firstArgNumberType : Language.typeListFirstArgNumber) {
+								if(firstArgNumberType.equals(typeString)){
+									try {
+										Integer.parseInt(splitedInputLineArguments[0]);
+									}catch(NumberFormatException e) {
+										throw new IOException(type + " must have the first argument as a number.");
+									}
+								}
+							}
+							
+							for(String secondArgNumberType : Language.typeListSecondArgNumber) {
+								if(secondArgNumberType.equals(typeString)){
+									try {
+										Integer.parseInt(splitedInputLineArguments[1]);
+									}catch(NumberFormatException e) {
+										throw new IOException(type + " must have the second argument as a number.");
+									}
+								}
+							}
+							
+							
 							// Splits with pivot = space
 							if (splitedInputLineArguments.length == 0) {
 								// Types with ":" has to have an argument at least.
-								throw new IOException(type + " needs argument/s.");
+								throw new IOException(type + " needs an argument.");
 							} else if (splitedInputLineArguments.length == 1) {
 								// If the phrase has only one argument, fill the other with null.
 								splitArgument[0] = splitedInputLineArguments[0];
@@ -675,7 +780,7 @@ public class AuthoringUtil {
 							} else {
 								// If argument is 3 or more, throw exception ( no phrase has 3 arguments)
 								throw new IOException(
-										"Phrase parsing failed. the line " + line + " has 3 or more arguments.");
+										"Phrase parsing failed. " + line + " has 3 or more arguments.");
 							}
 
 							// If a phrase do not have arguments,
@@ -710,7 +815,7 @@ public class AuthoringUtil {
 			
 
 		} catch (IOException e) {
-			errorLog("Exception error: " + e.toString(), e.toString());
+			errorLog("Line Phrase error: " + e.getLocalizedMessage(), e.getMessage());
 		}
 		return phrase;
 

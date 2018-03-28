@@ -139,9 +139,9 @@ public class ScenarioMakerController extends Controller implements Returnable<Fi
     	return listOfCommands.getSelectionModel().getSelectedIndex();
     }
     
-    /*private Phrase selectedItem() {
+    private Phrase selectedItem() {
     	return listOfCommands.getSelectionModel().getSelectedItem();
-    }*/
+    }
  	
     private void listUpdate() {
     	this.phraseListObs.clear();
@@ -158,20 +158,23 @@ public class ScenarioMakerController extends Controller implements Returnable<Fi
  		Stage window = new Stage();
  		CreateCommandPopUpBox popup = new CreateCommandPopUpBox();
 		popup.display(window);
-		Phrase returnPhrase = popup.getReturn();
+		List<Phrase> returnPhrase = popup.getReturn();
  		
  		if(returnPhrase != null) {
  			int index = 0;
 	 		if(!isItemSelected()) {
-	 			phraseList.add(0, returnPhrase);
+	 			phraseList.addAll(0, returnPhrase);
 	 		}else {
 	 			index = selectedItemIndex();
 	 			if(above.isSelected()) {
-	 				phraseList.add(index,returnPhrase);
+	 				phraseList.addAll(index,returnPhrase);
 	 			}else if (replace.isSelected()) {
-	 				phraseList.set(index,returnPhrase);
+	 				phraseList.set(index,returnPhrase.get(0));
+	 				if(phraseList.size() > 1) {
+	 					phraseList.addAll(index+1, returnPhrase.subList(1, returnPhrase.size()));
+	 				}
 	 			}else {
-	 				phraseList.add(index+1,returnPhrase);
+	 				phraseList.addAll(index+1,returnPhrase);
 	 				index++;
 	 			}
 	 		}

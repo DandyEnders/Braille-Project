@@ -153,6 +153,17 @@ public class Phrase {
 		this.arguments = inputArguments;
 		this.flag = flag;
 	}
+	
+	public Phrase(String type, String argument, Phrase flag){
+		this.type = type;
+		String[] inputArguments = new String[2];
+		
+		inputArguments[0] = argument;
+		inputArguments[1] = null;
+		
+		this.arguments = inputArguments;
+		this.flag = flag;
+	}
 
 	/**
 	 * @param obj

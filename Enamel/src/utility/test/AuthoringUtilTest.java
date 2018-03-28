@@ -6,6 +6,7 @@ package utility.test;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 import org.junit.Test;
@@ -146,8 +147,15 @@ public class AuthoringUtilTest {
 			String parsed = "";
 		while(scan.hasNext()) {
 			String nextLine = scan.nextLine();
-			Phrase phrase = AuthoringUtil.phraseThisLine(nextLine);
-			parsed += phrase + "\r\n";
+			Phrase phrase;
+			try {
+				phrase = AuthoringUtil.phraseThisLine(nextLine);
+				parsed += phrase + "\r\n";
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		assertEquals("Phrase parsing error. Please check src.utility.Phrase and src.utility.AuthoringUtil.",expected,parsed);
@@ -169,7 +177,12 @@ public class AuthoringUtilTest {
 	@Test
 	public void testPhraseNonIntegerParsing() {
 		String testStr = "/~skip-button:TWOEEE ONEE";
-		AuthoringUtil.phraseThisLine(testStr);
+		try {
+			AuthoringUtil.phraseThisLine(testStr);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 
@@ -236,7 +249,12 @@ public class AuthoringUtilTest {
 				"That's the end of directional orientation!\r\n" + 
 				"/~disp-cell-clear:0\r\n";
 		
-		AuthoringUtil.phraseScenario(testStr);
+		try {
+			AuthoringUtil.phraseScenario(testStr);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 	}
@@ -246,7 +264,12 @@ public class AuthoringUtilTest {
 	public void testScenarioPhrasingWithFactoryScenario2() {
 		
 		File file = new File("./FactoryScenarios/Scenario_2.txt");
-		AuthoringUtil.phraseScenario(file);
+		try {
+			AuthoringUtil.phraseScenario(file);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		
@@ -257,7 +280,12 @@ public class AuthoringUtilTest {
 		public void testScenarioPhrasingWithFactoryScenario3() {
 			
 			File file = new File("./FactoryScenarios/Scenario_3.txt");
-			AuthoringUtil.phraseScenario(file);
+			try {
+				AuthoringUtil.phraseScenario(file);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 			
 		}

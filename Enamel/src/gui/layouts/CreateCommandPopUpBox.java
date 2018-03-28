@@ -17,7 +17,7 @@ import utility.Phrase;
  * @author Jinho Hwang
  *
  */
-public class CreateCommandPopUpBox extends ReturnableView<CreateCommandPopUpBoxController,Phrase> {
+public class CreateCommandPopUpBox extends ReturnableView<CreateCommandPopUpBoxController,List<Phrase>> {
 
 	public CreateCommandPopUpBox() {
 		super();

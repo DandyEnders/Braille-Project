@@ -53,6 +53,53 @@ public final class Language {
 			"/~disp-cell-clear:",
 			"/~user-input" 
 			};
+	
+	final static String[] typeListOneArgument = {
+			"/~pause:",
+			"/~disp-string:", 
+			"/~repeat-button:",
+			"/~sound:", 
+			"/~skip:", 
+			"/~disp-cell-clear:"
+	};
+	
+	final static String[] typeListTwoArguments = {
+			"/~skip-button:", 
+			"/~disp-cell-pins:",
+			"/~disp-cell-char:",
+			"/~disp-cell-raise:", 
+			"/~disp-cell-lower:", 
+	};
+	
+	final static String[] typeListFirstArgNumber = {
+			"/~pause:", 
+			"/~repeat-button:",
+			"/~skip-button:", 
+			"/~disp-cell-clear:",
+			"/~disp-cell-pins:",
+			"/~disp-cell-char:", 
+			"/~disp-cell-raise:", 
+			"/~disp-cell-lower:"
+	};
+	
+	final static String[] typeListFirstArgString = {
+			"/~disp-string:", 
+			"/~sound:", 
+			"/~skip:"
+	};
+	
+	final static String[] typeListSecondArgNumber = {
+			"/~disp-cell-pins:",
+			"/~disp-cell-raise:", 
+			"/~disp-cell-lower:"
+	};
+	
+	final static String[] typeListSecondArgString = {
+			"/~skip-button:", 
+			"/~disp-cell-char:"
+	};
+	
+	
 	//public static final KeyCode sayCurrentWindowKey = KeyCode.BACK_QUOTE;
 	
 	// Fxml directory

@@ -2,6 +2,7 @@ package gui.controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ import utility.ErrorUtil;
 import utility.Language;
 import utility.Phrase;
 
-public class CreateCommandPopUpBoxController extends Controller implements Returnable<Phrase> {
+public class CreateCommandPopUpBoxController extends Controller implements Returnable<List<Phrase>> {
 
     @FXML
     private Button createButton;
@@ -67,6 +68,7 @@ public class CreateCommandPopUpBoxController extends Controller implements Retur
     private ObservableList<String> obsAudioFileList;
     ObservableList<String> obsPhraseTypeList;
     Phrase returnPhrase;
+    List<Phrase> returnPhraseList;
     
     public CreateCommandPopUpBoxController(){
     	String[] typeList = AuthoringUtil.getTypeList();
@@ -74,6 +76,7 @@ public class CreateCommandPopUpBoxController extends Controller implements Retur
     	obsAudioFileList = FXCollections.observableArrayList();
     	obsPhraseTypeList.add("emptyLine");
     	obsPhraseTypeList.add("speak");
+    	returnPhraseList = new ArrayList<Phrase>();
     	
     	
     }
@@ -231,9 +234,16 @@ public class CreateCommandPopUpBoxController extends Controller implements Retur
 		    	}else {
 		    		returnPhrase = AuthoringUtil.phraseThisLine(command + firstArg + " " + secondArg);
 		    	}
+		    	returnPhraseList.add(returnPhrase);
+		    	if(returnPhrase.getType().equals("/~skip:")) {
+		    		returnPhraseList.add(new Phrase("/~", firstArg));
+		    	}else if(returnPhrase.getType().equals("/~repeat")) {
+		    		returnPhraseList.add(new Phrase("/~endrepeat"));
+		    	}
+		    	
 		    	close();
 	    	}catch(IOException e) {
-				ErrorUtil.alertMessageShowException("Invalid command.", e.getMessage(), e);
+				ErrorUtil.alertMessageShowException("Invalid command.", e.getLocalizedMessage(), e);
 			}
     	}
     }
@@ -245,8 +255,8 @@ public class CreateCommandPopUpBoxController extends Controller implements Retur
     
 
     @Override
-	public Phrase getReturn() {
-		return this.returnPhrase;
+	public List<Phrase> getReturn() {
+		return this.returnPhraseList; 
 	}
 	
 	
