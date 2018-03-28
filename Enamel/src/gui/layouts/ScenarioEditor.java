@@ -66,6 +66,9 @@ public class ScenarioEditor {
 			// Set window the scene and title
 			window.setScene(scene);
 			window.setTitle(Language.scenarioEditorTitle);
+			// Adds CSS formatting into scene. ( it is empty file now )
+			scene.getStylesheets().add(getClass().getResource(Language.mainMenuCss).toExternalForm());
+						
 			
 			// If close button (red X button) is pressed, hide the window instead of destroy
 			window.setOnCloseRequest(e -> hide());

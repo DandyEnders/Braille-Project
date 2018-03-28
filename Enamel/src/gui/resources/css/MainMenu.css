@@ -1,1 +1,25 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.root{
+	-fx-background-color:#213240;
+	-fx-padding: 10;
+}
+
+.button{
+	-fx-background-color: linear-gradient(#7E8E9C, #435767);
+	-fx-text-fill: #010910;
+	
+}
+
+
+.label{
+	-fx-text-fill: #7E8E9C
+}
+.button:hover{
+	-fx-background-color: linear-gradient(#010910, #0e1E2C);
+	-fx-text-fill: #7E8E9C;
+}
+
+#scenarioEditButton{
+	
+	-fx-border-radius: 25px
+}

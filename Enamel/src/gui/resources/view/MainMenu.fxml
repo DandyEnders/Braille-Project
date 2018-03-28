@@ -7,23 +7,23 @@
 
 <AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.MainMenuController">
    <children>
-      <Label fx:id="titleLabel" accessibleHelp="You can traverse through elements with tab, shift tabs and arrow keys.Press space to run it." accessibleRole="TEXT_AREA" accessibleText="Authoring App." ellipsisString="Label : Braille Project" layoutX="129.0" layoutY="68.0" text="Authoring App">
+      <Label fx:id="titleLabel" accessibleHelp="You can traverse through elements with tab, shift tabs and arrow keys.Press space to run it." accessibleRole="TEXT_AREA" accessibleText="Authoring App." ellipsisString="Label : Braille Project" layoutX="70.0" layoutY="68.0" text="Authoring App">
          <font>
-            <Font name="Arial" size="54.0" />
+            <Font name="Forte" size="74.0" />
          </font>
       </Label>
       <Button fx:id="scenarioEditButton" accessibleHelp="You can manipulate scenarios here.You can traverse through elements with tab, shift tabs and arrow keys. Press space to run it." accessibleRoleDescription="Press space to activate, tab to traverse." accessibleText="open Secnario Editor" ellipsisString="Scenario lol" layoutX="60.0" layoutY="234.0" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#openScenarioEditor" text="Scenario Editor">
          <font>
-            <Font name="Arial" size="30.0" />
+            <Font name="Rockwell Condensed" size="30.0" />
          </font>
       </Button>
       <Button fx:id="voiceRecordButton" accessibleHelp="Voice recorder provide you to capture and save recording from your mic.You can traverse through elements with tab, shift tabs and arrow keys.Press space to run it." accessibleRoleDescription="Press space to activate, tab to traverse." accessibleText="open voice recorder." ellipsisString="Scenario lol" layoutX="60.0" layoutY="305.0" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#openVoiceRecorder" text="Voice Recorder">
          <font>
-            <Font name="Arial" size="30.0" />
+            <Font name="Rockwell Condensed" size="30.0" />
          </font></Button>
       <Button fx:id="exitButton" accessibleHelp="Press it to exit the app." accessibleRoleDescription="Press space to activate, tab to traverse." accessibleText="Exit authoring app." ellipsisString="Exit" layoutX="416.0" layoutY="267.0" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#exitProgram" text="Exit">
          <font>
-            <Font name="Arial" size="30.0" />
+            <Font name="Rockwell Condensed" size="30.0" />
          </font>
       </Button>
    </children>
