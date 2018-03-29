@@ -117,16 +117,14 @@ public class ScenarioEditorController extends Controller{
 	 
 	public void removeScenario() {
 		if(isSelected()) {
+			int index = getSelectedIndex();
+			fileList.remove(index).delete();
 			
-			fileList.remove(getSelectedIndex()).delete();
-			
-			listUpdate();
+			listUpdate(index);
 		}
 	}
 	 
 	private void listUpdate() {
-		
-		obsFileList = FXCollections.observableArrayList();
 		
 		this.obsFileList.clear();
 		
@@ -135,6 +133,15 @@ public class ScenarioEditorController extends Controller{
 		}
 		
 		scenarioList.setItems(obsFileList);
+	}
+	
+	private void listUpdate(int index) {
+		this.listUpdate();
+		int selectIndex = index;
+		if(index == fileList.size()) {
+			selectIndex--;
+		}
+		scenarioList.getSelectionModel().select(selectIndex);
 	}
 	
 	/**
@@ -164,15 +171,6 @@ public class ScenarioEditorController extends Controller{
 		List<File> phrasingFailedFiles = new ArrayList<File>();
 		
 		if(inputFiles != null){
-			// Add files into fileList
-			//fileList.addAll(inputFiles);
-			
-			// Initialize observable file lists
-			obsFileList = FXCollections.observableArrayList();
-			
-			// Transfer all the file names into observable file lists
-			
-			// TODO: FIX IT HERE. 
 			for(File file : inputFiles) {
 				
 				try {
@@ -197,6 +195,8 @@ public class ScenarioEditorController extends Controller{
 							+ "because at least one of the line of scenario could not be read.", e);
 				}
 			}
+			
+			
 			
 			// If loading was done without any failures,
 			if(phrasingFailedFiles.size() == 0) {
@@ -299,14 +299,15 @@ public class ScenarioEditorController extends Controller{
 				fileChooser.setInitialFileName(scenarioList.getSelectionModel().getSelectedItem());
 				
 				// Set starting directory ( the directory you start to select from )
-				fileChooser.setInitialDirectory(new File("./FactoryScenarios").getCanonicalFile());
+				fileChooser.setInitialDirectory(new File(Language.scenarioPath).getCanonicalFile());
 				
 				// Create a dummy variable for customized file.
 				//( selectedFile can be null if user decides to not to make a file )
 				File writtenFile = fileChooser.showSaveDialog(window);
 				
 				// If user pressed save after write its name,
-				if(writtenFile != null ) {
+				if(writtenFile != null &&
+					!writtenFile.getName().equals(fileList.get(index).getName())) {
 					
 					// Create fileWriter and scanner to read selected file from the fileList.
 					Writer fileWriter = new FileWriter(writtenFile);
@@ -345,9 +346,22 @@ public class ScenarioEditorController extends Controller{
 		// empty name and zero cells / buttons
 		File scenarioFile = makeScenario(new File(""));
 		
+		System.out.println("file is null? " + scenarioFile == null );
+		System.out.println(" and " + scenarioFile.getName());
+		
+		addAndUpdate(scenarioFile);
+	}
+
+
+	/**
+	 * @param scenarioFile
+	 */
+	private void addAndUpdate(File scenarioFile) {
 		if(scenarioFile != null) {
-			fileList.add(scenarioFile);
-			listUpdate();
+			if(scenarioFile.getName() != null && !scenarioFile.getName().equals(Language.emptyString)) {
+				fileList.add(scenarioFile);
+				listUpdate();
+			}
 		}
 	}
 
@@ -373,11 +387,12 @@ public class ScenarioEditorController extends Controller{
 			
 			// Get the selected file
 			File selectedFile = fileList.get(getSelectedIndex());
+			
 			File scenarioFile = makeScenario(selectedFile);
 			
 			if(scenarioFile != null) {
 				fileList.set(getSelectedIndex(), scenarioFile);
-				listUpdate();
+				listUpdate(getSelectedIndex());
 			}
 		}
 		

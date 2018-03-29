@@ -166,7 +166,6 @@ public abstract class Player {
 	public abstract void addRepeatButtonListener(int index, ScenarioParser sp);
 
 	public void setup() {
-		// TODO Auto-generated method stub
 		
 	}
 }

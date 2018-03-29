@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -112,6 +113,9 @@ public class AuthoringUtil {
 
 		// Get validation check of two first line and phrase it------------//
 		try {
+		if(!scan.hasNextLine()) {
+			throw new IOException("The file is empty.");
+		}
 
 		// Get 1st and 2nd line
 		String firstLawLine = scan.nextLine();
@@ -123,7 +127,7 @@ public class AuthoringUtil {
 		}
 
 		if (secondLawLine.split("\\s").length > 2 || secondLawLine.split("\\s").length < 2) {
-			throw new IOException("second line contains more or less than 2 arguments.");
+			throw new IOException("Second line contains more or less than 2 arguments.");
 		}
 
 		// Sub them in
@@ -169,7 +173,7 @@ public class AuthoringUtil {
 					+ "as the first two lines of the scenarion file, and where num1 and num2 are positive integers. \n"
 					+ "Did not receive such a format in the scenario file and program had to end due to the incorrect"
 					+ "file format. ");
-		}
+		} 
 
 		// Got validation check of two first line and phrase it---------------//^^^^^
 
@@ -635,8 +639,7 @@ public class AuthoringUtil {
 	
 						Phrase currentPivotPhrase = remainingList.get(j);
 	
-						// If the phrase is endrepeat,
-						if (currentPivotPhrase.getType().equals("/~") 
+						if (currentPivotPhrase.getType().equals("/~skip") 
 							&& currentPhrase.getArguments()[0].equals(currentPivotPhrase.getArguments()[0])) {
 	
 							// and if the phrase is unmatched,

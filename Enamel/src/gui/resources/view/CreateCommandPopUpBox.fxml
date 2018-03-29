@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -22,6 +23,11 @@
                   <ComboBox fx:id="firstArgList" accessibleHelp="List of " accessibleText="List of items" prefWidth="150.0" />
                </children>
             </Pane>
+         </children>
+      </Pane>
+      <Pane layoutX="222.0" layoutY="86.0" prefHeight="16.0" prefWidth="138.0">
+         <children>
+            <CheckBox fx:id="pairCheck" mnemonicParsing="false" text="Make a skip goto line" visible="false" />
          </children>
       </Pane>
       <Pane fx:id="secondArgumentPane" disable="true" layoutX="221.0" layoutY="64.0">

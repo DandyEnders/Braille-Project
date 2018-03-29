@@ -47,13 +47,12 @@ public class ScenarioMaker extends ReturnableView<ScenarioMakerController,File> 
 		window.initModality(Modality.APPLICATION_MODAL);
 		
 		// Pass scenarioFile to Control
-		if(!scenarioFile.getName().equals("")) {
-			control.setFile(scenarioFile);
-		}
+		control.setFile(scenarioFile);
+	
 		
 		// Close the whole thing when red X is pressed.
 		window.setOnCloseRequest(e -> window.close());
-		window.show();
+		window.showAndWait();
 	}
 	
 }

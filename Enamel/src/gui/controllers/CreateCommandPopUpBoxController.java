@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -51,6 +52,9 @@ public class CreateCommandPopUpBoxController extends Controller implements Retur
     
     @FXML
     private Label firstArgText;
+    
+    @FXML
+    private CheckBox pairCheck;
 
     @FXML
     private Label secondArgText;
@@ -98,7 +102,11 @@ public class CreateCommandPopUpBoxController extends Controller implements Retur
 		firstArgList.setDisable(true);
 		firstArgumentTextField.setVisible(true);
 		firstArgumentTextField.setDisable(false);
-    	
+
+		secondArgumentTextField.setVisible(true);
+		pairCheck.setVisible(false);
+		//pairCheck.setDisable(true);
+		
 		if(comboBoxText != null) {
 			
 		}
@@ -113,8 +121,12 @@ public class CreateCommandPopUpBoxController extends Controller implements Retur
     		
     		firstArgList.setItems(obsAudioFileList);
     		
+    		
     	}else if(comboBoxText.equals("/~skip:")) {
     		setArgumentText("Jump to String");
+    		pairCheck.setVisible(true);
+    		pairCheck.setDisable(false);
+    		secondArgumentTextField.setVisible(false);
     		
     	}else if(comboBoxText.equals("/~pause:")) {
     		setArgumentText("Seconds to pause");
@@ -204,7 +216,10 @@ public class CreateCommandPopUpBoxController extends Controller implements Retur
     
     private void setPaneDisable(boolean first, boolean second) {
     	firstArgumentPane.setDisable(first);
+    	firstArgumentPane.setVisible(!first);
     	secondArgumentPane.setDisable(second);
+    	secondArgumentPane.setVisible(!second);
+    	
     }
     
     @FXML
@@ -235,7 +250,7 @@ public class CreateCommandPopUpBoxController extends Controller implements Retur
 		    		returnPhrase = AuthoringUtil.phraseThisLine(command + firstArg + " " + secondArg);
 		    	}
 		    	returnPhraseList.add(returnPhrase);
-		    	if(returnPhrase.getType().equals("/~skip:")) {
+		    	if(returnPhrase.getType().equals("/~skip:") && pairCheck.isSelected()) {
 		    		returnPhraseList.add(new Phrase("/~", firstArg));
 		    	}else if(returnPhrase.getType().equals("/~repeat")) {
 		    		returnPhraseList.add(new Phrase("/~endrepeat"));

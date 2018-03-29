@@ -196,9 +196,7 @@ public class Phrase {
 			if(this.getArguments()[0] == null && this.getArguments()[1] == null &&
 			   phrase.getArguments()[0] == null && phrase.getArguments()[1] == null) {
 				return true;
-			}
-			
-			if(this.getArguments()[0].equals(phrase.getArguments()[0])){
+			}else if(this.getArguments()[0].equals(phrase.getArguments()[0])){
 				if(this.getArguments()[1].equals(phrase.getArguments()[1])){
 					if(this.flag == phrase.getFlag()){
 						return true;

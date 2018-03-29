@@ -26,6 +26,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import utility.ErrorUtil;
 import utility.Language;
 
 public class VoiceRecorderController extends Controller{
@@ -214,15 +215,14 @@ public class VoiceRecorderController extends Controller{
 	    	
 	    	audioStream = new AudioInputStream(targetDataLine);
 
-			waveFile = new File("./FactoryScenarios/AudioFiles/" + fileName + ".wav");
+			waveFile = new File(Language.audioPath + fileName + ".wav");
 			
 			Thread record = new Thread( new Runnable(){
 				public void run() {
 					try {
 						AudioSystem.write(audioStream, AudioFileFormat.Type.WAVE, waveFile);
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						ErrorUtil.alertMessageShowException("Error occured while recording!", "Error occured! please report the detail to tech staff.",e);
 					}
 				}
 			});
@@ -253,9 +253,8 @@ public class VoiceRecorderController extends Controller{
 	    	listUpdate();
 	    	
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			ErrorUtil.alertMessageShowException("Error occured while saving recording!", "Error occured! please report the detail to tech staff.",e);
+			}
  
     	
     }
@@ -282,8 +281,6 @@ public class VoiceRecorderController extends Controller{
     @FXML
     public void playSelected() {
     	if(isSelected()) {
-    		
-    		System.out.println("yep!" + getSelectedFile().getName());
     		
     		try {
 	    		Clip clip = AudioSystem.getClip();

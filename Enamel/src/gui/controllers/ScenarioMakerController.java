@@ -95,38 +95,48 @@ public class ScenarioMakerController extends Controller implements Returnable<Fi
  		// Set the scenario name.
  		scenarioNameField.setText(file.getName());
  		
- 		List<Phrase> lawPhraseList = null;
- 		try {
-	 		// Bring the list of Phrases.
-	 		lawPhraseList = AuthoringUtil.phraseScenario(file);
- 		}catch(IOException e) {
- 			ErrorUtil.alertMessageShowException("Formatting error!", "The following error occured.", e);
- 		}
- 		
- 		// If scenario load was successful,
- 		if( lawPhraseList != null) {
+ 		if(file.getName() == "") {
  			
-	 		// Gets first two phrase containing num cell and buttons.
-	 		Phrase cellPhrase = lawPhraseList.get(0);
-	 		Phrase buttonPhrase = lawPhraseList.get(1);
+ 		
+ 		}else {
+ 		
+	 		// Set the scenario name.
+	 		scenarioNameField.setText(file.getName());
 	 		
-	 		// Add those cell # and button # to obsList for text fields.
-	 		numberOfCellAndButton.add(cellPhrase.getArguments()[0]);
-	 		numberOfCellAndButton.add(buttonPhrase.getArguments()[0]);
-	 		
-	 		// Set cell # and button # on text fields.
-	 		numCellTextField.setText(numberOfCellAndButton.get(0));
-	 		numButtonTextField.setText(numberOfCellAndButton.get(1));
-	 		
-	 		if(lawPhraseList.size() > 2) {
-	 			// Set phraseList to be rest of phrase list other then first two.
-	 			phraseList.addAll(lawPhraseList.subList(2, lawPhraseList.size()));
+	 		List<Phrase> lawPhraseList = null;
+	 		try {
+		 		// Bring the list of Phrases.
+		 		lawPhraseList = AuthoringUtil.phraseScenario(file);
+	 		}catch(IOException e) {
+	 			ErrorUtil.alertMessageShowException("Formatting error!", "The following error occured.", e);
 	 		}
 	 		
-	 		listUpdate();
-	 		
-	 		if(!phraseList.isEmpty())
-	 			listOfCommands.getSelectionModel().select(0);
+	 		// If scenario load was successful,
+	 		if( lawPhraseList != null) {
+	 			
+		 		// Gets first two phrase containing num cell and buttons.
+		 		Phrase cellPhrase = lawPhraseList.get(0);
+		 		Phrase buttonPhrase = lawPhraseList.get(1);
+		 		
+		 		// Add those cell # and button # to obsList for text fields.
+		 		numberOfCellAndButton.add(cellPhrase.getArguments()[0]);
+		 		numberOfCellAndButton.add(buttonPhrase.getArguments()[0]);
+		 		
+		 		// Set cell # and button # on text fields.
+		 		numCellTextField.setText(numberOfCellAndButton.get(0));
+		 		numButtonTextField.setText(numberOfCellAndButton.get(1));
+		 		
+		 		if(lawPhraseList.size() > 2) {
+		 			// Set phraseList to be rest of phrase list other then first two.
+		 			phraseList.addAll(lawPhraseList.subList(2, lawPhraseList.size()));
+		 		}
+		 		
+		 		listUpdate();
+		 		
+		 		if(!phraseList.isEmpty())
+		 			listOfCommands.getSelectionModel().select(0);
+	 		}
+ 		
  		}
  		
  	}

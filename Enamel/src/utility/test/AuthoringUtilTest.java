@@ -152,7 +152,6 @@ public class AuthoringUtilTest {
 				phrase = AuthoringUtil.phraseThisLine(nextLine);
 				parsed += phrase + "\r\n";
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -180,7 +179,6 @@ public class AuthoringUtilTest {
 		try {
 			AuthoringUtil.phraseThisLine(testStr);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -252,7 +250,6 @@ public class AuthoringUtilTest {
 		try {
 			AuthoringUtil.phraseScenario(testStr);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -267,7 +264,6 @@ public class AuthoringUtilTest {
 		try {
 			AuthoringUtil.phraseScenario(file);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -283,7 +279,6 @@ public class AuthoringUtilTest {
 			try {
 				AuthoringUtil.phraseScenario(file);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
