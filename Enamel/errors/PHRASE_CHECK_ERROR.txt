@@ -1,4 +1,8 @@
-Mar 27, 2018 6:03:07 PM utility.ErrorUtil errorLog
-WARNING: One of the repeat no match endrepeat error on 1
-Mar 27, 2018 6:03:07 PM utility.ErrorUtil errorLog
-INFO: Repeat command on line 1 do not have a matching endrepeat for the rest of the scenario.
+3월 28, 2018 9:50:10 오후 utility.ErrorUtil errorLog
+경고: Exception error: The file is empty.
+3월 28, 2018 9:50:10 오후 utility.ErrorUtil errorLog
+정보: Expected format: 
+Cell num1 
+ Button num2 
+as the first two lines of the scenarion file, and where num1 and num2 are positive integers. 
+Did not receive such a format in the scenario file and program had to end due to the incorrectfile format. 

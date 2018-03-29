@@ -15,8 +15,7 @@ Press the button 1 for true, the button 2 for false.
 /~ONEE
 /~sound:correct.wav
 That's correct! The letter displayed on the cell was a. 
-/~skip:NEXTT
- 
+
 /~TWOO
 /~sound:wrong.wav
 Sorry! That's incorrect. The cell is displaying the character a.

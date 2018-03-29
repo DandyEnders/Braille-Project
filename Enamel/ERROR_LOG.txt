@@ -1,4 +1,4 @@
-2월 23, 2018 3:52:22 오후 enamel.ScenarioParser errorLog
+3월 28, 2018 9:42:05 오후 enamel.ScenarioParser errorLog
 경고: Exception error : java.lang.IllegalStateException: Scanner closed
-2월 23, 2018 3:52:22 오후 enamel.ScenarioParser errorLog
+3월 28, 2018 9:42:05 오후 enamel.ScenarioParser errorLog
 정보: Strange error occurred if you are able to read this message. Possibilities could include possible file corruption, or that you have enter characters that could not be read/interpreted.
