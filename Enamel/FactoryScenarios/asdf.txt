@@ -1,0 +1,5 @@
+Cell 1
+Button 1
+/~skip:AAA
+/~AAA
+/~sound:correct.wav
