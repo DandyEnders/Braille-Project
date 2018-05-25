@@ -1,7 +1,7 @@
-3월 28, 2018 9:50:10 오후 utility.ErrorUtil errorLog
-경고: Exception error: The file is empty.
-3월 28, 2018 9:50:10 오후 utility.ErrorUtil errorLog
-정보: Expected format: 
+May 25, 2018 1:18:32 PM utility.ErrorUtil errorLog
+WARNING: Exception error: The file is empty.
+May 25, 2018 1:18:32 PM utility.ErrorUtil errorLog
+INFO: Expected format: 
 Cell num1 
  Button num2 
 as the first two lines of the scenarion file, and where num1 and num2 are positive integers. 

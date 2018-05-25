@@ -37,6 +37,7 @@ public class AuthoringApp {
 		fileList.add(new File(Language.scenarioPath));
 		fileList.add(new File(Language.audioPath));
 		fileList.add(new File(Language.errorPath));
+		fileList.add(new File(Language.userLogPath));
 		
 		for(File file : fileList) {
 			if(!file.exists()) {
