@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import gui.layouts.MainMenu;
 import javafx.application.Application;
 import utility.Language;
+import utility.LoggerUtil;
 
 /**
  * This class starts the program execution by creating view, model, and a
@@ -20,6 +21,7 @@ public class AuthoringApp {
 	public static void main(String[] args) {
 
 		createDefaultFolders();
+		LoggerUtil.initialize();
 		
 		new Thread() {
 			@Override
@@ -27,7 +29,8 @@ public class AuthoringApp {
 				Application.launch(MainMenu.class, args);
 			}
 		}.start();
-
+		
+		
 		
 	}
 	

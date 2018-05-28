@@ -1,11 +1,14 @@
 package gui.layouts;
 	
 
+import java.util.logging.Logger;
+
 import gui.controllers.MainMenuController;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import utility.Language;
+import utility.LoggerUtil;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +23,8 @@ import javafx.fxml.FXMLLoader;
 public class MainMenu extends Application {
 	
 	MainMenuController control;
+	
+	private static Logger logger = LoggerUtil.getLogger();
 	
 	// The integer window wiedth / height. Added for convenience.
 	private final static Integer windowWidth = 600;
@@ -65,7 +70,10 @@ public class MainMenu extends Application {
 			window.show();
 			
 			// Close the whole thing when red X is pressed.
-			window.setOnCloseRequest(e -> Platform.exit());
+			window.setOnCloseRequest(e -> {
+				LoggerUtil.close();
+				Platform.exit();
+			});
 			
 			
 			
