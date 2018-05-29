@@ -10,6 +10,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import utility.Language;
+import utility.LoggerUtil;
 
 /**
  * Main menu controller.
@@ -48,6 +49,7 @@ public class MainMenuController extends Controller{
 	
 	// Close the program
 	public void exitProgram() {
+		LoggerUtil.close();
 		Platform.exit();
 		System.exit(0);
 	}

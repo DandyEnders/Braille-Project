@@ -20,12 +20,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import utility.Language;
 import utility.LoggerUtil;
+import utility.ViewUtil;
 
 public abstract class View<T extends Controller> {
 	
@@ -78,9 +81,11 @@ public abstract class View<T extends Controller> {
 		// Scene is built using the base panel
 		scene = new Scene(root);
 		
-		List<Node> childrenList = getAllNodes(root);
+		List<Node> childrenList = ViewUtil.getAllNodes(root);
 		for(Node child : childrenList) {
-			setLogger(child);
+			if(!(child instanceof Pane)) {
+				ViewUtil.setLogger(child);
+			}
 		}
 		
 
@@ -94,104 +99,7 @@ public abstract class View<T extends Controller> {
 		
 	}
 	
-	public static List<Node> getAllNodes(Parent root) {
-	    List<Node> nodes = new ArrayList<Node>();
-	    addAllDescendents(root, nodes);
-	    return nodes;
-	}
-
-	private static void addAllDescendents(Parent parent, List<Node> nodes) {
-	    for (Node node : parent.getChildrenUnmodifiable()) {
-	        nodes.add(node);
-	        if (node instanceof Parent)
-	            addAllDescendents((Parent)node, nodes);
-	    }
-	}
 	
-	
-	private void setLogger(Node node) {
-		keyLogger(node);
-		mouseLogger(node);
-	}
-	
-	
-	private void keyLogger(Node node) {
-		node.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
-
-			@Override
-			public void handle(KeyEvent event) {
-				try {
-					
-					Node node = (Node)event.getSource();
-					String tostr = "";
-					
-					if(node instanceof Button) {
-						tostr = ((Button) node).getText();
-					}else if(node instanceof Label) {
-						tostr = ((Label) node).getText();
-					}else if(node instanceof ListView) {
-						
-					}else {
-						tostr = event.getSource().toString();
-					}
-					
-					LoggerUtil.log(tostr, "Key pressed at : " + tostr + " \"" + event.getText() + "\"");
-					System.out.println("Key Logged");
-				}catch (SecurityException e) {
-					e.printStackTrace();
-				}
-				
-			}
-			
-			
-			
-		});
-	}
-	
-	private void mouseLogger(Node node) {
-		
-		node.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
-
-			@Override
-			public void handle(MouseEvent event) {
-				try {
-					
-					Node node = (Node)event.getSource();
-					String tostr = "";
-					if(node instanceof Button) {
-						tostr = ((Button) node).getText();
-					}else if(node instanceof Label) {
-						tostr = ((Label) node).getText();
-					}else {
-						tostr = event.getSource().toString();
-					}
-					
-					
-					LoggerUtil.log(tostr, "Mouse pressed at : " + tostr);
-					System.out.println("Mouse Logged");
-				}catch (SecurityException e) {
-					e.printStackTrace();
-				}
-				
-			}
-		});
-		
-		
-		/*node.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				try {
-					logger.info("Mouse pressed : " + event.getSource().toString());
-					System.out.println("Mouse Logged");
-				}catch (SecurityException e) {
-					e.printStackTrace();
-				}
-				
-			}
-			
-			
-		});*/
-	}
 	
 	protected abstract void initialize();
 	

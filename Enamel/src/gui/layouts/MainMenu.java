@@ -1,6 +1,7 @@
 package gui.layouts;
 	
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import gui.controllers.MainMenuController;
@@ -9,8 +10,12 @@ import javafx.application.Platform;
 import javafx.stage.Stage;
 import utility.Language;
 import utility.LoggerUtil;
+import utility.ViewUtil;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.fxml.FXMLLoader;
 
  /**
@@ -23,8 +28,6 @@ import javafx.fxml.FXMLLoader;
 public class MainMenu extends Application {
 	
 	MainMenuController control;
-	
-	private static Logger logger = LoggerUtil.getLogger();
 	
 	// The integer window wiedth / height. Added for convenience.
 	private final static Integer windowWidth = 600;
@@ -68,6 +71,14 @@ public class MainMenu extends Application {
 			window.setScene(scene);
 			window.setTitle(Language.mainMenuTitle);
 			window.show();
+			
+			List<Node> childrenList = ViewUtil.getAllNodes(root);
+			
+			for(Node child : childrenList) {
+				if(!(child instanceof Pane) && !(child instanceof Text)) {
+					ViewUtil.setLogger(child);
+				}
+			}
 			
 			// Close the whole thing when red X is pressed.
 			window.setOnCloseRequest(e -> {

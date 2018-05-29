@@ -22,6 +22,7 @@ public final class Language {
 	public static final String nullString = null;
 	public static final String scenarioFileFormat = ".txt";
 	public static final String logFileFormat = ".txt";
+	public static final String audioFileFormat = ".wav";
 	
 	public static final CodeSource codeSource = AuthoringApp.class.getProtectionDomain().getCodeSource();
 	public static final File jarFile = new File(codeSource.getLocation().getPath());
@@ -41,7 +42,7 @@ public final class Language {
 	
 	
 	
-	public static final KeyCode openKey = KeyCode.SPACE;
+	public static final KeyCode openKey = KeyCode.ENTER;
 	
 	public static final String commandPrefix = "/~";
 	

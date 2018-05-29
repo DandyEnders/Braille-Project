@@ -20,7 +20,8 @@
       <Button fx:id="voiceRecordButton" accessibleHelp="Voice recorder provide you to capture and save recording from your mic.You can traverse through elements with tab, shift tabs and arrow keys.Press space to run it." accessibleRoleDescription="Press space to activate, tab to traverse." accessibleText="open voice recorder." ellipsisString="Scenario lol" layoutX="60.0" layoutY="305.0" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#openVoiceRecorder" text="Voice Recorder">
          <font>
             <Font name="Arial" size="30.0" />
-         </font></Button>
+         </font>
+      </Button>
       <Button fx:id="exitButton" accessibleHelp="Press it to exit the app." accessibleRoleDescription="Press space to activate, tab to traverse." accessibleText="Exit authoring app." ellipsisString="Exit" layoutX="416.0" layoutY="267.0" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#exitProgram" text="Exit">
          <font>
             <Font name="Arial" size="30.0" />
