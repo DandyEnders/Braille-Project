@@ -1,6 +1,6 @@
-3월 28, 2018 9:50:10 오후 utility.ErrorUtil errorLog
+3월 28, 2018 10:20:48 오후 utility.ErrorUtil errorLog
 경고: Exception error: The file is empty.
-3월 28, 2018 9:50:10 오후 utility.ErrorUtil errorLog
+3월 28, 2018 10:20:48 오후 utility.ErrorUtil errorLog
 정보: Expected format: 
 Cell num1 
  Button num2 
