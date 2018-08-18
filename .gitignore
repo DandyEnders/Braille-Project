@@ -1,6 +1,16 @@
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> branch 'refactorBranch' of https://github.com/DandyEnders/Braille-Project
 *.txt
 *.txt
 *.wav
+<<<<<<< HEAD
 
 Enamel/FactoryScenarios/asd.txt
+=======
+=======
+Enamel/FactoryScenarios/asd.txt
+>>>>>>> refs/remotes/origin/pr/10
+>>>>>>> branch 'refactorBranch' of https://github.com/DandyEnders/Braille-Project

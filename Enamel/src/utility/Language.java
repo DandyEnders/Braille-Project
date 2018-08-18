@@ -5,6 +5,8 @@ package utility;
 
 import java.io.File;
 import java.security.CodeSource;
+import java.time.Instant;
+import java.util.Date;
 
 import javafx.scene.input.KeyCode;
 import startProgram.AuthoringApp;
@@ -19,6 +21,8 @@ public final class Language {
 	public static final String emptyString = "";
 	public static final String nullString = null;
 	public static final String scenarioFileFormat = ".txt";
+	public static final String logFileFormat = ".txt";
+	public static final String audioFileFormat = ".wav";
 	
 	public static final CodeSource codeSource = AuthoringApp.class.getProtectionDomain().getCodeSource();
 	public static final File jarFile = new File(codeSource.getLocation().getPath());
@@ -29,9 +33,16 @@ public final class Language {
 	public static final String scenarioPath = rootPath + File.separator + "FactoryScenarios" + File.separator;
 	public static final String audioPath = scenarioPath + "AudioFiles" + File.separator;
 	public static final String errorPath = rootPath + File.separator + "errors" + File.separator;
+	public static final String userLogPath = rootPath + File.separator + "logs" + File.separator;
+	
+	public static final Date startDate = Date.from(Instant.now());
+	
+	public static final File userLog = new File(Language.userLogPath + Language.startDate.toString().replaceAll(" ", "_").replaceAll(":", "-") + Language.logFileFormat);
+	public static final File userCountLog = new File(Language.userLogPath + "FeatureAccessed"+ Language.logFileFormat);
 	
 	
-	public static final KeyCode openKey = KeyCode.SPACE;
+	
+	public static final KeyCode openKey = KeyCode.ENTER;
 	
 	public static final String commandPrefix = "/~";
 	

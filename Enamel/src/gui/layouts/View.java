@@ -1,13 +1,34 @@
 package gui.layouts;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 import gui.controllers.Controller;
+import javafx.event.*;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import utility.Language;
+import utility.LoggerUtil;
+import utility.ViewUtil;
 
 public abstract class View<T extends Controller> {
 	
@@ -33,6 +54,7 @@ public abstract class View<T extends Controller> {
 	}
 	
 	public View(Stage window) {
+		this();
 		isDisplayed = false;
 		this.window = window;
 	}
@@ -59,6 +81,14 @@ public abstract class View<T extends Controller> {
 		// Scene is built using the base panel
 		scene = new Scene(root);
 		
+		List<Node> childrenList = ViewUtil.getAllNodes(root);
+		for(Node child : childrenList) {
+			if(!(child instanceof Pane)) {
+				ViewUtil.setLogger(child);
+			}
+		}
+		
+
 		// Set scene to the window, title, and show it
 		window.setScene(scene);
 		window.setTitle(title);
@@ -68,6 +98,8 @@ public abstract class View<T extends Controller> {
 		initialize();
 		
 	}
+	
+	
 	
 	protected abstract void initialize();
 	

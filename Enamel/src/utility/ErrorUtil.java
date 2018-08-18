@@ -71,7 +71,7 @@ public class ErrorUtil {
 		// The try-catch block is to format the Logger class so that the error
 		// log file is easier to understand.
 		try {
-			File f = new File("./errors/" + errorLoggerName + ".txt");
+			File f = new File(Language.errorPath + errorLoggerName + ".txt");
 			fh = new FileHandler(f.toString());
 	
 			logger.addHandler(fh);

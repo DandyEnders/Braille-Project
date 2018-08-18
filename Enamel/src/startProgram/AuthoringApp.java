@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import gui.layouts.MainMenu;
 import javafx.application.Application;
 import utility.Language;
+import utility.LoggerUtil;
 
 /**
  * This class starts the program execution by creating view, model, and a
@@ -20,6 +21,7 @@ public class AuthoringApp {
 	public static void main(String[] args) {
 
 		createDefaultFolders();
+		LoggerUtil.initialize();
 		
 		new Thread() {
 			@Override
@@ -27,7 +29,8 @@ public class AuthoringApp {
 				Application.launch(MainMenu.class, args);
 			}
 		}.start();
-
+		
+		
 		
 	}
 	
@@ -37,6 +40,7 @@ public class AuthoringApp {
 		fileList.add(new File(Language.scenarioPath));
 		fileList.add(new File(Language.audioPath));
 		fileList.add(new File(Language.errorPath));
+		fileList.add(new File(Language.userLogPath));
 		
 		for(File file : fileList) {
 			if(!file.exists()) {

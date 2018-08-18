@@ -346,9 +346,6 @@ public class ScenarioEditorController extends Controller{
 		// empty name and zero cells / buttons
 		File scenarioFile = makeScenario(new File(""));
 		
-		System.out.println("file is null? " + scenarioFile == null );
-		System.out.println(" and " + scenarioFile.getName());
-		
 		addAndUpdate(scenarioFile);
 	}
 
