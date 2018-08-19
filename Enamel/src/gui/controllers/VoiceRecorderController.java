@@ -329,6 +329,18 @@ public class VoiceRecorderController extends Controller {
 				close();
 			}
 		}
+		
+		if(event.getCode().equals(Language.key_VoiceRecorderDelete)) {
+			deleteSelected();
+    	}else if(event.getCode().equals(Language.key_VoiceRecorderLoad)) {
+    		loadSoundFile();
+    	}else if(event.getCode().equals(Language.key_VoiceRecorderPlay)) {
+    		playSelected();
+    	}else if(event.getCode().equals(Language.key_VoiceRecorderRecord)) {
+    		recordVoiceButtonClicked();
+    	}else if(event.getCode().equals(Language.key_VoiceRecorderExit)) {
+    		close();
+    	}
 	}
 
 }

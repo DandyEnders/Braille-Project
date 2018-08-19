@@ -44,6 +44,38 @@ public final class Language {
 	
 	public static final KeyCode openKey = KeyCode.ENTER;
 	
+	public static final KeyCode key_MainMenuScenarioEditor = KeyCode.S;
+	public static final KeyCode key_MainMenuVoiceRecorder = KeyCode.V;
+	public static final KeyCode key_MainMenuExit = KeyCode.ESCAPE;
+	
+	public static final KeyCode key_ScenarioEditorNewScneario = KeyCode.C;
+	public static final KeyCode key_ScenarioEditorEditScenario = KeyCode.E;
+	public static final KeyCode key_ScenarioEditorSaveScneario = KeyCode.S;
+	public static final KeyCode key_ScenarioEditorLoadScneario = KeyCode.L;
+	public static final KeyCode key_ScenarioEditorRunScneario = KeyCode.R;
+	public static final KeyCode key_ScenarioEditorRemoveScneario = KeyCode.M;
+	public static final KeyCode key_ScenarioEditorExitScneario = KeyCode.ESCAPE;
+	
+	public static final KeyCode key_VoiceRecorderRecord = KeyCode.R;
+	public static final KeyCode key_VoiceRecorderDelete = KeyCode.D;
+	public static final KeyCode key_VoiceRecorderPlay = KeyCode.P;
+	public static final KeyCode key_VoiceRecorderLoad = KeyCode.L;
+	public static final KeyCode key_VoiceRecorderExit = KeyCode.ESCAPE;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public static final String commandPrefix = "/~";
 	
 	final static String[] typeList = { 

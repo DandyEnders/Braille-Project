@@ -12,12 +12,12 @@
             <Font name="Arial" size="54.0" />
          </font>
       </Label>
-      <Button fx:id="scenarioEditButton" accessibleHelp="You can manipulate scenarios here.You can traverse through elements with tab, shift tabs and arrow keys. Press space to run it." accessibleRoleDescription="Press space to activate, tab to traverse." accessibleText="open Secnario Editor" ellipsisString="Scenario lol" layoutX="60.0" layoutY="234.0" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#openScenarioEditor" text="Scenario Editor">
+      <Button fx:id="scenarioEditButton" accessibleHelp="You can manipulate scenarios here.You can traverse through elements with tab, shift tabs and arrow keys. Press space to run it." accessibleRoleDescription="Press space to activate, tab to traverse." accessibleText="open Secnario Editor" ellipsisString="Scenario lol" layoutX="60.0" layoutY="234.0" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#openScenarioEditor" text="(S)cenario Editor">
          <font>
             <Font name="Arial" size="30.0" />
          </font>
       </Button>
-      <Button fx:id="voiceRecordButton" accessibleHelp="Voice recorder provide you to capture and save recording from your mic.You can traverse through elements with tab, shift tabs and arrow keys.Press space to run it." accessibleRoleDescription="Press space to activate, tab to traverse." accessibleText="open voice recorder." ellipsisString="Scenario lol" layoutX="60.0" layoutY="305.0" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#openVoiceRecorder" text="Voice Recorder">
+      <Button fx:id="voiceRecordButton" accessibleHelp="Voice recorder provide you to capture and save recording from your mic.You can traverse through elements with tab, shift tabs and arrow keys.Press space to run it." accessibleRoleDescription="Press space to activate, tab to traverse." accessibleText="open voice recorder." ellipsisString="Scenario lol" layoutX="60.0" layoutY="305.0" mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#openVoiceRecorder" text="(V)oice Recorder">
          <font>
             <Font name="Arial" size="30.0" />
          </font>

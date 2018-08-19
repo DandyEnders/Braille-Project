@@ -9,7 +9,7 @@
 
 <AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.ScenarioEditorController">
    <children>
-      <ListView fx:id="scenarioList" accessibleHelp="This is a list of scenario. use arrow keys to nevigate." accessibleText="Scenario List." layoutX="7.0" layoutY="69.0" prefHeight="527.0" prefWidth="172.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" />
+      <ListView fx:id="scenarioList" accessibleHelp="This is a list of scenario. use arrow keys to nevigate." accessibleText="Scenario List." layoutX="7.0" layoutY="69.0" onKeyPressed="#keyPressed" prefHeight="527.0" prefWidth="172.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" />
       <Label layoutX="34.0" layoutY="28.0" text="Scenario Lists" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
@@ -17,32 +17,32 @@
       </Label>
       <VBox layoutX="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="createScenarioButton" accessibleHelp="You can create a new scenario here." accessibleRoleDescription="Press space to activate, tab to traverse." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#createScenario" prefHeight="100.0" prefWidth="200.0" text="Create a new Scenario">
+            <Button fx:id="createScenarioButton" accessibleHelp="You can create a new scenario here." accessibleRoleDescription="Press space to activate, tab to traverse." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#createScenario" prefHeight="100.0" prefWidth="200.0" text="(C)reate a new Scenario">
                <font>
                   <Font name="Arial Bold" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="editScenarioButton" accessibleHelp="You can edit a selected sceanrio here." accessibleRoleDescription="Press space to activate, tab to traverse." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#editScenario" prefHeight="100.0" prefWidth="200.0" text="Edit selected Scenario">
+            <Button fx:id="editScenarioButton" accessibleHelp="You can edit a selected sceanrio here." accessibleRoleDescription="Press space to activate, tab to traverse." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#editScenario" prefHeight="100.0" prefWidth="200.0" text="(E)dit selected Scenario">
                <font>
                   <Font name="Arial Bold" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="saveScenarioButton" accessibleHelp="You can save selected Scenario here." accessibleRoleDescription="Press space to activate, tab to traverse." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#saveScenario" prefHeight="100.0" prefWidth="200.0" text="Save selected Scenario">
+            <Button fx:id="saveScenarioButton" accessibleHelp="You can save selected Scenario here." accessibleRoleDescription="Press space to activate, tab to traverse." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#saveScenario" prefHeight="100.0" prefWidth="200.0" text="(S)ave selected Scenario">
                <font>
                   <Font name="Arial Bold" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="loadScenarioButton" accessibleHelp="You can load scenario on your computer here." accessibleRoleDescription="Press space to activate, tab to traverse." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#loadScenario" prefHeight="100.0" prefWidth="200.0" text="Load Scenario">
+            <Button fx:id="loadScenarioButton" accessibleHelp="You can load scenario on your computer here." accessibleRoleDescription="Press space to activate, tab to traverse." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#loadScenario" prefHeight="100.0" prefWidth="200.0" text="(L)oad Scenario">
                <font>
                   <Font name="Arial Bold" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="runScenarioButton" accessibleHelp="You can run a selected Scenario here." accessibleRoleDescription="Press space to activate, tab to traverse." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#runScenario" prefHeight="100.0" prefWidth="200.0" text="Run selected Scenario">
+            <Button fx:id="runScenarioButton" accessibleHelp="You can run a selected Scenario here." accessibleRoleDescription="Press space to activate, tab to traverse." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#runScenario" prefHeight="100.0" prefWidth="200.0" text="(R)un selected Scenario">
                <font>
                   <Font name="Arial Bold" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="removeScenarioButton" accessibleHelp="You can remove an unwanted scneario on the list here." accessibleRoleDescription="Press space to activate, tab to traverse." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#removeScenario" prefHeight="100.0" prefWidth="200.0" text="Remove Selected">
+            <Button fx:id="removeScenarioButton" accessibleHelp="You can remove an unwanted scneario on the list here." accessibleRoleDescription="Press space to activate, tab to traverse." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#removeScenario" prefHeight="100.0" prefWidth="200.0" text="Re(m)ove Selected">
                <font>
                   <Font name="Arial Bold" size="15.0" />
                </font>

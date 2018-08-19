@@ -79,6 +79,15 @@ public class MainMenuController extends Controller{
     			exitProgram();
     		}
     	}
+    	
+    	if(event.getCode().equals(Language.key_MainMenuScenarioEditor)) {
+    		openScenarioEditor();
+    	}else if(event.getCode().equals(Language.key_MainMenuVoiceRecorder)) {
+    		openVoiceRecorder();
+    	}else if(event.getCode().equals(Language.key_MainMenuExit)) {
+    		exitProgram();
+    	}
+    	
     }
 	
 	

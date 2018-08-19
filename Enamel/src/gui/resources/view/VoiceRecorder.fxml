@@ -13,16 +13,16 @@
    <children>
       <VBox alignment="CENTER" layoutX="188.0" layoutY="23.0" prefHeight="379.0" prefWidth="112.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <ToggleButton fx:id="recordVoiceButton" accessibleHelp="Record your voice by pressing this, type soundfile name, click okay, and click again to stop recording." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#recordVoiceButtonClicked" prefHeight="39.0" prefWidth="130.0" text="Record Voice">
+            <ToggleButton fx:id="recordVoiceButton" accessibleHelp="Record your voice by pressing this, type soundfile name, click okay, and click again to stop recording." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#recordVoiceButtonClicked" prefHeight="39.0" prefWidth="130.0" text="(R)ecord Voice">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></ToggleButton>
             <Region prefHeight="7.0" prefWidth="112.0" />
-            <Button fx:id="deleteButton" accessibleHelp="This deletes selected voice file on the list." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#deleteSelected" prefHeight="37.0" prefWidth="124.0" text="Delete Selected" />
+            <Button fx:id="deleteButton" accessibleHelp="This deletes selected voice file on the list." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#deleteSelected" prefHeight="37.0" prefWidth="124.0" text="(D)elete Selected" />
             <Region prefHeight="7.0" prefWidth="112.0" />
-            <Button fx:id="playButton" accessibleHelp="This plays selected file on the list." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#playSelected" prefHeight="37.0" prefWidth="130.0" text="Play Selected" />
+            <Button fx:id="playButton" accessibleHelp="This plays selected file on the list." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#playSelected" prefHeight="37.0" prefWidth="130.0" text="(P)lay Selected" />
             <Region prefHeight="7.0" prefWidth="112.0" />
-            <Button fx:id="loadSoundButton" accessibleHelp="This pops up the load window for you to import a file." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#loadSoundFile" prefHeight="37.0" prefWidth="130.0" text="Load Sound" />
+            <Button fx:id="loadSoundButton" accessibleHelp="This pops up the load window for you to import a file." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#loadSoundFile" prefHeight="37.0" prefWidth="130.0" text="(L)oad Sound" />
             <Region prefHeight="7.0" prefWidth="112.0" />
             <Button fx:id="exitButton" accessibleHelp="This exits voice recorder." mnemonicParsing="false" onKeyPressed="#keyPressed" onMouseClicked="#close" prefHeight="41.0" prefWidth="125.0" text="Exit" />
          </children>

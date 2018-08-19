@@ -400,6 +400,7 @@ public class ScenarioEditorController extends Controller{
 	
 	@FXML
 	protected void keyPressed(KeyEvent event) {
+		
     	if(event.getCode().equals(Language.openKey)) {
     		if(event.getSource().equals(createScenarioButton)) {
     			createScenario();
@@ -416,6 +417,22 @@ public class ScenarioEditorController extends Controller{
     		}else if(event.getSource().equals(exitButton)) {
     			hide();
     		}
+    	}
+    	
+    	if(event.getCode().equals(Language.key_ScenarioEditorEditScenario)) {
+    		editScenario();
+    	}else if(event.getCode().equals(Language.key_ScenarioEditorLoadScneario)) {
+    		loadScenario();
+    	}else if(event.getCode().equals(Language.key_ScenarioEditorNewScneario)) {
+    		createScenario();
+    	}else if(event.getCode().equals(Language.key_ScenarioEditorRemoveScneario)) {
+    		removeScenario();
+    	}else if(event.getCode().equals(Language.key_ScenarioEditorRunScneario)) {
+    		runScenario();
+    	}else if(event.getCode().equals(Language.key_ScenarioEditorSaveScneario)) {
+    		saveScenario();
+    	}else if(event.getCode().equals(Language.key_ScenarioEditorExitScneario)) {
+    		hide();
     	}
     }
 	
