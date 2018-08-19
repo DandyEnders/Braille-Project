@@ -214,10 +214,19 @@ public class ScenarioMakerController extends Controller implements Returnable<Fi
  	public void moveUp() {
  		if(isItemSelected()) {
  			if(selectedItemIndex() > 0) {
+<<<<<<< HEAD
  				int index = selectedItemIndex();
  				swap(index, index-1);
+=======
+ 				int index = selectedItemIndex()-1;
+ 				swap(selectedItemIndex(), selectedItemIndex()-1);
+>>>>>>> branch 'master' of https://github.com/DandyEnders/Braille-Project
  				listUpdate();
+<<<<<<< HEAD
  				listOfCommands.getSelectionModel().select(index-1);
+=======
+ 				listOfCommands.getSelectionModel().select(index);
+>>>>>>> branch 'master' of https://github.com/DandyEnders/Braille-Project
  			}
  		}
  	}
@@ -225,10 +234,19 @@ public class ScenarioMakerController extends Controller implements Returnable<Fi
  	public void moveDown() {
  		if(isItemSelected()) {
  			if(selectedItemIndex() < phraseListObs.size()-1) {
+<<<<<<< HEAD
  				int index = selectedItemIndex();
  				swap(index, index+1);
+=======
+ 				int index = selectedItemIndex()+1;
+ 				swap(selectedItemIndex(), selectedItemIndex()+1);
+>>>>>>> branch 'master' of https://github.com/DandyEnders/Braille-Project
  				listUpdate();
+<<<<<<< HEAD
  				listOfCommands.getSelectionModel().select(index+1);
+=======
+ 				listOfCommands.getSelectionModel().select(index);
+>>>>>>> branch 'master' of https://github.com/DandyEnders/Braille-Project
  			}
  		}
  	}
@@ -308,7 +326,28 @@ public class ScenarioMakerController extends Controller implements Returnable<Fi
 			
 			if(scenario != null) {
 				
+<<<<<<< HEAD
 				String scenarioFileName = scenarioNameField.getText();
+=======
+				String fileName = scenarioNameField.getText();
+				
+				if(fileName.length() < 5) {
+					if(!fileName.equals(".txt"))
+						fileName += ".txt";
+				}else {
+					if(!fileName.substring(fileName.length()-4, fileName.length()).equals(".txt")) {
+						fileName += ".txt";
+					}
+				}
+				
+				if(scenarioNameList.contains(fileName)) {
+					while(scenarioNameList.contains(fileName)) {
+						fileName = fileName.split("\\.")[0] + "_m.txt";
+					}
+				}
+				File file = new File(Language.scenarioPath + fileName);
+				
+>>>>>>> branch 'master' of https://github.com/DandyEnders/Braille-Project
 				try {
 					scenarioFileName = formatScenarioName(scenarioFileName);
 					

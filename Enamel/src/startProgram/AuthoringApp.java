@@ -19,7 +19,7 @@ import utility.LoggerUtil;
 public class AuthoringApp {
 
 	public static void main(String[] args) {
-
+		
 		createDefaultFolders();
 		LoggerUtil.initialize();
 		
@@ -36,6 +36,8 @@ public class AuthoringApp {
 	
 	private static void createDefaultFolders() {
 		ArrayList<File> fileList = new ArrayList<File>();
+		
+		System.out.println(Language.rootPath);
 		
 		fileList.add(new File(Language.scenarioPath));
 		fileList.add(new File(Language.audioPath));

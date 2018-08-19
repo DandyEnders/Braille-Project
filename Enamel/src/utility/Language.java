@@ -26,10 +26,11 @@ public final class Language {
 	
 	public static final CodeSource codeSource = AuthoringApp.class.getProtectionDomain().getCodeSource();
 	public static final File jarFile = new File(codeSource.getLocation().getPath());
-	public static final String rootPath = jarFile.getParentFile().getPath();
-	
+	public static final String rootPath = jarFile.getParentFile().getPath() + File.separator;
+
 	//public static final String viewPath = "." + File.separator + "gui" + File.separator + "resources" + File.separator + "view" + File.separator;
 	public static final String viewPath = "/gui/resources/view/";
+<<<<<<< HEAD
 	public static final String scenarioPath = rootPath + File.separator + "FactoryScenarios" + File.separator;
 	public static final String audioPath = scenarioPath + "AudioFiles" + File.separator;
 	public static final String errorPath = rootPath + File.separator + "errors" + File.separator;
@@ -39,6 +40,11 @@ public final class Language {
 	
 	public static final File userLog = new File(Language.userLogPath + Language.startDate.toString().replaceAll(" ", "_").replaceAll(":", "-") + Language.logFileFormat);
 	public static final File userCountLog = new File(Language.userLogPath + "FeatureAccessed"+ Language.logFileFormat);
+=======
+	public static final String scenarioPath = new String(rootPath + "FactoryScenarios" + File.separator).replace("%20", " ");
+	public static final String audioPath = new String(scenarioPath + "AudioFiles" + File.separator).replace("%20", " ");
+	public static final String errorPath = new String(rootPath + "errors" + File.separator).replace("%20", " ");
+>>>>>>> branch 'master' of https://github.com/DandyEnders/Braille-Project
 	
 	
 	
